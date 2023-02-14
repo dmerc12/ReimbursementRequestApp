@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Data
 @Document
 public class Employee {
@@ -13,4 +15,6 @@ public class Employee {
     private String password;
     private String firstName;
     private String lastName;
+    private LocalDateTime created;
+    private LocalDateTime lastModified;
 }

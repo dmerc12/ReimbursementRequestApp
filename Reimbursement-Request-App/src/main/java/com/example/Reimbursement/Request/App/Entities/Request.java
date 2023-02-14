@@ -8,10 +8,12 @@ import java.time.LocalDateTime;
 
 @Data
 @Document
-public class ReimbursementRequest {
+public class Request {
     @Id
+    private int requestId;
     private int employeeId;
     private int reasonId;
-    private LocalDateTime requestCreationDate;
+    private LocalDateTime requestCreated;
+    private LocalDateTime requestLastModified;
     private float amount;
 }
