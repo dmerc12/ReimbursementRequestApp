@@ -2,7 +2,7 @@ package com.example.Reimbursement.Request.App.DAL.EmployeeDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Employee;
 
-public abstract class EmployeeDALImplementation implements EmployeeDALInterface{
+public abstract class EmployeeImplementation implements EmployeeRepository {
     @Override
     public Employee addEmployee(Employee employee) {
         return null;

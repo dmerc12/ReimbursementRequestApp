@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Data
-@Document
+@Document(collation = "Employees")
 public class Employee {
     @Id
     private String employeeId;

@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface RequestDALInterface extends MongoRepository<Request, String> {
+public interface RequestRepository extends MongoRepository<Request, String> {
     Request addRequest(Request request);
     List<Request> getAllRequests(int employeeId);
     Request getRequest(int requestId);

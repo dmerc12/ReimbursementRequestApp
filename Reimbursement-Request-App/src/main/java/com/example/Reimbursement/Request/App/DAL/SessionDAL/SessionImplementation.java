@@ -2,7 +2,7 @@ package com.example.Reimbursement.Request.App.DAL.SessionDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Session;
 
-public abstract class SessionDALImplementation implements SessionDALInterface{
+public abstract class SessionImplementation implements SessionRepository {
     @Override
     public Session addSession(Session session) {
         return null;

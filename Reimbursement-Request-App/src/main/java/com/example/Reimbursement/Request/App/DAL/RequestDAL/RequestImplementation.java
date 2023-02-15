@@ -4,7 +4,7 @@ import com.example.Reimbursement.Request.App.Entities.Request;
 
 import java.util.List;
 
-public abstract class RequestDALImplementation implements RequestDALInterface{
+public abstract class RequestImplementation implements RequestRepository {
     @Override
     public Request addRequest(Request request) {
         return null;
