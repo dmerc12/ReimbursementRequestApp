@@ -1,5 +1,6 @@
 package com.example.Reimbursement.Request.App.Entities;
 
+
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,12 +9,9 @@ import java.time.LocalDateTime;
 
 @Data
 @Document
-public class Request {
+public class Session {
     @Id
-    private String requestId;
+    private String sessionId;
     private String employeeId;
-    private String reasonId;
-    private LocalDateTime requestCreated;
-    private LocalDateTime requestLastModified;
-    private float amount;
+    private LocalDateTime expiration;
 }

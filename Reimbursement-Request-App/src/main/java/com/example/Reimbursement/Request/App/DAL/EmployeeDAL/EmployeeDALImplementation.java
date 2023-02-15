@@ -9,9 +9,11 @@ public abstract class EmployeeDALImplementation implements EmployeeDALInterface{
     }
 
     @Override
-    public Employee getEmployee(int employeeId) {
+    public Employee getEmployeeById(int employeeId) {
         return null;
     }
+
+    public Employee getEmployeeByEmail(String email) {return null; }
 
     @Override
     public Employee updateEmployee(Employee employee) {

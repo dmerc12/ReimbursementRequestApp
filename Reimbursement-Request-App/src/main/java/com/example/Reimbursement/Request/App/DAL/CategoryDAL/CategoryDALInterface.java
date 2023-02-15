@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface CategoryDALInterface extends MongoRepository<Category, Integer> {
+public interface CategoryDALInterface extends MongoRepository<Category, String> {
     Category addCategory(Category category);
 
     List<Category> getAllCategories();

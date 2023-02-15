@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Document
 public class Employee {
     @Id
-    private int employeeId;
+    private String employeeId;
     private String email;
     private String password;
     private String firstName;
