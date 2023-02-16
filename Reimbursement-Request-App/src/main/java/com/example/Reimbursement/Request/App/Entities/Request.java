@@ -12,8 +12,10 @@ public class Request {
     @Id
     private String requestId;
     private String employeeId;
+    private int requestNumber;
     private String reasonId;
+    private String comment;
+    private float amount;
     private LocalDateTime requestCreated;
     private LocalDateTime requestLastModified;
-    private float amount;
 }

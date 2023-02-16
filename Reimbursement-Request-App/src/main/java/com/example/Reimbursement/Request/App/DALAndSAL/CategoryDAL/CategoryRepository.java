@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.DAL.CategoryDAL;
+package com.example.Reimbursement.Request.App.DALAndSAL.CategoryDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Category;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -9,7 +9,8 @@ public interface CategoryRepository extends MongoRepository<Category, String> {
     Category addCategory(Category category);
 
     List<Category> getAllCategories();
-    Category getCategory(String categoryId);
+    Category getCategoryByName(String categoryName)
+;    Category getCategoryById(String categoryId);
     Category updateCategory(Category category);
     boolean deleteCategory(String categoryId);
 }

@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.DAL.SessionDAL;
+package com.example.Reimbursement.Request.App.DALAndSAL.SessionDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Session;
 import org.springframework.data.mongodb.repository.MongoRepository;
