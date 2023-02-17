@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.DALAndSAL.CategoryDAL;
+package com.example.Reimbursement.Request.App.Implementation.Category;
 
 
 import com.example.Reimbursement.Request.App.Entities.Category;
@@ -11,15 +11,15 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 @AllArgsConstructor
-public abstract class CategoryImplementation implements CategoryRepository {
-    private CategoryRepository categoryDB;
+public abstract class CategoryImplementation implements CategoryInterface {
+    private CategoryRepository categoryDB = new CategoryRepository();
 
     public static Logger logger = LogManager.getLogger(CategoryImplementation.class);
 
     @Override
     public Category addCategory(Category categoryNameInput) {
         logger.info("Beginning category implementation method add category with data: " + categoryNameInput + ".");
-        Category existingCategory = categoryDB.getCategoryByName(categoryNameInput.getCategoryName());
+        Category existingCategory = getCategoryByName(categoryNameInput.getCategoryName());
         if (existingCategory == null) {
             Category newCategory = new Category(categoryNameInput.getCategoryName());
             Category insertedCategory = categoryDB.insert(newCategory);
@@ -49,7 +49,7 @@ public abstract class CategoryImplementation implements CategoryRepository {
     @Override
     public Category getCategoryByName(String categoryName) {
         logger.info("Beginning category implementation method get category by name with data: " + categoryName + ".");
-        Category resultingCategory = categoryDB.getCategoryByName(categoryName);
+        Category resultingCategory = getCategoryByName(categoryName);
         if (resultingCategory == null) {
             logger.warn("Error with category implementation method get category by name, category not found.");
             throw new NoneFound("No category found, please try again!");
@@ -62,17 +62,34 @@ public abstract class CategoryImplementation implements CategoryRepository {
 
     @Override
     public Category getCategoryById(String categoryId) {
-        return null;
+        logger.info("Beginning category implementation method get category by ID with data: " + categoryId + ".");
+        Category resultingCategory = categoryDB.findById(categoryId);
+        if (resultingCategory == null) {
+            logger.warn("Error with category implementation method get category by ID, category not found.");
+            throw new NoneFound("No category found, please try again!");
+        } else {
+            logger.info("Finishing category implementation method get category by ID with result: " +
+                    resultingCategory + ".");
+            return resultingCategory;
+        }
     }
 
     @Override
     public Category updateCategory(Category category) {
-        return null;
+        logger.info("Beginning category implementation method update category with data: " + category + ".");
+        getCategoryById(category.getCategoryId());
+        deleteCategory(category.getCategoryId());
+        Category updatedCategory = addCategory(category);
+        logger.info("Finishing category implementation method update category with result: " + updatedCategory + ".");
+        return updatedCategory;
     }
 
     @Override
     public boolean deleteCategory(String categoryId) {
-        return false;
+        logger.info("Beginning category implementation method delete category with data: " + categoryId + ".");
+        getCategoryById(categoryId);
+        categoryDB.deleteById(categoryId);
+        return true;
     }
 
 }

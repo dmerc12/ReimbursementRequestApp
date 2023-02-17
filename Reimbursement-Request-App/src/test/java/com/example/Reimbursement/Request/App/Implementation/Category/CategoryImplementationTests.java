@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.DALAndSAL.CategoryDAL;
+package com.example.Reimbursement.Request.App.Implementation.Category;
 
 import com.example.Reimbursement.Request.App.Entities.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.CategoryAlreadyExists;
@@ -78,6 +78,17 @@ public class CategoryImplementationTests {
     public void getCategoryByIdSuccess() {
         Category result = categoryDAO.getCategoryById(successfulCategory.getCategoryId());
         Assert.assertNotNull(result);
+    }
+
+    @Test(expected = NoneFound.class)
+    public void updateCategoryNotFound() {
+        try {
+            Category nonExistentCategory = new Category("I don't exist");
+            categoryDAO.updateCategory(nonExistentCategory);
+            Assert.fail();
+        } catch (NoneFound error) {
+            Assert.assertEquals(error.getMessage(), "No category found, please try again!");
+        }
     }
 
     @Test(expected = CategoryAlreadyExists.class)
