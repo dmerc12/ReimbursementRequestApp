@@ -1,0 +1,13 @@
+package com.example.Reimbursement.Request.App.Implementation.Request;
+
+import com.example.Reimbursement.Request.App.Entities.Request;
+
+import java.util.List;
+
+public interface RequestInterface {
+    Request addRequest(Request request);
+    List<Request> getAllRequests(int employeeId);
+    Request getRequest(int requestId);
+    Request updateRequest(Request request);
+    boolean deleteRequest(int requestId);
+}
