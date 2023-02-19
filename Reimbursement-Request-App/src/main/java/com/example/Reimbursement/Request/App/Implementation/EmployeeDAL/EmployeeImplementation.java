@@ -1,8 +1,22 @@
 package com.example.Reimbursement.Request.App.Implementation.EmployeeDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Employee;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.stereotype.Service;
 
-public abstract class EmployeeImplementation implements EmployeeRepository {
+
+@Service
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmployeeImplementation implements EmployeeInterface {
+    private MongoTemplate mongoTemplate;
+
+    public static Logger logger = LogManager.getLogger(EmployeeImplementation.class);
+
     @Override
     public Employee addEmployee(Employee employee) {
         return null;

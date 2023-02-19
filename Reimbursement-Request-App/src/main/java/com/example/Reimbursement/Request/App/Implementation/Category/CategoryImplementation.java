@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -21,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryImplementation implements CategoryInterface {
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private MongoConfig mongoConfig;
 
     public static Logger logger = LogManager.getLogger(CategoryImplementation.class);
 
@@ -32,7 +31,7 @@ public class CategoryImplementation implements CategoryInterface {
         if (existingCategory == null) {
             Category newCategory = new Category();
             newCategory.setCategoryName(categoryNameInput.getCategoryName());
-            Category insertedCategory = mongoTemplate.insert(newCategory);
+            Category insertedCategory = mongoConfig.mongoTemplate().insert(newCategory);
             logger.info("Finishing category implementation method add category with result: " + insertedCategory
                     + ".");
             return insertedCategory;
@@ -45,7 +44,7 @@ public class CategoryImplementation implements CategoryInterface {
     @Override
     public List<Category> getAllCategories() {
         logger.info("Beginning category implementation method get all categories.");
-        List<Category> categoryList = mongoTemplate.findAll(Category.class);
+        List<Category> categoryList = mongoConfig.mongoTemplate().findAll(Category.class);
         if (categoryList.isEmpty()) {
             logger.warn("Error with category implementation method get all categories, no categories found.");
             throw new NoneFound("No categories found, please try again!");
@@ -61,7 +60,7 @@ public class CategoryImplementation implements CategoryInterface {
         logger.info("Beginning category implementation method get category by name with data: " + categoryName + ".");
         Query query = new Query();
         query.addCriteria(Criteria.where("categoryName").is(categoryName));
-        Category resultingCategory = mongoTemplate.findOne(query, Category.class);
+        Category resultingCategory = mongoConfig.mongoTemplate().findOne(query, Category.class);
         if (resultingCategory == null) {
             logger.warn("Error with category implementation method get category by name, category not found.");
             throw new NoneFound("No category found, please try again!");
@@ -77,7 +76,7 @@ public class CategoryImplementation implements CategoryInterface {
         logger.info("Beginning category implementation method get category by ID with data: " + categoryId + ".");
         Query query = new Query();
         query.addCriteria(Criteria.where("categoryId").is(categoryId));
-        Category resultingCategory = mongoTemplate.findOne(query, Category.class);
+        Category resultingCategory = mongoConfig.mongoTemplate().findOne(query, Category.class);
         if (resultingCategory == null) {
             logger.warn("Error with category implementation method get category by ID, category not found.");
             throw new NoneFound("No category found, please try again!");
@@ -96,7 +95,7 @@ public class CategoryImplementation implements CategoryInterface {
         Update update = new Update();
         update.set("categoryId", category.getCategoryId());
         update.set("categoryName", category.getCategoryName());
-        mongoTemplate.updateFirst(query, update, Category.class);
+        mongoConfig.mongoTemplate().updateFirst(query, update, Category.class);
         Category updatedCategory = getCategoryById(category.getCategoryId());
                 logger.info("Finishing category implementation method update category with result: " + updatedCategory + ".");
         return updatedCategory;
@@ -107,7 +106,7 @@ public class CategoryImplementation implements CategoryInterface {
         logger.info("Beginning category implementation method delete category with data: " + categoryId + ".");
         Query query = new Query();
         query.addCriteria(Criteria.where("categoryId").is(categoryId));
-        mongoTemplate.remove(query, Category.class);
+        mongoConfig.mongoTemplate().remove(query, Category.class);
         return true;
     }
 
