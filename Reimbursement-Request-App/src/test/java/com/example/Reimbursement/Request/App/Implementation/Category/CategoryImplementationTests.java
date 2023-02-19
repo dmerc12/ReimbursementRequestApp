@@ -9,9 +9,9 @@ import org.junit.Test;
 import java.util.List;
 
 public class CategoryImplementationTests {
-    private CategoryImplementation categoryDAO;
+    CategoryImplementation categoryDAO = new CategoryImplementation();
 
-    Category successfulCategory = new Category("test");
+    Category successfulCategory = new Category("success");
     Category updatedCategory = new Category("updated");
 
     @Test(expected = NoneFound.class)
