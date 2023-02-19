@@ -3,7 +3,6 @@ package com.example.Reimbursement.Request.App.Implementation.Category;
 import com.example.Reimbursement.Request.App.Entities.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.CategoryAlreadyExists;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.NoneFound;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +15,6 @@ import java.util.List;
 
 @Service
 @NoArgsConstructor
-@AllArgsConstructor
 public class CategoryImplementation implements CategoryInterface {
     private CategoryRepository categoryRepository;
 

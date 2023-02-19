@@ -1,11 +1,10 @@
-package com.example.Reimbursement.Request.App.Implementation.RequestDAL;
+package com.example.Reimbursement.Request.App.Implementation.Request;
 
 import com.example.Reimbursement.Request.App.Entities.Request;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface RequestRepository extends MongoRepository<Request, String> {
+public interface RequestInterface {
     Request addRequest(Request request);
     List<Request> getAllRequests(int employeeId);
     Request getRequest(int requestId);

@@ -1,6 +1,7 @@
 package com.example.Reimbursement.Request.App.Entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 @Document(collation = "Employees")
 public class Employee {
     @Id
@@ -18,10 +20,6 @@ public class Employee {
     private String lastName;
     private LocalDateTime created;
     private LocalDateTime lastModified;
-
-    public Employee() {
-
-    }
 
     public Employee(String email, String password, String firstName, String lastName, LocalDateTime created,
                     LocalDateTime lastModified) {

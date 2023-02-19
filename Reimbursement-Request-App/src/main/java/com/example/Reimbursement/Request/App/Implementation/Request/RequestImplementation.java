@@ -1,10 +1,20 @@
-package com.example.Reimbursement.Request.App.Implementation.RequestDAL;
+package com.example.Reimbursement.Request.App.Implementation.Request;
 
 import com.example.Reimbursement.Request.App.Entities.Request;
+import lombok.NoArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public abstract class RequestImplementation implements RequestRepository {
+@Service
+@NoArgsConstructor
+public class RequestImplementation implements RequestInterface {
+    private  RequestRepository requestRepository;
+
+    public static Logger logger = LogManager.getLogger(RequestImplementation.class);
+
     @Override
     public Request addRequest(Request request) {
         return null;
