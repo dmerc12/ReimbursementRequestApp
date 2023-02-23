@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.Implementation.Request;
+package com.example.Reimbursement.Request.App.DAL.RequestDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Request;
 import lombok.NoArgsConstructor;

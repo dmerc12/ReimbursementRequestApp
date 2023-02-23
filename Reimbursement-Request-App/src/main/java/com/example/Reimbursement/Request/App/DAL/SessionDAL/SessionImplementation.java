@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.Implementation.Session;
+package com.example.Reimbursement.Request.App.DAL.SessionDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Session;
 import org.apache.logging.log4j.LogManager;

@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.Implementation.Category;
+package com.example.Reimbursement.Request.App.DAL.CategoryDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.CategoryAlreadyExists;

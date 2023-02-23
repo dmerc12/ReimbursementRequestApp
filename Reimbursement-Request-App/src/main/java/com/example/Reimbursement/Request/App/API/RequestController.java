@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.API;
 
-import com.example.Reimbursement.Request.App.Implementation.Category.CategoryImplementation;
+import com.example.Reimbursement.Request.App.DAL.CategoryDAL.CategoryImplementation;
 import com.example.Reimbursement.Request.App.Entities.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
