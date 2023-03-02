@@ -20,12 +20,7 @@ public class CategoryDALImplementation implements CategoryDALInterface {
     }
 
     @Override
-    public Category getCategoryByName(String categoryName) {
-        return null;
-    }
-
-    @Override
-    public Category getCategoryById(String categoryId) {
+    public Category getCategoryById(int categoryId) {
         return null;
     }
 
@@ -35,7 +30,7 @@ public class CategoryDALImplementation implements CategoryDALInterface {
     }
 
     @Override
-    public boolean deleteCategory(String categoryId) {
+    public boolean deleteCategory(int categoryId) {
         return false;
     }
 }

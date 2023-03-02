@@ -3,76 +3,44 @@ package com.example.Reimbursement.Request.App.DAL.CategoryDAL;
 import com.example.Reimbursement.Request.App.Entities.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.CategoryAlreadyExists;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.NoneFound;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.List;
 
 public class CategoryDALTests {
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
 
     Category successfulCategory = new Category(0,"success");
-    Category updatedCategory = new Category(0,"updated");
-
-    @Test(expected = NoneFound.class)
-    public void getAllCategoriesNoneFound() {
-        
-    }
+    Category updatedCategory = new Category(successfulCategory.getCategoryId(),"updated");
 
     @Test
     public void addCategorySuccess() {
-
-    }
-
-    @Test(expected = CategoryAlreadyExists.class)
-    public void addCategoryNameAlreadyTaken() {
-
+        Category result = categoryDAO.addCategory(successfulCategory);
+        Assert.assertNotEquals(result.getCategoryId(), 0);
     }
 
     @Test
     public void getAllCategoriesSuccess() {
-
-    }
-
-    @Test(expected = NoneFound.class)
-    public void getCategoryByNameDoesNotExist() {
-
-    }
-
-    @Test
-    public void getCategoryByNameSuccess() {
-
-    }
-
-    @Test(expected = NoneFound.class)
-    public void getCategoryByIdDoesNotExist() {
-
+        List<Category> result = categoryDAO.getAllCategories();
+        Assert.assertFalse(result.isEmpty());
     }
 
     @Test
     public void getCategoryByIdSuccess() {
-
-    }
-
-    @Test(expected = NoneFound.class)
-    public void updateCategoryNotFound() {
-
-    }
-
-    @Test(expected = CategoryAlreadyExists.class)
-    public void updateCategoryAlreadyExists() {
-
+        Category result = categoryDAO.getCategoryById(successfulCategory.getCategoryId());
+        Assert.assertNotNull(result);
     }
 
     @Test
     public void updateCategorySuccess() {
-
-    }
-
-    @Test(expected = NoneFound.class)
-    public void deleteCategoryNotFound() {
-
+        Category result = categoryDAO.updateCategory(updatedCategory);
+        Assert.assertEquals(updatedCategory.getCategoryName(), result.getCategoryName());
     }
 
     @Test
     public void deleteCategorySuccess() {
-
+        boolean result = categoryDAO.deleteCategory(successfulCategory.getCategoryId());
+        Assert.assertTrue(result);
     }
 }

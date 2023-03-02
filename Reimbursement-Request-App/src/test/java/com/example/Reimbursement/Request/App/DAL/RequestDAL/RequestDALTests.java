@@ -5,10 +5,6 @@ import org.junit.Test;
 public class RequestDALTests {
     RequestDALImplementation requestDAO = new RequestDALImplementation();
 
-    Request successfulRequest = new Request();
-
-    Request updatedRequest = new Request();
-
     @Test
     public void addRequestSuccess() {
 

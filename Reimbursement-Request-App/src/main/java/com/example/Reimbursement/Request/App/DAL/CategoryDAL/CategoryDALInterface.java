@@ -8,8 +8,7 @@ public interface CategoryDALInterface {
     Category addCategory(Category category);
 
     List<Category> getAllCategories();
-    Category getCategoryByName(String categoryName)
-            ;    Category getCategoryById(String categoryId);
+    Category getCategoryById(int categoryId);
     Category updateCategory(Category category);
-    boolean deleteCategory(String categoryId);
+    boolean deleteCategory(int categoryId);
 }

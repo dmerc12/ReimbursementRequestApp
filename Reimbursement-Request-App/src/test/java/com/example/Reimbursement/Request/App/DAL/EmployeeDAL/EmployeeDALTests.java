@@ -1,13 +1,11 @@
 package com.example.Reimbursement.Request.App.DAL.EmployeeDAL;
 
+import com.example.Reimbursement.Request.App.Entities.Employee;
 import org.junit.Test;
 
 public class EmployeeDALTests {
 
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
-
-    Employee successfulEmployee = new Employee();
-    Employee updatedEmployee = new Employee();
 
     @Test
     public void addEmployeeSuccess() {
