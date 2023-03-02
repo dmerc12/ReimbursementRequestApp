@@ -1,18 +1,10 @@
 package com.example.Reimbursement.Request.App.DAL.EmployeeDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Employee;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Service;
 
-
-@Service
-@NoArgsConstructor
-@AllArgsConstructor
 public class EmployeeImplementation implements EmployeeInterface {
-    private EmployeeRepository employeeRepository;
 
     public static Logger logger = LogManager.getLogger(EmployeeImplementation.class);
 

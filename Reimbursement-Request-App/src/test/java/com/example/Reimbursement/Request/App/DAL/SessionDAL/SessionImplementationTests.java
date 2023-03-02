@@ -1,6 +1,5 @@
 package com.example.Reimbursement.Request.App.DAL.SessionDAL;
 
-import com.example.Reimbursement.Request.App.Entities.Session;
 import org.junit.Test;
 
 public class SessionImplementationTests {

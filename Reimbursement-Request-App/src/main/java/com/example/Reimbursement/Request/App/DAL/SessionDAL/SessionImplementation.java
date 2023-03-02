@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 
 public class SessionImplementation implements SessionInterface {
 
-    private SessionRepository sessionRepository;
-
     public static Logger logger = LogManager.getLogger(SessionImplementation.class);
 
     @Override
