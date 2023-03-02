@@ -4,9 +4,9 @@ import com.example.Reimbursement.Request.App.Entities.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class EmployeeImplementation implements EmployeeInterface {
+public class EmployeeDALImplementation implements EmployeeDALInterface {
 
-    public static Logger logger = LogManager.getLogger(EmployeeImplementation.class);
+    public static Logger logger = LogManager.getLogger(EmployeeDALImplementation.class);
 
     @Override
     public Employee addEmployee(Employee employee) {

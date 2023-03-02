@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class CategoryImplementation implements CategoryInterface {
-    public static Logger logger = LogManager.getLogger(CategoryImplementation.class);
+public class CategoryDALImplementation implements CategoryDALInterface {
+    public static Logger logger = LogManager.getLogger(CategoryDALImplementation.class);
 
     @Override
     public Category addCategory(Category category) {

@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.API;
 
-import com.example.Reimbursement.Request.App.DAL.CategoryDAL.CategoryImplementation;
+import com.example.Reimbursement.Request.App.DAL.CategoryDAL.CategoryDALImplementation;
 import com.example.Reimbursement.Request.App.Entities.Category;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/category")
 @AllArgsConstructor
 public class RequestController {
-    private final CategoryImplementation categoryImplementation;
+    private final CategoryDALImplementation categoryImplementation;
 
     @PostMapping("/add/category")
     public Category addCategory(Category category) {

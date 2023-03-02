@@ -2,8 +2,8 @@ package com.example.Reimbursement.Request.App.DAL.RequestDAL;
 
 import org.junit.Test;
 
-public class RequestImplementationTests {
-    RequestImplementation requestDAO = new RequestImplementation();
+public class RequestDALTests {
+    RequestDALImplementation requestDAO = new RequestDALImplementation();
 
     Request successfulRequest = new Request();
 

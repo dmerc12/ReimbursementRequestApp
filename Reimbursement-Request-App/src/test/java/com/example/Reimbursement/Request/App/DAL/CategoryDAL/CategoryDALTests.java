@@ -3,20 +3,17 @@ package com.example.Reimbursement.Request.App.DAL.CategoryDAL;
 import com.example.Reimbursement.Request.App.Entities.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.CategoryAlreadyExists;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.NoneFound;
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-
-public class CategoryImplementationTests {
-    CategoryImplementation categoryDAO = new CategoryImplementation();
+public class CategoryDALTests {
+    CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
 
     Category successfulCategory = new Category(0,"success");
     Category updatedCategory = new Category(0,"updated");
 
     @Test(expected = NoneFound.class)
     public void getAllCategoriesNoneFound() {
-
+        
     }
 
     @Test

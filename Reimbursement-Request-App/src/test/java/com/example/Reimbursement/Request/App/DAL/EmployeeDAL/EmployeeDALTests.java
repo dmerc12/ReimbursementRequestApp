@@ -2,9 +2,9 @@ package com.example.Reimbursement.Request.App.DAL.EmployeeDAL;
 
 import org.junit.Test;
 
-public class EmployeeImplementationTests {
+public class EmployeeDALTests {
 
-    EmployeeImplementation employeeDAO = new EmployeeImplementation();
+    EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
 
     Employee successfulEmployee = new Employee();
     Employee updatedEmployee = new Employee();

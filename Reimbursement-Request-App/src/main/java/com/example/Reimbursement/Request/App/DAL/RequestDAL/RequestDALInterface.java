@@ -4,7 +4,7 @@ import com.example.Reimbursement.Request.App.Entities.Request;
 
 import java.util.List;
 
-public interface RequestInterface {
+public interface RequestDALInterface {
     Request addRequest(Request request);
     List<Request> getAllRequests(int employeeId);
     Request getRequest(int requestId);
