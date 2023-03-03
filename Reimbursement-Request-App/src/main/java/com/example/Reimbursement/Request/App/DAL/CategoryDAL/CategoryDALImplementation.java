@@ -24,9 +24,9 @@ public class CategoryDALImplementation implements CategoryDALInterface {
                 ps.execute();
                 ResultSet rs = ps.getGeneratedKeys();
                 rs.next();
-                category.setCategoryId(rs.getInt("category_id"));
+                category.setCategoryId(rs.getInt(1));
             }
-            logger.info("Finishing DAL method add category with result: /n" + category);
+            logger.info("Finishing DAL method add category with result: " + category);
             return category;
         } catch (SQLException error) {
             error.printStackTrace();

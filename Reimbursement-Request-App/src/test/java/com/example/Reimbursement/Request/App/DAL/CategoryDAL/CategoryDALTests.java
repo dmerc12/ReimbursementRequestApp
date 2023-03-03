@@ -1,8 +1,6 @@
 package com.example.Reimbursement.Request.App.DAL.CategoryDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Category;
-import com.example.Reimbursement.Request.App.Entities.CustomExceptions.CategoryAlreadyExists;
-import com.example.Reimbursement.Request.App.Entities.CustomExceptions.NoneFound;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,7 +26,7 @@ public class CategoryDALTests {
 
     @Test
     public void getCategoryByIdSuccess() {
-        Category result = categoryDAO.getCategoryById(successfulCategory.getCategoryId());
+        Category result = categoryDAO.getCategoryById(1);
         Assert.assertNotNull(result);
     }
 
