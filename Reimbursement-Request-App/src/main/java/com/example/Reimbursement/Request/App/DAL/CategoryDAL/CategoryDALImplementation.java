@@ -62,16 +62,61 @@ public class CategoryDALImplementation implements CategoryDALInterface {
 
     @Override
     public Category getCategoryById(int categoryId) {
-        return null;
+        logger.info("Beginning DAL method get account by ID with data: " + categoryId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "select * from reimbursement_request_app.categories where category_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            Category category = new Category(
+                    rs.getInt("category_id"),
+                    rs.getString("category_name")
+            );
+            logger.info("Finishing DAL method get account by ID with result: " + category);
+            return category;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method get category by ID with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Category updateCategory(Category category) {
-        return null;
+        logger.info("Beginning DAL method update category with data: " + category);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "update reimbursement_request_app.categories set category_name=? where category_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, category.getCategoryName());
+            ps.setInt(2, category.getCategoryId());
+            ps.executeUpdate();
+            logger.info("Finishing DAL method update category with result: " + category);
+            return category;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method update category with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
     public boolean deleteCategory(int categoryId) {
-        return false;
+        logger.info("Beginning DAL method delete category with data: " + categoryId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "delete from reimbursement_request_app.categories where category_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ps.executeUpdate();
+            logger.info("Finishing DAL method delete category");
+            return true;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method delete category with error: " + error.getMessage());
+            return false;
+        }
     }
 }
