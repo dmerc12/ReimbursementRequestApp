@@ -103,20 +103,20 @@ public class CategoryDALImplementation implements CategoryDALInterface {
     }
 
     @Override
-    public boolean deleteCategory(int categoryId) {
+    public int deleteCategory(int categoryId) {
         logger.info("Beginning DAL method delete category with data: " + categoryId);
         try (Connection connection = DatabaseConnection.createConnection()) {
-            String sql = "delete from reimbursement_request_app.categories where category_id=?;";
+            String sql = "DELETE FROM reimbursement_request_app.categories WHERE category_id=?;";
             assert connection != null;
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, categoryId);
-            ps.executeUpdate();
+            int result = ps.executeUpdate();
             logger.info("Finishing DAL method delete category");
-            return true;
+            return result;
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method delete category with error: " + error.getMessage());
-            return false;
+            return 0;
         }
     }
 }

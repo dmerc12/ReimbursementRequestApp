@@ -7,10 +7,11 @@ import org.junit.Test;
 import java.util.List;
 
 public class CategoryDALTests {
-    CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
 
+    int current_category_id = 1;
+    CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
     Category successfulCategory = new Category(0,"success");
-    Category updatedCategory = new Category(successfulCategory.getCategoryId(),"updated");
+    Category updatedCategory = new Category(current_category_id,"updated");
 
     @Test
     public void addCategorySuccess() {
@@ -26,7 +27,7 @@ public class CategoryDALTests {
 
     @Test
     public void getCategoryByIdSuccess() {
-        Category result = categoryDAO.getCategoryById(1);
+        Category result = categoryDAO.getCategoryById(-1);
         Assert.assertNotNull(result);
     }
 
@@ -38,7 +39,7 @@ public class CategoryDALTests {
 
     @Test
     public void deleteCategorySuccess() {
-        boolean result = categoryDAO.deleteCategory(successfulCategory.getCategoryId());
-        Assert.assertTrue(result);
+        int result = categoryDAO.deleteCategory(current_category_id);
+        Assert.assertTrue(result != 0);
     }
 }

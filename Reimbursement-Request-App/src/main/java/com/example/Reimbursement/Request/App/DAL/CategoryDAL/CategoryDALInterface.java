@@ -10,5 +10,5 @@ public interface CategoryDALInterface {
     List<Category> getAllCategories();
     Category getCategoryById(int categoryId);
     Category updateCategory(Category category);
-    boolean deleteCategory(int categoryId);
+    int deleteCategory(int categoryId);
 }
