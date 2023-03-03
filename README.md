@@ -2,7 +2,7 @@
 
 ## Technologies Used:
 - Docker
-- MongoDB
+- MySQL
 - Spring Framework
 - Lambok
 - j-unit

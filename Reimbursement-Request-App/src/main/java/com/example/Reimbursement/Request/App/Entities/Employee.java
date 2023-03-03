@@ -1,33 +1,14 @@
 package com.example.Reimbursement.Request.App.Entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
 
-import java.time.LocalDateTime;
-
-@Data
-@NoArgsConstructor
-@Document(collation = "Employees")
+@AllArgsConstructor
 public class Employee {
-    @Id
-    private String employeeId;
+    private int employeeId;
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-    private LocalDateTime created;
-    private LocalDateTime lastModified;
-
-    public Employee(String email, String password, String firstName, String lastName, LocalDateTime created,
-                    LocalDateTime lastModified) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.created = created;
-        this.lastModified = lastModified;
-    }
+    private String phoneNumber;
+    private String address;
 }

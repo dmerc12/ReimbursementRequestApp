@@ -10,10 +10,9 @@ import java.util.List;
 
 @Service
 @NoArgsConstructor
-public class RequestImplementation implements RequestInterface {
-    private  RequestRepository requestRepository;
+public class RequestDALImplementation implements RequestDALInterface {
 
-    public static Logger logger = LogManager.getLogger(RequestImplementation.class);
+    public static Logger logger = LogManager.getLogger(RequestDALImplementation.class);
 
     @Override
     public Request addRequest(Request request) {

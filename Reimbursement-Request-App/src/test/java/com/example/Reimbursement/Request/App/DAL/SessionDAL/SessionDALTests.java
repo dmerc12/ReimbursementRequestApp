@@ -1,13 +1,9 @@
 package com.example.Reimbursement.Request.App.DAL.SessionDAL;
 
-import com.example.Reimbursement.Request.App.Entities.Session;
 import org.junit.Test;
 
-public class SessionImplementationTests {
-    SessionImplementation sessionDAO = new SessionImplementation();
-
-    Session successfulSession = new Session();
-    Session updatedSession = new Session();
+public class SessionDALTests {
+    SessionDALImplementation sessionDAO = new SessionDALImplementation();
 
     @Test
     public void addSessionSuccess() {

@@ -1,14 +1,9 @@
 package com.example.Reimbursement.Request.App.DAL.RequestDAL;
 
-import com.example.Reimbursement.Request.App.Entities.Request;
 import org.junit.Test;
 
-public class RequestImplementationTests {
-    RequestImplementation requestDAO = new RequestImplementation();
-
-    Request successfulRequest = new Request();
-
-    Request updatedRequest = new Request();
+public class RequestDALTests {
+    RequestDALImplementation requestDAO = new RequestDALImplementation();
 
     @Test
     public void addRequestSuccess() {
