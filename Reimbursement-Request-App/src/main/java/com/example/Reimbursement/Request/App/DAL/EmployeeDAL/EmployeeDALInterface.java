@@ -6,6 +6,7 @@ public interface EmployeeDALInterface {
     Employee addEmployee(Employee employee);
     Employee getEmployeeById(int employeeId);
     Employee getEmployeeByEmail(String email);
+    Employee login(String email, String password);
     Employee updateEmployee(Employee employee);
-    boolean deleteEmployee(int employeeId);
+    int deleteEmployee(int employeeId);
 }
