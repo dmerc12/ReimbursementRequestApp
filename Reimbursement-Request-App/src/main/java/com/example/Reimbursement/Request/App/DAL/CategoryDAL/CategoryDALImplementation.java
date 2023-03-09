@@ -14,7 +14,7 @@ public class CategoryDALImplementation implements CategoryDALInterface {
 
     @Override
     public Category addCategory(Category category) {
-        logger.info("Beginning DAL method add category with data: /n" + category);
+        logger.info("Beginning DAL method add category with data: " + category);
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "insert into reimbursement_request_app.categories values (0, ?);";
             PreparedStatement ps = null;

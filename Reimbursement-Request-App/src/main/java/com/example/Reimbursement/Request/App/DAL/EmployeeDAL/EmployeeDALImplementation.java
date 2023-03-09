@@ -1,8 +1,12 @@
 package com.example.Reimbursement.Request.App.DAL.EmployeeDAL;
 
 import com.example.Reimbursement.Request.App.Entities.Employee;
+import com.example.Reimbursement.Request.App.Utilities.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.*;
+
 
 public class EmployeeDALImplementation implements EmployeeDALInterface {
 
@@ -10,7 +14,30 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     @Override
     public Employee addEmployee(Employee employee) {
-        return null;
+        logger.info("Beginning DAL method add employee with data: " + employee);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "insert into reimbursement_request_app.employees values (0, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement ps = null;
+            if (connection != null) {
+                ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, employee.getEmail());
+                ps.setString(2, employee.getPassword());
+                ps.setString(3, employee.getFirstName());
+                ps.setString(4, employee.getLastName());
+                ps.setString(5, employee.getPhoneNumber());
+                ps.setString(6, employee.getAddress());
+                ps.execute();
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                employee.setEmployeeId(rs.getInt(1));
+            }
+            logger.info("Finishing DAL method add employee with result: " + employee);
+            return employee;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method add employee with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -18,8 +45,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
         return null;
     }
 
+    @Override
     public Employee getEmployeeByEmail(String email) {return null; }
 
+    @Override
     public Employee login(String email, String password) { return null; }
 
     @Override
