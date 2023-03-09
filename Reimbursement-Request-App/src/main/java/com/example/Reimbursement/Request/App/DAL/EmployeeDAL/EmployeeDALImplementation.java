@@ -14,7 +14,7 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     @Override
     public Employee addEmployee(Employee employee) {
-        logger.info("Beginning DAL method add employee with data: " + employee);
+        logger.info("Beginning DAL method add employee with employee: " + employee);
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "insert into reimbursement_request_app.employees values (0, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = null;
@@ -42,7 +42,30 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     @Override
     public Employee getEmployeeById(int employeeId) {
-        return null;
+        logger.info("Beginning DAL method get employee by ID with employee ID: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "select * from reimbursement_request_app.employees where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            Employee employee = new Employee(
+                    rs.getInt("employee_id"),
+                    rs.getString("email"),
+                    rs.getString("passwrd"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("phone_number"),
+                    rs.getString("address")
+            );
+            logger.info("Finishing DAL method get employee by ID with result: " + employee);
+            return employee;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method get employee by ID with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -53,7 +76,7 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        logger.info("Beginning DAL method update employee with data: " + employee);
+        logger.info("Beginning DAL method update employee with employee: " + employee);
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "update reimbursement_request_app.employees set email=? address=? phone_number=? " +
                     "first_name=? last_name=? where employee_id=?;";
@@ -77,7 +100,7 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     @Override
     public int deleteEmployee(int employeeId) {
-        logger.info("Beginning DAL method delete employee with data: " + employeeId);
+        logger.info("Beginning DAL method delete employee with employee ID: " + employeeId);
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "delete from reimbursement_request_app.employees where employee_id=?;";
             assert connection != null;
