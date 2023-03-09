@@ -58,6 +58,19 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     @Override
     public int deleteEmployee(int employeeId) {
-        return 0;
+        logger.info("Beginning DAL method delete employee with data: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "delete from reimbursement_request_app.employees where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            int result = ps.executeUpdate();
+            logger.info("Finishing DAL method delete employee");
+            return result;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method delete employee with error: " + error.getMessage());
+            return 0;
+        }
     }
 }
