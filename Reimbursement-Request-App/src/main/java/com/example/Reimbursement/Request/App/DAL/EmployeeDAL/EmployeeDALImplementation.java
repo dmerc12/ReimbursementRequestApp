@@ -53,7 +53,26 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        return null;
+        logger.info("Beginning DAL method update employee with data: " + employee);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "update reimbursement_request_app.employees set email=? address=? phone_number=? " +
+                    "first_name=? last_name=? where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, employee.getEmail());
+            ps.setString(2, employee.getAddress());
+            ps.setString(3, employee.getPhoneNumber());
+            ps.setString(4, employee.getFirstName());
+            ps.setString(5, employee.getLastName());
+            ps.setInt(6, employee.getEmployeeId());
+            ps.executeUpdate();
+            logger.info("Finishing DAL method update employee with result: " + employee);
+            return employee;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method update employee with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
