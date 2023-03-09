@@ -8,10 +8,10 @@ import java.util.List;
 
 public class CategoryDALTests {
 
-    int current_category_id = 1;
+    int currentCategoryId = 1;
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
     Category successfulCategory = new Category(0,"success");
-    Category updatedCategory = new Category(current_category_id,"updated");
+    Category updatedCategory = new Category(currentCategoryId,"updated");
 
     @Test
     public void addCategorySuccess() {
@@ -39,7 +39,7 @@ public class CategoryDALTests {
 
     @Test
     public void deleteCategorySuccess() {
-        int result = categoryDAO.deleteCategory(current_category_id);
+        int result = categoryDAO.deleteCategory(currentCategoryId);
         Assert.assertTrue(result != 0);
     }
 }

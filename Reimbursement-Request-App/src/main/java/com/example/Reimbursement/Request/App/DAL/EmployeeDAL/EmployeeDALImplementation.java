@@ -20,13 +20,15 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
 
     public Employee getEmployeeByEmail(String email) {return null; }
 
+    public Employee login(String email, String password) { return null; }
+
     @Override
     public Employee updateEmployee(Employee employee) {
         return null;
     }
 
     @Override
-    public boolean deleteEmployee(int employeeId) {
-        return false;
+    public int deleteEmployee(int employeeId) {
+        return 0;
     }
 }
