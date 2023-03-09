@@ -4,9 +4,11 @@ import com.example.Reimbursement.Request.App.Entities.Employee;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Dictionary;
+
 public class EmployeeDALTests {
 
-    int currentEmployeeId = 1;
+    int currentEmployeeId = 4;
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     Employee successfulEmployee = new Employee(0, "e@mail.com", "password", "first",
             "last", "444-555-6666", "123 S Second St, OKC, OK, 78995");
@@ -21,19 +23,19 @@ public class EmployeeDALTests {
 
     @Test
     public void getEmployeeByIdSuccess() {
-        Employee result = employeeDAO.getEmployeeById(currentEmployeeId);
+        Employee result = employeeDAO.getEmployeeById(-1);
         Assert.assertNotNull(result);
     }
 
     @Test
     public void getEmployeeByEmailSuccess() {
-        Employee result = employeeDAO.getEmployeeByEmail(successfulEmployee.getEmail());
+        Employee result = employeeDAO.getEmployeeByEmail("test@email.com");
         Assert.assertNotNull(result);
     }
 
     @Test
     public void loginSuccess() {
-        Employee result = employeeDAO.login(successfulEmployee.getEmail(), successfulEmployee.getPassword());
+        Employee result = employeeDAO.login("test@email.com", "test");
         Assert.assertNotNull(result);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CategoryDALTests {
 
-    int currentCategoryId = 1;
+    int currentCategoryId = 4;
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
     Category successfulCategory = new Category(0,"success");
     Category updatedCategory = new Category(currentCategoryId,"updated");

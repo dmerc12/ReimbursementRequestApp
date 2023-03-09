@@ -69,17 +69,72 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
     }
 
     @Override
-    public Employee getEmployeeByEmail(String email) {return null; }
+    public Employee getEmployeeByEmail(String email) {
+        logger.info("Beginning DAL method get employee by email with email: " + email);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "select * from reimbursement_request_app.employees where email=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            Employee employee = new Employee(
+                    rs.getInt("employee_id"),
+                    rs.getString("email"),
+                    rs.getString("passwrd"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("phone_number"),
+                    rs.getString("address")
+            );
+            logger.info("Finishing DAL method get employee by email with result: " + employee);
+            return employee;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method get employee by email with error: " + error.getMessage());
+            return null;
+        }
+    }
 
     @Override
-    public Employee login(String email, String password) { return null; }
+    public Employee login(String email, String password) {
+        logger.info("Beginning DAL method login with email: " + email + ", and password: " + password);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "select * from reimbursement_request_app.employees where email=? and passwrd=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Employee employee = new Employee(
+                        rs.getInt("employee_id"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("phone_number"),
+                        rs.getString("address")
+                );
+                logger.info("Finishing DAL method login with result: " + employee);
+                return employee;
+            } else {
+                logger.info("Finishing DAL method login with result: null");
+                return null;
+            }
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method login with error: " + error.getMessage());
+            return null;
+        }
+    }
 
     @Override
     public Employee updateEmployee(Employee employee) {
         logger.info("Beginning DAL method update employee with employee: " + employee);
         try (Connection connection = DatabaseConnection.createConnection()) {
-            String sql = "update reimbursement_request_app.employees set email=? address=? phone_number=? " +
-                    "first_name=? last_name=? where employee_id=?;";
+            String sql = "update reimbursement_request_app.employees set email=?, address=?, phone_number=?, " +
+                    "first_name=?, last_name=? where employee_id=?;";
             assert connection != null;
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, employee.getEmail());
