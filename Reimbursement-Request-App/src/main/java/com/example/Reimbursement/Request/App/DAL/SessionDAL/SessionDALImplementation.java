@@ -44,7 +44,7 @@ public class SessionDALImplementation implements SessionDALInterface {
     }
 
     @Override
-    public boolean deleteSession(int sessionId) {
-        return false;
+    public int deleteSession(int sessionId) {
+        return 0;
     }
 }

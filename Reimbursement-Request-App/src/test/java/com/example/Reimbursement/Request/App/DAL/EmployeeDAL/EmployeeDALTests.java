@@ -8,7 +8,7 @@ import java.util.Dictionary;
 
 public class EmployeeDALTests {
 
-    int currentEmployeeId = 4;
+    int currentEmployeeId = 1;
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     Employee successfulEmployee = new Employee(0, "e@mail.com", "password", "first",
             "last", "444-555-6666", "123 S Second St, OKC, OK, 78995");
