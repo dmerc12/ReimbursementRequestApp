@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,7 +60,31 @@ public class RequestDALImplementation implements RequestDALInterface {
 
     @Override
     public List<Request> getAllRequests(int employeeId) {
-        return null;
+        logger.info("Beginning DAL method get all requests with employee ID: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "select * from reimbursement_request_app.requests where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            ResultSet rs = ps.executeQuery();
+            List<Request> requestList = new ArrayList<>();
+            while (rs.next()) {
+                Request request = new Request(
+                        rs.getInt("request_id"),
+                        rs.getInt("employee_id"),
+                        rs.getInt("category_id"),
+                        rs.getString("comment"),
+                        rs.getDouble("amount")
+                );
+                requestList.add(request);
+            }
+            logger.info("Finishing DAL method get all requests with result: " + requestList);
+            return requestList;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method get all requests with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -99,6 +124,7 @@ public class RequestDALImplementation implements RequestDALInterface {
             ps.setInt(1, request.getCategoryId());
             ps.setString(2, request.getComment());
             ps.setDouble(3, request.getAmount());
+            ps.setInt(4, request.getRequestId());
             ps.executeUpdate();
             logger.info("Finishing DAL method update request with result: " + request);
             return request;

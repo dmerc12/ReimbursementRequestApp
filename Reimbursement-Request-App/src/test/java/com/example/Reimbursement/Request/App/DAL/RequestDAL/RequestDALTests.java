@@ -38,7 +38,7 @@ public class RequestDALTests {
         Assert.assertEquals(updateRequest.getEmployeeId(), result.getEmployeeId());
         Assert.assertEquals(updateRequest.getCategoryId(), result.getCategoryId());
         Assert.assertEquals(updateRequest.getComment(), result.getComment());
-        Assert.assertEquals(updateRequest.getAmount(), result.getAmount());
+        Assert.assertEquals(updateRequest.getAmount(), result.getAmount(), 0);
     }
 
     @Test
