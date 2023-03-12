@@ -5,5 +5,5 @@ import com.example.Reimbursement.Request.App.Entities.Session;
 public interface SessionDALInterface {    Session addSession(Session session);
     Session getSession(int sessionId);
     Session updateSession(Session session);
-    boolean deleteSession(int sessionId);
+    int deleteSession(int sessionId);
 }

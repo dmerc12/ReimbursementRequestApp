@@ -12,6 +12,21 @@ import java.util.List;
 public class CategoryDALImplementation implements CategoryDALInterface {
     public static Logger logger = LogManager.getLogger(CategoryDALImplementation.class);
 
+    public void accessCategoryTable(String sql) {
+        logger.info("Beginning DAL method access category table with sql statement: " + sql);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            PreparedStatement ps = null;
+            if (connection != null) {
+                ps = connection.prepareStatement(sql);
+                ps.execute();
+            }
+            logger.info("Finishing DAL method access employee table");
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method access category table with error: " + error.getMessage());
+        }
+    }
+
     @Override
     public Category addCategory(Category category) {
         logger.info("Beginning DAL method add category with data: " + category);
