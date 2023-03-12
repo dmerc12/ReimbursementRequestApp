@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class SessionDALImplementation implements SessionDALInterface {
 
@@ -62,6 +63,19 @@ public class SessionDALImplementation implements SessionDALInterface {
 
     @Override
     public int deleteSession(int sessionId) {
-        return 0;
+        logger.info("Beginning DAL method delete session with session ID: " + sessionId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "delete from reimbursement_request_app.sessions where session_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, sessionId);
+            int result = ps.executeUpdate();
+            logger.info("Finishing DAL method delete session");
+            return result;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method delete session with error: " + error.getMessage());
+            return 0;
+        }
     }
 }
