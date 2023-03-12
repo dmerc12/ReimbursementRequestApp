@@ -9,5 +9,5 @@ public interface RequestDALInterface {
     List<Request> getAllRequests(int employeeId);
     Request getRequest(int requestId);
     Request updateRequest(Request request);
-    boolean deleteRequest(int requestId);
+    int deleteRequest(int requestId);
 }

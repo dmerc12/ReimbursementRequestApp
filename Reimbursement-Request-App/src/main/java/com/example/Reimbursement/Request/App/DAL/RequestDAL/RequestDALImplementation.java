@@ -54,7 +54,7 @@ public class RequestDALImplementation implements RequestDALInterface {
     }
 
     @Override
-    public boolean deleteRequest(int requestId) {
-        return false;
+    public int deleteRequest(int requestId) {
+        return 0;
     }
 }
