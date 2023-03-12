@@ -78,7 +78,20 @@ public class SessionDALImplementation implements SessionDALInterface {
 
     @Override
     public Session updateSession(Session session) {
-        return null;
+        logger.info("Beginning DAL method update session with session: " + session);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "update reimbursement_request_app.sessions set expiration=? where session_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setObject(1, session.getExpiration());
+            ps.executeUpdate();
+            logger.info("Finishing DAL method update session with result: " + session);
+            return session;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method update session with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
