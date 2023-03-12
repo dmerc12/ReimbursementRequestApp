@@ -50,7 +50,7 @@ public class DatabaseSetup {
 
             // session table setup
             String sessionTable = "create table reimbursement_request_app.sessions(session_id int auto_increment " +
-                    "primary key, employee_id int, expiration text, constraint sessionfk foreign key " +
+                    "primary key, employee_id int, expiration DateTime, constraint sessionfk foreign key " +
                     "(employee_id) references reimbursement_request_app.employees(employee_id));";
             String testSession = String.format("insert into reimbursement_request_app.sessions values(-1, -1, '%s');",
                     LocalDateTime.now());

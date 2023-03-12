@@ -5,9 +5,7 @@ import com.example.Reimbursement.Request.App.Utilities.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SessionDALImplementation implements SessionDALInterface {
 
@@ -30,7 +28,26 @@ public class SessionDALImplementation implements SessionDALInterface {
 
     @Override
     public Session addSession(Session session) {
-        return null;
+        logger.info("Beginning DAL method add session with session: " + session);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "insert into reimbursement_request_app.sessions values (0, ?, ?);";
+            PreparedStatement ps = null;
+            if (connection != null) {
+                ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, session.getEmployeeId());
+                ps.setObject(2, session.getExpiration());
+                ps.execute();
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                session.setSessionId(rs.getInt(1));
+            }
+            logger.info("Finishing DAL method add session with result: " + session);
+            return session;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method add session with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
