@@ -84,6 +84,7 @@ public class SessionDALImplementation implements SessionDALInterface {
             assert connection != null;
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setObject(1, session.getExpiration());
+            ps.setInt(2, session.getSessionId());
             ps.executeUpdate();
             logger.info("Finishing DAL method update session with result: " + session);
             return session;
