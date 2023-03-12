@@ -53,7 +53,27 @@ public class SessionDALImplementation implements SessionDALInterface {
 
     @Override
     public Session getSession(int sessionId) {
-        return null;
+        logger.info("Beginning DAL method get session with session ID: " + sessionId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "select * from reimbursement_request_app.sessions where session_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, sessionId);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            LocalDateTime expiration = rs.getTimestamp("expiration").toLocalDateTime();
+            Session session = new Session(
+                    rs.getInt("session_id"),
+                    rs.getInt("employee_id"),
+                    expiration
+            );
+            logger.info("Finishing DAL method get session with result: " + session);
+            return session;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method get session with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
