@@ -64,7 +64,28 @@ public class RequestDALImplementation implements RequestDALInterface {
 
     @Override
     public Request getRequest(int requestId) {
-        return null;
+        logger.info("Beginning DAL method get request with request ID: " + requestId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "select * from reimbursement_request_app.requests where request_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, requestId);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            Request request = new Request(
+                    rs.getInt("request_id"),
+                    rs.getInt("employee_id"),
+                    rs.getInt("category_id"),
+                    rs.getString("comment"),
+                    rs.getDouble("amount")
+            );
+            logger.info("Finishing DAL method get request with result: " + request);
+            return request;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method get request with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
