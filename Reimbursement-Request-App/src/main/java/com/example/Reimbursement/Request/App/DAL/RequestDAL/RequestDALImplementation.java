@@ -69,7 +69,23 @@ public class RequestDALImplementation implements RequestDALInterface {
 
     @Override
     public Request updateRequest(Request request) {
-        return null;
+        logger.info("Beginning DAL method update request with request: " + request);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "update reimbursement_request_app.requests set category_id=?, comment=?, amount=? where " +
+                    "request_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, request.getCategoryId());
+            ps.setString(2, request.getComment());
+            ps.setDouble(3, request.getAmount());
+            ps.executeUpdate();
+            logger.info("Finishing DAL method update request with result: " + request);
+            return request;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method update request with error: " + error.getMessage());
+            return null;
+        }
     }
 
     @Override
