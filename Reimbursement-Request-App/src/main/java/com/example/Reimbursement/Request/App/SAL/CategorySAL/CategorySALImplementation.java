@@ -25,8 +25,14 @@ public class CategorySALImplementation implements CategorySALInterface{
             throw new GeneralError("Category name field cannot exceed 60 characters, please try again!");
         } else {
             List<Category> categoryList = getAllCategories();
-            if (categoryList.contains(category)) {
-                logger.warn("SAL method add category, category name already taken");
+            boolean exists = false;
+            for (Category existingCategory: categoryList) {
+                if (existingCategory.getCategoryName().equals(category.getCategoryName())) {
+                    exists = true;
+                    break;
+                }
+            } if (exists) {
+                logger.warn("SAL method update category, category already exists");
                 throw new GeneralError("Category with this name already exists, please try again!");
             } else {
                 Category result = categoryDAO.addCategory(category);
@@ -64,7 +70,33 @@ public class CategorySALImplementation implements CategorySALInterface{
 
     @Override
     public Category updateCategory(Category category) {
-        return null;
+        logger.info("Beginning SAL method update category with category: " + category);
+        if (category.getCategoryName().equals("")) {
+            logger.warn("SAL method update category, category name left empty");
+            throw new GeneralError("Category name field cannot be left empty, please try again!");
+        } else if (category.getCategoryName().length() > 60) {
+            logger.warn("SAL method update category, category name too long");
+            throw new GeneralError("Category name field cannot exceed 60 characters, please try again!");
+        } else {
+            List<Category> categoryList = getAllCategories();
+            boolean exists = false;
+            Category existingCategoryInformation = getCategory(category.getCategoryId());
+            if (category.getCategoryName().equals(existingCategoryInformation.getCategoryName())) {
+                logger.warn("SAL method update category, nothing changed");
+                throw new GeneralError("Nothing changed, please try again!");
+            } for (Category existingCategory: categoryList) {
+                if (existingCategory.getCategoryName().equals(category.getCategoryName())) {
+                    exists = true;
+                    break;
+                }
+            } if (exists) {
+                logger.warn("SAL method update category, category already exists");
+                throw new GeneralError("Category with this name already exists, please try again!");
+            } else {
+                logger.info("Finishing SAL method update category with category: " + category);
+                return category;
+            }
+        }
     }
 
     @Override
