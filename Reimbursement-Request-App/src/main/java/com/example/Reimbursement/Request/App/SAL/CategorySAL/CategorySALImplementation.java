@@ -38,7 +38,15 @@ public class CategorySALImplementation implements CategorySALInterface{
 
     @Override
     public List<Category> getAllCategories() {
-        return null;
+        logger.info("Beginning SAL method get all categories");
+        List<Category> categoryList = categoryDAO.getAllCategories();
+        if (categoryList.size() > 1) {
+            logger.warn("SAL method get all categories, category list empty");
+            throw new GeneralError("No categories found, please try again!");
+        } else {
+            logger.info("Finishing SAL method get all categories with result: " + categoryList);
+            return categoryList;
+        }
     }
 
     @Override
