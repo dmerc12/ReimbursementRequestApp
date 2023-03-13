@@ -1,5 +1,6 @@
-package com.example.Reimbursement.Request.App.DAL.SessionDAL;
+package com.example.Reimbursement.Request.App.DAL;
 
+import com.example.Reimbursement.Request.App.DAL.SessionDAL.SessionDALImplementation;
 import com.example.Reimbursement.Request.App.Entities.Session;
 import org.junit.Assert;
 import org.junit.Test;
