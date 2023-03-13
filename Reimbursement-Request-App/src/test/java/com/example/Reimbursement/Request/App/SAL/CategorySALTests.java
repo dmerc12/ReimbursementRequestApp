@@ -5,10 +5,13 @@ import com.example.Reimbursement.Request.App.Entities.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
 import com.example.Reimbursement.Request.App.SAL.CategorySAL.CategorySALImplementation;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.List;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CategorySALTests {
     int currentCategoryId = 1;
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
@@ -16,86 +19,86 @@ public class CategorySALTests {
     Category successCategory = new Category(0, "success");
     Category updateCategory = new Category(currentCategoryId, "updated");
 
-    @Test(expected = GeneralError.class)
-    public void getAllCategoriesNoneFound() {
+    @Test
+    public void a_getAllCategoriesNoneFound() {
         try {
             categorySAO.getAllCategories();
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "No categories found, please try again!");
         }
     }
 
-    @Test(expected = GeneralError.class)
-    public void addCategoryNameEmpty() {
+    @Test
+    public void b_addCategoryNameEmpty() {
         try {
             Category testCategory = new Category(0, "");
             categorySAO.addCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category name field cannot be left empty, please try " +
                     "again!");
         }
     }
 
-    @Test(expected = GeneralError.class)
-    public void addCategoryNameTooLong() {
+    @Test
+    public void c_addCategoryNameTooLong() {
         try {
             Category testCategory = new Category(0, "this is way too long and so it should fail " +
                     "and bring about the desired error message");
             categorySAO.addCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category name field cannot exceed 60 characters, please " +
                     "try again!");
         }
     }
 
-    @Test(expected = GeneralError.class)
-    public void addCategoryNameAlreadyTaken() {
+    @Test
+    public void d_addCategoryNameAlreadyTaken() {
         try {
             Category testCategory = new Category(0, "test");
             categorySAO.addCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category with this name already exists, please try again!");
         }
     }
 
     @Test()
-    public void addCategorySuccess() {
+    public void e_addCategorySuccess() {
         Category result = categorySAO.addCategory(successCategory);
         Assert.assertNotEquals(result.getCategoryId(), 0);
     }
 
     @Test
-    public void getAllCategoriesSuccess() {
+    public void f_getAllCategoriesSuccess() {
         List<Category> result = categorySAO.getAllCategories();
-        Assert.assertFalse(result.size() <= 1);
+        Assert.assertTrue(result.size() >= 1);
     }
 
-    @Test(expected = GeneralError.class)
-    public void getCategoryNoneFound() {
+    @Test
+    public void g_getCategoryNoneFound() {
         try {
             categorySAO.getCategory(-5000000);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category not found, please try again!");
         }
     }
 
     @Test
-    public void getCategorySuccess(){
+    public void h_getCategorySuccess(){
         Category result = categorySAO.getCategory(-1);
         Assert.assertNotNull(result);
     }
 
-    @Test(expected = GeneralError.class)
-    public void updateCategoryNameEmpty() {
+    @Test
+    public void i_updateCategoryNameEmpty() {
         try {
             Category testCategory = new Category(currentCategoryId, "");
             categorySAO.updateCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category name field cannot be left empty, please try" +
                     " again!");
@@ -103,13 +106,13 @@ public class CategorySALTests {
 
     }
 
-    @Test(expected = GeneralError.class)
-    public void updateCategoryNameTooLong() {
+    @Test
+    public void j_updateCategoryNameTooLong() {
         try {
             Category testCategory = new Category(currentCategoryId, "this is way too long and so it " +
                     "should fail and bring about the desired error message");
             categorySAO.updateCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category name field cannot exceed 60 characters, " +
                     "please try again!");
@@ -117,36 +120,36 @@ public class CategorySALTests {
 
     }
 
-    @Test(expected = GeneralError.class)
-    public void updateCategoryNameNotChanged() {
+    @Test
+    public void k_updateCategoryNameNotChanged() {
         try {
             Category testCategory = new Category(currentCategoryId, successCategory.getCategoryName());
             categorySAO.updateCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Nothing changed, please try again!");
         }
 
     }
 
-    @Test(expected = GeneralError.class)
-    public void updateCategoryNotFound() {
+    @Test
+    public void l_updateCategoryNotFound() {
         try {
             Category testCategory = new Category(-500000000, updateCategory.getCategoryName());
             categorySAO.updateCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category not found, please try again!");
         }
 
     }
 
-    @Test(expected = GeneralError.class)
-    public void updateCategoryNameAlreadyExists() {
+    @Test
+    public void m_updateCategoryNameAlreadyExists() {
         try {
             Category testCategory = new Category(currentCategoryId, "test");
             categorySAO.updateCategory(testCategory);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category with this name already exists, please try again!");
         }
@@ -154,23 +157,23 @@ public class CategorySALTests {
     }
 
     @Test
-    public void updateCategorySuccess() {
+    public void n_updateCategorySuccess() {
         Category result = categorySAO.updateCategory(updateCategory);
         Assert.assertEquals(updateCategory.getCategoryName(), result.getCategoryName());
     }
 
-    @Test(expected = GeneralError.class)
-    public void deleteCategoryNoneFound() {
+    @Test
+    public void o_deleteCategoryNoneFound() {
         try {
             categorySAO.deleteCategory(-500000000);
-            assert false;
+            Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category not found, please try again!");
         }
     }
 
     @Test
-    public void deleteCategorySuccess() {
+    public void p_deleteCategorySuccess() {
         int result = categorySAO.deleteCategory(currentCategoryId);
         Assert.assertTrue(result != 0);
     }

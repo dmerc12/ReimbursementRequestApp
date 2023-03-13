@@ -12,7 +12,7 @@ public class CategorySALImplementation implements CategorySALInterface{
     private CategoryDALImplementation categoryDAO;
     public static Logger logger = LogManager.getLogger(CategorySALImplementation.class);
     public CategorySALImplementation(CategoryDALImplementation companyDAO) {
-
+        this.categoryDAO = companyDAO;
     }
     @Override
     public Category addCategory(Category category) {
@@ -24,7 +24,7 @@ public class CategorySALImplementation implements CategorySALInterface{
             logger.warn("SAL method add category, category name too long");
             throw new GeneralError("Category name field cannot exceed 60 characters, please try again!");
         } else {
-            List<Category> categoryList = getAllCategories();
+            List<Category> categoryList = categoryDAO.getAllCategories();
             boolean exists = false;
             for (Category existingCategory: categoryList) {
                 if (existingCategory.getCategoryName().equals(category.getCategoryName())) {
@@ -46,7 +46,7 @@ public class CategorySALImplementation implements CategorySALInterface{
     public List<Category> getAllCategories() {
         logger.info("Beginning SAL method get all categories");
         List<Category> categoryList = categoryDAO.getAllCategories();
-        if (categoryList.size() > 1) {
+        if (categoryList.size() <= 1) {
             logger.warn("SAL method get all categories, category list empty");
             throw new GeneralError("No categories found, please try again!");
         } else {
@@ -78,7 +78,7 @@ public class CategorySALImplementation implements CategorySALInterface{
             logger.warn("SAL method update category, category name too long");
             throw new GeneralError("Category name field cannot exceed 60 characters, please try again!");
         } else {
-            List<Category> categoryList = getAllCategories();
+            List<Category> categoryList = categoryDAO.getAllCategories();
             boolean exists = false;
             Category existingCategoryInformation = getCategory(category.getCategoryId());
             if (category.getCategoryName().equals(existingCategoryInformation.getCategoryName())) {
@@ -93,14 +93,19 @@ public class CategorySALImplementation implements CategorySALInterface{
                 logger.warn("SAL method update category, category already exists");
                 throw new GeneralError("Category with this name already exists, please try again!");
             } else {
-                logger.info("Finishing SAL method update category with category: " + category);
-                return category;
+                Category result = categoryDAO.updateCategory(category);
+                logger.info("Finishing SAL method update category with category: " + result);
+                return result;
             }
         }
     }
 
     @Override
     public int deleteCategory(int categoryId) {
-        return 0;
+        logger.info("Beginning SAL method delete category with category ID: " + categoryId);
+        getCategory(categoryId);
+        int result = categoryDAO.deleteCategory(categoryId);
+        logger.info("Finishing SAL method delete category with result: " + result);
+        return result;
     }
 }
