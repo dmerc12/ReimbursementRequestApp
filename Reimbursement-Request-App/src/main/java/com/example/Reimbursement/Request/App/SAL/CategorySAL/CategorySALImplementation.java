@@ -30,7 +30,7 @@ public class CategorySALImplementation implements CategorySALInterface{
                 throw new GeneralError("Category with this name already exists, please try again!");
             } else {
                 Category result = categoryDAO.addCategory(category);
-                logger.info("Finishing SAL method add category with result: " + result);
+                logger.info("Finishing SAL method add category with category: " + result);
                 return result;
             }
         }
@@ -44,14 +44,22 @@ public class CategorySALImplementation implements CategorySALInterface{
             logger.warn("SAL method get all categories, category list empty");
             throw new GeneralError("No categories found, please try again!");
         } else {
-            logger.info("Finishing SAL method get all categories with result: " + categoryList);
+            logger.info("Finishing SAL method get all categories with category list: " + categoryList);
             return categoryList;
         }
     }
 
     @Override
     public Category getCategory(int categoryId) {
-        return null;
+        logger.info("Beginning SAL method get category with category ID: " + categoryId);
+        Category result = categoryDAO.getCategoryById(categoryId);
+        if (result == null) {
+            logger.warn("SAL method get category, no category found");
+            throw new GeneralError("Category not found, please try again!");
+        } else {
+            logger.info("Finishing SAL method get category with category: " + result);
+            return result;
+        }
     }
 
     @Override
