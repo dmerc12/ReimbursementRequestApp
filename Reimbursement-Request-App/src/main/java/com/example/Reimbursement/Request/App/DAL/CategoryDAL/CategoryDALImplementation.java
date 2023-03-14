@@ -84,13 +84,17 @@ public class CategoryDALImplementation implements CategoryDALInterface {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            Category category = new Category(
-                    rs.getInt("category_id"),
-                    rs.getString("category_name")
-            );
-            logger.info("Finishing DAL method get account by ID with result: " + category);
-            return category;
+            if (rs.next()) {
+                Category category = new Category(
+                        rs.getInt("category_id"),
+                        rs.getString("category_name")
+                );
+                logger.info("Finishing DAL method get account by ID with result: " + category);
+                return category;
+            } else {
+                logger.info("No category found with ID: " + categoryId);
+                return null;
+            }
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method get category by ID with error: " + error.getMessage());
