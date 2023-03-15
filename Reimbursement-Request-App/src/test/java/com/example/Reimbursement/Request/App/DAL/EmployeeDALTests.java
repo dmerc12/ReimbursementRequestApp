@@ -11,10 +11,11 @@ public class EmployeeDALTests {
 
     int currentEmployeeId = 1;
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
-    Employee successfulEmployee = new Employee(0, "e@mail.com", "password", "first",
-            "last", "444-555-6666", "123 S Second St, OKC, OK, 78995");
-    Employee updateEmployee = new Employee(currentEmployeeId,"new@email.com","new password",
-            "updated", "updated", "555-666-4444", "312 N Second St, OKC, OK, 79588");
+    Employee successfulEmployee = new Employee(0, "first", "last", "e@mail.com",
+            "password", "444-555-6666", "123 S Second St, OKC, OK, 78995");
+    Employee updateEmployee = new Employee(currentEmployeeId,"updated","updated",
+            "new@email.com", "new password", "555-666-4444",
+            "312 N Second St, OKC, OK, 79588");
 
     @Test
     public void addEmployeeSuccess() {
