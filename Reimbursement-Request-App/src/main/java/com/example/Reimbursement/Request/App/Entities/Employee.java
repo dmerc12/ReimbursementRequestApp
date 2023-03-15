@@ -7,10 +7,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class Employee {
     private int employeeId;
-    private String email;
-    private String password;
     private String firstName;
     private String lastName;
+    private String email;
+    private String password;
     private String phoneNumber;
     private String address;
 }
