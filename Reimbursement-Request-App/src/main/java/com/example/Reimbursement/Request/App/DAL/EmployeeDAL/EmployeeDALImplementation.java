@@ -65,18 +65,22 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, employeeId);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            Employee employee = new Employee(
-                    rs.getInt("employee_id"),
-                    rs.getString("email"),
-                    rs.getString("passwrd"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("phone_number"),
-                    rs.getString("address")
-            );
-            logger.info("Finishing DAL method get employee by ID with result: " + employee);
-            return employee;
+            if (rs.next()) {
+                Employee employee = new Employee(
+                        rs.getInt("employee_id"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("phone_number"),
+                        rs.getString("address")
+                );
+                logger.info("Finishing DAL method get employee by ID with result: " + employee);
+                return employee;
+            } else {
+                logger.info("Finishing DAL method get employee by ID with nothing found");
+                return null;
+            }
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method get employee by ID with error: " + error.getMessage());

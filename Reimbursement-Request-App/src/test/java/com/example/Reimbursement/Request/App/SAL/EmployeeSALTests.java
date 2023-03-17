@@ -211,7 +211,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void bb_getEmployeeByIdNoneFound() {
+    public void ba_getEmployeeByIdNoneFound() {
         try {
             employeeSAO.getEmployeeById(-500000000);
             Assert.fail();
@@ -221,7 +221,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void bc_getEmployeeByIdSuccess() {
+    public void bb_getEmployeeByIdSuccess() {
         Employee result = employeeSAO.getEmployeeById(currentEmployeeId);
         Assert.assertNotNull(result);
     }

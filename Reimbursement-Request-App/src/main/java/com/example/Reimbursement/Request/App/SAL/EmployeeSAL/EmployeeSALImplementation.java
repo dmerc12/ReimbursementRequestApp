@@ -70,13 +70,16 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
 
     @Override
     public Employee getEmployeeById(int employeeId) {
-        return null;
-    }
-
-    @Override
-    public Employee getEmployeeByEmail(String email) {
-        return null;
-    }
+        logger.info("Beginning SAL method get employee by ID with employee ID: " + employeeId);
+        Employee employee = employeeDAO.getEmployeeById(employeeId);
+        if (employee == null) {
+            logger.warn("SAL method get employee by ID, not found");
+            throw new GeneralError("No employee found, please try again!");
+        } else {
+            logger.info("Finishing SAL method get employee by ID with employee: " + employee);
+            return employee;
+        }
+     }
 
     @Override
     public Employee login(String email, String password) {
