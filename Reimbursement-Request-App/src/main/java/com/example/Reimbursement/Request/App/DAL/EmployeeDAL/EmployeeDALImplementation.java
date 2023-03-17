@@ -36,10 +36,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             PreparedStatement ps = null;
             if (connection != null) {
                 ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, employee.getEmail());
-                ps.setString(2, employee.getPassword());
-                ps.setString(3, employee.getFirstName());
-                ps.setString(4, employee.getLastName());
+                ps.setString(1, employee.getFirstName());
+                ps.setString(2, employee.getLastName());
+                ps.setString(3, employee.getEmail());
+                ps.setString(4, employee.getPassword());
                 ps.setString(5, employee.getPhoneNumber());
                 ps.setString(6, employee.getAddress());
                 ps.execute();
@@ -68,10 +68,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             if (rs.next()) {
                 Employee employee = new Employee(
                         rs.getInt("employee_id"),
-                        rs.getString("email"),
-                        rs.getString("passwrd"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
                         rs.getString("phone_number"),
                         rs.getString("address")
                 );
@@ -100,10 +100,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             if (rs.next()) {
                 Employee employee = new Employee(
                         rs.getInt("employee_id"),
-                        rs.getString("email"),
-                        rs.getString("passwrd"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
                         rs.getString("phone_number"),
                         rs.getString("address")
                 );

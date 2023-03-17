@@ -83,7 +83,23 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
 
     @Override
     public Employee login(String email, String password) {
-        return null;
+        logger.info("Beginning SAL method login with email: " + email + ", and password: " + password);
+        if (email.equals("")) {
+            logger.warn("SAL method login, email left empty");
+            throw new GeneralError("The email field cannot be left empty, please try again!");
+        } else if (password.equals("")) {
+            logger.warn("SAL method login, password left empty");
+            throw new GeneralError("The password field cannot be left empty, please try again!");
+        } else {
+            Employee employee = employeeDAO.login(email, password);
+            if (employee == null) {
+                logger.warn("SAL method login, not existing credentials");
+                throw new GeneralError("Either the email or the password is incorrect, please try again!");
+            } else {
+                logger.info("Finishing SAL method login with employee: " + employee);
+                return employee;
+            }
+        }
     }
 
     @Override
