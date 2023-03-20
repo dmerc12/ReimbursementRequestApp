@@ -133,10 +133,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             if (rs.next()) {
                 Employee employee = new Employee(
                         rs.getInt("employee_id"),
-                        rs.getString("email"),
-                        rs.getString("passwrd"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
                         rs.getString("phone_number"),
                         rs.getString("address")
                 );

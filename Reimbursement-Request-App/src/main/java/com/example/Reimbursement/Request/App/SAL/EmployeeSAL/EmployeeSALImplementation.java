@@ -109,6 +109,10 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
 
     @Override
     public int deleteEmployee(int employeeId) {
-        return 0;
+        logger.info("Beginning SAL method delete employee with employee ID: " + employeeId);
+        getEmployeeById(employeeId);
+        int result = employeeDAO.deleteEmployee(employeeId);
+        logger.info("Finishing SAL method delete employee");
+        return result;
     }
 }
