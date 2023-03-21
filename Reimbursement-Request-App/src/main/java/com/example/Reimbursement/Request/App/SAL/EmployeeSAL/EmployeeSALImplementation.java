@@ -104,7 +104,57 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        return null;
+        logger.info("Beginning SAL method update employee with employee: " + employee);
+        if (employee.getFirstName().equals("")) {
+            logger.warn("SAL method update employee, first name left empty");
+            throw new GeneralError("The first name field cannot be left empty, please try again!");
+        } else if (employee.getFirstName().length() > 36) {
+            logger.warn("SAL method update employee, first name too long");
+            throw new GeneralError("The first name field cannot exceed 36 characters, please try again!");
+        } else if (employee.getLastName().equals("")) {
+            logger.warn("SAL method update employee, last name left empty");
+            throw new GeneralError("The last name field cannot be left empty, please try again!");
+        } else if (employee.getLastName().length() > 36) {
+            logger.warn("SAL method update employee, last name too long");
+            throw new GeneralError("The last name field cannot exceed 36 characters, please try again!");
+        } else if (employee.getEmail().equals("")) {
+            logger.warn("SAL method update employee, email left empty");
+            throw new GeneralError("The email field cannot be left empty, please try again!");
+        } else if (employee.getEmail().length() > 60) {
+            logger.warn("SAL method update employee, email too long");
+            throw new GeneralError("The email field cannot exceed 60 characters, please try again!");
+        } else if (employee.getPhoneNumber().equals("")) {
+            logger.warn("SAL method update employee, phone number left empty");
+            throw new GeneralError("The phone number field cannot be left empty, please try again!");
+        } else if (employee.getPhoneNumber().length() > 13) {
+            logger.warn("SAL method update employee, phone number too long");
+            throw new GeneralError("The phone number field cannot exceed 13 characters, please try again!");
+        } else if (employee.getAddress().equals("")) {
+            logger.warn("SAL method update employee, address left empty");
+            throw new GeneralError("The address field cannot be left empty, please try again!");
+        } else if (employee.getAddress().length() > 60) {
+            logger.warn("SAL method update employee, address too long");
+            throw new GeneralError("The address field cannot exceed 60 characters, please try again!");
+        } else if (!employee.getPhoneNumber().matches("\\d{3}-\\d{3}-\\d{4}")) {
+            logger.warn("SAL method add employee, phone number in incorrect format");
+            throw new GeneralError("The phone number field cannot vary from the format 'xxx-xxx-xxxx', " +
+                    "please try again!");
+        } else {
+            Employee existingInformation = getEmployeeById(employee.getEmployeeId());
+            if (employee.getFirstName().equals(existingInformation.getFirstName()) &&
+                    employee.getLastName().equals(existingInformation.getLastName()) &&
+                    employee.getEmail().equals(existingInformation.getEmail()) &&
+                    employee.getPhoneNumber().equals(existingInformation.getPhoneNumber()) &&
+                    employee.getAddress().equals(existingInformation.getAddress())) {
+                logger.warn("SAL method update employee, nothing changed");
+                throw new GeneralError("Nothing has changed, please try again!");
+            } else {
+                Employee updatedInformation = employeeDAO.updateEmployee(employee);
+                logger.info("Finishing SAL method update employee with resulting employee information: " +
+                        updatedInformation);
+                return updatedInformation;
+            }
+        }
     }
 
     @Override

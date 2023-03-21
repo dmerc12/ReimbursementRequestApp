@@ -344,32 +344,6 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void dg_updateEmployeePasswordEmpty() {
-        try {
-            Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
-                    "", "666-555-4444", "312 N Test St, Test, TS, 78652");
-            employeeSAO.updateEmployee(testEmployee);
-            Assert.fail();
-        } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The password field cannot be left empty, please try again!");
-        }
-    }
-
-    @Test
-    public void dh_updateEmployeePasswordTooLong() {
-        try {
-            Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
-                    "this tests if it is too long and so it should fail and bring about the desired error " +
-                            "message", "666-555-4444", "312 N Test St, Test, TS, 78652");
-            employeeSAO.updateEmployee(testEmployee);
-            Assert.fail();
-        } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The password field cannot exceed 60 characters, please " +
-                    "try again!");
-        }
-    }
-
-    @Test
     public void di_updateEmployeePhoneNumberEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
@@ -437,7 +411,7 @@ public class EmployeeSALTests {
     @Test
     public void dn_updateEmployeeNothingChanged() {
         try {
-            Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
+            Employee testEmployee = new Employee(-1, "test", "test", "test@email.com",
                     "test", "111-222-3333", "test");
             employeeSAO.updateEmployee(testEmployee);
             Assert.fail();
