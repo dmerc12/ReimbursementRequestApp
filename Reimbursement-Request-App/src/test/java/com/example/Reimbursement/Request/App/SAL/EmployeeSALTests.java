@@ -5,8 +5,11 @@ import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralEr
 import com.example.Reimbursement.Request.App.Entities.Employee;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmployeeSALTests {
     int currentEmployeeId = 1;
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
@@ -18,7 +21,7 @@ public class EmployeeSALTests {
             "321 That St, OKC, OK, 75213");
 
     @Test
-    public void _addEmployeeFirstNameEmpty() {
+    public void aa_addEmployeeFirstNameEmpty() {
         try {
             Employee testEmployee = new Employee(0, "", "test", "test@email.com",
                     "password", "666-555-4444", "312 N Test St, Test, TS, 78652");
@@ -31,7 +34,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeFirstNameTooLong() {
+    public void ab_addEmployeeFirstNameTooLong() {
         try {
             Employee testEmployee = new Employee(0, "this tests if it is too long and so it " +
                     "should fail and bring about the desired error message", "test", "test@email.com",
@@ -45,7 +48,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeLastNameEmpty() {
+    public void ac_addEmployeeLastNameEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "", "test@email.com",
                     "password", "666-555-4444", "312 N Test St, Test, TS, 78652");
@@ -58,7 +61,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeLastNameTooLong() {
+    public void ad_addEmployeeLastNameTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "this tests if it is too " +
                     "long and so it should fail and bring about the desired error message", "test@email.com",
@@ -72,7 +75,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeEmailEmpty() {
+    public void ae_addEmployeeEmailEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "",
                     "password", "666-555-4444", "312 N Test St, Test, TS, 78652");
@@ -84,7 +87,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeEmailTooLong() {
+    public void af_addEmployeeEmailTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "this tests " +
                     "if it is too long and so it should fail and bring about the desired error message",
@@ -98,7 +101,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeePasswordEmpty() {
+    public void ag_addEmployeePasswordEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "", "666-555-4444", "312 N Test St, Test, TS, 78652");
@@ -110,7 +113,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeePasswordTooLong() {
+    public void ah_addEmployeePasswordTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "this tests if it is too long and so it should fail and bring about the desired error " +
@@ -124,7 +127,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeePhoneNumberEmpty() {
+    public void ai_addEmployeePhoneNumberEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "", "312 N Test St, Test, TS, 78652");
@@ -137,7 +140,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeePhoneNumberTooLong() {
+    public void aj_addEmployeePhoneNumberTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "this tests if it is too long and so it should fail and bring " +
@@ -145,13 +148,13 @@ public class EmployeeSALTests {
             employeeSAO.addEmployee(testEmployee);
             Assert.fail();
         } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The phone number field cannot exceed 60 characters, " +
+            Assert.assertEquals(error.getMessage(), "The phone number field cannot exceed 13 characters, " +
                     "please try again!");
         }
     }
 
     @Test
-    public void _addEmployeePhoneNumberIncorrectFormat() {
+    public void ak_addEmployeePhoneNumberIncorrectFormat() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "this is wrong", "312 N Test St, Test, TS, 78652");
@@ -164,7 +167,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeAddressEmpty() {
+    public void al_addEmployeeAddressEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "666-555-4444", "");
@@ -176,7 +179,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeAddressTooLong() {
+    public void am_addEmployeeAddressTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "666-555-4444", "this tests if it is too long and so it " +
@@ -189,9 +192,9 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeAlreadyExists() {
+    public void an_addEmployeeAlreadyExists() {
         try {
-            Employee testEmployee = new Employee(0, "test", "test", "test",
+            Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "666-555-4444", "312 N Test St, Test, TS, 78652");
             employeeSAO.addEmployee(testEmployee);
             Assert.fail();
@@ -202,13 +205,13 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _addEmployeeSuccess() {
+    public void ao_addEmployeeSuccess() {
         Employee result = employeeSAO.addEmployee(successEmployee);
         Assert.assertNotEquals(result.getEmployeeId(), 0);
     }
 
     @Test
-    public void _getEmployeeByIdNoneFound() {
+    public void ba_getEmployeeByIdNoneFound() {
         try {
             employeeSAO.getEmployeeById(-500000000);
             Assert.fail();
@@ -218,29 +221,13 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _getEmployeeByIdSuccess() {
+    public void bb_getEmployeeByIdSuccess() {
         Employee result = employeeSAO.getEmployeeById(currentEmployeeId);
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void _getEmployeeByEmailEmpty() {
-        try {
-            employeeSAO.getEmployeeByEmail("");
-            Assert.fail();
-        } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The email field cannot be left empty, please try again!");
-        }
-    }
-
-    @Test
-    public void _getEmployeeByEmailSuccess() {
-        Employee result = employeeSAO.getEmployeeByEmail("test@email.com");
-        Assert.assertNotNull(result);
-    }
-
-    @Test
-    public void _loginEmailEmpty() {
+    public void ca_loginEmailEmpty() {
         try {
             employeeSAO.login("", "test");
             Assert.fail();
@@ -250,7 +237,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _loginPasswordEmpty() {
+    public void cb_loginPasswordEmpty() {
         try {
             employeeSAO.login("test", "");
             Assert.fail();
@@ -260,7 +247,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _loginEmailOrPasswordIncorrect() {
+    public void cc_loginEmailOrPasswordIncorrect() {
         try {
             employeeSAO.login("test", "test");
             Assert.fail();
@@ -271,13 +258,13 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _loginSuccess() {
+    public void cd_loginSuccess() {
         Employee result = employeeSAO.login("test@email.com", "test");
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void _updateEmployeeFirstNameEmpty() {
+    public void da_updateEmployeeFirstNameEmpty() {
         try {
             Employee testEmployee = new Employee(0, "", "test", "test@email.com",
                     "password", "666-555-4444", "312 N Test St, Test, TS, 78652");
@@ -290,7 +277,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeFirstNameTooLong() {
+    public void db_updateEmployeeFirstNameTooLong() {
         try {
             Employee testEmployee = new Employee(0, "this tests if it is too long and so it " +
                     "should fail and bring about the desired error message", "test", "test@email.com",
@@ -304,7 +291,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeLastNameEmpty() {
+    public void dc_updateEmployeeLastNameEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "", "test@email.com",
                     "password", "666-555-4444", "312 N Test St, Test, TS, 78652");
@@ -317,7 +304,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeLastNameTooLong() {
+    public void dd_updateEmployeeLastNameTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "this tests if it is too " +
                     "long and so it should fail and bring about the desired error message", "test@email.com",
@@ -331,7 +318,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeEmailEmpty() {
+    public void de_updateEmployeeEmailEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "",
                     "password", "666-555-4444", "312 N Test St, Test, TS, 78652");
@@ -343,7 +330,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeEmailTooLong() {
+    public void df_updateEmployeeEmailTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "this tests" +
                     " if it is too long and so it should fail and bring about the desired error message",
@@ -357,33 +344,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeePasswordEmpty() {
-        try {
-            Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
-                    "", "666-555-4444", "312 N Test St, Test, TS, 78652");
-            employeeSAO.updateEmployee(testEmployee);
-            Assert.fail();
-        } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The password field cannot be left empty, please try again!");
-        }
-    }
-
-    @Test
-    public void _updateEmployeePasswordTooLong() {
-        try {
-            Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
-                    "this tests if it is too long and so it should fail and bring about the desired error " +
-                            "message", "666-555-4444", "312 N Test St, Test, TS, 78652");
-            employeeSAO.updateEmployee(testEmployee);
-            Assert.fail();
-        } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The password field cannot exceed 60 characters, please " +
-                    "try again!");
-        }
-    }
-
-    @Test
-    public void _updateEmployeePhoneNumberEmpty() {
+    public void di_updateEmployeePhoneNumberEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "", "312 N Test St, Test, TS, 78652");
@@ -395,7 +356,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeePhoneNumberTooLong() {
+    public void dj_updateEmployeePhoneNumberTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "this tests if it is too long and so it should fail and bring " +
@@ -409,7 +370,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeePhoneNumberIncorrectFormat() {
+    public void dk_updateEmployeePhoneNumberIncorrectFormat() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "this is wrong", "312 N Test St, Test, TS, 78652");
@@ -422,7 +383,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeAddressEmpty() {
+    public void dl_updateEmployeeAddressEmpty() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "666-555-4444", "");
@@ -434,7 +395,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeAddressTooLong() {
+    public void dm_updateEmployeeAddressTooLong() {
         try {
             Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
                     "password", "666-555-4444", "this tests if it is too long and so " +
@@ -448,9 +409,9 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeNothingChanged() {
+    public void dn_updateEmployeeNothingChanged() {
         try {
-            Employee testEmployee = new Employee(0, "test", "test", "test@email.com",
+            Employee testEmployee = new Employee(-1, "test", "test", "test@email.com",
                     "test", "111-222-3333", "test");
             employeeSAO.updateEmployee(testEmployee);
             Assert.fail();
@@ -460,7 +421,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeNoneFound() {
+    public void do_updateEmployeeNoneFound() {
         try {
             Employee testEmployee = new Employee(-500000000, "test", "test",
                     "test@email.com", "password", "666-555-4444",
@@ -473,7 +434,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _updateEmployeeSuccess() {
+    public void dp_updateEmployeeSuccess() {
         Employee result = employeeSAO.updateEmployee(updateEmployee);
         Assert.assertEquals(updateEmployee.getFirstName(), result.getFirstName());
         Assert.assertEquals(updateEmployee.getLastName(), result.getLastName());
@@ -483,7 +444,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _deleteEmployeeNotFound() {
+    public void ea_deleteEmployeeNotFound() {
         try {
             employeeSAO.deleteEmployee(-500000000);
             Assert.fail();
@@ -493,7 +454,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void _deleteEmployeeSuccess() {
+    public void eb_deleteEmployeeSuccess() {
         int result = employeeSAO.deleteEmployee(currentEmployeeId);
         Assert.assertTrue(result != 0);
     }

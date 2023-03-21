@@ -36,10 +36,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             PreparedStatement ps = null;
             if (connection != null) {
                 ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, employee.getEmail());
-                ps.setString(2, employee.getPassword());
-                ps.setString(3, employee.getFirstName());
-                ps.setString(4, employee.getLastName());
+                ps.setString(1, employee.getFirstName());
+                ps.setString(2, employee.getLastName());
+                ps.setString(3, employee.getEmail());
+                ps.setString(4, employee.getPassword());
                 ps.setString(5, employee.getPhoneNumber());
                 ps.setString(6, employee.getAddress());
                 ps.execute();
@@ -65,18 +65,22 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, employeeId);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            Employee employee = new Employee(
-                    rs.getInt("employee_id"),
-                    rs.getString("email"),
-                    rs.getString("passwrd"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("phone_number"),
-                    rs.getString("address")
-            );
-            logger.info("Finishing DAL method get employee by ID with result: " + employee);
-            return employee;
+            if (rs.next()) {
+                Employee employee = new Employee(
+                        rs.getInt("employee_id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
+                        rs.getString("phone_number"),
+                        rs.getString("address")
+                );
+                logger.info("Finishing DAL method get employee by ID with result: " + employee);
+                return employee;
+            } else {
+                logger.info("Finishing DAL method get employee by ID with nothing found");
+                return null;
+            }
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method get employee by ID with error: " + error.getMessage());
@@ -93,18 +97,22 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            Employee employee = new Employee(
-                    rs.getInt("employee_id"),
-                    rs.getString("email"),
-                    rs.getString("passwrd"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("phone_number"),
-                    rs.getString("address")
-            );
-            logger.info("Finishing DAL method get employee by email with result: " + employee);
-            return employee;
+            if (rs.next()) {
+                Employee employee = new Employee(
+                        rs.getInt("employee_id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
+                        rs.getString("phone_number"),
+                        rs.getString("address")
+                );
+                logger.info("Finishing DAL method get employee by email with result: " + employee);
+                return employee;
+            } else {
+                logger.info("Finishing DAL method get employee by email, none found within the database");
+                return null;
+            }
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method get employee by email with error: " + error.getMessage());
@@ -125,10 +133,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface {
             if (rs.next()) {
                 Employee employee = new Employee(
                         rs.getInt("employee_id"),
-                        rs.getString("email"),
-                        rs.getString("passwrd"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("passwrd"),
                         rs.getString("phone_number"),
                         rs.getString("address")
                 );
