@@ -92,6 +92,10 @@ public class RequestSALImplementation implements RequestSALInterface{
 
     @Override
     public int deleteRequest(int requestId) {
-        return 0;
+        logger.info("Beginning SAL method delete request with request ID: " + requestId);
+        getRequest(requestId);
+        int result = requestDAO.deleteRequest(requestId);
+        logger.info("Finishing SAL method delete request with result: " + result);
+        return result;
     }
 }
