@@ -58,7 +58,15 @@ public class RequestSALImplementation implements RequestSALInterface{
 
     @Override
     public Request getRequest(int requestId) {
-        return null;
+        logger.info("Beginning SAL method get request with request ID: " + requestId);
+        Request request = requestDAO.getRequest(requestId);
+        if (request == null) {
+            logger.warn("SAL method get request, no request found");
+            throw new GeneralError("No request found, please try again!");
+        } else {
+            logger.info("Finishing SAL method get request with request: " + request);
+            return request;
+        }
     }
 
     @Override
