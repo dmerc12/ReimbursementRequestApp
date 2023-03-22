@@ -5,10 +5,13 @@ import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralEr
 import com.example.Reimbursement.Request.App.Entities.Request;
 import com.example.Reimbursement.Request.App.SAL.RequestSAL.RequestSALImplementation;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.List;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RequestSALTests {
     int currentRequestId = 1;
     RequestDALImplementation requestDAO = new RequestDALImplementation();
@@ -190,7 +193,18 @@ public class RequestSALTests {
     }
 
     @Test
-    public void e_deleteRequestSuccess() {
+    public void ea_deleteRequestNotFound() {
+        try {
+            requestSAO.deleteRequest(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No request found, please try again!");
+        }
+    }
 
+    @Test
+    public void eb_deleteRequestSuccess() {
+        int result = requestSAO.deleteRequest(currentRequestId);
+        Assert.assertTrue(result != 0);
     }
 }
