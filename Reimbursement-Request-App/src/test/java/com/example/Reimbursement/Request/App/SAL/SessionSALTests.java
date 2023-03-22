@@ -2,6 +2,7 @@ package com.example.Reimbursement.Request.App.SAL;
 
 import com.example.Reimbursement.Request.App.DAL.EmployeeDAL.EmployeeDALImplementation;
 import com.example.Reimbursement.Request.App.DAL.SessionDAL.SessionDALImplementation;
+import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
 import com.example.Reimbursement.Request.App.Entities.Session;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.example.Reimbursement.Request.App.SAL.SessionSAL.SessionSALImplementation;
@@ -25,7 +26,29 @@ public class SessionSALTests {
             successSession.getExpiration().plusMinutes(15));
 
     @Test
-    public void a_addSessionSuccess() {
+    public void aa_addSessionEmployeeNotFound() {
+        try {
+            Session testSession = new Session(0, -500000000, LocalDateTime.now().plusMinutes(15));
+            sessionSAO.addSession(testSession);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void ab_addSessionExpirationAlreadyExpired() {
+        try {
+            Session testSession = new Session(0, -1, LocalDateTime.now().minusMinutes(15));
+            sessionSAO.addSession(testSession);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "The expiration field cannot be expired, please try again!");
+        }
+    }
+
+    @Test
+    public void ac_addSessionSuccess() {
         Session result = sessionSAO.addSession(successSession);
         Assert.assertNotEquals(result.getSessionId(), 0);
     }
