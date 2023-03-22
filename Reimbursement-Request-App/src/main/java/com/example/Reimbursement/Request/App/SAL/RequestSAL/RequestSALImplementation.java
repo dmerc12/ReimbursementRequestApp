@@ -44,7 +44,16 @@ public class RequestSALImplementation implements RequestSALInterface{
 
     @Override
     public List<Request> getAllRequests(int employeeId) {
-        return null;
+        logger.info("Beginning SAL method get all requests with employee ID: " + employeeId);
+        employeeSAO.getEmployeeById(employeeId);
+        List<Request> requestList = requestDAO.getAllRequests(employeeId);
+        if (requestList.size() <= 1) {
+            logger.warn("SAL method get all requests, request list empty");
+            throw new GeneralError("No requests found, please try again!");
+        } else {
+            logger.info("Finishing SAL method get all requests with request list: " + requestList);
+            return requestList;
+        }
     }
 
     @Override
