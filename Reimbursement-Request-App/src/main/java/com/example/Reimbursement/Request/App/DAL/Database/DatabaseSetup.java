@@ -26,10 +26,13 @@ public class DatabaseSetup {
             String employeeTable = "create table reimbursement_request_app.employees(employee_id int auto_increment " +
                     "primary key, first_name varchar(36), last_name varchar(36), email varchar(60), " +
                     "passwrd varchar(60), phone_number varchar(13), address varchar(60));";
-            String testEmployee = "insert into reimbursement_request_app.employees values(-1, 'test@email.com', " +
+            String testEmployee1 = "insert into reimbursement_request_app.employees values(-1, 'test@email.com', " +
                     "'test', 'test', 'test', 'test', 'test');";
+            String testEmployee2 = "insert into reimbursement_request_app.employees values(-2, 'no', 'request', " +
+                    "'no@requests.test', 'test', '222-333-4444', 'test');";
             employeeDAO.accessEmployeeTable(employeeTable);
-            employeeDAO.accessEmployeeTable(testEmployee);
+            employeeDAO.accessEmployeeTable(testEmployee1);
+            employeeDAO.accessEmployeeTable(testEmployee2);
 
             // category table setup
             String categoryTable = "create table reimbursement_request_app.categories(category_id int auto_increment " +
