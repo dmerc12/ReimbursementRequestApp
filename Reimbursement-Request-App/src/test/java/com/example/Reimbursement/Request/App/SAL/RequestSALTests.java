@@ -1,8 +1,12 @@
 package com.example.Reimbursement.Request.App.SAL;
 
+import com.example.Reimbursement.Request.App.DAL.CategoryDAL.CategoryDALImplementation;
+import com.example.Reimbursement.Request.App.DAL.EmployeeDAL.EmployeeDALImplementation;
 import com.example.Reimbursement.Request.App.DAL.RequestDAL.RequestDALImplementation;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
 import com.example.Reimbursement.Request.App.Entities.Request;
+import com.example.Reimbursement.Request.App.SAL.CategorySAL.CategorySALImplementation;
+import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.example.Reimbursement.Request.App.SAL.RequestSAL.RequestSALImplementation;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -15,7 +19,11 @@ import java.util.List;
 public class RequestSALTests {
     int currentRequestId = 1;
     RequestDALImplementation requestDAO = new RequestDALImplementation();
-    RequestSALImplementation requestSAO = new RequestSALImplementation(requestDAO);
+    EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
+    EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
+    CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
+    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO);
+    RequestSALImplementation requestSAO = new RequestSALImplementation(requestDAO, employeeSAO, categorySAO);
     Request successRequest = new Request(0, -1, -1, "success", 25.00);
     Request updateRequest = new Request(currentRequestId, -1, -1, "updated",
             successRequest.getAmount() + 25.00);
@@ -41,7 +49,8 @@ public class RequestSALTests {
             requestSAO.addRequest(testRequest);
             Assert.fail();
         } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The comment field cannot exceed 150 characters, please try again!");
+            Assert.assertEquals(error.getMessage(), "The comment field cannot exceed 150 characters, please " +
+                    "try again!");
         }
     }
 
