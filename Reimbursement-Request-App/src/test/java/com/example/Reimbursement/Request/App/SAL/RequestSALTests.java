@@ -7,6 +7,8 @@ import com.example.Reimbursement.Request.App.SAL.RequestSAL.RequestSALImplementa
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class RequestSALTests {
     int currentRequestId = 1;
     RequestDALImplementation requestDAO = new RequestDALImplementation();
@@ -14,6 +16,7 @@ public class RequestSALTests {
     Request successRequest = new Request(0, -1, -1, "success", 25.00);
     Request updateRequest = new Request(currentRequestId, -1, -1, "updated",
             successRequest.getAmount() + 25.00);
+
     @Test
     public void aa_addRequestCommentLeftEmpty() {
         try {
@@ -79,8 +82,29 @@ public class RequestSALTests {
     }
 
     @Test
-    public void b_getAllRequestsSuccess() {
+    public void ba_getAllRequestsNoneFound() {
+        try {
+            requestSAO.getAllRequests(-2);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No requests found, please try again!");
+        }
+    }
 
+    @Test
+    public void bb_getAllRequestsEmployeeNotFound() {
+        try {
+            requestSAO.getAllRequests(-5000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void b_getAllRequestsSuccess() {
+        List<Request> result = requestSAO.getAllRequests(successRequest.getEmployeeId());
+        Assert.assertTrue(result.size() >= 1);
     }
 
     @Test
