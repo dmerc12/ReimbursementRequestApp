@@ -102,14 +102,25 @@ public class RequestSALTests {
     }
 
     @Test
-    public void b_getAllRequestsSuccess() {
+    public void bc_getAllRequestsSuccess() {
         List<Request> result = requestSAO.getAllRequests(successRequest.getEmployeeId());
         Assert.assertTrue(result.size() >= 1);
     }
 
     @Test
-    public void c_getRequestSuccess() {
+    public void ca_getRequestNotFound() {
+        try {
+            requestSAO.getRequest(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No request found, please try again!");
+        }
+    }
 
+    @Test
+    public void c_getRequestSuccess() {
+        Request result = requestSAO.getRequest(-1);
+        Assert.assertNotNull(result);
     }
 
     @Test
