@@ -118,14 +118,75 @@ public class RequestSALTests {
     }
 
     @Test
-    public void c_getRequestSuccess() {
+    public void cb_getRequestSuccess() {
         Request result = requestSAO.getRequest(-1);
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void d_updateRequestSuccess() {
+    public void da_updateRequestNotFound() {
+        try {
+            Request testRequest = new Request(-50000, -1, -1, "test", 25.00);
+            requestSAO.updateRequest(testRequest);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No request found, please try again!");
+        }
+    }
 
+    @Test
+    public void db_updateRequestCommentEmpty() {
+        try {
+            Request testRequest = new Request(currentRequestId, -1, -1, "", 25.00);
+            requestSAO.updateRequest(testRequest);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "The comment field cannot be left empty, please try again!");
+        }
+    }
+
+    @Test
+    public void dc_updateRequestCommentTooLong() {
+        try {
+            Request testRequest = new Request(currentRequestId, -1, -1, "this is way too" +
+                    " long and so it should fail and bring about a desired warning message, if not then I have a " +
+                    "bug on my hands and hopefully this test should catch it and tell me 'hey! the problem is " +
+                    "right here!'", 25.00);
+            requestSAO.updateRequest(testRequest);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "The comment field cannot exceed 150 characters, please try again!");
+        }
+    }
+
+    @Test
+    public void dd_updateRequestAmountNegativeOrZero() {
+        try {
+            Request testRequest = new Request(currentRequestId, -1, -1, "test", -25.00);
+            requestSAO.updateRequest(testRequest);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "The amount field cannot be below $0.01, please try again!");
+        }
+    }
+
+    @Test
+    public void de_updateRequestCategoryNotFound() {
+        try {
+            Request testRequest = new Request(currentRequestId, -1, -500000000, "test", 25.00);
+            requestSAO.updateRequest(testRequest);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Category not found, please try again!");
+        }
+    }
+
+    @Test
+    public void df_updateRequestSuccess() {
+        Request result = requestSAO.updateRequest(updateRequest);
+        Assert.assertEquals(result.getCategoryId(), updateRequest.getCategoryId());
+        Assert.assertEquals(result.getComment(), updateRequest.getComment());
+        Assert.assertEquals(result.getAmount(), updateRequest.getAmount());
     }
 
     @Test
