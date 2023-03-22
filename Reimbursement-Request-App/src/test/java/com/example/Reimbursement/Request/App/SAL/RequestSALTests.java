@@ -61,7 +61,7 @@ public class RequestSALTests {
             requestSAO.addRequest(testRequest);
             Assert.fail();
         } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The amount field cannot be below $0.01, please try again!");
+            Assert.assertEquals(error.getMessage(), "The amount field cannot be $0.01, please try again!");
         }
     }
 
@@ -167,7 +167,8 @@ public class RequestSALTests {
             requestSAO.updateRequest(testRequest);
             Assert.fail();
         } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The comment field cannot exceed 150 characters, please try again!");
+            Assert.assertEquals(error.getMessage(), "The comment field cannot exceed 150 characters, please " +
+                    "try again!");
         }
     }
 
@@ -178,7 +179,7 @@ public class RequestSALTests {
             requestSAO.updateRequest(testRequest);
             Assert.fail();
         } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The amount field cannot be below $0.01, please try again!");
+            Assert.assertEquals(error.getMessage(), "The amount field cannot be $0.01, please try again!");
         }
     }
 
@@ -198,7 +199,7 @@ public class RequestSALTests {
         Request result = requestSAO.updateRequest(updateRequest);
         Assert.assertEquals(result.getCategoryId(), updateRequest.getCategoryId());
         Assert.assertEquals(result.getComment(), updateRequest.getComment());
-        Assert.assertEquals(result.getAmount(), updateRequest.getAmount());
+        Assert.assertEquals(Float.floatToIntBits((float) result.getAmount()), Float.floatToIntBits((float) updateRequest.getAmount()));
     }
 
     @Test

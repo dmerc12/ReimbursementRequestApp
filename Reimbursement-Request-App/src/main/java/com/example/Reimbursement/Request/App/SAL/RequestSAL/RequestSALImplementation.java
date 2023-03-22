@@ -31,8 +31,8 @@ public class RequestSALImplementation implements RequestSALInterface{
             logger.warn("SAL method add request, comment too long");
             throw new GeneralError("The comment field cannot exceed 150 characters, please try again!");
         } else if (request.getAmount() < 0.01) {
-            logger.warn("SAL method add request, amount negative or below $0.00");
-            throw new GeneralError("The amount field cannot be below $0.01, please try again!");
+            logger.warn("SAL method add request, amount negative or $0.00");
+            throw new GeneralError("The amount field cannot be $0.01, please try again!");
         } else {
             employeeSAO.getEmployeeById(request.getEmployeeId());
             categorySAO.getCategory(request.getCategoryId());
@@ -71,7 +71,23 @@ public class RequestSALImplementation implements RequestSALInterface{
 
     @Override
     public Request updateRequest(Request request) {
-        return null;
+        logger.info("Beginning SAL method update request with request: " + request);
+        getRequest(request.getRequestId());
+        categorySAO.getCategory(request.getCategoryId());
+        if (request.getComment().equals("")) {
+            logger.warn("SAL method update request, comment left empty");
+            throw new GeneralError("The comment field cannot be left empty, please try again!");
+        } else if (request.getComment().length() > 150) {
+            logger.warn("SAL method update request, comment too long");
+            throw new GeneralError("The comment field cannot exceed 150 characters, please try again!");
+        } else if (request.getAmount() < 0.01) {
+            logger.warn("SAL method update request, amount negative or $0.00");
+            throw new GeneralError("The amount field cannot be $0.01, please try again!");
+        } else {
+            Request updatedRequest = requestDAO.updateRequest(request);
+            logger.info("Finishing SAL method update request with request: " + updatedRequest);
+            return updatedRequest;
+        }
     }
 
     @Override
