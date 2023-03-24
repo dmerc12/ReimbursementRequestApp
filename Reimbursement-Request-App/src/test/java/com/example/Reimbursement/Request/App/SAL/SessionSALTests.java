@@ -64,13 +64,45 @@ public class SessionSALTests {
     }
 
     @Test
-    public void bb_getSessionSuccess() {
+    public void bb_getSessionExpired() {
+        try {
+            sessionSAO.getSession(-1);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
+        }
+    }
+
+    @Test
+    public void bc_getSessionSuccess() {
         Session result = sessionSAO.getSession(-1);
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void c_updateSessionSuccess() {
+    public void ca_updateSessionNotFound() {
+        try {
+            Session testSession = new Session(-500000000, -1, LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(testSession);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No session found, please try again!");
+        }
+    }
+
+    @Test
+    public void cb_updateSessionExpired() {
+        try {
+            Session testSession = new Session(-1, -1, LocalDateTime.now().minusMinutes(30));
+            sessionSAO.updateSession(testSession);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
+        }
+    }
+
+    @Test
+    public void cc_updateSessionSuccess() {
         Session result = sessionSAO.updateSession(updateSession);
         Assert.assertEquals(result.getExpiration(), updateSession.getExpiration());
     }
