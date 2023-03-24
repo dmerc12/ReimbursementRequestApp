@@ -7,6 +7,7 @@ import com.example.Reimbursement.Request.App.Entities.Session;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.example.Reimbursement.Request.App.SAL.SessionSAL.SessionSALImplementation;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -16,15 +17,14 @@ import java.time.LocalDateTime;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SessionSALTests {
-    int currentSessionId = 1;
-    SessionDALImplementation sessionDAO = new SessionDALImplementation();
-    EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
-    EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
-    SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
-    Session successSession = new Session(0, -1, LocalDateTime.now().plusMinutes(15));
-    Session updateSession = new Session(currentSessionId, successSession.getEmployeeId(),
+    private final int currentSessionId = 1;
+    private final Session successSession = new Session(0, -1, LocalDateTime.now().plusMinutes(15));
+    private final Session updateSession = new Session(currentSessionId, successSession.getEmployeeId(),
             successSession.getExpiration().plusMinutes(15));
-
+    private final SessionDALImplementation sessionDAO = new SessionDALImplementation();
+    private final EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
+    private final EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
+    private final SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
     @Test
     public void aa_addSessionEmployeeNotFound() {
         try {
@@ -37,7 +37,7 @@ public class SessionSALTests {
     }
 
     @Test
-    public void ab_addSessionExpirationAlreadyExpired() {
+    public void ab_addSessionExpirationExpired() {
         try {
             Session testSession = new Session(0, -1, LocalDateTime.now().minusMinutes(15));
             sessionSAO.addSession(testSession);
@@ -54,19 +54,81 @@ public class SessionSALTests {
     }
 
     @Test
-    public void b_getSessionSuccess() {
+    public void ba_getSessionNotFound() {
+        try {
+            sessionSAO.getSession(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No session found, please try again!");
+        }
+    }
+
+    @Test
+    public void bb_getSessionExpired() {
+        try {
+            sessionSAO.getSession(-1);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
+        }
+    }
+
+    @Test
+    public void bc_getSessionSuccess() {
         Session result = sessionSAO.getSession(-1);
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void c_updateSessionSuccess() {
+    public void ca_updateSessionNotFound() {
+        try {
+            Session testSession = new Session(-500000000, -1, LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(testSession);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No session found, please try again!");
+        }
+    }
+
+    @Test
+    public void cb_updateSessionExpired() {
+        try {
+            Session testSession = new Session(-1, -1, LocalDateTime.now().minusMinutes(30));
+            sessionSAO.updateSession(testSession);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
+        }
+    }
+
+    @Test
+    public void cc_updateSessionSuccess() {
         Session result = sessionSAO.updateSession(updateSession);
         Assert.assertEquals(result.getExpiration(), updateSession.getExpiration());
     }
 
     @Test
-    public void d_deleteSessionSuccess() {
+    public void da_deleteSessionNotFound() {
+        try {
+            sessionSAO.deleteSession(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No session found, please try again!");
+        }
+    }
+
+    @Test
+    public void db_deleteSessionExpired() {
+        try {
+            sessionSAO.deleteSession(-1);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
+        }
+    }
+
+    @Test
+    public void dc_deleteSessionSuccess() {
         int result = sessionSAO.deleteSession(currentSessionId);
         Assert.assertTrue(result != 0);
     }
