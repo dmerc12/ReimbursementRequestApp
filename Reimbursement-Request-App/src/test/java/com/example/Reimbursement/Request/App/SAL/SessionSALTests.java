@@ -7,6 +7,7 @@ import com.example.Reimbursement.Request.App.Entities.Session;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.example.Reimbursement.Request.App.SAL.SessionSAL.SessionSALImplementation;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -16,15 +17,14 @@ import java.time.LocalDateTime;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SessionSALTests {
-    int currentSessionId = 1;
-    SessionDALImplementation sessionDAO = new SessionDALImplementation();
-    EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
-    EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
-    SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
-    Session successSession = new Session(0, -1, LocalDateTime.now().plusMinutes(15));
-    Session updateSession = new Session(currentSessionId, successSession.getEmployeeId(),
+    private final int currentSessionId = 1;
+    private final Session successSession = new Session(0, -1, LocalDateTime.now().plusMinutes(15));
+    private final Session updateSession = new Session(currentSessionId, successSession.getEmployeeId(),
             successSession.getExpiration().plusMinutes(15));
-
+    private final SessionDALImplementation sessionDAO = new SessionDALImplementation();
+    private final EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
+    private final EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
+    private final SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
     @Test
     public void aa_addSessionEmployeeNotFound() {
         try {
@@ -37,7 +37,7 @@ public class SessionSALTests {
     }
 
     @Test
-    public void ab_addSessionExpirationAlreadyExpired() {
+    public void ab_addSessionExpirationExpired() {
         try {
             Session testSession = new Session(0, -1, LocalDateTime.now().minusMinutes(15));
             sessionSAO.addSession(testSession);
