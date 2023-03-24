@@ -54,7 +54,17 @@ public class SessionSALTests {
     }
 
     @Test
-    public void b_getSessionSuccess() {
+    public void ba_getSessionNotFound() {
+        try {
+            sessionSAO.getSession(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No session found, please try again!");
+        }
+    }
+
+    @Test
+    public void bb_getSessionSuccess() {
         Session result = sessionSAO.getSession(-1);
         Assert.assertNotNull(result);
     }
