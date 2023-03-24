@@ -108,7 +108,27 @@ public class SessionSALTests {
     }
 
     @Test
-    public void d_deleteSessionSuccess() {
+    public void da_deleteSessionNotFound() {
+        try {
+            sessionSAO.deleteSession(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No session found, please try again!");
+        }
+    }
+
+    @Test
+    public void db_deleteSessionExpired() {
+        try {
+            sessionSAO.deleteSession(-1);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
+        }
+    }
+
+    @Test
+    public void dc_deleteSessionSuccess() {
         int result = sessionSAO.deleteSession(currentSessionId);
         Assert.assertTrue(result != 0);
     }
