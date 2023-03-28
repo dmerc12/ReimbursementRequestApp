@@ -93,7 +93,7 @@ public class SessionSALTests {
     @Test
     public void cb_updateSessionExpired() {
         try {
-            Session testSession = new Session(-1, -1, LocalDateTime.now().minusMinutes(30));
+            Session testSession = new Session(-2, -1, LocalDateTime.now().minusMinutes(30));
             sessionSAO.updateSession(testSession);
             Assert.fail();
         } catch (GeneralError error) {

@@ -51,7 +51,11 @@ public class SessionSALImplementation implements SessionSALInterface{
 
     @Override
     public Session updateSession(Session session) {
-        return null;
+        logger.info("Beginning SAL method update session with session: " + session);
+        getSession(session.getSessionId());
+        Session updatedSession = sessionDAO.updateSession(session);
+        logger.info("Finishing SAL method update session with updated session: " + session);
+        return updatedSession;
     }
 
     @Override
