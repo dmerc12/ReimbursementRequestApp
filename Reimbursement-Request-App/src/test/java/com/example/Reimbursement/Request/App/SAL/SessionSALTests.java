@@ -120,7 +120,7 @@ public class SessionSALTests {
     @Test
     public void db_deleteSessionExpired() {
         try {
-            sessionSAO.deleteSession(-1);
+            sessionSAO.deleteSession(-2);
             Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
