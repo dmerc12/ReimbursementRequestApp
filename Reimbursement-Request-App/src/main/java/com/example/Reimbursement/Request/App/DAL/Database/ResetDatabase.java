@@ -66,10 +66,13 @@ public class ResetDatabase {
             String sessionTable = "create table reimbursement_request_app.sessions(session_id int auto_increment " +
                     "primary key, employee_id int, expiration DateTime, constraint sessionfk foreign key " +
                     "(employee_id) references reimbursement_request_app.employees(employee_id));";
-            String testSession = String.format("insert into reimbursement_request_app.sessions values(-1, -1, '%s');",
-                    LocalDateTime.now());
+            String testSession1 = String.format("insert into reimbursement_request_app.sessions values(-1, -1, '%s');",
+                    LocalDateTime.now().plusHours(1));
+            String testSession2 = String.format("insert into reimbursement_request_app.sessions values(-2, -1, '%s');",
+                    LocalDateTime.now().minusHours(2));
             sessionDAO.accessSessionTable(sessionTable);
-            sessionDAO.accessSessionTable(testSession);
+            sessionDAO.accessSessionTable(testSession1);
+            sessionDAO.accessSessionTable(testSession2);
 
             logger.info("Finishing Database Reset Script");
         } catch (SQLException error) {

@@ -66,7 +66,7 @@ public class SessionSALTests {
     @Test
     public void bb_getSessionExpired() {
         try {
-            sessionSAO.getSession(-1);
+            sessionSAO.getSession(-2);
             Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
@@ -93,7 +93,7 @@ public class SessionSALTests {
     @Test
     public void cb_updateSessionExpired() {
         try {
-            Session testSession = new Session(-1, -1, LocalDateTime.now().minusMinutes(30));
+            Session testSession = new Session(-2, -1, LocalDateTime.now().minusMinutes(30));
             sessionSAO.updateSession(testSession);
             Assert.fail();
         } catch (GeneralError error) {
@@ -120,7 +120,7 @@ public class SessionSALTests {
     @Test
     public void db_deleteSessionExpired() {
         try {
-            sessionSAO.deleteSession(-1);
+            sessionSAO.deleteSession(-2);
             Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");
