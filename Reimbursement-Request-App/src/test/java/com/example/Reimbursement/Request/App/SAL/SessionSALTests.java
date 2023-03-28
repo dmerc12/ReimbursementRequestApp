@@ -66,7 +66,7 @@ public class SessionSALTests {
     @Test
     public void bb_getSessionExpired() {
         try {
-            sessionSAO.getSession(-1);
+            sessionSAO.getSession(-2);
             Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Session has expired, please log in!");

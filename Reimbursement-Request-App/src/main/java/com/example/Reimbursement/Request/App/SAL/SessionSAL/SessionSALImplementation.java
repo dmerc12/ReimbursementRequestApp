@@ -34,7 +34,19 @@ public class SessionSALImplementation implements SessionSALInterface{
 
     @Override
     public Session getSession(int sessionId) {
-        return null;
+        logger.info("Beginning SAL method get session with session ID: " + sessionId);
+        Session session = sessionDAO.getSession(sessionId);
+        if (session == null) {
+            logger.warn("SAL method get session, no session found");
+            throw new GeneralError("No session found, please try again!");
+        } else if (session.getExpiration().isBefore(LocalDateTime.now()) |
+                session.getExpiration().equals(LocalDateTime.now())) {
+            logger.warn("SAL method get session, session expired");
+            throw new GeneralError("Session has expired, please log in!");
+        } else {
+            logger.info("Finishing SAL method get session with session: " + session);
+            return session;
+        }
     }
 
     @Override
