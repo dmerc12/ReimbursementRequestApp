@@ -27,7 +27,7 @@ public class LoginController {
 
     @GetMapping(value = {"/", "/login"})
     public String renderLoginPage(Model model) {
-        return "login";
+        return "Employee/login";
     }
 
     @PostMapping("/login")
@@ -39,10 +39,10 @@ public class LoginController {
             Session newSession = new Session(0, employee.getEmployeeId(), newSessionExpiration);
             newSession = sessionSAO.addSession(newSession);
             session.setAttribute("sessionId", newSession.getSessionId());
-            return "redirect:/home";
+            return "redirect:/Main/home";
         } catch (GeneralError error) {
             model.addAttribute("errorMessage", error.getMessage());
-            return "login";
+            return "Employee/login";
         }
     }
 }
