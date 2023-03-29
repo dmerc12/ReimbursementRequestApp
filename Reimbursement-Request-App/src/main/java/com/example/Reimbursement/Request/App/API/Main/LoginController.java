@@ -26,13 +26,12 @@ public class LoginController {
     SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
 
     @GetMapping(value = {"/", "/login"})
-    public String renderLoginPage(Model model) {
+    public String renderLoginPage() {
         return "Employee/login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password,
-                        RedirectAttributes redirectAttributes, Model model, HttpSession session) {
+    public String login(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
         try {
             Employee employee = employeeSAO.login(email, password);
             LocalDateTime newSessionExpiration = LocalDateTime.now().plusMinutes(15);

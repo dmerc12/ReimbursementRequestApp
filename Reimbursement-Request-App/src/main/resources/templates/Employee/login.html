@@ -6,7 +6,7 @@
     <title>Login</title>
 </head>
 <body>
-    <div th: replace="layout" :: content>
+    <div th: replace="Layout/layout" :: content>
         <form method="post" action="@{/login}">
             <label for="loginEmail">Email:</label>
             <input type="email" name="loginEmail" id="loginEmail" required><br>
