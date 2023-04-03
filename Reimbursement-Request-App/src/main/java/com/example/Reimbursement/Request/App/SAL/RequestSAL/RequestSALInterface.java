@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.SAL.RequestSAL;
 
-import com.example.Reimbursement.Request.App.Entities.Request;
+import com.example.Reimbursement.Request.App.Entities.Data.Request;
 
 import java.util.List;
 

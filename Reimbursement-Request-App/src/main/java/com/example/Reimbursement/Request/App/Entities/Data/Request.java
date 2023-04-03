@@ -1,4 +1,4 @@
-package com.example.Reimbursement.Request.App.Entities;
+package com.example.Reimbursement.Request.App.Entities.Data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

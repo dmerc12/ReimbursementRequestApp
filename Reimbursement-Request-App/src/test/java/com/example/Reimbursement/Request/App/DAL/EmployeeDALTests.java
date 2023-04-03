@@ -1,11 +1,9 @@
 package com.example.Reimbursement.Request.App.DAL;
 
 import com.example.Reimbursement.Request.App.DAL.EmployeeDAL.EmployeeDALImplementation;
-import com.example.Reimbursement.Request.App.Entities.Employee;
+import com.example.Reimbursement.Request.App.Entities.Data.Employee;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Dictionary;
 
 public class EmployeeDALTests {
 

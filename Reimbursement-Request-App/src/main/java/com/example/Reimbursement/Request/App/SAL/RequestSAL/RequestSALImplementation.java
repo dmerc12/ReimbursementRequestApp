@@ -2,7 +2,7 @@ package com.example.Reimbursement.Request.App.SAL.RequestSAL;
 
 import com.example.Reimbursement.Request.App.DAL.RequestDAL.RequestDALImplementation;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
-import com.example.Reimbursement.Request.App.Entities.Request;
+import com.example.Reimbursement.Request.App.Entities.Data.Request;
 import com.example.Reimbursement.Request.App.SAL.CategorySAL.CategorySALImplementation;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import org.apache.logging.log4j.LogManager;

@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.DAL.RequestDAL;
 
-import com.example.Reimbursement.Request.App.Entities.Request;
+import com.example.Reimbursement.Request.App.Entities.Data.Request;
 import com.example.Reimbursement.Request.App.Utilities.DatabaseConnection;
 import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;

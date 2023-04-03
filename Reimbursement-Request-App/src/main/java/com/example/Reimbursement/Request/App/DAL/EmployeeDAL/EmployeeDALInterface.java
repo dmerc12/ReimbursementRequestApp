@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.DAL.EmployeeDAL;
 
-import com.example.Reimbursement.Request.App.Entities.Employee;
+import com.example.Reimbursement.Request.App.Entities.Data.Employee;
 
 public interface EmployeeDALInterface {
     Employee addEmployee(Employee employee);

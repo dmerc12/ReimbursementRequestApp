@@ -1,7 +1,7 @@
 package com.example.Reimbursement.Request.App.SAL.CategorySAL;
 
 import com.example.Reimbursement.Request.App.DAL.CategoryDAL.CategoryDALImplementation;
-import com.example.Reimbursement.Request.App.Entities.Category;
+import com.example.Reimbursement.Request.App.Entities.Data.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

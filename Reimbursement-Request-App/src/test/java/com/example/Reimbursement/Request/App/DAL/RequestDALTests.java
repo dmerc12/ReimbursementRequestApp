@@ -1,7 +1,7 @@
 package com.example.Reimbursement.Request.App.DAL;
 
 import com.example.Reimbursement.Request.App.DAL.RequestDAL.RequestDALImplementation;
-import com.example.Reimbursement.Request.App.Entities.Request;
+import com.example.Reimbursement.Request.App.Entities.Data.Request;
 import org.junit.Assert;
 import org.junit.Test;
 

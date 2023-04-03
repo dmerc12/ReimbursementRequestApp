@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.DAL.CategoryDAL;
 
-import com.example.Reimbursement.Request.App.Entities.Category;
+import com.example.Reimbursement.Request.App.Entities.Data.Category;
 import com.example.Reimbursement.Request.App.Utilities.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

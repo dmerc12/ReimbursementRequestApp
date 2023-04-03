@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.SAL.SessionSAL;
 
-import com.example.Reimbursement.Request.App.Entities.Session;
+import com.example.Reimbursement.Request.App.Entities.Data.Session;
 
 public interface SessionSALInterface {
     Session addSession(Session session);

@@ -2,7 +2,7 @@ package com.example.Reimbursement.Request.App.SAL;
 
 import com.example.Reimbursement.Request.App.DAL.EmployeeDAL.EmployeeDALImplementation;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
-import com.example.Reimbursement.Request.App.Entities.Employee;
+import com.example.Reimbursement.Request.App.Entities.Data.Employee;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;

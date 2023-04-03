@@ -1,7 +1,7 @@
 package com.example.Reimbursement.Request.App.SAL;
 
 import com.example.Reimbursement.Request.App.DAL.CategoryDAL.CategoryDALImplementation;
-import com.example.Reimbursement.Request.App.Entities.Category;
+import com.example.Reimbursement.Request.App.Entities.Data.Category;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
 import com.example.Reimbursement.Request.App.SAL.CategorySAL.CategorySALImplementation;
 import org.junit.Assert;

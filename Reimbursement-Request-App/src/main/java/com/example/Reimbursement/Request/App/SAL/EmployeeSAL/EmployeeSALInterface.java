@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.SAL.EmployeeSAL;
 
-import com.example.Reimbursement.Request.App.Entities.Employee;
+import com.example.Reimbursement.Request.App.Entities.Data.Employee;
 
 public interface EmployeeSALInterface {
     Employee addEmployee(Employee employee);

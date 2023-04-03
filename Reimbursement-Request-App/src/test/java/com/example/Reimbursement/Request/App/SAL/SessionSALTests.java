@@ -3,15 +3,13 @@ package com.example.Reimbursement.Request.App.SAL;
 import com.example.Reimbursement.Request.App.DAL.EmployeeDAL.EmployeeDALImplementation;
 import com.example.Reimbursement.Request.App.DAL.SessionDAL.SessionDALImplementation;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
-import com.example.Reimbursement.Request.App.Entities.Session;
+import com.example.Reimbursement.Request.App.Entities.Data.Session;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.example.Reimbursement.Request.App.SAL.SessionSAL.SessionSALImplementation;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,6 @@
 package com.example.Reimbursement.Request.App.SAL.CategorySAL;
 
-import com.example.Reimbursement.Request.App.Entities.Category;
+import com.example.Reimbursement.Request.App.Entities.Data.Category;
 
 import java.util.List;
 

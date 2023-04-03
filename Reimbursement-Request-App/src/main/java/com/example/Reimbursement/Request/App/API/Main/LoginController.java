@@ -3,11 +3,11 @@ package com.example.Reimbursement.Request.App.API.Main;
 import com.example.Reimbursement.Request.App.DAL.EmployeeDAL.EmployeeDALImplementation;
 import com.example.Reimbursement.Request.App.DAL.SessionDAL.SessionDALImplementation;
 import com.example.Reimbursement.Request.App.Entities.CustomExceptions.GeneralError;
-import com.example.Reimbursement.Request.App.Entities.LoginRequest;
-import com.example.Reimbursement.Request.App.Entities.Session;
+import com.example.Reimbursement.Request.App.Entities.Requests.LoginRequest;
+import com.example.Reimbursement.Request.App.Entities.Data.Session;
 import com.example.Reimbursement.Request.App.SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.example.Reimbursement.Request.App.SAL.SessionSAL.SessionSALImplementation;
-import com.example.Reimbursement.Request.App.Entities.Employee;
+import com.example.Reimbursement.Request.App.Entities.Data.Employee;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class LoginController {
     SessionDALImplementation sessionDAO = new SessionDALImplementation();
     SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
 
-    @PostMapping("/login")
+    @PostMapping("/login/now")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             logger.info("Beginning API method login with information: " + loginRequest);
