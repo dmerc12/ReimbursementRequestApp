@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Main/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Requests/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/EmployeeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Requests/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DAL/EmployeeDALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DAL/EmployeeRequestDALTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SAL/EmployeeSALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SAL/EmployeeRequestSALTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2NvzCx9kvVf8DlsH3JwJXpYo5wh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ResetDatabase">
+    <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="DAL.Database.DatabaseSetup" />
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAL.Database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DropDatabase" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="DAL.Database.DropDatabase" />
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAL.Database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResetDatabase" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="DAL.Database.ResetDatabase" />
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAL.Database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="Run" />
+      <module name="Back-End" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAL" />
+      <option name="MAIN_CLASS_NAME" value="DAL.CategoryDALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategorySALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="SAL" />
+      <option name="MAIN_CLASS_NAME" value="SAL.CategorySALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeRequestDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAL" />
+      <option name="MAIN_CLASS_NAME" value="DAL.EmployeeRequestDALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmployeeRequestSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="SAL" />
+      <option name="MAIN_CLASS_NAME" value="SAL.EmployeeRequestSALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RequestDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAL" />
+      <option name="MAIN_CLASS_NAME" value="DAL.RequestDALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RequestSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="SAL" />
+      <option name="MAIN_CLASS_NAME" value="SAL.RequestSALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="DAL" />
+      <option name="MAIN_CLASS_NAME" value="DAL.SessionDALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SAL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="SAL" />
+      <option name="MAIN_CLASS_NAME" value="SAL.SessionSALTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="Username" value="root" />
+        <env name="Password" value="Mercer1282!" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.DropDatabase" />
+      <item itemvalue="Application.DatabaseSetup" />
+      <item itemvalue="Application.ResetDatabase" />
+      <item itemvalue="Application.Run" />
+      <item itemvalue="JUnit.EmployeeRequestDALTests" />
+      <item itemvalue="JUnit.EmployeeRequestSALTests" />
+      <item itemvalue="JUnit.SessionDALTests" />
+      <item itemvalue="JUnit.CategoryDALTests" />
+      <item itemvalue="JUnit.RequestDALTests" />
+      <item itemvalue="JUnit.SessionSALTests" />
+      <item itemvalue="JUnit.RequestSALTests" />
+      <item itemvalue="JUnit.CategorySALTests" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="" />
+      <created>1680559221224</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1680559221224</updated>
+    </task>
+    <servers />
+  </component>
+</project>
