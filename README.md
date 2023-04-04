@@ -3,6 +3,10 @@
 ## Technologies Used:
 - Docker
 - MySQL
-- Spring Framework
-- Lambok
+- Javalin
+- Log4J
+- SLF4J
+- Gson
 - j-unit
+- java
+- next js

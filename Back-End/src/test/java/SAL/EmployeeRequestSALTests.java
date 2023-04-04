@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class EmployeeSALTests {
+public class EmployeeRequestSALTests {
     int currentEmployeeId = 1;
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);

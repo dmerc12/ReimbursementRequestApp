@@ -6,7 +6,7 @@ import Entities.Data.Employee;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class EmployeeDALTests {
+public class EmployeeRequestDALTests {
     int currentEmployeeId = 1;
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     Employee successfulEmployee = new Employee(0, "first", "last", "e@mail.com",

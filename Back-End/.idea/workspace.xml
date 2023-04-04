@@ -5,173 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__com_google_code_gson_gson_2_10_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__io_javalin_javalin_5_4_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__jakarta_transaction_jakarta_transaction_api_2_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_annotations_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_http_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_io_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_jndi_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_plus_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_security_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_server_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_servlet_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_util_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_webapp_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_jetty_xml_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_toolchain_jetty_jakarta_servlet_api_5_0_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_core_common_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_core_server_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_jetty_api_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_jetty_common_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_jetty_server_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_jetty_websocket_websocket_servlet_11_0_13.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_jetbrains_annotations_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_7_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_7_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk7_1_7_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_jdk8_1_7_22.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_ow2_asm_asm_9_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_ow2_asm_asm_commons_9_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/libraries/Maven__org_ow2_asm_asm_tree_9_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentation/BusinessRules.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentation/TestPlan.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentation/TestStrategy.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/documentation/UserStories.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/CategoryDAL/CategoryDALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/CategoryDAL/CategoryDALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/Database/DatabaseSetup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/Database/DropDatabase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/Database/ResetDatabase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/RequestDAL/RequestDALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/RequestDAL/RequestDALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/SessionDAL/SessionDALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DAL/SessionDAL/SessionDALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/CustomExceptions/GeneralError.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Data/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Data/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Data/Request.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Data/Session.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/CategorySAL/CategorySALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/CategorySAL/CategorySALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/RequestSAL/RequestSALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/RequestSAL/RequestSALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/SessionSAL/SessionSALImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SAL/SessionSAL/SessionSALInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utilities/DatabaseConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/maven/archetype.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/main/java/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/test/java/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/DAL/CategoryDALTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/DAL/EmployeeDALTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/DAL/RequestDALTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/DAL/SessionDALTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/SAL/CategorySALTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/SAL/EmployeeSALTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/SAL/RequestSALTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/SAL/SessionSALTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__ch_qos_logback_logback_classic_1_4_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__ch_qos_logback_logback_core_1_4_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_14_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_14_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_14_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_14_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_14_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_14_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__io_micrometer_micrometer_commons_1_10_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__io_micrometer_micrometer_observation_1_10_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_19_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_10_1_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_10_1_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_10_1_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_attoparser_attoparser_2_0_6_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_jul_to_slf4j_2_0_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_thymeleaf_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_aop_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_beans_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_context_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_core_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_expression_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_jcl_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_web_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_webmvc_6_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_thymeleaf_thymeleaf_3_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_thymeleaf_thymeleaf_spring6_3_1_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_unbescape_unbescape_1_1_6_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_yaml_snakeyaml_1_33.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentation/BusinessRules.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentation/TestPlan.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentation/TestStrategy.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentation/UserStories.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/API/Employee/RegisterController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/API/Main/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/CategoryDAL/CategoryDALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/CategoryDAL/CategoryDALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/Database/DatabaseSetup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/Database/DropDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/Database/ResetDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/EmployeeDAL/EmployeeDALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/EmployeeDAL/EmployeeDALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/RequestDAL/RequestDALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/RequestDAL/RequestDALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/SessionDAL/SessionDALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/DAL/SessionDAL/SessionDALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Entities/CustomExceptions/GeneralError.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Entities/Data/Category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Entities/Data/Employee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Entities/Data/Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Entities/Data/Session.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Entities/Requests/EmployeeRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Entities/Requests/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Run.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/CategorySAL/CategorySALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/CategorySAL/CategorySALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/EmployeeSAL/EmployeeSALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/EmployeeSAL/EmployeeSALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/RequestSAL/RequestSALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/RequestSAL/RequestSALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/SessionSAL/SessionSALImplementation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/SAL/SessionSAL/SessionSALInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Reimbursement/Request/App/Utilities/DatabaseConnection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/DAL/CategoryDALTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/DAL/EmployeeDALTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/DAL/RequestDALTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/DAL/SessionDALTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/SAL/CategorySALTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/SAL/EmployeeSALTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/SAL/RequestSALTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/Reimbursement/Request/App/SAL/SessionSALTests.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Main/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Requests/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/EmployeeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Requests/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DAL/EmployeeDALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DAL/EmployeeRequestDALTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SAL/EmployeeSALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SAL/EmployeeRequestSALTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,6 +54,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -219,7 +63,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="Application.ResetDatabase">
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
@@ -271,7 +115,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Run" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
         <env name="Password" value="Mercer1282!" />
@@ -322,7 +166,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <configuration name="EmployeeRequestDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Back-End" />
       <extension name="coverage">
         <pattern>
@@ -331,7 +175,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="DAL" />
-      <option name="MAIN_CLASS_NAME" value="DAL.EmployeeDALTests" />
+      <option name="MAIN_CLASS_NAME" value="DAL.EmployeeRequestDALTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
@@ -342,7 +186,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmployeeSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <configuration name="EmployeeRequestSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Back-End" />
       <extension name="coverage">
         <pattern>
@@ -351,7 +195,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="SAL" />
-      <option name="MAIN_CLASS_NAME" value="SAL.EmployeeSALTests" />
+      <option name="MAIN_CLASS_NAME" value="SAL.EmployeeRequestSALTests" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
@@ -447,20 +291,15 @@
       <item itemvalue="Application.DatabaseSetup" />
       <item itemvalue="Application.ResetDatabase" />
       <item itemvalue="Application.Run" />
+      <item itemvalue="JUnit.EmployeeRequestDALTests" />
+      <item itemvalue="JUnit.EmployeeRequestSALTests" />
       <item itemvalue="JUnit.SessionDALTests" />
       <item itemvalue="JUnit.CategoryDALTests" />
-      <item itemvalue="JUnit.EmployeeDALTests" />
       <item itemvalue="JUnit.RequestDALTests" />
       <item itemvalue="JUnit.SessionSALTests" />
       <item itemvalue="JUnit.RequestSALTests" />
       <item itemvalue="JUnit.CategorySALTests" />
-      <item itemvalue="JUnit.EmployeeSALTests" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Run" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

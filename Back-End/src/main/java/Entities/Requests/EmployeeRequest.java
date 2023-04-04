@@ -1,6 +1,6 @@
 package Entities.Requests;
 
-public class Employee {
+public class EmployeeRequest {
     private String firstName;
     private String lastName;
     private String email;

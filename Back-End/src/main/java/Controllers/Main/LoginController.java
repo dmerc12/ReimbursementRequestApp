@@ -1,11 +1,11 @@
-package Controllers;
+package Controllers.Main;
 
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
 import Entities.Data.Session;
-import Entities.Requests.Login;
+import Entities.Requests.LoginRequest;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
@@ -27,7 +27,7 @@ public class LoginController {
             logger.info("Beginning API handler login with info: " + ctx);
             String requestBody = ctx.body();
             Gson gson = new Gson();
-            Login employeeInfo = gson.fromJson(requestBody, Login.class);
+            LoginRequest employeeInfo = gson.fromJson(requestBody, LoginRequest.class);
             Employee employee = employeeSAO.login(employeeInfo.getEmail(), employeeInfo.getPassword());
             Session newSession = new Session(0, employee.getEmployeeId(), LocalDateTime.now().plusMinutes(15));
             Session createdNewSession = sessionSAO.addSession(newSession);
