@@ -8,47 +8,40 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <header class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Home
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-              </li>
-            </ul>
-            <form class="d-flex" wtx-context="5A1A6F1E-CF9E-4AFC-886E-19E79A3EABE1">
-              <input class="form-control me-sm-2" type="search" placeholder="Search" wtx-context="364C50A4-57DE-4028-8454-02AB1118102E"></input>
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+      <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/">Home
+                    <span class="visually-hidden">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Features</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Pricing</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/">About</a>
+                </li>
+              </ul>
+              <ul class="d-flex" wtx-context="5A1A6F1E-CF9E-4AFC-886E-19E79A3EABE1">
+                <li className='nav-item'>
+                  <a class="nav-link" href="/register">Register</a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </header>
-      <body>{children}</body>
+        </nav>
+        {children}
+        </body>
     </html>
   )
 }
