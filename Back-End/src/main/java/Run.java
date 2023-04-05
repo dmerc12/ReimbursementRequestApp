@@ -1,3 +1,4 @@
+import Controllers.Employee.GetEmployeeController;
 import Controllers.Employee.RegisterController;
 import Controllers.Main.LoginController;
 import io.javalin.Javalin;
@@ -12,9 +13,11 @@ public class Run {
 
         LoginController loginController = new LoginController();
         RegisterController registerController = new RegisterController();
+        GetEmployeeController getEmployeeController = new GetEmployeeController();
 
         app.post("/login/now", loginController.login);
         app.post("/register/now", registerController.register);
+        app.get("/get/employee/{employeeId}", getEmployeeController.getEmployee);
 
         app.start();
     }
