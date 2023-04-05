@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Main/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Requests/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/EmployeeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Entities/Requests/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/DAL/EmployeeDALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DAL/EmployeeRequestDALTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SAL/EmployeeSALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SAL/EmployeeRequestSALTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-    </list>
+    <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
