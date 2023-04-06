@@ -8,5 +8,7 @@
 - SLF4J
 - Gson
 - j-unit
-- java
-- next js
+- Java
+- Next.JS
+- Bootstrap
+
