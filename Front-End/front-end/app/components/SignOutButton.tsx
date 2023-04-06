@@ -2,23 +2,23 @@
 
 import { FC, useState } from 'react'
 import Button from '@/app/components/ui/Button'
-import { signIn } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 
-interface SignInButtonProps {
+interface SignOutButtonProps {
   
 }
 
-const SignInButton: FC<SignInButtonProps> = ({}) => {
+const SignOutButton: FC<SignOutButtonProps> = ({}) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const loginWithCredentials = async () => {
+    const signUserOut = async () => {
         setIsLoading(true)
 
         try {
-            await signIn('credentials')
+            await signOut()
         } catch (error) {
             toast({
-                title: 'Error signing in',
+                title: 'Error signing out',
                 message: 'Please try again later',
                 type: 'error'
             })
@@ -26,10 +26,10 @@ const SignInButton: FC<SignInButtonProps> = ({}) => {
     }
 
     return (
-        <Button onClick={loginWithCredentials} isLoading={isLoading}>
-            Login
+        <Button onClick={signUserOut} isLoading={isLoading}>
+            Logout
         </Button>
     )
 }
 
-export default SignInButton
+export default SignOutButton
