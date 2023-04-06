@@ -2,6 +2,7 @@ import { HTMLAttributes, forwardRef } from 'react'
 import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '@/app/lib/utils'
 
+
 interface HeadingProps {}
 
 const headingVariants = cva(
