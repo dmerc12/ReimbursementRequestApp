@@ -14,15 +14,15 @@ const SignInButton: FC<SignInButtonProps> = ({}) => {
     const loginWithCredentials = async () => {
         setIsLoading(true)
 
-        try {
-            await signIn('credentials')
-        } catch (error) {
-            toast({
-                title: 'Error signing in',
-                message: 'Please try again later',
-                type: 'error'
-            })
-        }
+        // try {
+        //     await signIn('credentials')
+        // } catch (error) {
+        //     toast({
+        //         title: 'Error signing in',
+        //         message: 'Please try again later',
+        //        type: 'error'
+        //     })
+        // }
     }
 
     return (

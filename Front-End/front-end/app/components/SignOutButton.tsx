@@ -14,15 +14,15 @@ const SignOutButton: FC<SignOutButtonProps> = ({}) => {
     const signUserOut = async () => {
         setIsLoading(true)
 
-        try {
-            await signOut()
-        } catch (error) {
-            toast({
-                title: 'Error signing out',
-                message: 'Please try again later',
-                type: 'error'
-            })
-        }
+        // try {
+        //     await signOut()
+        // } catch (error) {
+        //     toast({
+        //         title: 'Error signing out',
+        //         message: 'Please try again later',
+        //         type: 'error'
+        //     })
+        // }
     }
 
     return (
