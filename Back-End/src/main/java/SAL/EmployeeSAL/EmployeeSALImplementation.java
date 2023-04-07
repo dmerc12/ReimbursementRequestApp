@@ -14,7 +14,10 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
     }
     @Override
     public Employee addEmployee(Employee employee) {
-        logger.info("Beginning SAL method add employee with employee: " + employee);
+        logger.info("Beginning SAL method add employee with employeeId: " + employee.getEmployeeId() +
+                ", firstName; " + employee.getFirstName() + ", lastName: " + employee.getLastName() +
+                ", email: " + employee.getEmail() + ", password: " + employee.getPassword(),", phoneNumber: " +
+                employee.getPhoneNumber() + ", address: " + employee.getAddress());
         if (employee.getFirstName().equals("")) {
             logger.warn("SAL method add employee, first name left empty");
             throw new GeneralError("The first name field cannot be left empty, please try again!");
@@ -62,7 +65,11 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
                 throw new GeneralError("An employee with this email already exists, please try again!");
             } else {
                 Employee result = employeeDAO.addEmployee(employee);
-                logger.info("Finishing SAL method add employee with result: " + result);
+                String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                                "password: %s, phoneNumber: %s, address: %s", result.getEmployeeId(),
+                        result.getFirstName(), result.getLastName(), result.getEmail(), result.getPassword(),
+                        result.getPhoneNumber(), result.getAddress());
+                logger.info("Finishing SAL method add employee with result: " + employeeString);
                 return result;
             }
         }
@@ -76,7 +83,11 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
             logger.warn("SAL method get employee by ID, not found");
             throw new GeneralError("No employee found, please try again!");
         } else {
-            logger.info("Finishing SAL method get employee by ID with employee: " + employee);
+            String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                            "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(),
+                    employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPassword(),
+                    employee.getPhoneNumber(), employee.getAddress());
+            logger.info("Finishing SAL method get employee by ID with employee: " + employeeString);
             return employee;
         }
     }
@@ -96,7 +107,11 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
                 logger.warn("SAL method login, not existing credentials");
                 throw new GeneralError("Either the email or the password is incorrect, please try again!");
             } else {
-                logger.info("Finishing SAL method login with employee: " + employee);
+                String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                                "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(),
+                        employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPassword(),
+                        employee.getPhoneNumber(), employee.getAddress());
+                logger.info("Finishing SAL method login with employee: " + employeeString);
                 return employee;
             }
         }
@@ -104,7 +119,10 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        logger.info("Beginning SAL method update employee with employee: " + employee);
+        logger.info("Beginning SAL method update employee with employeeId: " + employee.getEmployeeId() +
+                ", firstName; " + employee.getFirstName() + ", lastName: " + employee.getLastName() +
+                ", email: " + employee.getEmail() + ", password: " + employee.getPassword(),", phoneNumber: " +
+                employee.getPhoneNumber() + ", address: " + employee.getAddress());
         if (employee.getFirstName().equals("")) {
             logger.warn("SAL method update employee, first name left empty");
             throw new GeneralError("The first name field cannot be left empty, please try again!");
@@ -150,8 +168,13 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
                 throw new GeneralError("Nothing has changed, please try again!");
             } else {
                 Employee updatedInformation = employeeDAO.updateEmployee(employee);
+                String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                                "password: %s, phoneNumber: %s, address: %s", updatedInformation.getEmployeeId(),
+                        updatedInformation.getFirstName(), updatedInformation.getLastName(),
+                        updatedInformation.getEmail(), updatedInformation.getPassword(),
+                        updatedInformation.getPhoneNumber(), updatedInformation.getAddress());
                 logger.info("Finishing SAL method update employee with resulting employee information: " +
-                        updatedInformation);
+                        employeeString);
                 return updatedInformation;
             }
         }

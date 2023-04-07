@@ -16,7 +16,7 @@ public class GetEmployeeController {
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     public Handler getEmployee = ctx -> {
         try {
-            logger.info("Beginning API handler get employee with info: " + ctx);
+            logger.info("Beginning API handler get employee with info: " + ctx.body());
             int employeeId = Integer.parseInt(ctx.pathParam("employeeId"));
             Employee employee = employeeSAO.getEmployeeById(employeeId);
             Gson gson = new Gson();

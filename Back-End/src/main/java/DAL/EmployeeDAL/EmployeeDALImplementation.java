@@ -29,7 +29,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
 
     @Override
     public Employee addEmployee(Employee employee) {
-        logger.info("Beginning DAL method add employee with employee: " + employee);
+        logger.info("Beginning DAL method add employee with employeeId: " + employee.getEmployeeId() +
+                ", firstName; " + employee.getFirstName() + ", lastName: " + employee.getLastName() +
+                ", email: " + employee.getEmail() + ", password: " + employee.getPassword(),", phoneNumber: " +
+                employee.getPhoneNumber() + ", address: " + employee.getAddress());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "insert into reimbursement_request_app.employees values (0, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = null;
@@ -46,7 +49,11 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
                 rs.next();
                 employee.setEmployeeId(rs.getInt(1));
             }
-            logger.info("Finishing DAL method add employee with result: " + employee);
+            String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                            "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(),
+                    employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPassword(),
+                    employee.getPhoneNumber(), employee.getAddress());
+            logger.info("Finishing DAL method add employee with result: " + employeeString);
             return employee;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -74,7 +81,11 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
                         rs.getString("phone_number"),
                         rs.getString("address")
                 );
-                logger.info("Finishing DAL method get employee by ID with result: " + employee);
+                String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                                "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(),
+                        employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPassword(),
+                        employee.getPhoneNumber(), employee.getAddress());
+                logger.info("Finishing DAL method get employee by ID with result: " + employeeString);
                 return employee;
             } else {
                 logger.info("Finishing DAL method get employee by ID with nothing found");
@@ -106,7 +117,11 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
                         rs.getString("phone_number"),
                         rs.getString("address")
                 );
-                logger.info("Finishing DAL method get employee by email with result: " + employee);
+                String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                                "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(),
+                        employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPassword(),
+                        employee.getPhoneNumber(), employee.getAddress());
+                logger.info("Finishing DAL method get employee by email with result: " + employeeString);
                 return employee;
             } else {
                 logger.info("Finishing DAL method get employee by email, none found within the database");
@@ -139,7 +154,11 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
                         rs.getString("phone_number"),
                         rs.getString("address")
                 );
-                logger.info("Finishing DAL method login with result: " + employee);
+                String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                                "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(),
+                        employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPassword(),
+                        employee.getPhoneNumber(), employee.getAddress());
+                logger.info("Finishing DAL method login with result: " + employeeString);
                 return employee;
             } else {
                 logger.info("Finishing DAL method login with result: null");
@@ -154,7 +173,10 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
 
     @Override
     public Employee updateEmployee(Employee employee) {
-        logger.info("Beginning DAL method update employee with employee: " + employee);
+        logger.info("Beginning DAL method update employee with employeeId: " + employee.getEmployeeId() +
+                ", firstName; " + employee.getFirstName() + ", lastName: " + employee.getLastName() +
+                ", email: " + employee.getEmail() + ", password: " + employee.getPassword(),", phoneNumber: " +
+                employee.getPhoneNumber() + ", address: " + employee.getAddress());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "update reimbursement_request_app.employees set email=?, address=?, phone_number=?, " +
                     "first_name=?, last_name=? where employee_id=?;";
@@ -167,7 +189,11 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
             ps.setString(5, employee.getLastName());
             ps.setInt(6, employee.getEmployeeId());
             ps.executeUpdate();
-            logger.info("Finishing DAL method update employee with result: " + employee);
+            String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                            "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(),
+                    employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPassword(),
+                    employee.getPhoneNumber(), employee.getAddress());
+            logger.info("Finishing DAL method update employee with result: " + employeeString);
             return employee;
         } catch (SQLException error) {
             error.printStackTrace();
