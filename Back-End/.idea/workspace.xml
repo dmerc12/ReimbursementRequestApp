@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/GetEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/GetEmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Main/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Main/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/src/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/src/pages/index.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +57,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ResetDatabase">
+  <component name="RunManager" selected="Application.Run">
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
