@@ -17,7 +17,7 @@ public class RegisterController {
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     public Handler register = ctx -> {
         try {
-            logger.info("Beginning API handler register with info: " + ctx);
+            logger.info("Beginning API handler register with info: " + ctx.body());
             String requestBody = ctx.body();
             Gson gson = new Gson();
             EmployeeRequest employeeRequestInformation = gson.fromJson(requestBody, EmployeeRequest.class);

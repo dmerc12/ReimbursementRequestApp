@@ -10,5 +10,6 @@
 - j-unit
 - Java
 - Next.JS
-- Bootstrap
+- Tailwind CSS
+
 
