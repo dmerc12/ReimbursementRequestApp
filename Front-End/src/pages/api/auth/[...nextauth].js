@@ -46,6 +46,12 @@ export const authOptions = {
                   throw new Error(errorMessage.message)
                 }
               }
-            }})]}
+            }
+        }
+    )],
+    pages: {
+        signIn: '/login'
+    }
+    }
 
 export default NextAuth(authOptions)
