@@ -38,17 +38,14 @@ export const authOptions = {
               }
               return user
             } catch (error) {
-                if (error instanceof Error) {
-                  throw new Error('Invalid email or password')
-                } else {
                   // Handle the error message returned by the Java backend
                   const errorMessage = await error.json()
                   throw new Error(errorMessage.message)
                 }
               }
             }
-        }
-    )],
+            )
+        ],
     pages: {
         signIn: '/login',
         // signOut: '/logout'
