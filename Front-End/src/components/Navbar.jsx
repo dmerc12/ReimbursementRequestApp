@@ -1,8 +1,17 @@
 import Link from "next/link"
-import { signIn, signOut } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
  
 const Navbar = () => {
+    const session = useSession()
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        signOut({ callbackUrl: '/login' });
+        router.push('/login');
+    };
+
     return (
         <>
             <nav>
@@ -12,9 +21,16 @@ const Navbar = () => {
                     <Link href='manage-information'>Manage Information</Link>
                 </div>
                 <div>
-                    <button onClick={() => signIn()}>Login</button>
-                    <button onClick={() => signOut()}>Logout</button>
-                    <Link href='/register'>Register</Link>
+                    {session.data ? (
+                        <>
+                            <button onClick={handleLogout}>Logout</button>
+                        </>
+                    ) : (
+                        <>
+                            <button onClick={() => signIn()}>Login</button>
+                            <Link href='/register'>Register</Link>
+                        </>
+                    )}
                 </div>
             </nav>
         </>
