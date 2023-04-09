@@ -1,18 +1,30 @@
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import { getSession } from 'next-auth/react'
+import Link from 'next/link'
 
-export default function Home() {
-  const session = useSession();
-  const router = useRouter();
-
-  if (!session.data) {
-    router.push('/login')
-    return null
-  }
-
+export default function Home({ user }) {
   return (
     <>
-      <h1>Home Page</h1>
+      <Link href='/manage-requests'>Manage Request Information</Link>
+      <Link href='/manage-information'>Manage Employee Information</Link>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: 'login',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {
+      user: session.user
+    }
+  }
 }

@@ -1,7 +1,4 @@
-import Controllers.Employee.GetEmployeeController;
-import Controllers.Employee.RegisterController;
-import Controllers.Employee.UpdateEmployeeController;
-import Controllers.Main.LoginController;
+import Controllers.Employee.*;
 import io.javalin.Javalin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,11 +13,13 @@ public class Run {
         RegisterController registerController = new RegisterController();
         GetEmployeeController getEmployeeController = new GetEmployeeController();
         UpdateEmployeeController updateEmployeeController = new UpdateEmployeeController();
+        DeleteEmployeeController deleteEmployeeController = new DeleteEmployeeController();
 
         app.post("/login/now", loginController.login);
         app.post("/register/now", registerController.register);
         app.get("/get/employee/{employeeId}", getEmployeeController.getEmployee);
         app.post("/update/employee/now", updateEmployeeController.updateEmployee);
+        app.delete("/delete/employee/now", deleteEmployeeController.deleteEmployee);
 
         app.start();
     }

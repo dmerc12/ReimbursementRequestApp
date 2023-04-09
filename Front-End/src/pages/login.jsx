@@ -1,24 +1,19 @@
+'use client'
+
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
-
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-
-    const router = useRouter();
-
-    const onSubmit = (event) => {
+    
+    const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            signIn('credentials', { email, password, callbackUrl: '/' });
-            router.push('/');
+            const response = await signIn('credentials', { email, password, callbackUrl: '/' });
         } catch (error) {
-            setError(error.message)
+            throw new Error(error.message)
         }
-        
     };
 
     return (
@@ -28,7 +23,7 @@ export default function LoginPage() {
                 <label htmlFor="email">Email</label>
                 <input
                 type="email"
-                id="email"
+                id="loginEmail"
                 name="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -36,13 +31,12 @@ export default function LoginPage() {
                 <label htmlFor="password">Password</label>
                 <input
                 type="password"
-                id="password"
+                id="loginPassword"
                 name="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 />
                 <button type="submit">Sign in</button>
-                {error && <p>{error}</p>}
             </form>
         </>
     )
