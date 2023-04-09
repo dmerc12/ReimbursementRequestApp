@@ -1,10 +1,10 @@
 import { getSession } from 'next-auth/react'
 
 
-export default function ManageRequests({ user }) {
+export default function ManageRequest({ user }) {
     return (
         <>
-            <h1>Manage Requests Page</h1>
+            <h1>Manage Request Information Page</h1>
         </>
     )
 }

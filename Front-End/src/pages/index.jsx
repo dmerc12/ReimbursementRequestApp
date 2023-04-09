@@ -1,9 +1,11 @@
 import { getSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function Home({ user }) {
   return (
     <>
-      <h1>Home Page</h1>
+      <Link href='/manage-requests'>Manage Request Information</Link>
+      <Link href='/manage-information'>Manage Employee Information</Link>
     </>
   )
 }

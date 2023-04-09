@@ -4,7 +4,7 @@ import { getSession } from 'next-auth/react'
 export default function ManageInformation({ user }) {
     return (
         <>
-            <h1>Manage Information Page</h1>
+            <h1>Manage Employee Information Page</h1>
         </>
     )
 }

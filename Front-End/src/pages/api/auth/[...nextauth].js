@@ -29,7 +29,7 @@ export const authOptions = {
                 })
               })
         
-              const userData = await response.json()
+              const userData = response.json()
               const user = {
                 id: userData.employeeId,
                 name: `${userData.firstName} ${userData.lastName}`,
@@ -39,8 +39,7 @@ export const authOptions = {
               return user
             } catch (error) {
                   // Handle the error message returned by the Java backend
-                  const errorMessage = await error.json()
-                  throw new Error(errorMessage.message)
+                  throw new Error(error.message)
                 }
               }
             }
