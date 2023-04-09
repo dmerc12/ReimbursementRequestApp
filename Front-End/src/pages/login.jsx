@@ -9,7 +9,11 @@ export default function LoginPage() {
     
     const onSubmit = async (event) => {
         event.preventDefault();
-        const response = await signIn('credentials', { email, password, callbackUrl: '/' });
+        try {
+            const response = await signIn('credentials', { email, password, callbackUrl: '/' });
+        } catch (error) {
+            throw new Error(error.message)
+        }
     };
 
     return (

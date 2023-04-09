@@ -28,17 +28,23 @@ export const authOptions = {
                     'password' : credentials.password
                 })
               })
-        
-              const userData = response.json()
-              const user = {
-                id: userData.employeeId,
-                name: `${userData.firstName} ${userData.lastName}`,
-                email: userData.email
-                // Add any other user properties you need to store in the session here
+
+              if (response.status === 200) {
+                const userData = response.json()
+                const user = {
+                  id: userData.employeeId,
+                  name: `${userData.firstName} ${userData.lastName}`,
+                  email: userData.email
+                }
+                return user
+              } else if (response.status === 400) {
+                throw new Error(response.body)
+              } else {
+                alert("you really messed up to see me")
               }
-              return user
             } catch (error) {
                   // Handle the error message returned by the Java backend
+                  alert(error.message)
                   throw new Error(error.message)
                 }
               }
