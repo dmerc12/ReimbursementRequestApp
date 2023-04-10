@@ -38,14 +38,14 @@ export const authOptions = {
                 }
                 return user
               } else if (response.status === 400) {
-                throw new Error(response.body)
+                throw Error(response.body)
               } else {
                 alert("you really messed up to see me")
               }
             } catch (error) {
                   // Handle the error message returned by the Java backend
                   alert(error.message)
-                  throw new Error(error.message)
+                  throw Error(error.message)
                 }
               }
             }

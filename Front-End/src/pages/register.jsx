@@ -13,10 +13,23 @@ export default function Register() {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        try {
-
-        } catch (error) {
-            throw new Error(error.message)
+        const response = await fetch('http://localhost:8080/register/now', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            'firstName': firstName,
+            'lastName': lastName,
+            'email': email,
+            'password': password,
+            'phoneNumber': phoneNumber,
+            'address': address
+        })})
+        if (response.status === 200) {
+            return console.log(response.body)
+        } else if (response.status === 400) {
+            throw Error(response.body)
+        } else {
+            alert('You really messed up to see me...')
         }
     }
 
