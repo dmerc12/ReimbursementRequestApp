@@ -16,7 +16,8 @@ public class CategorySALImplementation implements CategorySALInterface{
     }
     @Override
     public Category addCategory(Category category) {
-        logger.info("Beginning SAL method add category with category: " + category);
+        logger.info("Beginning SAL method add category with category ID: " + category.getCategoryId() +
+                ", category name: " + category.getCategoryName());
         if (category.getCategoryName().equals("")) {
             logger.warn("SAL method add category, category name left empty");
             throw new GeneralError("Category name field cannot be left empty, please try again!");
@@ -36,7 +37,8 @@ public class CategorySALImplementation implements CategorySALInterface{
                 throw new GeneralError("Category with this name already exists, please try again!");
             } else {
                 Category result = categoryDAO.addCategory(category);
-                logger.info("Finishing SAL method add category with category: " + result);
+                logger.info("Finishing SAL method add category with category ID: " + category.getCategoryId() +
+                        ", category name: " + category.getCategoryName());
                 return result;
             }
         }
@@ -50,7 +52,7 @@ public class CategorySALImplementation implements CategorySALInterface{
             logger.warn("SAL method get all categories, category list empty");
             throw new GeneralError("No categories found, please try again!");
         } else {
-            logger.info("Finishing SAL method get all categories with category list: " + categoryList);
+            logger.info("Finishing SAL method get all categories");
             return categoryList;
         }
     }
@@ -63,14 +65,16 @@ public class CategorySALImplementation implements CategorySALInterface{
             logger.warn("SAL method get category, no category found");
             throw new GeneralError("Category not found, please try again!");
         } else {
-            logger.info("Finishing SAL method get category with category: " + result);
+            logger.info("Finishing SAL method get category with category ID: " + result.getCategoryId() +
+                    ", category name: " + result.getCategoryName());
             return result;
         }
     }
 
     @Override
     public Category updateCategory(Category category) {
-        logger.info("Beginning SAL method update category with category: " + category);
+        logger.info("Beginning SAL method update category with category ID: " + category.getCategoryId() +
+                ", category name: " + category.getCategoryName());
         if (category.getCategoryName().equals("")) {
             logger.warn("SAL method update category, category name left empty");
             throw new GeneralError("Category name field cannot be left empty, please try again!");
@@ -94,7 +98,8 @@ public class CategorySALImplementation implements CategorySALInterface{
                 throw new GeneralError("Category with this name already exists, please try again!");
             } else {
                 Category result = categoryDAO.updateCategory(category);
-                logger.info("Finishing SAL method update category with category: " + result);
+                logger.info("Finishing SAL method update category with category ID: " + result.getCategoryId() +
+                        ", category name: " + result.getCategoryName());
                 return result;
             }
         }

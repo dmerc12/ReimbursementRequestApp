@@ -29,7 +29,7 @@ public class CategoryDALImplementation implements CategoryDALInterface{
 
     @Override
     public Category addCategory(Category category) {
-        logger.info("Beginning DAL method add category with data: " + category);
+        logger.info("Beginning DAL method add category with category name: " + category.getCategoryName());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "insert into reimbursement_request_app.categories values (0, ?);";
             PreparedStatement ps = null;
@@ -41,7 +41,8 @@ public class CategoryDALImplementation implements CategoryDALInterface{
                 rs.next();
                 category.setCategoryId(rs.getInt(1));
             }
-            logger.info("Finishing DAL method add category with result: " + category);
+            logger.info("Finishing DAL method add category with category ID: " + category.getCategoryId() +
+                    ", category name: " + category.getCategoryName());
             return category;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -65,8 +66,9 @@ public class CategoryDALImplementation implements CategoryDALInterface{
                         rs.getString("category_name")
                 );
                 categoryList.add(category);
+                logger.info("Finishing DAL method get all categories with category ID: " + category.getCategoryId() +
+                        ", category name: " + category.getCategoryName());
             }
-            logger.info("Finishing DAL method get all categories with result: " + categoryList);
             return categoryList;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -89,7 +91,8 @@ public class CategoryDALImplementation implements CategoryDALInterface{
                         rs.getInt("category_id"),
                         rs.getString("category_name")
                 );
-                logger.info("Finishing DAL method get account by ID with result: " + category);
+                logger.info("Finishing DAL method get account by ID with category ID: " + category.getCategoryId() +
+                        ", category name: " + category.getCategoryName());
                 return category;
             } else {
                 logger.info("No category found with ID: " + categoryId);
@@ -104,7 +107,8 @@ public class CategoryDALImplementation implements CategoryDALInterface{
 
     @Override
     public Category updateCategory(Category category) {
-        logger.info("Beginning DAL method update category with data: " + category);
+        logger.info("Beginning DAL method update category with category ID: " + category.getCategoryId() +
+                ", category name: " + category.getCategoryName());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "update reimbursement_request_app.categories set category_name=? where category_id=?;";
             assert connection != null;
@@ -112,7 +116,8 @@ public class CategoryDALImplementation implements CategoryDALInterface{
             ps.setString(1, category.getCategoryName());
             ps.setInt(2, category.getCategoryId());
             ps.executeUpdate();
-            logger.info("Finishing DAL method update category with result: " + category);
+            logger.info("Finishing DAL method update category with category ID: " + category.getCategoryId() +
+                    ", category name: " + category.getCategoryName());
             return category;
         } catch (SQLException error) {
             error.printStackTrace();

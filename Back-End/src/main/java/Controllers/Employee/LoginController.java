@@ -17,8 +17,8 @@ public class LoginController {
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     public Handler login = ctx -> {
         try {
-            logger.info("Beginning API handler login with info: " + ctx.body());
             String requestBody = ctx.body();
+            logger.info("Beginning API handler login with info: " + requestBody);
             Gson gson = new Gson();
             LoginRequest employeeInfo = gson.fromJson(requestBody, LoginRequest.class);
             Employee employee = employeeSAO.login(employeeInfo.getEmail(), employeeInfo.getPassword());

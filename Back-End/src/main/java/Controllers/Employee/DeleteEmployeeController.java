@@ -17,8 +17,8 @@ public class DeleteEmployeeController {
 
     public Handler deleteEmployee = ctx -> {
         try {
-            logger.info("Beginning API handler delete employee with info: " + ctx.body());
             String requestBody = ctx.body();
+            logger.info("Beginning API handler delete employee with info: " + requestBody);
             Gson gson = new Gson();
             Employee employeeId = gson.fromJson(requestBody, Employee.class);
             int result = employeeSAO.deleteEmployee(employeeId.getEmployeeId());

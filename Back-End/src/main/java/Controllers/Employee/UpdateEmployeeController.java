@@ -17,8 +17,8 @@ public class UpdateEmployeeController {
 
     public Handler updateEmployee = ctx -> {
         try {
-            logger.info("Beginning API handler update employee with info: " + ctx.body());
             String requestBody = ctx.body();
+            logger.info("Beginning API handler update employee with info: " + requestBody);
             Gson gson = new Gson();
             Employee updatedEmployeeInfo = gson.fromJson(requestBody, Employee.class);
             Employee updatedEmployee = employeeSAO.updateEmployee(updatedEmployeeInfo);
