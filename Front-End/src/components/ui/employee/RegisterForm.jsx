@@ -1,6 +1,5 @@
 'use client'
 
-import axios from '../../../pages/api/axios'
 import { useState } from 'react';
 
 export default function Registser() {
@@ -11,24 +10,25 @@ export default function Registser() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
 
-    const REGISTER_URL = 'http://localhost:8080/register/now'
-
-
     const onSubmit = async (event) => {
         event.preventDefault();
         try{
-            const response = await axios.post(REGISTER_URL, 
-                JSON.stringify({ 
-                    'firstName': firstName, 
-                    'lastName': lastName, 
-                    'email': email, 
-                    'password': password, 
-                    'phoneNumber': phoneNumber, 
-                    'address': address
-                }), {
-                    headers: {'Content-Type': 'application/json'}
-                })
-                console.log(JSON.stringify(response))
+            const response = await fetch('/api/employee/handleRegister',
+                {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ 
+                        'firstName': firstName, 
+                        'lastName': lastName, 
+                        'email': email, 
+                        'password': password, 
+                        'phoneNumber': phoneNumber, 
+                        'address': address
+                    })
+                }
+            )
+            const data = await response.json();
+            console.log(JSON.stringify(data))
         } catch (error) {
             console.log(JSON.stringify(error))
         }
