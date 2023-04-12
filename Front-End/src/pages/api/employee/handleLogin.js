@@ -2,12 +2,8 @@ const handler = async (req, res) => {
     const method = 'POST';
 
     const requestBody = JSON.stringify({
-        'firstName': req.body.firstName, 
-        'lastName': req.body.lastName, 
-        'email': req.body.email, 
-        'password': req.body.password, 
-        'phoneNumber': req.body.phoneNumber, 
-        'address': req.body.address
+        'email': req.body.email,
+        'password': req.body.password
     })
 
     const requestOptions = {
@@ -16,13 +12,13 @@ const handler = async (req, res) => {
         body: requestBody
     }
 
-    const registerURL = 'http://localhost:8080/register/now';
+    const loginURL = 'http://localhost:8080/login/now';
 
     try {
-        const response = await fetch(registerURL, requestOptions);
+        const response = await fetch(loginURL, requestOptions);
         const data = await response.json();
 
-        return res.end(JSON.stringify({'success': data}));
+        return res.end(JSON.stringify({'success': data}))
     } catch (error) {
         return res.end(JSON.stringify({'error': error.message}));
     }

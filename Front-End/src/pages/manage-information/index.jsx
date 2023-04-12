@@ -1,5 +1,3 @@
-import { getSession } from 'next-auth/react'
-
 
 export default function ManageInformation({ user }) {
     return (
@@ -8,22 +6,3 @@ export default function ManageInformation({ user }) {
         </>
     )
 }
-
-export async function getServerSideProps(context) {
-    const session = await getSession(context)
-  
-    if (!session) {
-      return {
-        redirect: {
-          destination: 'login',
-          permanent: false
-        }
-      }
-    }
-  
-    return {
-      props: {
-        user: session.user
-      }
-    }
-  }
