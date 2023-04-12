@@ -1,16 +1,17 @@
 import Link from "next/link"
-import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
  
 const Navbar = () => {
-    const session = useSession()
     const router = useRouter();
 
-    const handleLogout = async () => {
-        signOut({ callbackUrl: '/login' });
+    const handleLogout = () => {
+        Cookies.remove('employeeId');
         router.push('/login');
     };
+
+    const isLoggedIn = Cookies.get('employeeId');
 
     return (
         <>
@@ -21,13 +22,13 @@ const Navbar = () => {
                     <Link href='manage-information'>Manage Information</Link>
                 </div>
                 <div>
-                    {session.data ? (
+                    {isLoggedIn ? (
                         <>
                             <button onClick={handleLogout}>Logout</button>
                         </>
                     ) : (
                         <>
-                            <button onClick={() => signIn()}>Login</button>
+                            <Link href='/login'>Login</Link>
                             <Link href='/register'>Register</Link>
                         </>
                     )}

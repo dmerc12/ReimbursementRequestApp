@@ -1,29 +1,19 @@
-import { getSession } from 'next-auth/react'
-
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 export default function ManageRequest({ user }) {
+    const router = useRouter();
+
+    useEffect(() => {
+        const employeeId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('employeeId='));
+        if (!employeeId) {
+          router.push('/login');
+        }
+      }, [router]);
+
     return (
         <>
             <h1>Manage Request Information Page</h1>
         </>
     )
 }
-
-export async function getServerSideProps(context) {
-    const session = await getSession(context)
-  
-    if (!session) {
-      return {
-        redirect: {
-          destination: 'login',
-          permanent: false
-        }
-      }
-    }
-  
-    return {
-      props: {
-        user: session.user
-      }
-    }
-  }

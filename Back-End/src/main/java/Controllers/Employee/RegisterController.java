@@ -3,7 +3,6 @@ package Controllers.Employee;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
-import Entities.Requests.EmployeeRequest;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
@@ -17,10 +16,10 @@ public class RegisterController {
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     public Handler register = ctx -> {
         try {
-            logger.info("Beginning API handler register with info: " + ctx.body());
             String requestBody = ctx.body();
+            logger.info("Beginning API handler register with info: " + requestBody);
             Gson gson = new Gson();
-            EmployeeRequest employeeRequestInformation = gson.fromJson(requestBody, EmployeeRequest.class);
+            Employee employeeRequestInformation = gson.fromJson(requestBody, Employee.class);
             Employee employeeInformation = new Employee(0, employeeRequestInformation.getFirstName(),
                     employeeRequestInformation.getLastName(), employeeRequestInformation.getEmail(),
                     employeeRequestInformation.getPassword(), employeeRequestInformation.getPhoneNumber(),
