@@ -16,9 +16,16 @@ const handler = async (req, res) => {
 
     try {
         const response = await fetch(loginURL, requestOptions);
-        const data = await response.json();
 
-        return res.end(JSON.stringify({'success': data}))
+        if (response.status === 200) {
+            const data = await response.json();
+
+            return res.end(JSON.stringify({'success': data}))
+        } else if (response.status === 400) {
+            const data = await response.json();
+
+            return res.end(JSON.stringify({'error': data}))
+        }
     } catch (error) {
         return res.end(JSON.stringify({'error': error.message}));
     }

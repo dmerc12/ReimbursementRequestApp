@@ -31,7 +31,7 @@ public class LoginController {
         } catch (GeneralError error) {
             Gson gson = new Gson();
             HashMap<String, String> errorDictionary = new HashMap<>();
-            errorDictionary.put("errorMessage", error.getMessage());
+            errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
             ctx.status(400);
