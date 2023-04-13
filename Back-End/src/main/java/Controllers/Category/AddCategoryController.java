@@ -6,6 +6,7 @@ import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
 import Entities.Data.Session;
+import Entities.Requests.AddCategoryRequest;
 import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
@@ -30,9 +31,8 @@ public class AddCategoryController {
             String requestBody = ctx.body();
             logger.info("Beginning API handler add category with info: " + requestBody);
             Gson gson = new Gson();
-            Category requestedCategoryInformation = gson.fromJson(requestBody, Category.class);
-            Session currentSessionToken = gson.fromJson(requestBody, Session.class);
-            Session currentSession = sessionSAO.getSession(currentSessionToken.getSessionId());
+            AddCategoryRequest requestedCategoryInformation = gson.fromJson(requestBody, AddCategoryRequest.class);
+            Session currentSession = sessionSAO.getSession(requestedCategoryInformation.getSessionId());
             Category categoryInformation = new Category(0, currentSession.getEmployeeId(),
                     requestedCategoryInformation.getCategoryName());
             Category createdCategory = categorySAO.addCategory(categoryInformation);
