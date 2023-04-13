@@ -3,6 +3,7 @@ package SAL.CategorySAL;
 import DAL.CategoryDAL.CategoryDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
+import SAL.EmployeeSAL.EmployeeSALImplementation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,14 +11,16 @@ import java.util.List;
 
 public class CategorySALImplementation implements CategorySALInterface{
     private final CategoryDALImplementation categoryDAO;
+    private final EmployeeSALImplementation employeeSAO;
     public static Logger logger = LogManager.getLogger(CategorySALImplementation.class);
-    public CategorySALImplementation(CategoryDALImplementation companyDAO) {
+    public CategorySALImplementation(CategoryDALImplementation companyDAO, EmployeeSALImplementation employeeSAO) {
         this.categoryDAO = companyDAO;
+        this.employeeSAO = employeeSAO;
     }
     @Override
     public Category addCategory(Category category) {
         logger.info("Beginning SAL method add category with category ID: " + category.getCategoryId() +
-                ", category name: " + category.getCategoryName());
+                ", employee ID: " + category.getEmployeeId() + ", category name: " + category.getCategoryName());
         if (category.getCategoryName().equals("")) {
             logger.warn("SAL method add category, category name left empty");
             throw new GeneralError("Category name field cannot be left empty, please try again!");
@@ -25,7 +28,8 @@ public class CategorySALImplementation implements CategorySALInterface{
             logger.warn("SAL method add category, category name too long");
             throw new GeneralError("Category name field cannot exceed 60 characters, please try again!");
         } else {
-            List<Category> categoryList = categoryDAO.getAllCategories();
+            employeeSAO.getEmployeeById(category.getEmployeeId());
+            List<Category> categoryList = categoryDAO.getAllCategories(category.getEmployeeId());
             boolean exists = false;
             for (Category existingCategory: categoryList) {
                 if (existingCategory.getCategoryName().equals(category.getCategoryName())) {
@@ -45,9 +49,10 @@ public class CategorySALImplementation implements CategorySALInterface{
     }
 
     @Override
-    public List<Category> getAllCategories() {
-        logger.info("Beginning SAL method get all categories");
-        List<Category> categoryList = categoryDAO.getAllCategories();
+    public List<Category> getAllCategories(int employeeId) {
+        logger.info("Beginning SAL method get all categories with employee ID: " + employeeId);
+        employeeSAO.getEmployeeById(employeeId);
+        List<Category> categoryList = categoryDAO.getAllCategories(employeeId);
         if (categoryList.size() <= 1) {
             logger.warn("SAL method get all categories, category list empty");
             throw new GeneralError("No categories found, please try again!");
@@ -66,7 +71,7 @@ public class CategorySALImplementation implements CategorySALInterface{
             throw new GeneralError("Category not found, please try again!");
         } else {
             logger.info("Finishing SAL method get category with category ID: " + result.getCategoryId() +
-                    ", category name: " + result.getCategoryName());
+                    ", employee ID: " + result.getEmployeeId() + ", category name: " + result.getCategoryName());
             return result;
         }
     }
@@ -74,7 +79,7 @@ public class CategorySALImplementation implements CategorySALInterface{
     @Override
     public Category updateCategory(Category category) {
         logger.info("Beginning SAL method update category with category ID: " + category.getCategoryId() +
-                ", category name: " + category.getCategoryName());
+                ", employee ID: " + category.getEmployeeId() + ", category name: " + category.getCategoryName());
         if (category.getCategoryName().equals("")) {
             logger.warn("SAL method update category, category name left empty");
             throw new GeneralError("Category name field cannot be left empty, please try again!");
@@ -82,7 +87,8 @@ public class CategorySALImplementation implements CategorySALInterface{
             logger.warn("SAL method update category, category name too long");
             throw new GeneralError("Category name field cannot exceed 60 characters, please try again!");
         } else {
-            List<Category> categoryList = categoryDAO.getAllCategories();
+            employeeSAO.getEmployeeById(category.getEmployeeId());
+            List<Category> categoryList = categoryDAO.getAllCategories(category.getEmployeeId());
             boolean exists = false;
             Category existingCategoryInformation = getCategory(category.getCategoryId());
             if (category.getCategoryName().equals(existingCategoryInformation.getCategoryName())) {

@@ -1,9 +1,14 @@
 package Controllers.Category;
 
 import DAL.CategoryDAL.CategoryDALImplementation;
+import DAL.EmployeeDAL.EmployeeDALImplementation;
+import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
+import Entities.Data.Session;
 import SAL.CategorySAL.CategorySALImplementation;
+import SAL.EmployeeSAL.EmployeeSALImplementation;
+import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
@@ -15,14 +20,21 @@ import java.util.HashMap;
 public class AddCategoryController {
     public static Logger logger = LogManager.getLogger(AddCategoryController.class);
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
-    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO);
+    EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
+    EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
+    SessionDALImplementation sessionDAO = new SessionDALImplementation();
+    SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
+    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO, employeeSAO);
     public Handler addCategory = ctx -> {
         try {
             String requestBody = ctx.body();
             logger.info("Beginning API handler add category with info: " + requestBody);
             Gson gson = new Gson();
-            Category categoryName = gson.fromJson(requestBody, Category.class);
-            Category categoryInformation = new Category(0, categoryName.getCategoryName());
+            Category requestedCategoryInformation = gson.fromJson(requestBody, Category.class);
+            Session currentSessionToken = gson.fromJson(requestBody, Session.class);
+            Session currentSession = sessionSAO.getSession(currentSessionToken.getSessionId());
+            Category categoryInformation = new Category(0, currentSession.getEmployeeId(),
+                    requestedCategoryInformation.getCategoryName());
             Category createdCategory = categorySAO.addCategory(categoryInformation);
             String category = gson.toJson(createdCategory);
             ctx.result(category);

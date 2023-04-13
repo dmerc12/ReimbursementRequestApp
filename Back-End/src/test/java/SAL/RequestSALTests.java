@@ -22,7 +22,7 @@ public class RequestSALTests {
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
-    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO);
+    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO, employeeSAO);
     RequestSALImplementation requestSAO = new RequestSALImplementation(requestDAO, employeeSAO, categorySAO);
     Request successRequest = new Request(0, -1, -1, "success", 25.00);
     Request updateRequest = new Request(currentRequestId, -1, -1, "updated",
