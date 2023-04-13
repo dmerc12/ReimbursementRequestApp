@@ -61,10 +61,9 @@ public class CategoryDALImplementation implements CategoryDALInterface{
             String sql = "select * from reimbursement_request_app.categories where employee_id=?;";
             List<Category> categoryList = new ArrayList<>();
             if (connection != null) {
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = connection.prepareStatement(sql);
                 ps.setInt(1, employeeId);
-                ps.execute();
-                ResultSet rs = ps.getGeneratedKeys();
+                ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     Category category = new Category(
                             rs.getInt("category_id"),
