@@ -11,6 +11,8 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
+
 public class LoginController {
     public static Logger logger = LogManager.getLogger(LoginController.class);
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
@@ -24,11 +26,15 @@ public class LoginController {
             Employee employee = employeeSAO.login(employeeInfo.getEmail(), employeeInfo.getPassword());
             String employeeJSON = gson.toJson(employee);
             ctx.result(employeeJSON);
-            ctx.status(HttpStatus.OK);
+            ctx.status(200);
             logger.info("Finishing API handler login with result: " + employeeJSON);
         } catch (GeneralError error) {
-            ctx.result(error.getMessage());
-            ctx.status(HttpStatus.BAD_REQUEST);
+            Gson gson = new Gson();
+            HashMap<String, String> errorDictionary = new HashMap<>();
+            errorDictionary.put("errorMessage", error.getMessage());
+            String errorJSON = gson.toJson(errorDictionary);
+            ctx.result(errorJSON);
+            ctx.status(400);
             logger.error("Error with API handler login with error: " + error.getMessage());
         }
     };
