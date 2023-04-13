@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-
+import { toast } from 'react-toastify';
  
 const Navbar = () => {
     const router = useRouter();
@@ -9,6 +9,7 @@ const Navbar = () => {
     const handleLogout = () => {
         Cookies.remove('employeeId');
         router.push('/login');
+        toast.success("Goodbye!")
     };
 
     const isLoggedIn = Cookies.get('employeeId');

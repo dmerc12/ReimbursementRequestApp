@@ -10,6 +10,8 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
+
 public class RegisterController {
     public static Logger logger = LogManager.getLogger(RegisterController.class);
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
@@ -30,7 +32,11 @@ public class RegisterController {
             ctx.status(HttpStatus.CREATED);
             logger.info("Finishing API handler register with result: " + createdEmployee);
         } catch (GeneralError error) {
-            ctx.result(error.getMessage());
+            Gson gson = new Gson();
+            HashMap<String, String> errorDictionary = new HashMap<>();
+            errorDictionary.put("message", error.getMessage());
+            String errorJSON = gson.toJson(errorDictionary);
+            ctx.result(errorJSON);
             ctx.status(HttpStatus.BAD_REQUEST);
             logger.error("Error with API handler register with error: " + error.getMessage());
         }

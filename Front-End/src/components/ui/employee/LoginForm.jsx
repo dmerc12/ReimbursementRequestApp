@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify';
 
 export default function LoginForm () {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
 
     const router = useRouter();
 
@@ -24,23 +24,25 @@ export default function LoginForm () {
                     })
                 })
                 const data = await response.json();
-                if (response.ok) {
-                    document.cookie = `employeeId=${data.success.employeeId}`;
+    
+                if (data.success) {
+                    document.cookie = `sessionId=${data.success.sessionId}`;
                     router.push('/');
-                } else if (response.status === 400) {
-                    const error = data.error
-                    setError(error);
+                    toast.success("Welcome!");
+                    } else if (data.error.message) {
+                    throw new Error(`${data.error.message}`);
+                } else if (data.error) {
+                    throw new Error(`${data.error}`);
                 } else {
-                    alert("You really messed up to see me...")
+                    throw new Error("Something went extremely wrong, please try again later!")
                 }
         } catch (error) {
-            console.log(JSON.stringify(error))
+            toast.error(error.message);
         }
     }
 
     return (
         <>
-            {error && <div className='error'>{error}</div>}
             <form onSubmit={onSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="loginEmail" name="email" value={email} onChange={(event) => setEmail(event.target.value)}/>
