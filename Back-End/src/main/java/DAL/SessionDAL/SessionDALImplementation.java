@@ -59,15 +59,19 @@ public class SessionDALImplementation implements SessionDALInterface{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, sessionId);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            LocalDateTime expiration = rs.getTimestamp("expiration").toLocalDateTime();
-            Session session = new Session(
-                    rs.getInt("session_id"),
-                    rs.getInt("employee_id"),
-                    expiration
-            );
-            logger.info("Finishing DAL method get session with result: " + session);
-            return session;
+            if (rs.next()) {
+                LocalDateTime expiration = rs.getTimestamp("expiration").toLocalDateTime();
+                Session session = new Session(
+                        rs.getInt("session_id"),
+                        rs.getInt("employee_id"),
+                        expiration
+                );
+                logger.info("Finishing DAL method get session with result: " + session);
+                return session;
+            } else {
+                logger.info("Finishing DAL method get session by ID with nothing found");
+                return null;
+            }
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method get session with error: " + error.getMessage());

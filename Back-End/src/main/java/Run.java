@@ -19,7 +19,7 @@ public class Run {
 
         app.post("/login/now", loginController.login);
         app.post("/register/now", registerController.register);
-        app.get("/get/employee/{employeeId}", getEmployeeController.getEmployee);
+        app.get("/get/employee/{sessionId}", getEmployeeController.getEmployee);
         app.put("/update/employee/now", updateEmployeeController.updateEmployee);
         app.delete("/delete/employee/now", deleteEmployeeController.deleteEmployee);
 

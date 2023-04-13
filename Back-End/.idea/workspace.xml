@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/UpdateEmployeeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/SessionRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Category/AddCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/AddCategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/DeleteEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/DeleteEmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/GetEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/GetEmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/UpdateEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/UpdateEmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/src/components/ui/employee/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/components/ui/employee/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/SessionDAL/SessionDALImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/SessionDAL/SessionDALImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

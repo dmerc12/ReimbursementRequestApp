@@ -5,6 +5,7 @@ import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
 import Entities.Data.Session;
+import Entities.Requests.SessionRequest;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
@@ -27,7 +28,7 @@ public class DeleteEmployeeController {
             String requestBody = ctx.body();
             logger.info("Beginning API handler delete employee with info: " + requestBody);
             Gson gson = new Gson();
-            Session sessionId = gson.fromJson(requestBody, Session.class);
+            SessionRequest sessionId = gson.fromJson(requestBody, SessionRequest.class);
             Session currentSession = sessionSAO.getSession(sessionId.getSessionId());
             int result = employeeSAO.deleteEmployee(currentSession.getEmployeeId());
             String resultJSON = gson.toJson(result);
