@@ -1,4 +1,4 @@
-package Entities.Requests;
+package Entities.Requests.Category;
 
 public class AddCategoryRequest {
     private int sessionId;

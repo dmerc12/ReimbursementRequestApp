@@ -6,7 +6,7 @@ import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
 import Entities.Data.Session;
-import Entities.Requests.AddCategoryRequest;
+import Entities.Requests.Category.AddCategoryRequest;
 import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;

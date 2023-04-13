@@ -44,4 +44,12 @@ public class CategoryDALTests {int currentCategoryId = 1;
         int result = categoryDAO.deleteCategory(currentCategoryId);
         Assert.assertTrue(result != 0);
     }
+
+    @Test
+    public void f_deleteAllCategoriesSuccess() {
+        Category category = new Category(0, -2, "to be deleted");
+        Category newCategory = categoryDAO.addCategory(category);
+        int result = categoryDAO.deleteAllCategories(newCategory.getEmployeeId());
+        Assert.assertTrue(result != 0);
+    }
 }

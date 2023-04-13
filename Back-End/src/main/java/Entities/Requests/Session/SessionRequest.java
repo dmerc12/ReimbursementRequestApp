@@ -1,4 +1,4 @@
-package Entities.Requests;
+package Entities.Requests.Session;
 
 public class SessionRequest {
     private int sessionId;

@@ -10,4 +10,5 @@ public interface CategoryDALInterface {
     Category getCategoryById(int categoryId);
     Category updateCategory(Category category);
     int deleteCategory(int categoryId);
+    int deleteAllCategories(int employeeId);
 }

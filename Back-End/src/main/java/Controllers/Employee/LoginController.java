@@ -5,7 +5,7 @@ import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
 import Entities.Data.Session;
-import Entities.Requests.LoginRequest;
+import Entities.Requests.Employee.LoginRequest;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;

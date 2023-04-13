@@ -3,7 +3,7 @@ import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
 import Entities.Data.Session;
-import Entities.Requests.UpdateEmployeeRequest;
+import Entities.Requests.Employee.UpdateEmployeeRequest;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;

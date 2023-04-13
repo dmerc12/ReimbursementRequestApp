@@ -10,4 +10,5 @@ public interface CategorySALInterface {
     Category getCategory(int categoryId);
     Category updateCategory(Category category);
     int deleteCategory(int categoryId);
+    int deleteAllCategories(int employeeId);
 }

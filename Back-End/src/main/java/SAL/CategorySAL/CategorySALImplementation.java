@@ -119,4 +119,13 @@ public class CategorySALImplementation implements CategorySALInterface{
         logger.info("Finishing SAL method delete category with result: " + result);
         return result;
     }
+
+    @Override
+    public int deleteAllCategories(int employeeId) {
+        logger.info("Beginning SAL method delete all categories with employee ID: " + employeeId);
+        employeeSAO.getEmployeeById(employeeId);
+        int result = categoryDAO.deleteAllCategories(employeeId);
+        logger.info("Finishing SAL method delete all categories with result: " + result);
+        return result;
+    }
 }

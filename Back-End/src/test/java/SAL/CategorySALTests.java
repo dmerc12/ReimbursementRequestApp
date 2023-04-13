@@ -213,4 +213,22 @@ public class CategorySALTests {
         int result = categorySAO.deleteCategory(currentCategoryId);
         Assert.assertTrue(result != 0);
     }
+
+    @Test
+    public void q_deleteAllCategoriesEmployeeNotFound() {
+        try {
+            categorySAO.deleteAllCategories(-50000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void r_deleteAllCategoriesSuccess() {
+        Category category = new Category(0, -2, "to be deleted");
+        Category newCategory = categoryDAO.addCategory(category);
+        int result = categorySAO.deleteAllCategories(newCategory.getEmployeeId());
+        Assert.assertTrue(result != 0);
+    }
 }

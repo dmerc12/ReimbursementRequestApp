@@ -1,4 +1,4 @@
-package Entities.Requests;
+package Entities.Requests.Employee;
 
 public class LoginRequest {
     private String email;

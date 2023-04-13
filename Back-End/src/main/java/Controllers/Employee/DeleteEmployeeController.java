@@ -1,11 +1,12 @@
 package Controllers.Employee;
 
+import DAL.CategoryDAL.CategoryDALImplementation;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
-import Entities.Data.Employee;
 import Entities.Data.Session;
-import Entities.Requests.SessionRequest;
+import Entities.Requests.Session.SessionRequest;
+import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
@@ -22,6 +23,8 @@ public class DeleteEmployeeController {
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     SessionDALImplementation sessionDAO = new SessionDALImplementation();
     SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
+    CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
+    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO, employeeSAO);
 
     public Handler deleteEmployee = ctx -> {
         try {
@@ -30,6 +33,7 @@ public class DeleteEmployeeController {
             Gson gson = new Gson();
             SessionRequest sessionId = gson.fromJson(requestBody, SessionRequest.class);
             Session currentSession = sessionSAO.getSession(sessionId.getSessionId());
+            categorySAO.deleteAllCategories(currentSession.getEmployeeId());
             int result = employeeSAO.deleteEmployee(currentSession.getEmployeeId());
             String resultJSON = gson.toJson(result);
             ctx.result(resultJSON);

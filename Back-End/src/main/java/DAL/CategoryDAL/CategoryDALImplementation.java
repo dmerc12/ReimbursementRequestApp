@@ -151,4 +151,22 @@ public class CategoryDALImplementation implements CategoryDALInterface{
             return 0;
         }
     }
+
+    @Override
+    public int deleteAllCategories(int employeeId) {
+        logger.info("Beginning DAL method delete all categories with data: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "DELETE FROM reimbursement_request_app.categories WHERE employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            int result = ps.executeUpdate();
+            logger.info("Finishing DAL method delete all categories");
+            return result;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.info("Error with DAL method delete all categories with error: " + error.getMessage());
+            return 0;
+        }
+    }
 }
