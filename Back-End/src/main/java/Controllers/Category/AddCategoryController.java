@@ -10,6 +10,8 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
+
 public class AddCategoryController {
     public static Logger logger = LogManager.getLogger(AddCategoryController.class);
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
@@ -27,7 +29,11 @@ public class AddCategoryController {
             ctx.status(HttpStatus.CREATED);
             logger.info("Finishing API handler add category with result: " + category);
         } catch (GeneralError error) {
-            ctx.result(error.getMessage());
+            Gson gson = new Gson();
+            HashMap<String, String> errorDictionary = new HashMap<>();
+            errorDictionary.put("message", error.getMessage());
+            String errorJSON = gson.toJson(errorDictionary);
+            ctx.result(errorJSON);
             ctx.status(HttpStatus.BAD_REQUEST);
             logger.error("Error with API handler add category with error: " + error.getMessage());
         }

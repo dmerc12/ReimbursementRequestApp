@@ -26,7 +26,7 @@ export default function LoginForm () {
                 const data = await response.json();
     
                 if (data.success) {
-                    document.cookie = `employeeId=${data.success.employeeId}`;
+                    document.cookie = `sessionId=${data.success.sessionId}`;
                     router.push('/');
                     toast.success("Welcome!");
                     } else if (data.error.message) {
