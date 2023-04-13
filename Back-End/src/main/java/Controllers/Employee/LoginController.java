@@ -26,7 +26,7 @@ public class LoginController {
             Employee employee = employeeSAO.login(employeeInfo.getEmail(), employeeInfo.getPassword());
             String employeeJSON = gson.toJson(employee);
             ctx.result(employeeJSON);
-            ctx.status(200);
+            ctx.status(HttpStatus.OK);
             logger.info("Finishing API handler login with result: " + employeeJSON);
         } catch (GeneralError error) {
             Gson gson = new Gson();
@@ -34,7 +34,7 @@ public class LoginController {
             errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
-            ctx.status(400);
+            ctx.status(HttpStatus.BAD_REQUEST);
             logger.error("Error with API handler login with error: " + error.getMessage());
         }
     };

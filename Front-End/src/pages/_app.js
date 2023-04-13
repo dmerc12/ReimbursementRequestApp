@@ -8,9 +8,9 @@ export default function App({ Component,
  }) {
   return (
     <>
+      <ToastContainer />
       <Navbar />
       <Component {...pageProps} />
-      <ToastContainer />
     </>
   )
 }

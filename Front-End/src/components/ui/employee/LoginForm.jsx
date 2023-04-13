@@ -28,13 +28,13 @@ export default function LoginForm () {
                 if (data.success) {
                     document.cookie = `employeeId=${data.success.employeeId}`;
                     router.push('/');
-                    toast.success("Welcome!")
+                    toast.success("Welcome!");
                     } else if (data.error.message) {
-                    throw new Error(`${data.error.message}`)
+                    throw new Error(`${data.error.message}`);
                 } else if (data.error) {
-                    throw new Error(`${data.error}`)
+                    throw new Error(`${data.error}`);
                 } else {
-                    throw new Error("Cannot connect to the back end, please try again!")
+                    throw new Error("Something went extremely wrong, please try again later!")
                 }
         } catch (error) {
             toast.error(error.message);

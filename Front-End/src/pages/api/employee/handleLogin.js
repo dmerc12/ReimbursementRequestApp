@@ -16,15 +16,14 @@ const handler = async (req, res) => {
 
     try {
         const response = await fetch(loginURL, requestOptions);
+        const data = await response.json();
 
         if (response.status === 200) {
-            const data = await response.json();
-
             return res.end(JSON.stringify({'success': data}))
         } else if (response.status === 400) {
-            const data = await response.json();
-
             return res.end(JSON.stringify({'error': data}))
+        } else {
+            return "Cannot connect to the back end, please try again!"
         }
     } catch (error) {
         return res.end(JSON.stringify({'error': error.message}));

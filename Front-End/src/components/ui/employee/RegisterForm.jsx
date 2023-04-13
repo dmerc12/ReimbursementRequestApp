@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react';
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify';
 
 export default function RegistserForm () {
     const [firstName, setFirstName] = useState('');
@@ -9,6 +11,8 @@ export default function RegistserForm () {
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
+
+    const router = useRouter();
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -28,9 +32,19 @@ export default function RegistserForm () {
                 }
             )
             const data = await response.json();
-            console.log(JSON.stringify(data))
+            
+            if (data.success) {
+                router.push('/');
+                toast.success("Employee successfully created, please log in!");
+            } else if (data.error.message) {
+                throw new Error(`${data.error.message}`);
+            } else if (data.error) {
+                throw new Error(`${data.error}`);
+            } else {
+                throw new Error("Something went extremely wrong, please try again later!")
+            }
         } catch (error) {
-            console.log(JSON.stringify(error))
+            toast.error(error.message);
         }
         
     }
@@ -43,7 +57,7 @@ export default function RegistserForm () {
                 <br/>
 
                 <label htmlFor="lastName">Last Name</label>
-                <input type="text" id='registerFastName' name='lastName' value={lastName} onChange={(event) => setLastName(event.target.value)}/>
+                <input type="text" id='registerLastName' name='lastName' value={lastName} onChange={(event) => setLastName(event.target.value)}/>
                 <br/>
                 
                 <label htmlFor="email">Email</label>
