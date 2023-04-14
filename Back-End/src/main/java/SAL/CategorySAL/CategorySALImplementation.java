@@ -53,7 +53,7 @@ public class CategorySALImplementation implements CategorySALInterface{
         logger.info("Beginning SAL method get all categories with employee ID: " + employeeId);
         employeeSAO.getEmployeeById(employeeId);
         List<Category> categoryList = categoryDAO.getAllCategories(employeeId);
-        if (categoryList.size() <= 1) {
+        if (categoryList.size() == 0) {
             logger.warn("SAL method get all categories, category list empty");
             throw new GeneralError("No categories found, please try again!");
         } else {
