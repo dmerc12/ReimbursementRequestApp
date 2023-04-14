@@ -7,4 +7,5 @@ public interface SessionSALInterface {
     Session getSession(int sessionId);
     Session updateSession(Session session);
     int deleteSession(int sessionId);
+    int deleteAllSessions(int employeeId);
 }

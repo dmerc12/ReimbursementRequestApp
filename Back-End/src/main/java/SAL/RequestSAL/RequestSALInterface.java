@@ -10,5 +10,5 @@ public interface RequestSALInterface {
     Request getRequest(int requestId);
     Request updateRequest(Request request);
     int deleteRequest(int requestId);
-
+    int deleteAllRequests(int employeeId);
 }

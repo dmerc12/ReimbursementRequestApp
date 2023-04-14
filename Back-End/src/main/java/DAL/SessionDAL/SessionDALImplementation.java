@@ -115,4 +115,9 @@ public class SessionDALImplementation implements SessionDALInterface{
             return 0;
         }
     }
+
+    @Override
+    public int deleteAllSessions(int employeeId) {
+        return 0;
+    }
 }

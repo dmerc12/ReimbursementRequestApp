@@ -217,4 +217,22 @@ public class RequestSALTests {
         int result = requestSAO.deleteRequest(currentRequestId);
         Assert.assertTrue(result != 0);
     }
+
+    @Test
+    public void fa_deleteAllRequestsEmployeeNotFound() {
+        try {
+            requestSAO.deleteAllRequests(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void fb_deleteAllRequestsSuccess() {
+        Request request = new Request(0, -2, -1, "comment", 50.00);
+        Request newRequest = requestDAO.addRequest(request);
+        int result = requestSAO.deleteAllRequests(newRequest.getEmployeeId());
+        Assert.assertTrue(result != 0);
+    }
 }

@@ -66,4 +66,9 @@ public class SessionSALImplementation implements SessionSALInterface{
         logger.info("Finishing SAL method delete session with result: " + result);
         return result;
     }
+
+    @Override
+    public int deleteAllSessions(int employeeId) {
+        return 0;
+    }
 }
