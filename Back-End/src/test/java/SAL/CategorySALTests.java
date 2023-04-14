@@ -1,9 +1,11 @@
 package SAL;
 
 import DAL.CategoryDAL.CategoryDALImplementation;
+import DAL.EmployeeDAL.EmployeeDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
 import SAL.CategorySAL.CategorySALImplementation;
+import SAL.EmployeeSAL.EmployeeSALImplementation;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -14,25 +16,17 @@ import java.util.List;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CategorySALTests {
     int currentCategoryId = 1;
+    EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
+    EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
-    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO);
-    Category successCategory = new Category(0, "success");
-    Category updateCategory = new Category(currentCategoryId, "updated");
+    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO, employeeSAO);
+    Category successCategory = new Category(0, -1, "success");
+    Category updateCategory = new Category(currentCategoryId, successCategory.getEmployeeId(), "updated");
 
     @Test
-    public void a_getAllCategoriesNoneFound() {
+    public void aa_addCategoryNameEmpty() {
         try {
-            categorySAO.getAllCategories();
-            Assert.fail();
-        } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "No categories found, please try again!");
-        }
-    }
-
-    @Test
-    public void b_addCategoryNameEmpty() {
-        try {
-            Category testCategory = new Category(0, "");
+            Category testCategory = new Category(0, -1, "");
             categorySAO.addCategory(testCategory);
             Assert.fail();
         } catch (GeneralError error) {
@@ -42,9 +36,9 @@ public class CategorySALTests {
     }
 
     @Test
-    public void c_addCategoryNameTooLong() {
+    public void ab_addCategoryNameTooLong() {
         try {
-            Category testCategory = new Category(0, "this is way too long and so it should fail " +
+            Category testCategory = new Category(0, -1, "this is way too long and so it should fail " +
                     "and bring about the desired error message");
             categorySAO.addCategory(testCategory);
             Assert.fail();
@@ -55,9 +49,9 @@ public class CategorySALTests {
     }
 
     @Test
-    public void d_addCategoryNameAlreadyTaken() {
+    public void ac_addCategoryNameAlreadyTaken() {
         try {
-            Category testCategory = new Category(0, "test");
+            Category testCategory = new Category(0, -1, "test");
             categorySAO.addCategory(testCategory);
             Assert.fail();
         } catch (GeneralError error) {
@@ -65,20 +59,51 @@ public class CategorySALTests {
         }
     }
 
-    @Test()
-    public void e_addCategorySuccess() {
+    @Test
+    public void ad_addCategoryEmployeeNotFound() {
+        try {
+            Category testCategory = new Category(0, -5000000, "this is fine");
+            categorySAO.addCategory(testCategory);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void ae_addCategorySuccess() {
         Category result = categorySAO.addCategory(successCategory);
         Assert.assertNotEquals(result.getCategoryId(), 0);
     }
 
     @Test
-    public void f_getAllCategoriesSuccess() {
-        List<Category> result = categorySAO.getAllCategories();
+    public void ba_getAllCategoriesNoneFound() {
+        try {
+            categorySAO.getAllCategories(-2);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No categories found, please try again!");
+        }
+    }
+
+    @Test
+    public void bb_getAllCategoriesNoEmployeeFound() {
+        try {
+            categorySAO.getAllCategories(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void bc_getAllCategoriesSuccess() {
+        List<Category> result = categorySAO.getAllCategories(-1);
         Assert.assertTrue(result.size() >= 1);
     }
 
     @Test
-    public void g_getCategoryNoneFound() {
+    public void ca_getCategoryNoneFound() {
         try {
             categorySAO.getCategory(-5000000);
             Assert.fail();
@@ -88,15 +113,15 @@ public class CategorySALTests {
     }
 
     @Test
-    public void h_getCategorySuccess(){
+    public void cb_getCategorySuccess(){
         Category result = categorySAO.getCategory(-1);
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void i_updateCategoryNameEmpty() {
+    public void da_updateCategoryNameEmpty() {
         try {
-            Category testCategory = new Category(currentCategoryId, "");
+            Category testCategory = new Category(currentCategoryId, -1, "");
             categorySAO.updateCategory(testCategory);
             Assert.fail();
         } catch (GeneralError error) {
@@ -107,10 +132,10 @@ public class CategorySALTests {
     }
 
     @Test
-    public void j_updateCategoryNameTooLong() {
+    public void db_updateCategoryNameTooLong() {
         try {
-            Category testCategory = new Category(currentCategoryId, "this is way too long and so it " +
-                    "should fail and bring about the desired error message");
+            Category testCategory = new Category(currentCategoryId, -1, "this is way too " +
+                    "long and so it should fail and bring about the desired error message");
             categorySAO.updateCategory(testCategory);
             Assert.fail();
         } catch (GeneralError error) {
@@ -121,9 +146,10 @@ public class CategorySALTests {
     }
 
     @Test
-    public void k_updateCategoryNameNotChanged() {
+    public void dc_updateCategoryNameNotChanged() {
         try {
-            Category testCategory = new Category(currentCategoryId, successCategory.getCategoryName());
+            Category testCategory = new Category(currentCategoryId,successCategory.getEmployeeId(),
+                    successCategory.getCategoryName());
             categorySAO.updateCategory(testCategory);
             Assert.fail();
         } catch (GeneralError error) {
@@ -133,21 +159,31 @@ public class CategorySALTests {
     }
 
     @Test
-    public void l_updateCategoryNotFound() {
+    public void dd_updateCategoryNotFound() {
         try {
-            Category testCategory = new Category(-500000000, updateCategory.getCategoryName());
+            Category testCategory = new Category(-500000000, -1, updateCategory.getCategoryName());
             categorySAO.updateCategory(testCategory);
             Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "Category not found, please try again!");
         }
-
     }
 
     @Test
-    public void m_updateCategoryNameAlreadyExists() {
+    public void de_updateCategoryEmployeeNotFound() {
         try {
-            Category testCategory = new Category(currentCategoryId, "test");
+            Category testCategory = new Category(currentCategoryId, -50000000, updateCategory.getCategoryName());
+            categorySAO.updateCategory(testCategory);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void df_updateCategoryNameAlreadyExists() {
+        try {
+            Category testCategory = new Category(currentCategoryId, -1, "test");
             categorySAO.updateCategory(testCategory);
             Assert.fail();
         } catch (GeneralError error) {
@@ -157,7 +193,7 @@ public class CategorySALTests {
     }
 
     @Test
-    public void n_updateCategorySuccess() {
+    public void dg_updateCategorySuccess() {
         Category result = categorySAO.updateCategory(updateCategory);
         Assert.assertEquals(updateCategory.getCategoryName(), result.getCategoryName());
     }
@@ -175,6 +211,24 @@ public class CategorySALTests {
     @Test
     public void p_deleteCategorySuccess() {
         int result = categorySAO.deleteCategory(currentCategoryId);
+        Assert.assertTrue(result != 0);
+    }
+
+    @Test
+    public void q_deleteAllCategoriesEmployeeNotFound() {
+        try {
+            categorySAO.deleteAllCategories(-50000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void r_deleteAllCategoriesSuccess() {
+        Category category = new Category(0, -2, "to be deleted");
+        Category newCategory = categoryDAO.addCategory(category);
+        int result = categorySAO.deleteAllCategories(newCategory.getEmployeeId());
         Assert.assertTrue(result != 0);
     }
 }

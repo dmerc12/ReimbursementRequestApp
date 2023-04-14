@@ -1,4 +1,4 @@
-package Entities.Requests;
+package Entities.Requests.Employee;
 
 public class UpdateEmployeeRequest {
     private int sessionId;

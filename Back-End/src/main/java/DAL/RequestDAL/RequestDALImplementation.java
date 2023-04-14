@@ -147,4 +147,22 @@ public class RequestDALImplementation implements RequestDALInterface{
             return 0;
         }
     }
+
+    @Override
+    public int deleteAllRequests(int employeeId) {
+        logger.info("Beginning DAL method delete all requests with employee ID: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "delete from reimbursement_request_app.requests where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            int result = ps.executeUpdate();
+            logger.info("Finishing DAL method delete all requests");
+            return result;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method delete all requests with error: " + error.getMessage());
+            return 0;
+        }
+    }
 }

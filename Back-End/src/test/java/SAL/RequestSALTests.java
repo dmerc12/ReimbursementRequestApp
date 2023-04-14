@@ -22,7 +22,7 @@ public class RequestSALTests {
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
-    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO);
+    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO, employeeSAO);
     RequestSALImplementation requestSAO = new RequestSALImplementation(requestDAO, employeeSAO, categorySAO);
     Request successRequest = new Request(0, -1, -1, "success", 25.00);
     Request updateRequest = new Request(currentRequestId, -1, -1, "updated",
@@ -215,6 +215,24 @@ public class RequestSALTests {
     @Test
     public void eb_deleteRequestSuccess() {
         int result = requestSAO.deleteRequest(currentRequestId);
+        Assert.assertTrue(result != 0);
+    }
+
+    @Test
+    public void fa_deleteAllRequestsEmployeeNotFound() {
+        try {
+            requestSAO.deleteAllRequests(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void fb_deleteAllRequestsSuccess() {
+        Request request = new Request(0, -2, -1, "comment", 50.00);
+        Request newRequest = requestDAO.addRequest(request);
+        int result = requestSAO.deleteAllRequests(newRequest.getEmployeeId());
         Assert.assertTrue(result != 0);
     }
 }

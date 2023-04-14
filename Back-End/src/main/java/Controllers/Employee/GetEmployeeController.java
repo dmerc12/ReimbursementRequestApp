@@ -23,9 +23,8 @@ public class GetEmployeeController {
     SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
     public Handler getEmployee = ctx -> {
         try {
-            String requestBody = ctx.body();
-            logger.info("Beginning API handler get employee with info: " + requestBody);
             int sessionId = Integer.parseInt(ctx.pathParam("sessionId"));
+            logger.info("Beginning API handler get employee with info: " + sessionId);
             Session currentSession = sessionSAO.getSession(sessionId);
             Employee employee = employeeSAO.getEmployeeById(currentSession.getEmployeeId());
             Gson gson = new Gson();

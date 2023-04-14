@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface CategorySALInterface {
     Category addCategory(Category category);
-    List<Category> getAllCategories();
+    List<Category> getAllCategories(int employeeId);
     Category getCategory(int categoryId);
     Category updateCategory(Category category);
     int deleteCategory(int categoryId);
+    int deleteAllCategories(int employeeId);
 }

@@ -1,11 +1,12 @@
-package Controllers.Employee;
-
+package Controllers.Category;
+import DAL.CategoryDAL.CategoryDALImplementation;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
+import Entities.Data.Category;
 import Entities.Data.Employee;
 import Entities.Data.Session;
-import Entities.Requests.Employee.LoginRequest;
+import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
@@ -14,30 +15,28 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 
-public class LoginController {
-    public static Logger logger = LogManager.getLogger(LoginController.class);
+public class GetAllCategoriesController {
+    public static Logger logger = LogManager.getLogger(GetAllCategoriesController.class);
+    CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
+    CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO, employeeSAO);
     SessionDALImplementation sessionDAO = new SessionDALImplementation();
     SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
-    public Handler login = ctx -> {
+    public Handler getAllCategories = ctx -> {
         try {
-            String requestBody = ctx.body();
-            logger.info("Beginning API handler login with info: " + requestBody);
+            int sessionId = Integer.parseInt(ctx.pathParam("sessionId"));
+            logger.info("Beginning API handler get all categories with info: " + sessionId);
+            Session currentSession = sessionSAO.getSession(sessionId);
+            List<Category> categoryList = categorySAO.getAllCategories(currentSession.getEmployeeId());
             Gson gson = new Gson();
-            LoginRequest employeeInfo = gson.fromJson(requestBody, LoginRequest.class);
-            Employee employee = employeeSAO.login(employeeInfo.getEmail(), employeeInfo.getPassword());
-            Session newSession = new Session(0, employee.getEmployeeId(), LocalDateTime.now().plusMinutes(15));
-            Session createdSession = sessionSAO.addSession(newSession);
-            HashMap<String, Integer> sessionIdDictionary = new HashMap<>();
-            sessionIdDictionary.put("sessionId", createdSession.getSessionId());
-            String sessionJSON = gson.toJson(sessionIdDictionary);
-            ctx.result(sessionJSON);
+            String categoryListJSON = gson.toJson(categoryList);
+            ctx.result(categoryListJSON);
             ctx.status(HttpStatus.OK);
-            logger.info("Finishing API handler login with result: " + sessionJSON);
+            logger.info("Finishing API handler get all categories with result: " + categoryListJSON);
         } catch (GeneralError error) {
             Gson gson = new Gson();
             HashMap<String, String> errorDictionary = new HashMap<>();
@@ -45,7 +44,7 @@ public class LoginController {
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
             ctx.status(HttpStatus.BAD_REQUEST);
-            logger.error("Error with API handler login with error: " + error.getMessage());
+            logger.error("Error with API handler get all categories with error: " + error.getMessage());
         }
     };
 }

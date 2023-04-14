@@ -39,16 +39,17 @@ public class ResetDatabase {
                     "passwrd varchar(60), phone_number varchar(13), address varchar(60));";
             String testEmployee1 = "insert into reimbursement_request_app.employees values(-1, 'test', " +
                     "'test', 'test@email.com', 'test', '111-222-3333', 'test');";
-            String testEmployee2 = "insert into reimbursement_request_app.employees values(-2, 'no', 'request', " +
-                    "'no@requests.test', 'test', '222-333-4444', 'test');";
+            String testEmployee2 = "insert into reimbursement_request_app.employees values(-2, 'no requests', 'or categories', " +
+                    "'no@requestsorcategories.test', 'test', '222-333-4444', 'test');";
             employeeDAO.accessEmployeeTable(employeeTable);
             employeeDAO.accessEmployeeTable(testEmployee1);
             employeeDAO.accessEmployeeTable(testEmployee2);
 
             // creating category table and inserting test data
             String categoryTable = "create table reimbursement_request_app.categories(category_id int auto_increment " +
-                    "primary key, category_name varchar(60))";
-            String testCategory = "insert into reimbursement_request_app.categories values(-1, 'test');";
+                    "primary key, employee_id int, category_name varchar(60), constraint employeecategoryfk foreign" +
+                    " key (employee_id) references reimbursement_request_app.employees(employee_id))";
+            String testCategory = "insert into reimbursement_request_app.categories values(-1, -1, 'test');";
             categoryDAO.accessCategoryTable(categoryTable);
             categoryDAO.accessCategoryTable(testCategory);
 

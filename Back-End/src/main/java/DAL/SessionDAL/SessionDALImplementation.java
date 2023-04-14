@@ -59,15 +59,19 @@ public class SessionDALImplementation implements SessionDALInterface{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, sessionId);
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            LocalDateTime expiration = rs.getTimestamp("expiration").toLocalDateTime();
-            Session session = new Session(
-                    rs.getInt("session_id"),
-                    rs.getInt("employee_id"),
-                    expiration
-            );
-            logger.info("Finishing DAL method get session with result: " + session);
-            return session;
+            if (rs.next()) {
+                LocalDateTime expiration = rs.getTimestamp("expiration").toLocalDateTime();
+                Session session = new Session(
+                        rs.getInt("session_id"),
+                        rs.getInt("employee_id"),
+                        expiration
+                );
+                logger.info("Finishing DAL method get session with result: " + session);
+                return session;
+            } else {
+                logger.info("Finishing DAL method get session by ID with nothing found");
+                return null;
+            }
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method get session with error: " + error.getMessage());
@@ -108,6 +112,24 @@ public class SessionDALImplementation implements SessionDALInterface{
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method delete session with error: " + error.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public int deleteAllSessions(int employeeId) {
+        logger.info("Beginning DAL method delete all sessions with employee ID: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "delete from reimbursement_request_app.sessions where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            int result = ps.executeUpdate();
+            logger.info("Finishing DAL method delete all sessions");
+            return result;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method delete all sessions with error: " + error.getMessage());
             return 0;
         }
     }

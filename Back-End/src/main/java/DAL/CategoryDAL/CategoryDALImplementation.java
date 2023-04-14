@@ -29,20 +29,23 @@ public class CategoryDALImplementation implements CategoryDALInterface{
 
     @Override
     public Category addCategory(Category category) {
-        logger.info("Beginning DAL method add category with category name: " + category.getCategoryName());
+        logger.info("Beginning DAL method add category with employee ID: " + category.getEmployeeId() +
+                ", category name: " + category.getCategoryName());
         try (Connection connection = DatabaseConnection.createConnection()) {
-            String sql = "insert into reimbursement_request_app.categories values (0, ?);";
+            String sql = "insert into reimbursement_request_app.categories values (0, ?, ?);";
             PreparedStatement ps = null;
             if (connection != null) {
                 ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, category.getCategoryName());
+                ps.setInt(1, category.getEmployeeId());
+                ps.setString(2, category.getCategoryName());
                 ps.execute();
                 ResultSet rs = ps.getGeneratedKeys();
                 rs.next();
                 category.setCategoryId(rs.getInt(1));
             }
             logger.info("Finishing DAL method add category with category ID: " + category.getCategoryId() +
-                    ", category name: " + category.getCategoryName());
+                    ", employee ID: " + category.getEmployeeId() + ", category name: " +
+                    category.getCategoryName());
             return category;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -52,22 +55,26 @@ public class CategoryDALImplementation implements CategoryDALInterface{
     }
 
     @Override
-    public List<Category> getAllCategories() {
-        logger.info("Beginning DAL method get all categories");
+    public List<Category> getAllCategories(int employeeId) {
+        logger.info("Beginning DAL method get all categories with employee ID: " + employeeId);
         try (Connection connection = DatabaseConnection.createConnection()) {
-            String sql = "select * from reimbursement_request_app.categories;";
-            assert connection != null;
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            String sql = "select * from reimbursement_request_app.categories where employee_id=?;";
             List<Category> categoryList = new ArrayList<>();
-            while (rs.next()) {
-                Category category = new Category(
-                        rs.getInt("category_id"),
-                        rs.getString("category_name")
-                );
-                categoryList.add(category);
-                logger.info("Finishing DAL method get all categories with category ID: " + category.getCategoryId() +
-                        ", category name: " + category.getCategoryName());
+            if (connection != null) {
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, employeeId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Category category = new Category(
+                            rs.getInt("category_id"),
+                            rs.getInt("employee_id"),
+                            rs.getString("category_name")
+                    );
+                    categoryList.add(category);
+                    logger.info("Finishing DAL method get all categories with category ID: " +
+                            category.getCategoryId() + ", employee ID: " + category.getEmployeeId() +
+                            ", category name: " + category.getCategoryName());
+                }
             }
             return categoryList;
         } catch (SQLException error) {
@@ -89,10 +96,11 @@ public class CategoryDALImplementation implements CategoryDALInterface{
             if (rs.next()) {
                 Category category = new Category(
                         rs.getInt("category_id"),
+                        rs.getInt("employee_id"),
                         rs.getString("category_name")
                 );
                 logger.info("Finishing DAL method get account by ID with category ID: " + category.getCategoryId() +
-                        ", category name: " + category.getCategoryName());
+                        ", employee ID: " + category.getEmployeeId() + ", category name: " + category.getCategoryName());
                 return category;
             } else {
                 logger.info("No category found with ID: " + categoryId);
@@ -108,7 +116,7 @@ public class CategoryDALImplementation implements CategoryDALInterface{
     @Override
     public Category updateCategory(Category category) {
         logger.info("Beginning DAL method update category with category ID: " + category.getCategoryId() +
-                ", category name: " + category.getCategoryName());
+                ", employee ID: " + category.getEmployeeId() + ", category name: " + category.getCategoryName());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "update reimbursement_request_app.categories set category_name=? where category_id=?;";
             assert connection != null;
@@ -117,7 +125,7 @@ public class CategoryDALImplementation implements CategoryDALInterface{
             ps.setInt(2, category.getCategoryId());
             ps.executeUpdate();
             logger.info("Finishing DAL method update category with category ID: " + category.getCategoryId() +
-                    ", category name: " + category.getCategoryName());
+                    ", employee ID: " + category.getEmployeeId() + ", category name: " + category.getCategoryName());
             return category;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -140,6 +148,24 @@ public class CategoryDALImplementation implements CategoryDALInterface{
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method delete category with error: " + error.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public int deleteAllCategories(int employeeId) {
+        logger.info("Beginning DAL method delete all categories with data: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "DELETE FROM reimbursement_request_app.categories WHERE employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            int result = ps.executeUpdate();
+            logger.info("Finishing DAL method delete all categories");
+            return result;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.info("Error with DAL method delete all categories with error: " + error.getMessage());
             return 0;
         }
     }
