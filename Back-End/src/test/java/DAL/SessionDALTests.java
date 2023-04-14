@@ -3,10 +3,13 @@ package DAL;
 import DAL.SessionDAL.SessionDALImplementation;
 import Entities.Data.Session;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.time.LocalDateTime;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SessionDALTests {
     int currentSessionId = 1;
     SessionDALImplementation sessionDAO = new SessionDALImplementation();
@@ -15,19 +18,19 @@ public class SessionDALTests {
             LocalDateTime.now().plusMinutes(30));
 
     @Test
-    public void addSessionSuccess() {
+    public void a_addSessionSuccess() {
         Session result = sessionDAO.addSession(successfulSession);
         Assert.assertNotEquals(result.getSessionId(), 0);
     }
 
     @Test
-    public void getSessionSuccess() {
+    public void b_getSessionSuccess() {
         Session result = sessionDAO.getSession(-1);
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void updateSessionSuccess() {
+    public void c_updateSessionSuccess() {
         Session result = sessionDAO.updateSession(updateSession);
         Assert.assertEquals(updateSession.getExpiration(), result.getExpiration());
         Assert.assertEquals(updateSession.getSessionId(), result.getSessionId());
@@ -35,8 +38,16 @@ public class SessionDALTests {
     }
 
     @Test
-    public void deleteSessionSuccess() {
+    public void d_deleteSessionSuccess() {
         int result = sessionDAO.deleteSession(currentSessionId);
+        Assert.assertTrue(result != 0);
+    }
+
+    @Test
+    public void e_deleteAllSessionsSuccess() {
+        Session session = new Session(0, -2, LocalDateTime.now().plusMinutes(15));
+        Session newSession = sessionDAO.addSession(session);
+        int result = sessionDAO.deleteAllSessions(newSession.getEmployeeId());
         Assert.assertTrue(result != 0);
     }
 }

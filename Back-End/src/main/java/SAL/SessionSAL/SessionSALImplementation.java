@@ -63,12 +63,16 @@ public class SessionSALImplementation implements SessionSALInterface{
         logger.info("Beginning SAL method delete session with session ID: " + sessionId);
         getSession(sessionId);
         int result = sessionDAO.deleteSession(sessionId);
-        logger.info("Finishing SAL method delete session with result: " + result);
+        logger.info("Finishing SAL method delete session");
         return result;
     }
 
     @Override
     public int deleteAllSessions(int employeeId) {
-        return 0;
+        logger.info("Beginning SAL method delete all sessions with employee ID: " + employeeId);
+        employeeSAO.getEmployeeById(employeeId);
+        int result = sessionDAO.deleteAllSessions(employeeId);
+        logger.info("Finishing SAL method delete all sessions");
+        return result;
     }
 }

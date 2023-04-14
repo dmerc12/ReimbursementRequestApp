@@ -118,6 +118,19 @@ public class SessionDALImplementation implements SessionDALInterface{
 
     @Override
     public int deleteAllSessions(int employeeId) {
-        return 0;
+        logger.info("Beginning DAL method delete all sessions with employee ID: " + employeeId);
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "delete from reimbursement_request_app.sessions where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, employeeId);
+            int result = ps.executeUpdate();
+            logger.info("Finishing DAL method delete all sessions");
+            return result;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method delete all sessions with error: " + error.getMessage());
+            return 0;
+        }
     }
 }

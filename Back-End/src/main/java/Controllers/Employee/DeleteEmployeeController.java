@@ -37,12 +37,13 @@ public class DeleteEmployeeController {
             Gson gson = new Gson();
             SessionRequest sessionId = gson.fromJson(requestBody, SessionRequest.class);
             Session currentSession = sessionSAO.getSession(sessionId.getSessionId());
+            sessionSAO.deleteAllSessions(currentSession.getEmployeeId());
             requestSAO.deleteAllRequests(currentSession.getEmployeeId());
             categorySAO.deleteAllCategories(currentSession.getEmployeeId());
             int result = employeeSAO.deleteEmployee(currentSession.getEmployeeId());
             String resultJSON = gson.toJson(result);
             ctx.result(resultJSON);
-            ctx.status(HttpStatus.OK);
+            ctx.status(200);
             logger.info("Finishing API handler delete employee with result: " + resultJSON);
         } catch (GeneralError error) {
             Gson gson = new Gson();
@@ -50,7 +51,7 @@ public class DeleteEmployeeController {
             errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
-            ctx.status(HttpStatus.BAD_REQUEST);
+            ctx.status(400);
             logger.error("Error with API handler delete employee with error: " + error.getMessage());
         }
     };

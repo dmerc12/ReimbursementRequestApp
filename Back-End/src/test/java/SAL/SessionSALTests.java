@@ -130,4 +130,21 @@ public class SessionSALTests {
         int result = sessionSAO.deleteSession(currentSessionId);
         Assert.assertTrue(result != 0);
     }
+
+    @Test
+    public void ea_deleteAllSessionsEmployeeNotFound() {
+        try {
+            sessionSAO.deleteAllSessions(-500000000);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+    @Test
+    public void eb_deleteAllSessionsSuccess() {
+        Session session = new Session(0, -2, LocalDateTime.now().plusMinutes(15));
+        Session newSession = sessionDAO.addSession(session);
+        int result = sessionSAO.deleteAllSessions(newSession.getEmployeeId());
+        Assert.assertTrue(result != 0);
+    }
 }
