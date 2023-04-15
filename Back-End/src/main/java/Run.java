@@ -1,5 +1,6 @@
 import Controllers.Category.AddCategoryController;
 import Controllers.Category.GetAllCategoriesController;
+import Controllers.Category.GetCategoryController;
 import Controllers.Employee.*;
 import io.javalin.Javalin;
 import org.apache.logging.log4j.LogManager;
@@ -27,9 +28,11 @@ public class Run {
         // Category controllers and routes:
         AddCategoryController addCategoryController = new AddCategoryController();
         GetAllCategoriesController getAllCategoriesController = new GetAllCategoriesController();
+        GetCategoryController getCategoryController = new GetCategoryController();
 
         app.post("/create/category/now", addCategoryController.addCategory);
         app.get("/get/all/categories/{sessionId}", getAllCategoriesController.getAllCategories);
+        app.get("/get/category/{categoryId}/{sessionId}", getCategoryController.getCategory);
 
         // Request Controllers and routes:
 
