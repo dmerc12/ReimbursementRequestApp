@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 
-export default function ManageRequest() {
+export default function ManageInformation() {
     const router = useRouter();
 
     useEffect(() => {
@@ -15,7 +15,7 @@ export default function ManageRequest() {
 
     return (
         <>
-            <h1>Manage Request Information Page</h1>
+            <h1>Manage Category Information Page</h1>
         </>
     )
 }

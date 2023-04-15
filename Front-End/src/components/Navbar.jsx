@@ -7,12 +7,12 @@ const Navbar = () => {
     const router = useRouter();
 
     const handleLogout = () => {
-        Cookies.remove('employeeId');
+        Cookies.remove('sessionId');
         router.push('/login');
         toast.success("Goodbye!")
     };
 
-    const isLoggedIn = Cookies.get('employeeId');
+    const isLoggedIn = Cookies.get('sessionId');
 
     return (
         <>
@@ -20,6 +20,7 @@ const Navbar = () => {
                 <div>
                     <Link href='/'>Home</Link>
                     <Link href='/manage-requests'>Manage Requests</Link>
+                    <Link href='/manage-categories'>Manage Categories</Link>
                     <Link href='manage-information'>Manage Information</Link>
                 </div>
                 <div>
