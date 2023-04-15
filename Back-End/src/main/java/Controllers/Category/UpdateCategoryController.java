@@ -6,7 +6,7 @@ import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
 import Entities.Data.Session;
-import Entities.Requests.Category.AddCategoryRequest;
+import Entities.Requests.Category.UpdateCategoryRequest;
 import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 
-public class AddCategoryController {
+public class UpdateCategoryController {
     public static Logger logger = LogManager.getLogger(AddCategoryController.class);
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
@@ -26,20 +26,20 @@ public class AddCategoryController {
     SessionDALImplementation sessionDAO = new SessionDALImplementation();
     SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
     CategorySALImplementation categorySAO = new CategorySALImplementation(categoryDAO, employeeSAO);
-    public Handler addCategory = ctx -> {
+    public Handler updateCategory = ctx -> {
         try {
             String requestBody = ctx.body();
-            logger.info("Beginning API handler add category with info: " + requestBody);
+            logger.info("Beginning API handler update category with info: " + requestBody);
             Gson gson = new Gson();
-            AddCategoryRequest requestedCategoryInformation = gson.fromJson(requestBody, AddCategoryRequest.class);
-            Session currentSession = sessionSAO.getSession(requestedCategoryInformation.getSessionId());
-            Category categoryInformation = new Category(0, currentSession.getEmployeeId(),
-                    requestedCategoryInformation.getCategoryName());
-            Category createdCategory = categorySAO.addCategory(categoryInformation);
-            String categoryJSON = gson.toJson(createdCategory);
-            ctx.result(categoryJSON);
-            ctx.status(HttpStatus.CREATED);
-            logger.info("Finishing API handler add category with result: " + categoryJSON);
+            UpdateCategoryRequest updateCategoryInformation = gson.fromJson(requestBody, UpdateCategoryRequest.class);
+            Session currentSession = sessionSAO.getSession(updateCategoryInformation.getSessionId());
+            Category categoryToBeUpdated = new Category(updateCategoryInformation.getCategoryId(),
+                    currentSession.getEmployeeId(), updateCategoryInformation.getCategoryName());
+            Category updatedCategory = categorySAO.updateCategory(categoryToBeUpdated);
+            String updatedCategoryJSON = gson.toJson(updatedCategory);
+            ctx.result(updatedCategoryJSON);
+            ctx.status(HttpStatus.OK);
+            logger.info("Finishing API handler update category with result: " + updatedCategoryJSON);
         } catch (GeneralError error) {
             Gson gson = new Gson();
             HashMap<String, String> errorDictionary = new HashMap<>();
@@ -47,7 +47,7 @@ public class AddCategoryController {
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
             ctx.status(HttpStatus.BAD_REQUEST);
-            logger.error("Error with API handler add category with error: " + error.getMessage());
+            logger.error("Error with API handler update category with error: " + error.getMessage());
         }
     };
 }
