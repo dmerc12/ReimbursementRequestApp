@@ -1,7 +1,4 @@
-import Controllers.Category.AddCategoryController;
-import Controllers.Category.GetAllCategoriesController;
-import Controllers.Category.GetCategoryController;
-import Controllers.Category.UpdateCategoryController;
+import Controllers.Category.*;
 import Controllers.Employee.*;
 import io.javalin.Javalin;
 import org.apache.logging.log4j.LogManager;
@@ -31,11 +28,13 @@ public class Run {
         GetAllCategoriesController getAllCategoriesController = new GetAllCategoriesController();
         GetCategoryController getCategoryController = new GetCategoryController();
         UpdateCategoryController updateCategoryController = new UpdateCategoryController();
+        DeleteCategoryController deleteCategoryController = new DeleteCategoryController();
 
         app.post("/create/category/now", addCategoryController.addCategory);
         app.get("/get/all/categories/{sessionId}", getAllCategoriesController.getAllCategories);
         app.get("/get/category/{categoryId}/{sessionId}", getCategoryController.getCategory);
         app.put("/update/category/now", updateCategoryController.updateCategory);
+        app.delete("/delete/category/{categoryId}/{sessionId}", deleteCategoryController.deleteCategory);
 
         // Request Controllers and routes:
 

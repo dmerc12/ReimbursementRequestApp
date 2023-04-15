@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/UpdateCategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Entities/Requests/Category/UpdateCategoryRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/DeleteCategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Category/AddCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/AddCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/DeleteEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/DeleteEmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +57,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="Application.ResetDatabase">
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
