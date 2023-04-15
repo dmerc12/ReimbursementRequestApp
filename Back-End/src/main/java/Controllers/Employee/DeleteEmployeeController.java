@@ -44,7 +44,7 @@ public class DeleteEmployeeController {
             String resultJSON = gson.toJson(result);
             ctx.result(resultJSON);
             ctx.status(200);
-            logger.info("Finishing API handler delete employee with result: " + resultJSON);
+            logger.info("Finishing API handler delete employee");
         } catch (GeneralError error) {
             Gson gson = new Gson();
             HashMap<String, String> errorDictionary = new HashMap<>();
