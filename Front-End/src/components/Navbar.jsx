@@ -16,22 +16,22 @@ const Navbar = () => {
 
     return (
         <>
-            <nav>
-                <div>
-                    <Link href='/'>Home</Link>
-                    <Link href='/manage-requests'>Manage Requests</Link>
-                    <Link href='/manage-categories'>Manage Categories</Link>
-                    <Link href='manage-information'>Manage Information</Link>
+            <nav className='nav-bar'>
+                <div className='nav-left'>
+                    <Link className="nav-item" href='/'>Home</Link>
+                    <Link className="nav-item" href='/manage-requests'>Manage Requests</Link>
+                    <Link className="nav-item" href='/manage-categories'>Manage Categories</Link>
+                    <Link className="nav-item" href='manage-information'>Manage Information</Link>
                 </div>
-                <div>
+                <div className="nav-right">
                     {isLoggedIn ? (
                         <>
-                            <button onClick={handleLogout}>Logout</button>
+                            <button className="nav-item" onClick={handleLogout}>Logout</button>
                         </>
                     ) : (
                         <>
-                            <Link href='/login'>Login</Link>
-                            <Link href='/register'>Register</Link>
+                            <Link className="nav-item" href='/login'>Login</Link>
+                            <Link className="nav-item" href='/register'>Register</Link>
                         </>
                     )}
                 </div>

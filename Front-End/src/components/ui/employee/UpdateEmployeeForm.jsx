@@ -43,7 +43,7 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
                 throw new Error("Something went extremely wrong, please try again!")
             }
         } catch (error) {
-            toast.error(error.message);
+            toast.warn(error.message);
         }
     }
 
