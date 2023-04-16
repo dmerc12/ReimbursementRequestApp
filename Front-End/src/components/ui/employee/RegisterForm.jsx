@@ -44,7 +44,7 @@ export default function RegistserForm () {
                 throw new Error("Something went extremely wrong, please try again later!")
             }
         } catch (error) {
-            toast.error(error.message);
+            toast.warn(error.message);
         }
         
     }
