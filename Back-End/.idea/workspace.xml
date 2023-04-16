@@ -54,7 +54,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="Application.ResetDatabase">
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
