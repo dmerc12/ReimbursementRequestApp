@@ -11,6 +11,7 @@
     color: white;
     text-decoration: none;
     padding: 4px 12px;
+    border: 0;
     border-radius: 4px;
     background-color: black;
     transition: all 0.2s ease-in-out;
@@ -82,7 +83,7 @@ h1 {
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.25);
 }
 
-.form-btn {
+.login-form-btn {
     padding: 10px;
     border: none;
     background-color: black;
@@ -92,11 +93,29 @@ h1 {
     height: 3em;
     margin-top: 10px;
     font-size: 15px;
-    
+    font-weight: 575;
 }
 
-.form-btn:hover {
+.login-form-btn:hover {
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.25);
     transform: scale(1.05);
 
+}
+
+.update-info-form-button {
+    padding: 10px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    width: 15em;
+    height: 4em;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 575;
+}
+
+.update-info-form-button:hover {
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
 }
