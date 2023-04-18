@@ -52,27 +52,27 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
             <form className='form' onSubmit={onSubmit}>
                 <div className='form-field'>
                     <label className='form-label' htmlFor="firstName">First Name: </label>
-                    <input className='form-input' type="text" id='updateFirstName' name='firstName' value={firstName} onChange={event => setFirstName(event.target.value)} required/>
+                    <input className='form-input' type="text" id='updateFirstName' name='firstName' value={firstName} onChange={event => setFirstName(event.target.value)}/>
                 </div>
 
                 <div className='form-field'>
                     <label className='form-label' htmlFor="lastName">Last Name: </label>
-                    <input className='form-input' type="text" id='updateLastName' name='lastName' value={lastName} onChange={event => setLastName(event.target.value)} required/>
+                    <input className='form-input' type="text" id='updateLastName' name='lastName' value={lastName} onChange={event => setLastName(event.target.value)}/>
                 </div>
 
                 <div className='form-field'>
                     <label className='form-label' htmlFor="email">Email: </label>
-                    <input className='form-input' type="text" id='updateEmail' name='email' value={email} onChange={event => setEmail(event.target.value)} required/>
+                    <input className='form-input' type="text" id='updateEmail' name='email' value={email} onChange={event => setEmail(event.target.value)}/>
                 </div>
 
                 <div className='form-field'>
                     <label className='form-label' htmlFor="phoneNumber">Phone Number: </label>
-                    <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={event => setPhoneNumber(event.target.value)} required/>
+                    <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={event => setPhoneNumber(event.target.value)}/>
                 </div>
 
                 <div className='form-field'>
                     <label className='form-label' htmlFor="address">Address: </label>
-                    <input className='form-input' type="text" id='updateAddress' name='address' value={address} onChange={event => setAddress(event.target.value)} required/>
+                    <input className='form-input' type="text" id='updateAddress' name='address' value={address} onChange={event => setAddress(event.target.value)}/>
                 </div>
 
                 <button className='update-info-form-button' type='submit'>Update Current Information</button>

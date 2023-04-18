@@ -24,9 +24,9 @@ const handler = async (req, res) => {
         if (response.status === 201) {
             return res.end(JSON.stringify({'success': data}));
         } else if (response.status === 400) {
-            return res.end(JSON.stringify({'error':data}))
+            return res.end(JSON.stringify({'error':data}));
         } else {
-            return "Cannot connect to the back end, please try again!"
+            return res.end(JSON.stringify({'error': "Cannot connect to the back end, please try again!"}));
         }
     } catch (error) {
         return res.end(JSON.stringify({'error': error.message}));

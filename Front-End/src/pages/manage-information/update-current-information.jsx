@@ -7,6 +7,7 @@ import UpdateEmployeeForm from '@/components/ui/employee/UpdateEmployeeForm';
 
 export default function UpdateCurrentEmployeeInformation() {
   const [employee, setEmployee] = useState(null);
+  const [sessionId, setSessionId] = useState(0);
   
   const router = useRouter();
 
@@ -31,6 +32,7 @@ export default function UpdateCurrentEmployeeInformation() {
         console.log(data); 
         if (data.success) {
           setEmployee(data.success)
+          setSessionId(sessionId)
         } else if (data.error.message) {
           throw new Error(`${data.error.message}`)
         } else if (data.error) {
@@ -49,7 +51,7 @@ export default function UpdateCurrentEmployeeInformation() {
     return (
       <>
         <h1>Update Current Employee Information Page</h1>
-        {employee && <UpdateEmployeeForm employee={employee}/>}
+        {employee && <UpdateEmployeeForm employee={employee} sessionId={sessionId}/>}
       </>
     )
 }
