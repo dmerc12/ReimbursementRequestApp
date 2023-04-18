@@ -1,9 +1,12 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 import UpdateEmployeeForm from '@/components/ui/employee/UpdateEmployeeForm';
 
-export default function UpdateCurrentEmployeeInformation({ employee }) {
+export default function UpdateCurrentEmployeeInformation() {
+  const [employee, setEmployee] = useState(null);
   
     const router = useRouter();
 
@@ -15,6 +18,27 @@ export default function UpdateCurrentEmployeeInformation({ employee }) {
             toastId: "customId"
           })
         }
+
+        const fetchEmployee = async () => {
+          try {
+            const response = await fetch(`/api/employees/handleGetCurrentInfo?sessionId=${sessionId}`);
+            const data = await response.json();
+            console.log(data); 
+            if (data.success) {
+              setEmployee(data)
+            } else if (data.error.message) {
+              throw new Error(`${data.error.message}`)
+            } else if (data.error) {
+              throw new Error(`${data.error}`)
+            } else {
+              throw new Error("Something went extremely wrong, please try again!")
+            }
+          } catch (error) {
+            console.error(error);
+            toast.error(error.message); 
+          }
+        }
+        fetchEmployee();
       }, [router]);
 
     return (
@@ -23,23 +47,4 @@ export default function UpdateCurrentEmployeeInformation({ employee }) {
             {employee && <UpdateEmployeeForm employee={employee}/>}
         </>
     )
-}
-
-export async function getServerSideProps(context) {
-  const sessionId = context.req.cookies.sessionId;
-  try {
-    const response = await fetch(`http://localhost:8080/get/employee/${sessionId}`)
-    const data = await response.json()
-    if (response.status === 200) {
-      return {props: { employee: data}};
-    } else if (response.status === 400) {
-      return {props: { error: data}};
-    } else {
-      toast.error("Cannot connect to the back end, please try again!")
-      return {props: { error: "Cannot connect to the back end, please try again!"}};
-    }
-  } catch (error) {
-    toast.error(error.message)
-    return { props: {'error': error.message}}
-  }
 }
