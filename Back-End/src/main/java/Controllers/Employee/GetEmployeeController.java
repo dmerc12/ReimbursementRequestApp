@@ -5,6 +5,7 @@ import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
 import Entities.Data.Session;
+import Entities.Requests.Session.SessionRequest;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
@@ -23,11 +24,12 @@ public class GetEmployeeController {
     SessionSALImplementation sessionSAO = new SessionSALImplementation(sessionDAO, employeeSAO);
     public Handler getEmployee = ctx -> {
         try {
-            int sessionId = Integer.parseInt(ctx.pathParam("sessionId"));
-            logger.info("Beginning API handler get employee with info: " + sessionId);
-            Session currentSession = sessionSAO.getSession(sessionId);
-            Employee employee = employeeSAO.getEmployeeById(currentSession.getEmployeeId());
+            String requestBody = ctx.body();
+            logger.info("Beginning API handler get employee with info: " + requestBody);
             Gson gson = new Gson();
+            SessionRequest session = gson.fromJson(requestBody, SessionRequest.class);
+            Session currentSession = sessionSAO.getSession(session.getSessionId());
+            Employee employee = employeeSAO.getEmployeeById(currentSession.getEmployeeId());
             String employeeJson = gson.toJson(employee);
             ctx.result(employeeJson);
             ctx.status(HttpStatus.OK);
