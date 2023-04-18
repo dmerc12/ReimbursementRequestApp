@@ -1,9 +1,12 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 import UpdateEmployeeForm from '@/components/ui/employee/UpdateEmployeeForm';
 
-export default function UpdateCurrentEmployeeInformation({ employee }) {
+export default function UpdateCurrentEmployeeInformation() {
+  const [employee, setEmployee] = useState(null);
   
     const router = useRouter();
 
@@ -15,24 +18,33 @@ export default function UpdateCurrentEmployeeInformation({ employee }) {
             toastId: "customId"
           })
         }
+
+        const fetchEmployee = async () => {
+          try {
+            const response = await fetch(`/api/employees/handleGetCurrentInfo?sessionId=${sessionId}`);
+            const data = await response.json();
+            console.log(data); 
+            if (data.success) {
+              setEmployee(data)
+            } else if (data.error.message) {
+              throw new Error(`${data.error.message}`)
+            } else if (data.error) {
+              throw new Error(`${data.error}`)
+            } else {
+              throw new Error("Something went extremely wrong, please try again!")
+            }
+          } catch (error) {
+            console.error(error);
+            toast.error(error.message); 
+          }
+        }
+        fetchEmployee();
       }, [router]);
 
     return (
         <>
             <h1>Update Current Employee Information Page</h1>
-            {/* {employee && <UpdateEmployeeForm />} */}
+            {employee && <UpdateEmployeeForm employee={employee}/>}
         </>
     )
 }
-
-// export async function getServerSideProps() {
-//   const response = await fetch('api/employee/handleGet')
-
-//   const data = await response.json()
-
-//   return {
-//     props: {
-//       employee: firstName, lastName, email, phoneNumber, address
-//     }
-//   }
-// }

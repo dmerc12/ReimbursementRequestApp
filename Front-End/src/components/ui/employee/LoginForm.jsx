@@ -43,16 +43,18 @@ export default function LoginForm () {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="loginEmail" name="email" value={email} onChange={(event) => setEmail(event.target.value)}/>
-                <br/>
+            <form className='form' onSubmit={onSubmit}>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="email">Email:</label>
+                    <input className='form-input' type="email" id="loginEmail" name="email" value={email} onChange={(event) => setEmail(event.target.value)}/>
+                </div>
 
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="loginPassword" name="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
-                <br/>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="password">Password:</label>
+                    <input className='form-input' type="password" id="loginPassword" name="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
+                </div>
 
-                <button type="submit">Login</button>
+                <button className='form-btn' type="submit">Login</button>
             </form>
         </>
     )
