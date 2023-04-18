@@ -20,19 +20,26 @@ export default function UpdateCurrentEmployeeInformation({ employee }) {
     return (
         <>
             <h1>Update Current Employee Information Page</h1>
-            {/* {employee && <UpdateEmployeeForm />} */}
+            {employee && <UpdateEmployeeForm employee={employee}/>}
         </>
     )
 }
 
-// export async function getServerSideProps() {
-//   const response = await fetch('api/employee/handleGet')
-
-//   const data = await response.json()
-
-//   return {
-//     props: {
-//       employee: firstName, lastName, email, phoneNumber, address
-//     }
-//   }
-// }
+export async function getServerSideProps(context) {
+  const sessionId = context.req.cookies.sessionId;
+  try {
+    const response = await fetch(`http://localhost:8080/get/employee/${sessionId}`)
+    const data = await response.json()
+    if (response.status === 200) {
+      return {props: { employee: data}};
+    } else if (response.status === 400) {
+      return {props: { error: data}};
+    } else {
+      toast.error("Cannot connect to the back end, please try again!")
+      return {props: { error: "Cannot connect to the back end, please try again!"}};
+    }
+  } catch (error) {
+    toast.error(error.message)
+    return { props: {'error': error.message}}
+  }
+}
