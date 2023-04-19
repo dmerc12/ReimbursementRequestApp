@@ -16,6 +16,7 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class UpdateCategoryController {
@@ -36,6 +37,9 @@ public class UpdateCategoryController {
             Category categoryToBeUpdated = new Category(updateCategoryInformation.getCategoryId(),
                     currentSession.getEmployeeId(), updateCategoryInformation.getCategoryName());
             Category updatedCategory = categorySAO.updateCategory(categoryToBeUpdated);
+            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
+                    LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(updatedSessionInfo);
             String updatedCategoryJSON = gson.toJson(updatedCategory);
             ctx.result(updatedCategoryJSON);
             ctx.status(HttpStatus.OK);

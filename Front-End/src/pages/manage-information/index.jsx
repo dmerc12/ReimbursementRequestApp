@@ -18,7 +18,11 @@ export default function ManageInformation() {
 
     return (
         <>
-          <Link href='/manage-information/update-current-information'>Update Current Information</Link>
+          <h1>Manage Your Current Information</h1>
+          <div className='nav-btn-container'>
+            <Link className='nav-btn' href='/manage-information/update'>Update Current Information</Link>
+            <Link className='nav-btn' href='/manage-information/delete'>Delete Your Information</Link>
+          </div>
         </>
     )
 }

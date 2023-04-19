@@ -18,8 +18,10 @@ export default function Home() {
 
   return (
     <>
-      <Link href='/manage-requests'>Manage Request Information</Link>
-      <Link href='/manage-information'>Manage Employee Information</Link>
+      <div className='nav-btn-container'>
+        <Link className='nav-btn' href='/manage-requests'>Manage Request Information</Link>
+        <Link className='nav-btn' href='/manage-information'>Manage Employee Information</Link>
+      </div>
     </>
   )
 }

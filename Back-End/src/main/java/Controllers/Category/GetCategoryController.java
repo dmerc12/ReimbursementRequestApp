@@ -5,6 +5,7 @@ import DAL.EmployeeDAL.EmployeeDALImplementation;
 import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
+import Entities.Data.Session;
 import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
@@ -14,6 +15,7 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class GetCategoryController {
@@ -29,8 +31,11 @@ public class GetCategoryController {
             int categoryId = Integer.parseInt(ctx.pathParam("categoryId"));
             int sessionId = Integer.parseInt(ctx.pathParam("sessionId"));
             logger.info("Beginning API handler get category with info: " + categoryId + ", " + sessionId);
-            sessionSAO.getSession(sessionId);
+            Session currentSession = sessionSAO.getSession(sessionId);
             Category category = categorySAO.getCategory(categoryId);
+            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
+                    LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(updatedSessionInfo);
             Gson gson = new Gson();
             String categoryJSON = gson.toJson(category);
             ctx.result(categoryJSON);

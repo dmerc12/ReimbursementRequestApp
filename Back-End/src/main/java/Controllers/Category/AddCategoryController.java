@@ -16,6 +16,7 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class AddCategoryController {
@@ -36,6 +37,9 @@ public class AddCategoryController {
             Category categoryInformation = new Category(0, currentSession.getEmployeeId(),
                     requestedCategoryInformation.getCategoryName());
             Category createdCategory = categorySAO.addCategory(categoryInformation);
+            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
+                    LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(updatedSessionInfo);
             String categoryJSON = gson.toJson(createdCategory);
             ctx.result(categoryJSON);
             ctx.status(HttpStatus.CREATED);

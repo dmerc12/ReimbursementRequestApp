@@ -1,14 +1,13 @@
 const handler = async (req, res) => {
-    const method = 'GET';
-
-    const sessionId = req.query.sessionId;
+    const method = 'PATCH';
 
     const requestOptions = {
         method: method,
-        headers: {'Content-Type': 'application/json'}
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({'sessionId': req.body.sessionId})
     };
 
-    const URL = `http://localhost:8080/get/employee/${sessionId}`;
+    const URL = 'http://localhost:8080/get/employee';
 
     try {
         const response = await fetch(URL, requestOptions);

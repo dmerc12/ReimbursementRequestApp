@@ -4,6 +4,7 @@ import DAL.CategoryDAL.CategoryDALImplementation;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
+import Entities.Data.Session;
 import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
@@ -13,6 +14,7 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class DeleteCategoryController {
@@ -29,8 +31,11 @@ public class DeleteCategoryController {
             int sessionId = Integer.parseInt(ctx.pathParam("sessionId"));
             logger.info("Beginning API handler delete category with info: " + categoryId + ", " + sessionId);
             Gson gson = new Gson();
-            sessionSAO.getSession(sessionId);
+            Session currentSession = sessionSAO.getSession(sessionId);
             int result = categorySAO.deleteCategory(categoryId);
+            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
+                    LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(updatedSessionInfo);
             String resultJSON = gson.toJson(result);
             ctx.result(resultJSON);
             ctx.status(HttpStatus.OK);
