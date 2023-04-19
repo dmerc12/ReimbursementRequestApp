@@ -35,7 +35,9 @@ export default function RegistserForm () {
             
             if (data.success) {
                 router.push('/');
-                toast.success("Employee successfully created, please log in!");
+                toast.success("Employee successfully created, please log in!", {
+                    toastId: "customId"
+                  });
             } else if (data.error.message) {
                 throw new Error(`${data.error.message}`);
             } else if (data.error) {
@@ -44,39 +46,53 @@ export default function RegistserForm () {
                 throw new Error("Something went extremely wrong, please try again later!")
             }
         } catch (error) {
-            toast.warn(error.message);
+            toast.warn(error.message, {
+                toastId: "customId"
+              });
         }
         
     }
 
     return (
         <>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="firstName">First Name</label>
-                <input type="text" id='registerFirstName' name='firstName' value={firstName} onChange={(event) => setFirstName(event.target.value)}/>
-                <br/>
+            <form className='form' onSubmit={onSubmit}>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="firstName">First Name</label>
+                    <input className='form-input' type="text" id='registerFirstName' name='firstName' value={firstName} onChange={(event) => setFirstName(event.target.value)}/>
+                    <br/>
+                </div>
 
-                <label htmlFor="lastName">Last Name</label>
-                <input type="text" id='registerLastName' name='lastName' value={lastName} onChange={(event) => setLastName(event.target.value)}/>
-                <br/>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="lastName">Last Name</label>
+                    <input className='form-input' type="text" id='registerLastName' name='lastName' value={lastName} onChange={(event) => setLastName(event.target.value)}/>
+                    <br/>
+                </div>
                 
-                <label htmlFor="email">Email</label>
-                <input type="email" id='registerEmail' name='email' value={email} onChange={(event) => setEmail(event.target.value)}/>
-                <br/>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="email">Email</label>
+                    <input className='form-input' type="email" id='registerEmail' name='email' value={email} onChange={(event) => setEmail(event.target.value)}/>
+                    <br/>
+                </div>
                 
-                <label htmlFor="password">Password</label>
-                <input type="password" id='registerPassword' name='password' value={password} onChange={(event) => setPassword(event.target.value)}/>
-                <br/>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="password">Password</label>
+                    <input className='form-input' type="password" id='registerPassword' name='password' value={password} onChange={(event) => setPassword(event.target.value)}/>
+                    <br/>
+                </div>
                 
-                <label htmlFor="phoneNumber">Phone Number</label>
-                <input type="text" id='registerPhoneNumber' name='phoneNumber' value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)}/>
-                <br/>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="phoneNumber">Phone Number</label>
+                    <input className='form-input' type="text" id='registerPhoneNumber' name='phoneNumber' value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)}/>
+                    <br/>
+                </div>
                 
-                <label htmlFor="address">Address</label>
-                <input type="text" id='registerAddress' name='address' value={address} onChange={(event) => setAddress(event.target.value)}/>
-                <br/>
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="address">Address</label>
+                    <input className='form-input' type="text" id='registerAddress' name='address' value={address} onChange={(event) => setAddress(event.target.value)}/>
+                    <br/>
+                </div>
                 
-                <button type="submit">Register</button>
+                <button className='form-btn-1' type="submit">Register</button>
             </form>
         </>
     )

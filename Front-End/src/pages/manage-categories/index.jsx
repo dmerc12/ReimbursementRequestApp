@@ -10,15 +10,11 @@ export default function ManageInformation() {
     const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId='));
     if (!sessionId) {
       router.push('/login');
+      toast.info("Please login or register to gain access!", {
+        toastId: "customId"
+      });
     }
   }, [router]);
-
-  const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId='));
-  if (!sessionId) {
-    toast.info("Please login or register to gain access!", {
-      toastId: "customId"
-    });
-  }
 
   return (
     <>

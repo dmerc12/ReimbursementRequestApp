@@ -83,7 +83,7 @@ h1 {
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.25);
 }
 
-.login-form-btn {
+.form-btn-1 {
     padding: 10px;
     border: none;
     background-color: black;
@@ -96,13 +96,13 @@ h1 {
     font-weight: 575;
 }
 
-.login-form-btn:hover {
+.form-btn-1:hover {
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.25);
     transform: scale(1.05);
 
 }
 
-.update-info-form-button {
+.form-btn-2 {
     padding: 10px;
     border: none;
     background-color: black;
@@ -115,7 +115,7 @@ h1 {
     font-weight: 575;
 }
 
-.update-info-form-button:hover {
+.form-btn-2:hover {
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.25);
     transform: scale(1.05);
 }

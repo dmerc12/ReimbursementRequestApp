@@ -54,7 +54,7 @@ export default function LoginForm () {
                     <input className='form-input' type="password" id="loginPassword" name="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                 </div>
 
-                <button className='login-form-btn' type="submit">Login</button>
+                <button className='form-btn-1' type="submit">Login</button>
             </form>
         </>
     )

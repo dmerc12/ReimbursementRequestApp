@@ -30,7 +30,7 @@ public class LoginController {
             Gson gson = new Gson();
             LoginRequest employeeInfo = gson.fromJson(requestBody, LoginRequest.class);
             Employee employee = employeeSAO.login(employeeInfo.getEmail(), employeeInfo.getPassword());
-            Session newSession = new Session(0, employee.getEmployeeId(), LocalDateTime.now().plusMinutes(15));
+            Session newSession = new Session(0, employee.getEmployeeId(), LocalDateTime.now().plusMinutes(1));
             Session createdSession = sessionSAO.addSession(newSession);
             HashMap<String, Integer> sessionIdDictionary = new HashMap<>();
             sessionIdDictionary.put("sessionId", createdSession.getSessionId());

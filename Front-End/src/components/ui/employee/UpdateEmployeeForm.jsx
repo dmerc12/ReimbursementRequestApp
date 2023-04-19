@@ -34,7 +34,9 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
 
             if (data.success) {
                 router.push('/manage-information');
-                toast.success("Information Successfully Updated!");
+                toast.success("Information Successfully Updated!", {
+                    toastId: "customId"
+                  });
             } else if (data.error.message) {
                 throw new Error(`${data.error.message}`);
             } else if (data.error) {
@@ -43,7 +45,15 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
                 throw new Error("Something went extremely wrong, please try again!")
             }
         } catch (error) {
-            toast.warn(error.message);
+            if (error.message === "Session has expired, please log in!") {
+                Cookies.remove('sessionId');
+                router.push('/login');
+                ToastContainer.warn(error.message);
+            } else {
+                toast.error(error.message, {
+                    toastId: "customId"
+                  }); 
+            }
         }
     }
 
@@ -75,7 +85,7 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
                     <input className='form-input' type="text" id='updateAddress' name='address' value={address} onChange={event => setAddress(event.target.value)}/>
                 </div>
 
-                <button className='update-info-form-button' type='submit'>Update Current Information</button>
+                <button className='form-btn-2' type='submit'>Update Current Information</button>
             </form>
         </>
     )

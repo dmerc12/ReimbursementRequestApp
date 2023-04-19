@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie'
 import UpdateEmployeeForm from '@/components/ui/employee/UpdateEmployeeForm';
 
 export default function UpdateCurrentEmployeeInformation() {
@@ -29,7 +30,6 @@ export default function UpdateCurrentEmployeeInformation() {
         });
 
         const data = await response.json();
-        console.log(data); 
         if (data.success) {
           setEmployee(data.success)
           setSessionId(sessionId)
@@ -41,8 +41,17 @@ export default function UpdateCurrentEmployeeInformation() {
           throw new Error("Something went extremely wrong, please try again!")
         }
       } catch (error) {
-        console.error(error);
-        toast.error(error.message); 
+        if (error.message === "Session has expired, please log in!") {
+          Cookies.remove('sessionId');
+          router.push('/login');
+          toast.warn(error.message, {
+            toastId: "customId"
+          });
+        } else {
+          toast.error(error.message, {
+            toastId: "customId"
+          }); 
+        }
       }
     }
     fetchEmployee();
