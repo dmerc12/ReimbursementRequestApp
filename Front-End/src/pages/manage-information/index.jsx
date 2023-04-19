@@ -18,7 +18,9 @@ export default function ManageInformation() {
 
     return (
         <>
-          <Link href='/manage-information/update-current-information'>Update Current Information</Link>
+          <div className='nav-btn-container'>
+            <Link className='nav-btn' href='/manage-information/update-current-information'>Update Current Information</Link>
+          </div>
         </>
     )
 }
