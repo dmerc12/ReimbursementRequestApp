@@ -15,6 +15,7 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +33,9 @@ public class GetAllCategoriesController {
             logger.info("Beginning API handler get all categories with info: " + sessionId);
             Session currentSession = sessionSAO.getSession(sessionId);
             List<Category> categoryList = categorySAO.getAllCategories(currentSession.getEmployeeId());
+            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
+                    LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(updatedSessionInfo);
             Gson gson = new Gson();
             String categoryListJSON = gson.toJson(categoryList);
             ctx.result(categoryListJSON);

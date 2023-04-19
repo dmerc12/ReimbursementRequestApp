@@ -14,6 +14,7 @@ import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class GetEmployeeController {
@@ -30,6 +31,9 @@ public class GetEmployeeController {
             SessionRequest session = gson.fromJson(requestBody, SessionRequest.class);
             Session currentSession = sessionSAO.getSession(session.getSessionId());
             Employee employee = employeeSAO.getEmployeeById(currentSession.getEmployeeId());
+            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
+                    LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(updatedSessionInfo);
             String employeeJson = gson.toJson(employee);
             ctx.result(employeeJson);
             ctx.status(HttpStatus.OK);

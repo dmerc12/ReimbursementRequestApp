@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Category/AddCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/AddCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Category/DeleteCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/DeleteCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Category/GetAllCategoriesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/GetAllCategoriesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Category/GetCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/GetCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Category/UpdateCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Category/UpdateCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/DeleteEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/DeleteEmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/GetEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/GetEmployeeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/src/pages/manage-information/update-current-information.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/src/pages/manage-information/update-current-information.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/Employee/UpdateEmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/Employee/UpdateEmployeeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +62,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="Application.ResetDatabase">
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />

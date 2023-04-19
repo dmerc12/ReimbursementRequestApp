@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class UpdateEmployeeController {
@@ -36,6 +37,9 @@ public class UpdateEmployeeController {
                     updatedEmployeeInfoRequest.getEmail(), employee.getPassword(),
                     updatedEmployeeInfoRequest.getPhoneNumber(), updatedEmployeeInfoRequest.getAddress());
             Employee updatedEmployee = employeeSAO.updateEmployee(updateEmployeeInfo);
+            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
+                    LocalDateTime.now().plusMinutes(15));
+            sessionSAO.updateSession(updatedSessionInfo);
             String updatedEmployeeJSON = gson.toJson(updatedEmployee);
             ctx.result(updatedEmployeeJSON);
             ctx.status(HttpStatus.OK);
