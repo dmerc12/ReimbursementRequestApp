@@ -29,7 +29,8 @@ body {
 }
 
 .nav-item:hover {
-    background-color: #2e2e2e;
+    background-color: black;
+    box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.25);
     font-size: 18px;
     transform: scale(1.05);
 }
@@ -70,8 +71,9 @@ body {
 }
 
 .nav-btn:hover {
-    background-color: #2e2e2e;
-    font-size: 15px;
+    background-color: black;
+    box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.25);
+    font-size:18px;
     transform: scale(1.05);
 }
 
@@ -79,6 +81,13 @@ h1 {
     display: flex;
     justify-content: center;
     color: white
+}
+
+p {
+    display: flex;
+    color: white;
+    justify-content: center;
+    font-weight: 575;
 }
 
 .form {
@@ -124,7 +133,7 @@ h1 {
 .form-btn-1 {
     padding: 10px;
     border: none;
-    background-color: rgb(32, 32, 32);
+    background-color: black;
     color: white;
     border-radius: 5px;
     width: 6em;
@@ -143,7 +152,7 @@ h1 {
 .form-btn-2 {
     padding: 10px;
     border: none;
-    background-color: rgb(32, 32, 32);
+    background-color: black;
     color: white;
     border-radius: 5px;
     width: 15em;

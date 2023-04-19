@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie'
-import UpdateEmployeeForm from '@/components/ui/employee/UpdateEmployeeForm';
+import UpdateEmployeeForm from '@/components/ui/employee/UpdateForm';
 
 export default function UpdateCurrentEmployeeInformation() {
   const [employee, setEmployee] = useState(null);
