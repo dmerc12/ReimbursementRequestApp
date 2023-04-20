@@ -13,7 +13,6 @@ import SAL.RequestSAL.RequestSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

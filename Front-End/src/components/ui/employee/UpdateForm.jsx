@@ -48,7 +48,9 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
             if (error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 router.push('/login');
-                ToastContainer.warn(error.message);
+                toast.warn(error.message, {
+                    toastId: 'customId'
+                });
             } else {
                 toast.error(error.message, {
                     toastId: "customId"

@@ -59,7 +59,7 @@ export default function UpdateCurrentEmployeeInformation() {
 
     return (
       <>
-        <h1>Update Current Employee Information Page</h1>
+        <h1>Update Your Current Information Below</h1>
         {employee && <UpdateEmployeeForm employee={employee} sessionId={sessionId}/>}
       </>
     )
