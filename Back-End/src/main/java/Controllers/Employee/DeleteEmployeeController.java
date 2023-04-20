@@ -41,9 +41,6 @@ public class DeleteEmployeeController {
             requestSAO.deleteAllRequests(currentSession.getEmployeeId());
             categorySAO.deleteAllCategories(currentSession.getEmployeeId());
             int result = employeeSAO.deleteEmployee(currentSession.getEmployeeId());
-            Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
-                    LocalDateTime.now().plusMinutes(15));
-            sessionSAO.updateSession(updatedSessionInfo);
             String resultJSON = gson.toJson(result);
             ctx.result(resultJSON);
             ctx.status(200);

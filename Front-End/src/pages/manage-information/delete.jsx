@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -9,17 +11,14 @@ export default function DeleteEmployeeInformation() {
     const router = useRouter();
 
     useEffect(() => {
-        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId='));
-        if (sessionId) {
-            const sessionIdValue = sessionId.split('=')[1];
-            setSessionId(sessionIdValue);
-        }
+        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
         if (!sessionId) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
             toastId: "customId"
           })
         }
+        setSessionId(sessionId)
       }, [router]);
 
     return (
