@@ -1,6 +1,12 @@
 # Reimbursement Request App
 
 ## Technologies Used:
+- Git
+- GitHub
+- InteliJ
+- Visual Studio Code
+- DBeaver
+- Postman
 - Docker
 - MySQL
 - Javalin
@@ -10,6 +16,8 @@
 - j-unit
 - Java
 - Next.JS
-- Tailwind CSS
+- CSS
+- react-toastify
+- js-cookie
 
 
