@@ -1,5 +1,6 @@
 import Controllers.Category.*;
 import Controllers.Employee.*;
+import Controllers.Request.AddRequestController;
 import io.javalin.Javalin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +38,9 @@ public class Run {
         app.delete("/delete/category/{categoryId}/{sessionId}", deleteCategoryController.deleteCategory);
 
         // Request Controllers and routes:
+        AddRequestController addRequestController = new AddRequestController();
+
+        app.post("/create/request/now", addRequestController.addRequest);
 
         logger.info("Application running...");
         app.start();
