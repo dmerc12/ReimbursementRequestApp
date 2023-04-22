@@ -23,7 +23,7 @@ export default function UpdateCurrentEmployeeInformation() {
 
     const fetchEmployee = async () => {
       try {
-        const response = await fetch('/api/employee/handleGetCurrentInfo', {
+        const response = await fetch('/api/employee/handleGet', {
           method: 'PATCH',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({'sessionId': sessionId})
