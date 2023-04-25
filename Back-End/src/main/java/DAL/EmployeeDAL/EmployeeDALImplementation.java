@@ -174,7 +174,7 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
     @Override
     public Employee updateEmployee(Employee employee) {
         logger.info("Beginning DAL method update employee with employeeId: " + employee.getEmployeeId() +
-                ", firstName; " + employee.getFirstName() + ", lastName: " + employee.getLastName() +
+                ", firstName: " + employee.getFirstName() + ", lastName: " + employee.getLastName() +
                 ", email: " + employee.getEmail() + ", password: " + employee.getPassword(),", phoneNumber: " +
                 employee.getPhoneNumber() + ", address: " + employee.getAddress());
         try (Connection connection = DatabaseConnection.createConnection()) {
@@ -198,6 +198,32 @@ public class EmployeeDALImplementation implements EmployeeDALInterface{
         } catch (SQLException error) {
             error.printStackTrace();
             logger.error("Error with DAL method update employee with error: " + error.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public Employee changePassword(Employee employee) {
+        logger.info("Beginning DAL method change password with employeeId: " + employee.getEmployeeId() +
+                ", firstName: " + employee.getFirstName() + ", lastName: " + employee.getLastName() + ", email: " +
+                employee.getEmail() + ", password: " + employee.getPassword() + ", phoneNumber: " +
+                employee.getPhoneNumber() + ", address: " + employee.getAddress());
+        try (Connection connection = DatabaseConnection.createConnection()) {
+            String sql = "update reimbursement_request_app.employees set passwrd=? where employee_id=?;";
+            assert connection != null;
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, employee.getPassword());
+            ps.setInt(2, employee.getEmployeeId());
+            ps.executeUpdate();
+            String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
+                    "password: %s, phoneNumber: %s, address: %s", employee.getEmployeeId(), employee.getFirstName(),
+                    employee.getLastName(), employee.getEmail(), employee.getPassword(), employee.getPhoneNumber(),
+                    employee.getAddress());
+            logger.info("Finishing DAL method change password with result: " + employeeString);
+            return employee;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            logger.error("Error with DAL method change password with error: " + error.getMessage());
             return null;
         }
     }
