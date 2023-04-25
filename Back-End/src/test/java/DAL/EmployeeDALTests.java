@@ -4,9 +4,12 @@ package DAL;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import Entities.Data.Employee;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-public class EmployeeRequestDALTests {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class EmployeeDALTests {
     int currentEmployeeId = 1;
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     Employee successfulEmployee = new Employee(0, "first", "last", "e@mail.com",
@@ -16,31 +19,31 @@ public class EmployeeRequestDALTests {
             "312 N Second St, OKC, OK, 79588");
 
     @Test
-    public void addEmployeeSuccess() {
+    public void a_addEmployeeSuccess() {
         Employee result = employeeDAO.addEmployee(successfulEmployee);
         Assert.assertNotEquals(result.getEmployeeId(), 0);
     }
 
     @Test
-    public void getEmployeeByIdSuccess() {
+    public void b_getEmployeeByIdSuccess() {
         Employee result = employeeDAO.getEmployeeById(-1);
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void getEmployeeByEmailSuccess() {
+    public void c_getEmployeeByEmailSuccess() {
         Employee result = employeeDAO.getEmployeeByEmail("test@email.com");
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void loginSuccess() {
+    public void d_loginSuccess() {
         Employee result = employeeDAO.login("test@email.com", "test");
         Assert.assertNotNull(result);
     }
 
     @Test
-    public void updateEmployeeSuccess() {
+    public void e_updateEmployeeSuccess() {
         Employee result = employeeDAO.updateEmployee(updateEmployee);
         Assert.assertEquals(updateEmployee.getEmail(), result.getEmail());
         Assert.assertEquals(updateEmployee.getAddress(), result.getAddress());
@@ -50,7 +53,13 @@ public class EmployeeRequestDALTests {
     }
 
     @Test
-    public void deleteEmployeeSuccess() {
+    public void f_changePasswordSuccess() {
+        Employee result = employeeDAO.changePassword(updateEmployee);
+        Assert.assertEquals(updateEmployee.getPassword(), result.getPassword());
+    }
+
+    @Test
+    public void g_deleteEmployeeSuccess() {
         int result = employeeDAO.deleteEmployee(currentEmployeeId);
         Assert.assertTrue(result != 0);
     }

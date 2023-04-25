@@ -8,5 +8,6 @@ public interface EmployeeDALInterface {
     Employee getEmployeeByEmail(String email);
     Employee login(String email, String password);
     Employee updateEmployee(Employee employee);
+    Employee changePassword(Employee employee);
     int deleteEmployee(int employeeId);
 }
