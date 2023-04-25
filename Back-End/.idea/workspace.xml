@@ -7,9 +7,9 @@
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/EmployeeDAL/EmployeeDALInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/DAL/EmployeeRequestDALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DAL/EmployeeDALTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/SAL/EmployeeRequestSALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SAL/EmployeeSALTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SAL/EmployeeSALTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SAL/EmployeeSALTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EmployeeDALTests">
+  <component name="RunManager" selected="JUnit.EmployeeSALTests">
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />

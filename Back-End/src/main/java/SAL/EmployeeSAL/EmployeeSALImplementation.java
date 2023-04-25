@@ -181,6 +181,29 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
     }
 
     @Override
+    public Employee changePassword(Employee employee) {
+        logger.info("Beginning SAL method change password with employee ID: " + employee.getEmployeeId() +
+                ", password: " + employee.getPassword());
+        if (employee.getPassword().equals("")) {
+            logger.warn("SAL method change password, password left empty");
+            throw new GeneralError("The password field cannot be left empty, please try again!");
+        } else if (employee.getPassword().length() > 60) {
+            logger.warn("SAL method change password, password too long");
+            throw new GeneralError("The password field cannot exceed 60 characters, please try again!");
+        } else {
+            String currentEmployeePassword = getEmployeeById(employee.getEmployeeId()).getPassword();
+            if (currentEmployeePassword.equals(employee.getPassword())) {
+                logger.warn("SAL method change password, nothing changed");
+                throw new GeneralError("Nothing has changed, please try again!");
+            } else {
+                Employee changedEmployee = employeeDAO.changePassword(employee);
+                logger.info("Finishing SAL method change password");
+                return changedEmployee;
+            }
+        }
+    }
+
+    @Override
     public int deleteEmployee(int employeeId) {
         logger.info("Beginning SAL method delete employee with employee ID: " + employeeId);
         getEmployeeById(employeeId);

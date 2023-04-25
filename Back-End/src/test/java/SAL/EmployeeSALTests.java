@@ -444,7 +444,63 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void ea_deleteEmployeeNotFound() {
+    public void ea_changePasswordEmpty() {
+        try {
+            Employee testEmployee = new Employee(currentEmployeeId, "first", "last",
+                    "e@mail.com", "", "111-222-3333", "123 Test");
+            employeeSAO.changePassword(testEmployee);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "The password field cannot be left empty, please try again!");
+        }
+    }
+
+    @Test
+    public void eb_changePasswordTooLong() {
+        try {
+            Employee testEmployee = new Employee(currentEmployeeId, "first", "last",
+                    "e@mail.com", "this is too long and so it should raise the desired error message " +
+                    "and then this test will pass", "111-222-3333", "123 Test");
+            employeeSAO.changePassword(testEmployee);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "The password field cannot exceed 60 characters, please " +
+                    "try again!");
+        }
+    }
+
+    @Test
+    public void ec_changePasswordEmployeeNotFound() {
+        try {
+            Employee testEmployee = new Employee(-50000000, "first", "last",
+                    "e@mail.com", "password", "111-222-3333", "123 Test");
+            employeeSAO.changePassword(testEmployee);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
+        }
+    }
+
+    @Test
+    public void ed_changePasswordNothingChanged() {
+        try {
+            Employee testEmployee = new Employee(currentEmployeeId, "first", "last",
+                    "e@mail.com", successEmployee.getPassword(), "111-222-3333", "123 Test");
+            employeeSAO.changePassword(testEmployee);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Nothing has changed, please try again!");
+        }
+    }
+
+    @Test
+    public void ee_changePasswordSuccess() {
+        Employee result = employeeSAO.changePassword(updateEmployee);
+        Assert.assertEquals(updateEmployee.getPassword(), result.getPassword());
+    }
+
+    @Test
+    public void fa_deleteEmployeeNotFound() {
         try {
             employeeSAO.deleteEmployee(-500000000);
             Assert.fail();
@@ -454,7 +510,7 @@ public class EmployeeSALTests {
     }
 
     @Test
-    public void eb_deleteEmployeeSuccess() {
+    public void fb_deleteEmployeeSuccess() {
         int result = employeeSAO.deleteEmployee(currentEmployeeId);
         Assert.assertTrue(result != 0);
     }
