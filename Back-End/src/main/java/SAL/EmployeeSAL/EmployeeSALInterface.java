@@ -7,5 +7,6 @@ public interface EmployeeSALInterface {
     Employee getEmployeeById(int employeeId);
     Employee login(String email, String password);
     Employee updateEmployee(Employee employee);
+    Employee changePassword(Employee employee);
     int deleteEmployee(int employeeId);
 }
