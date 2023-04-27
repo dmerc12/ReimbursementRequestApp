@@ -23,7 +23,9 @@ public class RequestSALImplementation implements RequestSALInterface{
     }
     @Override
     public Request addRequest(Request request) {
-        logger.info("Beginning SAL method add request with request: " + request);
+        logger.info("Beginning SAL method add request with request ID: " + request.getRequestId()
+                + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                ", comment: " + request.getComment() + ", amount: " + request.getAmount());
         if (request.getComment().equals("")) {
             logger.warn("SAL method add request, comment left empty");
             throw new GeneralError("The comment field cannot be left empty, please try again!");
@@ -37,7 +39,9 @@ public class RequestSALImplementation implements RequestSALInterface{
             employeeSAO.getEmployeeById(request.getEmployeeId());
             categorySAO.getCategory(request.getCategoryId());
             Request result = requestDAO.addRequest(request);
-            logger.info("Finishing SAL method add request with result: " + result);
+            logger.info("Finishing SAL method add request with result: request ID: " + result.getRequestId()
+                    + ", category ID: " + result.getCategoryId() + ", employee ID: " + result.getEmployeeId() +
+                    ", comment: " + result.getComment() + ", amount: " + result.getAmount());
             return request;
         }
     }
@@ -51,7 +55,7 @@ public class RequestSALImplementation implements RequestSALInterface{
             logger.warn("SAL method get all requests, request list empty");
             throw new GeneralError("No requests found, please try again!");
         } else {
-            logger.info("Finishing SAL method get all requests with request list: " + requestList);
+            logger.info("Finishing SAL method get all requests");
             return requestList;
         }
     }
@@ -64,14 +68,18 @@ public class RequestSALImplementation implements RequestSALInterface{
             logger.warn("SAL method get request, no request found");
             throw new GeneralError("No request found, please try again!");
         } else {
-            logger.info("Finishing SAL method get request with request: " + request);
+            logger.info("Finishing SAL method get request with request ID: " + request.getRequestId()
+                    + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                    ", comment: " + request.getComment() + ", amount: " + request.getAmount());
             return request;
         }
     }
 
     @Override
     public Request updateRequest(Request request) {
-        logger.info("Beginning SAL method update request with request: " + request);
+        logger.info("Beginning SAL method update request with request ID: " + request.getRequestId()
+                + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                ", comment: " + request.getComment() + ", amount: " + request.getAmount());
         getRequest(request.getRequestId());
         categorySAO.getCategory(request.getCategoryId());
         if (request.getComment().equals("")) {
@@ -85,7 +93,9 @@ public class RequestSALImplementation implements RequestSALInterface{
             throw new GeneralError("The amount field cannot be $0.01, please try again!");
         } else {
             Request updatedRequest = requestDAO.updateRequest(request);
-            logger.info("Finishing SAL method update request with request: " + updatedRequest);
+            logger.info("Finishing SAL method update request with request ID: " + updatedRequest.getRequestId()
+                    + ", category ID: " + updatedRequest.getCategoryId() + ", employee ID: " + updatedRequest.getEmployeeId() +
+                    ", comment: " + updatedRequest.getComment() + ", amount: " + updatedRequest.getAmount());
             return updatedRequest;
         }
     }

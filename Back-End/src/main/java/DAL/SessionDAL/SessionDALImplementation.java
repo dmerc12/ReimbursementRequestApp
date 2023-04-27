@@ -28,7 +28,8 @@ public class SessionDALImplementation implements SessionDALInterface{
 
     @Override
     public Session addSession(Session session) {
-        logger.info("Beginning DAL method add session with session: " + session);
+        logger.info("Beginning DAL method add session with session ID: " + session.getSessionId() + ", employee ID: "
+                + session.getEmployeeId() + ", expiration: " + session.getExpiration());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "insert into reimbursement_request_app.sessions values (0, ?, ?);";
             PreparedStatement ps = null;
@@ -41,7 +42,8 @@ public class SessionDALImplementation implements SessionDALInterface{
                 rs.next();
                 session.setSessionId(rs.getInt(1));
             }
-            logger.info("Finishing DAL method add session with result: " + session);
+            logger.info("Finishing DAL method add session with result: session ID: " + session.getSessionId() +
+                    ", employee ID: " + session.getEmployeeId() + ", expiration: " + session.getExpiration());
             return session;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -66,7 +68,8 @@ public class SessionDALImplementation implements SessionDALInterface{
                         rs.getInt("employee_id"),
                         expiration
                 );
-                logger.info("Finishing DAL method get session with result: " + session);
+                logger.info("Finishing DAL method get session with result: session ID: " + session.getSessionId() +
+                        ", employee ID: " + session.getEmployeeId() + ", expiration: " + session.getExpiration());
                 return session;
             } else {
                 logger.info("Finishing DAL method get session by ID with nothing found");
@@ -81,7 +84,8 @@ public class SessionDALImplementation implements SessionDALInterface{
 
     @Override
     public Session updateSession(Session session) {
-        logger.info("Beginning DAL method update session with session: " + session);
+        logger.info("Beginning DAL method update session with session ID: " + session.getSessionId() + ", employee ID: "
+                + session.getEmployeeId() + ", expiration: " + session.getExpiration());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "update reimbursement_request_app.sessions set expiration=? where session_id=?;";
             assert connection != null;
@@ -89,7 +93,8 @@ public class SessionDALImplementation implements SessionDALInterface{
             ps.setObject(1, session.getExpiration());
             ps.setInt(2, session.getSessionId());
             ps.executeUpdate();
-            logger.info("Finishing DAL method update session with result: " + session);
+            logger.info("Finishing DAL method update session with result: session ID: " + session.getSessionId() +
+                    ", employee ID: " + session.getEmployeeId() + ", expiration: " + session.getExpiration());
             return session;
         } catch (SQLException error) {
             error.printStackTrace();
