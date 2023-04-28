@@ -17,11 +17,13 @@ public class Run {
         GetEmployeeController getEmployeeController = new GetEmployeeController();
         UpdateEmployeeController updateEmployeeController = new UpdateEmployeeController();
         DeleteEmployeeController deleteEmployeeController = new DeleteEmployeeController();
+        ChangePasswordController changePasswordController = new ChangePasswordController();
 
         app.post("/login/now", loginController.login);
         app.post("/register/now", registerController.register);
         app.patch("/get/employee", getEmployeeController.getEmployee);
         app.put("/update/employee/now", updateEmployeeController.updateEmployee);
+        app.patch("/change/password/now", changePasswordController.changePassword);
         app.delete("/delete/employee/now", deleteEmployeeController.deleteEmployee);
 
         // Category controllers and routes:

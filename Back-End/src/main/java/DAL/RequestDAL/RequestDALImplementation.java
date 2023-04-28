@@ -29,7 +29,9 @@ public class RequestDALImplementation implements RequestDALInterface{
 
     @Override
     public Request addRequest(Request request) {
-        logger.info("Beginning DAL method add request with request: " + request);
+        logger.info("Beginning DAL method add request with request ID: " + request.getRequestId()
+                + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                ", comment: " + request.getComment() + ", amount: " + request.getAmount());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "insert into reimbursement_request_app.requests values (0, ?, ?, ?, ?);";
             PreparedStatement ps = null;
@@ -44,7 +46,9 @@ public class RequestDALImplementation implements RequestDALInterface{
                 rs.next();
                 request.setRequestId(rs.getInt(1));
             }
-            logger.info("Finishing DAL method add request with result: " + request);
+            logger.info("Finishing DAL method add request with result: request ID: " + request.getRequestId()
+                    + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                    ", comment: " + request.getComment() + ", amount: " + request.getAmount());
             return request;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -71,9 +75,11 @@ public class RequestDALImplementation implements RequestDALInterface{
                         rs.getString("comment"),
                         rs.getDouble("amount")
                 );
+                logger.info("Finishing DAL method get all requests with request: request ID: " + request.getRequestId()
+                        + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                        ", comment: " + request.getComment() + ", amount: " + request.getAmount());
                 requestList.add(request);
             }
-            logger.info("Finishing DAL method get all requests with result: " + requestList);
             return requestList;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -99,7 +105,9 @@ public class RequestDALImplementation implements RequestDALInterface{
                     rs.getString("comment"),
                     rs.getDouble("amount")
             );
-            logger.info("Finishing DAL method get request with result: " + request);
+            logger.info("Finishing DAL method get request with result: request ID: " + request.getRequestId()
+                    + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                    ", comment: " + request.getComment() + ", amount: " + request.getAmount());
             return request;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -110,7 +118,9 @@ public class RequestDALImplementation implements RequestDALInterface{
 
     @Override
     public Request updateRequest(Request request) {
-        logger.info("Beginning DAL method update request with request: " + request);
+        logger.info("Beginning DAL method update request with request ID: " + request.getRequestId()
+                + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                ", comment: " + request.getComment() + ", amount: " + request.getAmount());
         try (Connection connection = DatabaseConnection.createConnection()) {
             String sql = "update reimbursement_request_app.requests set category_id=?, comment=?, amount=? where " +
                     "request_id=?;";
@@ -121,7 +131,9 @@ public class RequestDALImplementation implements RequestDALInterface{
             ps.setDouble(3, request.getAmount());
             ps.setInt(4, request.getRequestId());
             ps.executeUpdate();
-            logger.info("Finishing DAL method update request with result: " + request);
+            logger.info("Finishing DAL method update request with result: request ID: " + request.getRequestId()
+                    + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
+                    ", comment: " + request.getComment() + ", amount: " + request.getAmount());
             return request;
         } catch (SQLException error) {
             error.printStackTrace();

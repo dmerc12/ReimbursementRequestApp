@@ -20,14 +20,16 @@ public class SessionSALImplementation implements SessionSALInterface{
 
     @Override
     public Session addSession(Session session) {
-        logger.info("Beginning SAL method add session with session: " + session);
+        logger.info("Beginning SAL method add session with session ID: " + session.getSessionId() + ", employee ID: "
+                + session.getEmployeeId() + ", expiration: " + session.getExpiration());
         employeeSAO.getEmployeeById(session.getEmployeeId());
         if (session.getExpiration().isBefore(LocalDateTime.now())) {
             logger.warn("SAL method add session, session expired");
             throw new GeneralError("The expiration field cannot be expired, please try again!");
         } else {
             Session addedSession = sessionDAO.addSession(session);
-            logger.info("Finishing SAL method add session with new session: " + addedSession);
+            logger.info("Finishing SAL method add session with session ID: " + addedSession.getSessionId() +
+                    ", employee ID: " + addedSession.getEmployeeId() + ", expiration: " + addedSession.getExpiration());
             return addedSession;
         }
     }
@@ -44,17 +46,20 @@ public class SessionSALImplementation implements SessionSALInterface{
             logger.warn("SAL method get session, session expired");
             throw new GeneralError("Session has expired, please log in!");
         } else {
-            logger.info("Finishing SAL method get session with session: " + session);
+            logger.info("Finishing SAL method get session with session ID: " + session.getSessionId() +
+                    ", employee ID: " + session.getEmployeeId() + ", expiration: " + session.getExpiration());
             return session;
         }
     }
 
     @Override
     public Session updateSession(Session session) {
-        logger.info("Beginning SAL method update session with session: " + session);
+        logger.info("Beginning SAL method update session with session ID: " + session.getSessionId() + ", employee ID: "
+                + session.getEmployeeId() + ", expiration: " + session.getExpiration());
         getSession(session.getSessionId());
         Session updatedSession = sessionDAO.updateSession(session);
-        logger.info("Finishing SAL method update session with updated session: " + session);
+        logger.info("Finishing SAL method update session with updated session: session ID: " + session.getSessionId()
+                + ", employee ID: " + session.getEmployeeId() + ", expiration: " + session.getExpiration());
         return updatedSession;
     }
 
