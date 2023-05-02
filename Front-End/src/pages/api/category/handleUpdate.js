@@ -2,7 +2,9 @@ const handler = async (req, res) => {
     const method = '';
 
     const requestBody = JSON.stringify({
-
+        'sessionId': req.body.sessionId,
+        'categoryId': req.body.categoryId,
+        'categoryName': req.body.categoryName
     });
 
     const requestOptions = {
@@ -11,7 +13,7 @@ const handler = async (req, res) => {
         body: requestBody
     };
 
-    const URL = 'http://localhost:8080/';
+    const URL = 'http://localhost:8080/update/category/now';
 
     try {
         const response = await fetch(URL, requestOptions);
