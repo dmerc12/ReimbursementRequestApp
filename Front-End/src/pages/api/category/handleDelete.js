@@ -1,17 +1,15 @@
 const handler = async (req, res) => {
-    const method = '';
+    const sessionId = req.body.sessionId;
+    const categoryId = req.body.categoryId;
 
-    const requestBody = JSON.stringify({
-
-    });
+    const method = 'DELETE';
 
     const requestOptions = {
         method: method,
         headers: {'Content-Type': 'application/json'},
-        body: requestBody
     };
 
-    const URL = 'http://localhost:8080/';
+    const URL = `http://localhost:8080/delete/category/${categoryId}/${sessionId}`;
 
     try {
         const response = await fetch(URL, requestOptions);
