@@ -1,4 +1,4 @@
-handler = async (req, res) => {
+const handler = async (req, res) => {
     const method = 'PATCH';
 
     const requestBody = JSON.stringify({

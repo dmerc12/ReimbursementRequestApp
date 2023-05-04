@@ -13,10 +13,9 @@ export default function ChangePasswordForm ({ sessionId }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('/api/employee/handlePasswordChange',
-            {
-                method: "PATCH",
-                headers: {'Content-Type': 'application/jsson'},
+            const response = await fetch('/api/employee/handlePasswordChange', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     'sessionId': sessionId,
                     'password':  password
