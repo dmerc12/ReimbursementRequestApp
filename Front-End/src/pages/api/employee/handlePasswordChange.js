@@ -16,13 +16,11 @@ const handler = async (req, res) => {
 
     try {
         const response = await fetch(changePasswordURL, requestOptions);
-        console.log(response)
         const data = await response.json();
-        console.log(data)
         if (response.status === 200) {
-            return res.end(JSON.parse.stringify({'success': data}));
+            return res.end(JSON.stringify({'success': data}));
         } else if (response.status === 400) {
-            return res.end(JSON.stringify({'erro': data}));
+            return res.end(JSON.stringify({'error': data}));
         } else {
             return res.end(JSON.stringify({'error': "Cannot connect to the back end, please try again!"}));
         }
