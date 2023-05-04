@@ -21,6 +21,7 @@ export default function ManageInformation() {
           <h1>Manage Your Current Information</h1>
           <div className='nav-btn-container'>
             <Link className='nav-btn' href='/manage-information/update'>Update Current Information</Link>
+            <Link className='nav-btn' href='/manage-information/change-password'>Change Current Password</Link>
             <Link className='nav-btn' href='/manage-information/delete'>Delete Your Information</Link>
           </div>
         </>
