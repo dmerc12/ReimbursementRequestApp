@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import ChangePasswordForm from "@/components/ui/employee/ChangePasswordForm";
 
 export default function ChangePassword() {
     const [sessionId, setSessionId] = useState(0);
@@ -20,7 +21,8 @@ export default function ChangePassword() {
 
     return (
         <>
-            
+            <h1>Change Your Current Password Below</h1>
+            <ChangePasswordForm  sessionId={sessionId}/>
         </>
     )
 }

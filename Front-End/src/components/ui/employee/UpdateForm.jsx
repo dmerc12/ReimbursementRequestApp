@@ -87,7 +87,7 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
                     <input className='form-input' type="text" id='updateAddress' name='address' value={address} onChange={event => setAddress(event.target.value)}/>
                 </div>
 
-                <button className='form-btn-2' type='submit'>Update Current Information</button>
+                <button className='form-btn-2' type='submit' id='updateCurrentInformationButton'>Update Current Information</button>
             </form>
         </>
     )
