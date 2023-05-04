@@ -16,7 +16,9 @@ handler = async (req, res) => {
 
     try {
         const response = await fetch(changePasswordURL, requestOptions);
+        console.log(response)
         const data = await response.json();
+        console.log(data)
         if (response.status === 200) {
             return res.end(JSON.parse.stringify({'success': data}));
         } else if (response.status === 400) {

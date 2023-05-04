@@ -13,7 +13,7 @@ export default function ChangePasswordForm ({ sessionId }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('api/employee/handlePasswordChange',
+            const response = await fetch('/api/employee/handlePasswordChange',
             {
                 method: "PATCH",
                 headers: {'Content-Type': 'application/jsson'},
@@ -22,7 +22,10 @@ export default function ChangePasswordForm ({ sessionId }) {
                     'password':  password
                 })
             })
+            console.log(response)
+
             const data = await response.json();
+            console.log(data)
             
             if (data.success) {
                 router.push('/manage-information');
