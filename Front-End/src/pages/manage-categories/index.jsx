@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
+import AddCategoryButton from '@/components/ui/category/AddCategoryButton';
+import CategoryList from '@/components/ui/category/CategoryList';
 
 export default function ManageInformation() {
 
@@ -19,6 +21,8 @@ export default function ManageInformation() {
   return (
     <>
       <h1>Manage Category Information Page</h1>
+      <AddCategoryButton />
+      <CategoryList />
     </>
   )
 }

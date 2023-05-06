@@ -3,6 +3,11 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import ChangePasswordForm from "@/components/ui/employee/ChangePasswordForm";
 
+export const metadata = {
+    title: "Changing Password",
+    description: "Changing my password"
+};
+
 export default function ChangePassword() {
     const [sessionId, setSessionId] = useState(0);
 
