@@ -208,8 +208,19 @@ p {
 }
 
 .category-list {
+    margin-top: 18px;
     display: flex;
     flex-direction: column;
     justify-self: center;
     align-items: center;
+}
+
+.category-table-head {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.category-table-data {
+    padding-left: 30px;
+    padding-right: 30px;
 }
