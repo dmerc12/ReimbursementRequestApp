@@ -22,7 +22,7 @@ export default function ManageInformation() {
     <>
       <h1>Manage Category Information Page</h1>
       <AddCategoryButton />
-      <CategoryList />
+      <CategoryList sessionId={sessionId}/>
     </>
   )
 }
