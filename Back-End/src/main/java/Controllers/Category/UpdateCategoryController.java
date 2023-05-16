@@ -12,7 +12,6 @@ import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +41,7 @@ public class UpdateCategoryController {
             sessionSAO.updateSession(updatedSessionInfo);
             String updatedCategoryJSON = gson.toJson(updatedCategory);
             ctx.result(updatedCategoryJSON);
-            ctx.status(HttpStatus.OK);
+            ctx.status(200);
             logger.info("Finishing API handler update category with result: " + updatedCategoryJSON);
         } catch (GeneralError error) {
             Gson gson = new Gson();
@@ -50,7 +49,7 @@ public class UpdateCategoryController {
             errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
-            ctx.status(HttpStatus.BAD_REQUEST);
+            ctx.status(400);
             logger.error("Error with API handler update category with error: " + error.getMessage());
         }
     };

@@ -6,7 +6,6 @@ import Entities.Data.Employee;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,7 +28,7 @@ public class RegisterController {
             Employee employee = employeeSAO.addEmployee(employeeInformation);
             String createdEmployee = gson.toJson(employee);
             ctx.result(createdEmployee);
-            ctx.status(HttpStatus.CREATED);
+            ctx.status(201);
             logger.info("Finishing API handler register with result: " + createdEmployee);
         } catch (GeneralError error) {
             Gson gson = new Gson();
@@ -37,7 +36,7 @@ public class RegisterController {
             errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
-            ctx.status(HttpStatus.BAD_REQUEST);
+            ctx.status(400);
             logger.error("Error with API handler register with error: " + error.getMessage());
         }
     };

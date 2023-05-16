@@ -14,7 +14,6 @@ import SAL.RequestSAL.RequestSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,7 +46,7 @@ public class AddRequestController {
             sessionSAO.updateSession(updatedSessionInfo);
             String requestJSON = gson.toJson(createdRequest);
             ctx.result(requestJSON);
-            ctx.status(HttpStatus.CREATED);
+            ctx.status(201);
             logger.info("Finishing API handler add request with result: " + requestJSON);
         } catch (GeneralError error) {
             Gson gson = new Gson();
@@ -55,7 +54,7 @@ public class AddRequestController {
             errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
-            ctx.status(HttpStatus.BAD_REQUEST);
+            ctx.status(400);
             logger.error("Error with API handler add request with error: " + error.getMessage());
         }
     };
