@@ -4,14 +4,12 @@ import DAL.EmployeeDAL.EmployeeDALImplementation;
 import DAL.SessionDAL.SessionDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Category;
-import Entities.Data.Employee;
 import Entities.Data.Session;
 import SAL.CategorySAL.CategorySALImplementation;
 import SAL.EmployeeSAL.EmployeeSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +37,7 @@ public class GetAllCategoriesController {
             Gson gson = new Gson();
             String categoryListJSON = gson.toJson(categoryList);
             ctx.result(categoryListJSON);
-            ctx.status(HttpStatus.OK);
+            ctx.status(200);
             logger.info("Finishing API handler get all categories with result: " + categoryListJSON);
         } catch (GeneralError error) {
             Gson gson = new Gson();
@@ -47,7 +45,7 @@ public class GetAllCategoriesController {
             errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
-            ctx.status(HttpStatus.BAD_REQUEST);
+            ctx.status(400);
             logger.error("Error with API handler get all categories with error: " + error.getMessage());
         }
     };

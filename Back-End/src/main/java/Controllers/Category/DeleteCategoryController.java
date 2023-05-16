@@ -13,7 +13,6 @@ import SAL.RequestSAL.RequestSALImplementation;
 import SAL.SessionSAL.SessionSALImplementation;
 import com.google.gson.Gson;
 import io.javalin.http.Handler;
-import io.javalin.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,7 +50,7 @@ public class DeleteCategoryController {
             sessionSAO.updateSession(updatedSessionInfo);
             String resultJSON = gson.toJson(result);
             ctx.result(resultJSON);
-            ctx.status(HttpStatus.OK);
+            ctx.status(200);
             logger.info("Finishing API handler delete category");
         } catch (GeneralError error) {
             Gson gson = new Gson();
@@ -59,7 +58,7 @@ public class DeleteCategoryController {
             errorDictionary.put("message", error.getMessage());
             String errorJSON = gson.toJson(errorDictionary);
             ctx.result(errorJSON);
-            ctx.status(HttpStatus.BAD_REQUEST);
+            ctx.status(400);
             logger.error("Error with API handler delete category with error: " + error.getMessage());
         }
     };

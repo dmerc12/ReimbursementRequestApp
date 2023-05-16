@@ -34,10 +34,10 @@ public class Run {
         DeleteCategoryController deleteCategoryController = new DeleteCategoryController();
 
         app.post("/create/category/now", addCategoryController.addCategory);
-        app.get("/get/all/categories/{sessionId}", getAllCategoriesController.getAllCategories);
-        app.get("/get/category/{categoryId}/{sessionId}", getCategoryController.getCategory);
+        app.get("/get/all/categories/:sessionId", getAllCategoriesController.getAllCategories);
+        app.get("/get/category/:categoryId/:sessionId", getCategoryController.getCategory);
         app.put("/update/category/now", updateCategoryController.updateCategory);
-        app.delete("/delete/category/{categoryId}/{sessionId}", deleteCategoryController.deleteCategory);
+        app.delete("/delete/category/:categoryId/:sessionId", deleteCategoryController.deleteCategory);
 
         // Request Controllers and routes:
         AddRequestController addRequestController = new AddRequestController();
@@ -45,6 +45,6 @@ public class Run {
         app.post("/create/request/now", addRequestController.addRequest);
 
         logger.info("Application running...");
-        app.start();
+        app.start(8080);
     }
 }

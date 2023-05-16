@@ -22,6 +22,10 @@ public class DatabaseSetup {
     public static void main(String[] args) {
         try (Connection connection = DatabaseConnection.createConnection()) {
             logger.info("Beginning Database Setup Script");
+            // schema setup
+            String schema = "create schema reimbursement_request_app";
+            employeeDAO.accessEmployeeTable(schema);
+
             // employee table setup
             String employeeTable = "create table reimbursement_request_app.employees(employee_id int auto_increment " +
                     "primary key, first_name varchar(36), last_name varchar(36), email varchar(60), " +
