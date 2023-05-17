@@ -1,19 +1,4 @@
-'use client'
-
-export default function CategoryList({ sessionId }) {
-    const getAllCategories = async () => {
-        try {
-            const categories = await fetch("/api/category/handleGetAll", {
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json'}, 
-                body: JSON.stringify({
-                    'sessionId': sessionId
-                })})
-        } catch (error) {
-
-        }
-        
-    }
+export default function CategoryList({ categories }) {
     return (
         <>
             <div className="category-list overflow-x-auto">
@@ -24,9 +9,9 @@ export default function CategoryList({ sessionId }) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {categories.map()}
-                        </tr>
+                        {categories.map((category) => (
+                            <tr key={category.categoryName}></tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
