@@ -1,6 +1,5 @@
 const handler = async (req, res) => {
     const sessionId = req.body.sessionId;
-    console.log(sessionId)
     const method = 'GET';
     
     const requestOptions = {

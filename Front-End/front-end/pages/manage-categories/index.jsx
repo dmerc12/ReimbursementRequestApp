@@ -26,13 +26,11 @@ export default function ManageInformation() {
             body: JSON.stringify({
               'sessionId': sessionId
             })})
-          console.log(response)
           const data = await response.json();
           console.log(data)
           setCategories(data)
         }
       } catch (error) {
-        console.log(error)
         toast.error(error.message, {
           toastId: "customId"
         });
