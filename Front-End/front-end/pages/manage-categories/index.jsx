@@ -14,13 +14,13 @@ export default function ManageInformation() {
     const fetchData = async () => {
       try {
         const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId='))[1];
+        console.log(sessionId)
         if (!sessionId) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
             toastId: "customId"
           });
         } else {
-          const URL = `http://localhost:8080/get/all/categories/${sessionId}`;
           const response = await fetch("/api/category/handleGetAll", {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'}, 
