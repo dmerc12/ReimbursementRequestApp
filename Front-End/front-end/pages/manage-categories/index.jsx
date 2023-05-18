@@ -20,17 +20,23 @@ export default function ManageInformation() {
             toastId: "customId"
           });
         } else {
+          const URL = `http://localhost:8080/get/all/categories/${sessionId}`;
           const response = await fetch("/api/category/handleGetAll", {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify({
               'sessionId': sessionId
             })})
+          console.log(response)
           const data = await response.json();
+          console.log(data)
           setCategories(data)
         }
       } catch (error) {
         console.log(error)
+        toast.error(error.message, {
+          toastId: "customId"
+        });
       }
     }
     fetchData();
