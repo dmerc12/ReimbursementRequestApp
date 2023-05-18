@@ -9,11 +9,7 @@ export default function CategoryList({ categories }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {categories.map((category) => (
-                            <tr key={category.categoryName}>
-                                <td>{category.categoryName}</td>
-                            </tr>
-                        ))}
+                        <td>hello</td>
                     </tbody>
                 </table>
             </div>

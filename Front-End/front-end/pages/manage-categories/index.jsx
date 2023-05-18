@@ -13,8 +13,7 @@ export default function ManageInformation() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId='))[1];
-        console.log(sessionId)
+        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
         if (!sessionId) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
