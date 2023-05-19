@@ -1,4 +1,18 @@
 export default function CategoryList({ categories }) {
+    let categoryRows = [];
+    if (categories.success) {
+        for (let i=0; i<categories.success.length; i++) {
+            const category = categories.success[i];
+            console.log(category)
+            categoryRows.unshift(
+                <tr key={category.categoryId}>
+                    <td className="category-table-data">{category.categoryName}</td>
+                </tr>
+            )
+            console.log(categoryRows)
+        }
+    }
+
     return (
         <>
             <div className="category-list overflow-x-auto">
@@ -9,11 +23,7 @@ export default function CategoryList({ categories }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {categories.map((category) => (
-                            <tr key={category.categoryName}>
-                                <td>{category.categoryName}</td>
-                            </tr>
-                        ))}
+                        {categoryRows}
                     </tbody>
                 </table>
             </div>
