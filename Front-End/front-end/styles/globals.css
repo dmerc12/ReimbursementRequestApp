@@ -85,7 +85,8 @@ body {
 h1 {
     display: flex;
     justify-content: center;
-    color: white
+    color: white;
+    margin-top: 1.85em;
 }
 
 p {
@@ -216,13 +217,13 @@ p {
 }
 
 .category-table-head {
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.category-table-data {
-    padding-left: 30px;
-    padding-right: 30px;
+    text-align: left;
+    padding: 30px;
     color: white;
 }
 
+.category-table-data {
+    padding: 30px;
+    color: white;
+
+}
