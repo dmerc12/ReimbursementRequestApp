@@ -30,6 +30,7 @@ export default function AddCategoryComponent({ sessionId }) {
             if (data.success) {
                 router.push('/manage-categories');
                 setVisible(false);
+                setCategoryName('')
                 toast.success("Category Successfully Added!", {
                     toastId: 'customId'
                 });

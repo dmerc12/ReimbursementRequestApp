@@ -14,12 +14,12 @@ export default function ManageInformation() {
   const router = useRouter();
 
   const [categories, setCategories] = useState([]);
-
-  const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
+  var [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
         if (!sessionId) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
@@ -36,9 +36,17 @@ export default function ManageInformation() {
           setCategories(data);
         }
       } catch (error) {
-        toast.error(error.message, {
-          toastId: "customId"
-        });
+        if (error.message === "Session has expired, please log in!") {
+          Cookies.remove('sessionId');
+          router.push('/login');
+          toast.warn(error.message, {
+              toastId: 'customId'
+          });
+      } else {
+          toast.error(error.message, {
+            toastId: "customId"
+          });
+        }
       }
     }
     fetchData();
