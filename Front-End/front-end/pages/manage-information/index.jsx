@@ -3,6 +3,11 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import Link from "next/link"
 
+export const metadata = {
+  title: "Managing Information",
+  description: "Managing information"
+};
+
 export default function ManageInformation() {
     const router = useRouter();
 

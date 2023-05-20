@@ -4,6 +4,11 @@ import { toast } from 'react-toastify';
 import AddCategoryComponent from '@/components/ui/category/AddCategoryComponent';
 import CategoryList from '@/components/ui/category/CategoryList';
 
+export const metadata = {
+  title: "Managing Categories",
+  description: "Managing categories"
+};
+
 export default function ManageInformation() {
 
   const router = useRouter();

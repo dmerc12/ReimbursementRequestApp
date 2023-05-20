@@ -5,7 +5,7 @@ import ChangePasswordForm from "@/components/ui/employee/ChangePasswordForm";
 
 export const metadata = {
     title: "Changing Password",
-    description: "Changing my password"
+    description: "Changing password"
 };
 
 export default function ChangePassword() {

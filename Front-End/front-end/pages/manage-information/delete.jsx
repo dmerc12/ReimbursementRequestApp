@@ -5,6 +5,11 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import DeleteForm from '@/components/ui/employee/DeleteForm';
 
+export const metadata = {
+  title: "Deleting",
+  description: "Deleting information"
+};
+
 export default function DeleteEmployeeInformation() {
     const [sessionId, setSessionId] = useState(0);
 

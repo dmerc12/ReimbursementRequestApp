@@ -3,6 +3,11 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 
+export const metadata = {
+  title: "Home",
+  description: "Home"
+};
+
 export default function Home() {
   const router = useRouter();
 

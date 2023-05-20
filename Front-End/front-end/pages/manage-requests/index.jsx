@@ -2,6 +2,11 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 
+export const metadata = {
+  title: "Managing Requests",
+  description: "Managing requests"
+};
+
 export default function ManageRequest() {
     const router = useRouter();
 

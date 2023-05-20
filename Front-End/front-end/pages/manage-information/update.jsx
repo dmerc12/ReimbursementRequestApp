@@ -6,6 +6,11 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import UpdateEmployeeForm from '@/components/ui/employee/UpdateForm';
 
+export const metadata = {
+  title: "Updating",
+  description: "Updating information"
+};
+
 export default function UpdateCurrentEmployeeInformation() {
   const [employee, setEmployee] = useState(null);
   const [sessionId, setSessionId] = useState(0);
