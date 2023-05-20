@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
-import AddCategoryButton from '@/components/ui/category/AddCategoryButton';
+import AddCategoryComponent from '@/components/ui/category/AddCategoryComponent';
 import CategoryList from '@/components/ui/category/CategoryList';
 
 export default function ManageInformation() {
@@ -10,10 +10,11 @@ export default function ManageInformation() {
 
   const [categories, setCategories] = useState([]);
 
+  const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
         if (!sessionId) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
@@ -27,8 +28,7 @@ export default function ManageInformation() {
               'sessionId': sessionId
             })})
           const data = await response.json();
-          console.log(data)
-          setCategories(data)
+          setCategories(data);
         }
       } catch (error) {
         toast.error(error.message, {
@@ -42,7 +42,7 @@ export default function ManageInformation() {
   return (
     <>
       <h1>Manage Category Information Page</h1>
-      <AddCategoryButton />
+      <AddCategoryComponent sessionId={sessionId}/>
       <CategoryList categories={categories}/>
     </>
   )
