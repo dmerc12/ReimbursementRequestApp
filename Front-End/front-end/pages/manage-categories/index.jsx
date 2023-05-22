@@ -56,7 +56,7 @@ export default function ManageInformation() {
     <>
       <h1>Manage Category Information Page</h1>
       <AddCategoryComponent sessionId={sessionId}/>
-      <CategoryList categories={categories}/>
+      <CategoryList sessionId={sessionId} categories={categories}/>
     </>
   )
 }
