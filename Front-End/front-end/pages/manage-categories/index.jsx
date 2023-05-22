@@ -21,7 +21,6 @@ export default function ManageInformation() {
     const fetchData = async () => {
       try {
         const sessionIdCookie = Cookies.get('sessionId');
-        //sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
         if (!sessionIdCookie) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {

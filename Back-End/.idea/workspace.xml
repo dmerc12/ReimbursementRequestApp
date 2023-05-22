@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/components/ui/category/UpdateCategoryComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/components/ui/category/UpdateCategoryComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-categories/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-categories/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/change-password.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/change-password.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/delete.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/delete.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/update.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-information/update.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-requests/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/pages/manage-requests/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

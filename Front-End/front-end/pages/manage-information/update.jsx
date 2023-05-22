@@ -13,25 +13,26 @@ export const metadata = {
 
 export default function UpdateCurrentEmployeeInformation() {
   const [employee, setEmployee] = useState(null);
-  const [sessionId, setSessionId] = useState(0);
+  const [sessionId, setSessionId] = useState(null);
   
   const router = useRouter();
 
   useEffect(() => {
-    const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
-    if (!sessionId) {
-      router.push('/login');
-      toast.info("Please login or register to gain access!", {
-        toastId: "customId"
-      })
+    const sessionIdCookie = Cookies.get('sessionId');
+    if (!sessionIdCookie) {
+        router.push('/login');
+        toast.info("Please login or register to gain access!", {
+            toastId: 'customId'
+        })
     }
+    setSessionId(sessionIdCookie)
 
     const fetchEmployee = async () => {
       try {
         const response = await fetch('/api/employee/handleGet', {
           method: 'PATCH',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({'sessionId': sessionId})
+          body: JSON.stringify({'sessionId': sessionIdCookie})
         });
 
         const data = await response.json();

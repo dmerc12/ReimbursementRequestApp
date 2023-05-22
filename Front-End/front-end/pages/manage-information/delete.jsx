@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import DeleteForm from '@/components/ui/employee/DeleteForm';
+import Cookies from 'js-cookie';
 
 export const metadata = {
   title: "Deleting",
@@ -16,15 +17,15 @@ export default function DeleteEmployeeInformation() {
     const router = useRouter();
 
     useEffect(() => {
-        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
-        if (!sessionId) {
+      const sessionIdCookie = Cookies.get('sessionId');
+      if (!sessionIdCookie) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
-            toastId: "customId"
+              toastId: 'customId'
           })
-        }
-        setSessionId(sessionId)
-      }, [router]);
+      }
+      setSessionId(sessionIdCookie)
+  }, [router]);
 
     return (
         <>
