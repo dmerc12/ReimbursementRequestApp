@@ -5,63 +5,29 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
-export default function UpdateCategoryComponent({ sessionId, categoryId }) {
+export default function UpdateCategoryComponent({ sessionId, category }) {
     const [editVisible, setEditVisible] = useState(false);
-    const [category, setCategory] = useState(null);
-    const [updatedCategoryName, setUpdatedCategoryName] = useState(category && category.categoryName)
+    const [categoryName, setCategoryName] = useState('');
 
     const router = useRouter();
 
     useEffect(() => {
-        const fetchCategory = async () => {
-            try {
-                const response = await fetch('/api/category/handleGet', {
-                    method: 'PATCH',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        'sessionId': sessionId,
-                        'categoryId': categoryId
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    setCategory(data.success);
-                } else if (data.error.message) {
-                    throw new Error(`${data.error.message}`);
-                } else if (data.error) {
-                    throw new Error(`${data.error}`);
-                } else {
-                    throw new Error("Something went extremely wrong, please try")
-                }
-            } catch (error) {
-                if (error.message === "Session has expired, please log in!") {
-                    Cookies.remove('sessionId');
-                    router.push('/login');
-                    toast.warn(error.message, {
-                        toastId: 'customId'
-                    });
-                } else {
-                    toast.error(error.message, {
-                        toastId: 'customId'
-                    });
-                }
-            } 
+        if (category) {
+            setCategoryName(category.categoryName);
         }
-        fetchCategory();
-    }, [router]);
+    }, [category]);
 
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
             const response = await fetch('/api/category/handleUpdate', 
                 {
-                method: 'PATCH',
+                method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     'sessionId': sessionId,
-                    'categoryName': updatedCategoryName
+                    'categoryId': category.categoryId,
+                    'categoryName': categoryName
                 }) 
                 }
             )
@@ -69,6 +35,8 @@ export default function UpdateCategoryComponent({ sessionId, categoryId }) {
 
             if (data.success) {
                 router.push('/manage-categories');
+                setEditVisible(false);
+                setCategoryName('')
                 toast.success("Category Successfully Updated!", {
                     toastId: 'customId'
                 });
@@ -100,7 +68,7 @@ export default function UpdateCategoryComponent({ sessionId, categoryId }) {
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
                         <label className='form-label' htmlFor='categoryName'>Category Name: </label>
-                        <input className='form-input' type='text' id='updateCategoryName' name='categoryName' value={updatedCategoryName} onChange={event => setUpdatedCategoryName(event.target.value)}/>
+                        <input className='form-input' type='text' id='updateCategoryName' name='categoryName' value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
                     </div>
 
                     <button className='form-btn-2' type='submit' id='updateCategoryNameButton'>Update Category</button>

@@ -6,17 +6,15 @@ export default function CategoryList({ sessionId, categories }) {
     if (categories.success) {
         for (let i=0; i<categories.success.length; i++) {
             const category = categories.success[i];
-            console.log(category)
             categoryRows.unshift(
                 <tr key={category.categoryId}>
                     <td className="category-table-data w-full">{category.categoryName}</td>
                     <td className="category-table-data flex gap-5">
-                        <UpdateCategoryComponent sessionId={sessionId} categoryId={category.categoryId}/>
+                        <UpdateCategoryComponent sessionId={sessionId} category={category}/>
                         <DeleteCategoryComponent />
                     </td>
                 </tr>
             )
-            console.log(categoryRows)
         }
     }
 

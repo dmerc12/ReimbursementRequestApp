@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 import AddCategoryComponent from '@/components/ui/category/AddCategoryComponent';
 import CategoryList from '@/components/ui/category/CategoryList';
+import Cookies from 'js-cookie';
 
 export const metadata = {
   title: "Managing Categories",
@@ -19,8 +20,9 @@ export default function ManageInformation() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
-        if (!sessionId) {
+        const sessionIdCookie = Cookies.get('sessionId');
+        //sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
+        if (!sessionIdCookie) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
             toastId: "customId"
@@ -30,10 +32,11 @@ export default function ManageInformation() {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify({
-              'sessionId': sessionId
+              'sessionId': sessionIdCookie
             })})
           const data = await response.json();
           setCategories(data);
+          setSessionId(sessionIdCookie);
         }
       } catch (error) {
         if (error.message === "Session has expired, please log in!") {

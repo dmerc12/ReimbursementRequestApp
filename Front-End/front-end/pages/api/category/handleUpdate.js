@@ -1,5 +1,5 @@
 const handler = async (req, res) => {
-    const method = '';
+    const method = 'PUT';
 
     const requestBody = JSON.stringify({
         'sessionId': req.body.sessionId,
