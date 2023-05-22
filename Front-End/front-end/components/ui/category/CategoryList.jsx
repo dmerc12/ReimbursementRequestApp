@@ -11,7 +11,7 @@ export default function CategoryList({ sessionId, categories }) {
                     <td className="category-table-data w-full">{category.categoryName}</td>
                     <td className="category-table-data flex gap-5">
                         <UpdateCategoryComponent sessionId={sessionId} category={category}/>
-                        <DeleteCategoryComponent />
+                        <DeleteCategoryComponent sessionId={sessionId} category={category}/>
                     </td>
                 </tr>
             )

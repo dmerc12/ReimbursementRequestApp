@@ -48,6 +48,10 @@ export default function AddCategoryComponent({ sessionId }) {
                 toast.warn(error.message, {
                     toastId: 'customId'
                 });
+            } else {
+                toast.error(error.message, {
+                    toastId: 'customId'
+                });
             }
         }
     }
