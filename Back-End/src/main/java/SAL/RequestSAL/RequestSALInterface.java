@@ -7,6 +7,7 @@ import java.util.List;
 public interface RequestSALInterface {
     Request addRequest(Request request);
     List<Request> getAllRequests(int employeeId);
+    List<Request> getAllRequestsCheck(int employeeId);
     Request getRequest(int requestId);
     Request updateRequest(Request request);
     int deleteRequest(int requestId);

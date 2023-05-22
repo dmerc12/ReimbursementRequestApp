@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 
 export default function DeleteCategoryComponent({ sessionId, category }) {
-    const [deleteVisible, setDeleteVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const router = useRouter();
 
@@ -26,7 +26,7 @@ export default function DeleteCategoryComponent({ sessionId, category }) {
 
             if (data.success) {
                 router.push('/manage-categories');
-                setDeleteVisible(false);
+                setVisible(false);
                 toast.success("Category Successfully Deleted!", {
                     toastId: 'customId'
                 });
@@ -39,12 +39,14 @@ export default function DeleteCategoryComponent({ sessionId, category }) {
             }
         } catch (error) {
             if (error.message === "Session has expired, please try again!") {
+                setVisible(false);
                 Cookies.remove('sessionId');
                 router.push('/login');
                 toast.warn(error.message, {
                     toastId: 'customId'
                 });
             } else {
+                setVisible(false)
                 toast.error(error.message, {
                     toastId: 'customId'
                 });
@@ -54,8 +56,8 @@ export default function DeleteCategoryComponent({ sessionId, category }) {
 
     return (
         <>
-            <FiTrash2 onClick={() => setDeleteVisible(true)} className='text-red-500' cursor="pointer" size={15}/>
-            <Modal visible={deleteVisible} onClose={() => setDeleteVisible(false)}>
+            <FiTrash2 onClick={() => setVisible(true)} className='text-red-500' cursor="pointer" size={15}/>
+            <Modal visible={visible} onClose={() => setVisible(false)}>
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
                         <label className='form-label'>Are you sure?</label>

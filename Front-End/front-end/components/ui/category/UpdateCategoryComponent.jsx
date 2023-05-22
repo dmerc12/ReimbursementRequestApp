@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 export default function UpdateCategoryComponent({ sessionId, category }) {
-    const [editVisible, setEditVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
     const [categoryName, setCategoryName] = useState('');
 
     const router = useRouter();
@@ -35,7 +35,7 @@ export default function UpdateCategoryComponent({ sessionId, category }) {
 
             if (data.success) {
                 router.push('/manage-categories');
-                setEditVisible(false);
+                setVisible(false);
                 setCategoryName('')
                 toast.success("Category Successfully Updated!", {
                     toastId: 'customId'
@@ -49,12 +49,14 @@ export default function UpdateCategoryComponent({ sessionId, category }) {
             }
         } catch (error) {
             if (error.message === "Session has expired, please log in!") {
+                setVisible(false)
                 Cookies.remove('sessionId');
                 router.push('/login');
                 toast.warn(error.message, {
                     toastId: 'customId'
                 });
             } else {
+                setVisible(false)
                 toast.error(error.message, {
                     toastId: 'customId'
                 });
@@ -63,8 +65,8 @@ export default function UpdateCategoryComponent({ sessionId, category }) {
     }
     return (
         <>
-            <FiEdit onClick={() => setEditVisible(true)} className='text-blue-500' cursor="pointer" size={15}/>
-            <Modal visible={editVisible} onClose={() => setEditVisible(false)}>
+            <FiEdit onClick={() => setVisible(true)} className='text-blue-500' cursor="pointer" size={15}/>
+            <Modal visible={visible} onClose={() => setVisible(false)}>
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
                         <label className='form-label' htmlFor='categoryName'>Category Name: </label>
