@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import Modal from '@/components/Model';
 import Cookies from 'js-cookie';
 
-export default function DeleteForm({ sessionId }) {
+export default function DeleteForm() {
     const [visible, setVisible] = useState(false);
 
     const router = useRouter();
@@ -15,11 +15,11 @@ export default function DeleteForm({ sessionId }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('/api/employee/handleDelete',
-            {
+            const sessionIdCookie = Cookies.get('sessionId');
+            const response = await fetch('/api/employee/handleDelete', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({'sessionId': sessionId,})
+                body: JSON.stringify({'sessionId': sessionIdCookie,})
             })
             console.log(response)
             const result = await response.json();

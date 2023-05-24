@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 import Modal from '@/components/Model';
+import Cookies from 'js-cookie';
 
-export default function UpdateEmployeeForm({ employee, sessionId }) {
+export default function UpdateEmployeeForm({ employee }) {
     const [firstName, setFirstName] = useState(employee.firstName);
     const [lastName, setLastName] = useState(employee.lastName);
     const [email, setEmail] = useState(employee.email);
@@ -18,12 +19,13 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
+            const sessionIdCookie = Cookies.get('sessionId');
             const response = await fetch('/api/employee/handleUpdate', 
                 {
                     method: 'PUT',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
-                        'sessionId': sessionId,
+                        'sessionId': sessionIdCookie,
                         'firstName': firstName,
                         'lastName': lastName,
                         'email': email,
@@ -36,6 +38,7 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
 
             if (data.success) {
                 router.push('/manage-information');
+                setVisible(false);
                 toast.success("Information Successfully Updated!", {
                     toastId: "customId"
                   });
@@ -50,6 +53,7 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
             if (error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 router.push('/login');
+                setVisible(false)
                 toast.warn(error.message, {
                     toastId: 'customId'
                 });

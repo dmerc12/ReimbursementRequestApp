@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import Modal from '@/components/Model';
 
-export default function ChangePasswordForm ({ sessionId }) {
+export default function ChangePasswordForm () {
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
 
@@ -15,11 +15,12 @@ export default function ChangePasswordForm ({ sessionId }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
+            const sessionIdCookie = Cookies.get('sessionId');
             const response = await fetch('/api/employee/handlePasswordChange', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    'sessionId': sessionId,
+                    'sessionId': sessionIdCookie,
                     'password':  password
                 })
             })
@@ -43,6 +44,7 @@ export default function ChangePasswordForm ({ sessionId }) {
             if (error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 router.push('/login');
+                setVisible(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
