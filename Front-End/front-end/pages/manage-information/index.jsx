@@ -67,8 +67,8 @@ export default function UpdateCurrentEmployeeInformation() {
     return (
       <>
         <h1>Update Your Current Information Below</h1>
-        <ChangePasswordForm sessionId={sessionId}/>
         {employee && <UpdateEmployeeForm employee={employee} sessionId={sessionId}/>}
+        <ChangePasswordForm sessionId={sessionId}/>
       </>
     )
 }

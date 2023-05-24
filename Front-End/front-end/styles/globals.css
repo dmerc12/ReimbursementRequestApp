@@ -128,7 +128,6 @@ p {
     background-color: black;
     border-radius: 10px;
     font-weight: 600;
-    transform: scale(1.05);
     color: white;
 }
 
@@ -201,11 +200,8 @@ p {
     flex-direction: column;
     justify-self: center;
     align-items: center;
-}
-
-.blur {
-    filter: blur(4px);
-    pointer-events: none;
+    z-index: 9999;
+    backdrop-filter: blur(5px)
 }
 
 .add-category-btn {
