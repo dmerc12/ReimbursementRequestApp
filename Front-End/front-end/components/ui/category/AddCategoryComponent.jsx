@@ -1,7 +1,7 @@
 'use client'
 
 import { AiOutlinePlus } from "react-icons/ai";
-import Modal from "../../Model";
+import Modal from "@/components/Model";
 import { useState } from 'react';
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";

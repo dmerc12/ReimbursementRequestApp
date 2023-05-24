@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 
-export default function UpdateEmployeeForm({ employee, sessionId }) {
+export default function UpdateEmployeeForm({ employee, sessionId, passwordModalOpen }) {
     const [firstName, setFirstName] = useState(employee.firstName);
     const [lastName, setLastName] = useState(employee.lastName);
     const [email, setEmail] = useState(employee.email);

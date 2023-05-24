@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
+import Modal from '@/components/Model';
 
 export default function ChangePasswordForm ({ sessionId }) {
     const [password, setPassword] = useState('');
+    const [visible, setVisible] = useState(false);
 
     const router = useRouter();
 
@@ -26,6 +28,7 @@ export default function ChangePasswordForm ({ sessionId }) {
             
             if (data.success) {
                 router.push('/manage-information');
+                setVisible(false);
                 toast.success("Password Successfully Changed!", {
                     toastId: "customId"
                 });
@@ -53,14 +56,20 @@ export default function ChangePasswordForm ({ sessionId }) {
 
     return (
         <>
-            <form className='form' onSubmit={onSubmit}>
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="password">New Password: </label>
-                    <input className='form-input' type="password" id='updatePassword' name='password' value={password} onChange={event => setPassword(event.target.value)}/>
-                </div>
+            <div className='change-password-component'>
+                <button onClick={() => setVisible(true)} className='change-password-btn' id='changePasswordModal'>Change Password</button>
+            </div>
 
-                <button className='form-btn-2' type='submit' id='changePasswordButton'>Change Password</button>
-            </form>
+            <Modal visible={visible} onClose={() => setVisible(false)}>
+                <form className='form' onSubmit={onSubmit}>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="password">New Password: </label>
+                        <input className='form-input' type="password" id='updatePassword' name='password' value={password} onChange={event => setPassword(event.target.value)}/>
+                    </div>
+
+                    <button className='form-btn-2' type='submit' id='changePasswordButton'>Change Password</button>
+                </form>
+            </Modal>
         </>
     )
 }
