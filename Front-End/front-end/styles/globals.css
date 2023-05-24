@@ -187,7 +187,6 @@ p {
     margin-top: 10px;
     font-size: 15px;
     font-weight: 575;
-    z-index: 0;
 } 
 
 .change-password-btn:hover {
@@ -201,8 +200,6 @@ p {
     flex-direction: column;
     justify-self: center;
     align-items: center;
-    backdrop-filter: blur(5px);
-    z-index: 1;
 }
 
 .delete-employee-component {
@@ -211,8 +208,6 @@ p {
     flex-direction: column;
     justify-self: center;
     align-items: center;
-    backdrop-filter: blur(5px);
-    z-index: 1;
 }
 
 .delete-employee-btn {
@@ -230,7 +225,6 @@ p {
     margin-top: 10px;
     font-size: 15px;
     font-weight: 575;
-    z-index: 0;
 }
 
 .delete-employee-btn:hover {
@@ -244,8 +238,6 @@ p {
     flex-direction: column;
     justify-self: center;
     align-items: center;
-    backdrop-filter: blur(5px);
-    z-index: 1;
 }
 
 .update-employee-btn {
@@ -263,7 +255,6 @@ p {
     margin-top: 10px;
     font-size: 15px;
     font-weight: 575;
-    z-index: 0;
 }
 
 .update-employee-btn:hover {
