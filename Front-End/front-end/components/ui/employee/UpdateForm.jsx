@@ -3,25 +3,29 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
+import Modal from '@/components/Model';
+import Cookies from 'js-cookie';
 
-export default function UpdateEmployeeForm({ employee, sessionId }) {
+export default function UpdateEmployeeForm({ employee }) {
     const [firstName, setFirstName] = useState(employee.firstName);
     const [lastName, setLastName] = useState(employee.lastName);
     const [email, setEmail] = useState(employee.email);
     const [phoneNumber, setPhoneNumber] = useState(employee.phoneNumber);
     const [address, setAddress] = useState(employee.address);
+    const [visible, setVisible] = useState(false);
 
     const router = useRouter();
 
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
+            const sessionIdCookie = Cookies.get('sessionId');
             const response = await fetch('/api/employee/handleUpdate', 
                 {
                     method: 'PUT',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
-                        'sessionId': sessionId,
+                        'sessionId': sessionIdCookie,
                         'firstName': firstName,
                         'lastName': lastName,
                         'email': email,
@@ -34,6 +38,7 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
 
             if (data.success) {
                 router.push('/manage-information');
+                setVisible(false);
                 toast.success("Information Successfully Updated!", {
                     toastId: "customId"
                   });
@@ -48,6 +53,7 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
             if (error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 router.push('/login');
+                setVisible(false)
                 toast.warn(error.message, {
                     toastId: 'customId'
                 });
@@ -61,34 +67,40 @@ export default function UpdateEmployeeForm({ employee, sessionId }) {
 
     return (
         <>
-            <form className='form' onSubmit={onSubmit}>
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="firstName">First Name: </label>
-                    <input className='form-input' type="text" id='updateFirstName' name='firstName' value={firstName} onChange={event => setFirstName(event.target.value)}/>
-                </div>
+            <div className='update-employee-component'>
+                <button onClick={() => setVisible(true)} className='update-employee-btn' id='updateInformationModal'>Update Information</button>
+            </div>
 
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="lastName">Last Name: </label>
-                    <input className='form-input' type="text" id='updateLastName' name='lastName' value={lastName} onChange={event => setLastName(event.target.value)}/>
-                </div>
+            <Modal visible={visible} onClose={() => setVisible(false)}>
+                <form className='form' onSubmit={onSubmit}>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="firstName">First Name: </label>
+                        <input className='form-input' type="text" id='updateFirstName' name='firstName' value={firstName} onChange={event => setFirstName(event.target.value)}/>
+                    </div>
 
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="email">Email: </label>
-                    <input className='form-input' type="text" id='updateEmail' name='email' value={email} onChange={event => setEmail(event.target.value)}/>
-                </div>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="lastName">Last Name: </label>
+                        <input className='form-input' type="text" id='updateLastName' name='lastName' value={lastName} onChange={event => setLastName(event.target.value)}/>
+                    </div>
 
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="phoneNumber">Phone Number: </label>
-                    <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={event => setPhoneNumber(event.target.value)}/>
-                </div>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="email">Email: </label>
+                        <input className='form-input' type="text" id='updateEmail' name='email' value={email} onChange={event => setEmail(event.target.value)}/>
+                    </div>
 
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="address">Address: </label>
-                    <input className='form-input' type="text" id='updateAddress' name='address' value={address} onChange={event => setAddress(event.target.value)}/>
-                </div>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="phoneNumber">Phone Number: </label>
+                        <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={event => setPhoneNumber(event.target.value)}/>
+                    </div>
 
-                <button className='form-btn-2' type='submit' id='updateCurrentInformationButton'>Update Current Information</button>
-            </form>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="address">Address: </label>
+                        <input className='form-input' type="text" id='updateAddress' name='address' value={address} onChange={event => setAddress(event.target.value)}/>
+                    </div>
+
+                    <button className='form-btn-2' type='submit' id='updateCurrentInformationButton'>Update Current Information</button>
+                </form>
+            </Modal>
         </>
     )
 }

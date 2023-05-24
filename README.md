@@ -19,5 +19,7 @@
 - CSS
 - react-toastify
 - js-cookie
-
+- Tailwind CSS
+- Post CSS
+- react-icons
 

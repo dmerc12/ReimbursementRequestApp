@@ -1,41 +1,42 @@
 'use client'
 
+import { AiOutlinePlus } from "react-icons/ai";
+import Modal from "@/components/Model";
 import { useState } from 'react';
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import Cookies from 'js-cookie';
-import Modal from '@/components/Model';
 
-export default function ChangePasswordForm () {
-    const [password, setPassword] = useState('');
+export default function AddCategoryComponent({ sessionId }) {
     const [visible, setVisible] = useState(false);
+    const [categoryName, setCategoryName] = useState('');
 
     const router = useRouter();
 
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const sessionIdCookie = Cookies.get('sessionId');
-            const response = await fetch('/api/employee/handlePasswordChange', {
+            const response = await fetch('/api/category/handleAdd', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    'sessionId': sessionIdCookie,
-                    'password':  password
+                    'sessionId': sessionId,
+                    'categoryName': categoryName
                 })
             })
 
             const data = await response.json();
-            
+
             if (data.success) {
-                router.push('/manage-information');
+                router.push('/manage-categories');
                 setVisible(false);
-                toast.success("Password Successfully Changed!", {
-                    toastId: "customId"
+                setCategoryName('')
+                toast.success("Category Successfully Added!", {
+                    toastId: 'customId'
                 });
             } else if (data.error.message) {
                 throw new Error(`${data.error.message}`);
-            }  else if (data.error) {
+            } else if (data.error) {
                 throw new Error(`${data.error}`);
             } else {
                 throw new Error("Something went extremely wrong, please try again!")
@@ -44,13 +45,12 @@ export default function ChangePasswordForm () {
             if (error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 router.push('/login');
-                setVisible(false);
                 toast.warn(error.message, {
-                    toastId: "customId"
+                    toastId: 'customId'
                 });
             } else {
-                toast.warn(error.message, {
-                    toastId: "customId"
+                toast.error(error.message, {
+                    toastId: 'customId'
                 });
             }
         }
@@ -58,18 +58,18 @@ export default function ChangePasswordForm () {
 
     return (
         <>
-            <div className='change-password-component'>
-                <button onClick={() => setVisible(true)} className='change-password-btn' id='changePasswordModal'>Change Password</button>
+            <div className="add-category-component">
+                <button onClick={() => setVisible(true)} className="add-category-btn" id='addNewCategoryModal'>Add New Category <AiOutlinePlus className="plus-icon" size={15} /></button>
             </div>
 
             <Modal visible={visible} onClose={() => setVisible(false)}>
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
-                        <label className='form-label' htmlFor="password">New Password: </label>
-                        <input className='form-input' type="password" id='updatePassword' name='password' value={password} onChange={event => setPassword(event.target.value)}/>
+                        <label className="form-label" htmlFor="categoryName">New Category Name: </label>
+                        <input className="form-input" type='text' id='newCategoryName' name='categoryName' value={categoryName} onChange={event => setCategoryName(event.target.value)}></input>
                     </div>
 
-                    <button className='form-btn-2' type='submit' id='changePasswordButton'>Change Password</button>
+                    <button className='form-btn-2' type='submit' id='addNewCategoryButton'>Add Category</button>
                 </form>
             </Modal>
         </>

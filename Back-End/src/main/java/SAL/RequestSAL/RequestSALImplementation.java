@@ -61,6 +61,15 @@ public class RequestSALImplementation implements RequestSALInterface{
     }
 
     @Override
+    public List<Request> getAllRequestsCheck(int employeeId) {
+        logger.info("Beginning SAL method get all requests check with employeeId: " + employeeId);
+        employeeSAO.getEmployeeById(employeeId);
+        List<Request> requestList = requestDAO.getAllRequests(employeeId);
+        logger.info("Finishing SAL method get all requests check");
+        return requestList;
+    }
+
+    @Override
     public Request getRequest(int requestId) {
         logger.info("Beginning SAL method get request with request ID: " + requestId);
         Request request = requestDAO.getRequest(requestId);

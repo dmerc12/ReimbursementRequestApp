@@ -1,10 +1,13 @@
 'use client'
 
 import { useRouter} from 'next/router';
+import { useState } from 'react'
 import { toast } from 'react-toastify';
-import Cookies from 'js-cookie'
+import Modal from '@/components/Model';
+import Cookies from 'js-cookie';
 
-export default function DeleteForm({ sessionId }) {
+export default function DeleteForm() {
+    const [visible, setVisible] = useState(false);
 
     const router = useRouter();
 
@@ -12,11 +15,11 @@ export default function DeleteForm({ sessionId }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('/api/employee/handleDelete',
-            {
+            const sessionIdCookie = Cookies.get('sessionId');
+            const response = await fetch('/api/employee/handleDelete', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({'sessionId': sessionId,})
+                body: JSON.stringify({'sessionId': sessionIdCookie,})
             })
             console.log(response)
             const result = await response.json();
@@ -52,12 +55,18 @@ export default function DeleteForm({ sessionId }) {
 
     return (
         <>
-            <h1>Confirm Deletion Below</h1>
-            <p> Any requests or subsequent categories you are associated with will also be deleted. Are you sure you would like to delete your information?</p>
-            
-            <form className="form" onSubmit={onSubmit}>
-                <button className="form-btn-2">Yes, Please Delete My Infomation</button>
-            </form>
+            <div className='delete-employee-component'>
+                <button onClick={() => setVisible(true)} className='delete-employee-btn' id='deleteInformationModal'>Delete Profile</button>
+            </div>
+
+            <Modal visible={visible} onClose={() => setVisible(false)}>
+                <form className="form" onSubmit={onSubmit}>
+                    <h1>Confirm Deletion Below</h1>
+                    <p> Any requests or subsequent categories you are associated with will also be deleted. Are you sure you would like to delete your information?</p>
+                
+                    <button className="form-btn-2">Yes, Please Delete My Infomation</button>
+                </form>
+            </Modal>
         </>
     )
 }

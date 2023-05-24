@@ -1,5 +1,5 @@
 const handler = async (req, res) => {
-    const method = '';
+    const method = 'PUT';
 
     const requestBody = JSON.stringify({
         'sessionId': req.body.sessionId,
@@ -29,3 +29,5 @@ const handler = async (req, res) => {
         return res.end(JSON.stringify({'error': error.message}));
     }
 }
+
+export default handler;

@@ -1,20 +1,27 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
-import AddCategoryButton from '@/components/ui/category/AddCategoryButton';
+import AddCategoryComponent from '@/components/ui/category/AddCategoryComponent';
 import CategoryList from '@/components/ui/category/CategoryList';
+import Cookies from 'js-cookie';
+
+export const metadata = {
+  title: "Managing Categories",
+  description: "Managing categories"
+};
 
 export default function ManageInformation() {
 
   const router = useRouter();
 
   const [categories, setCategories] = useState([]);
+  var [sessionId, setSessionId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId=')).split('=')[1];
-        if (!sessionId) {
+        const sessionIdCookie = Cookies.get('sessionId');
+        if (!sessionIdCookie) {
           router.push('/login');
           toast.info("Please login or register to gain access!", {
             toastId: "customId"
@@ -24,16 +31,24 @@ export default function ManageInformation() {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify({
-              'sessionId': sessionId
+              'sessionId': sessionIdCookie
             })})
           const data = await response.json();
-          console.log(data)
-          setCategories(data)
+          setCategories(data);
+          setSessionId(sessionIdCookie);
         }
       } catch (error) {
-        toast.error(error.message, {
-          toastId: "customId"
-        });
+        if (error.message === "Session has expired, please log in!") {
+          Cookies.remove('sessionId');
+          router.push('/login');
+          toast.warn(error.message, {
+              toastId: 'customId'
+          });
+      } else {
+          toast.error(error.message, {
+            toastId: "customId"
+          });
+        }
       }
     }
     fetchData();
@@ -42,8 +57,8 @@ export default function ManageInformation() {
   return (
     <>
       <h1>Manage Category Information Page</h1>
-      <AddCategoryButton />
-      <CategoryList categories={categories}/>
+      <AddCategoryComponent sessionId={sessionId} />
+      <CategoryList sessionId={sessionId} categories={categories}/>
     </>
   )
 }

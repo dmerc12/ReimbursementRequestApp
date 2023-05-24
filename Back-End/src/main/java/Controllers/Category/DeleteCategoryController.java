@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DeleteCategoryController {
-    public static Logger logger = LogManager.getLogger(GetCategoryController.class);
+    public static Logger logger = LogManager.getLogger(DeleteCategoryController.class);
     CategoryDALImplementation categoryDAO = new CategoryDALImplementation();
     EmployeeDALImplementation employeeDAO = new EmployeeDALImplementation();
     EmployeeSALImplementation employeeSAO = new EmployeeSALImplementation(employeeDAO);
@@ -37,7 +37,7 @@ public class DeleteCategoryController {
             logger.info("Beginning API handler delete category with info: " + categoryId + ", " + sessionId);
             Gson gson = new Gson();
             Session currentSession = sessionSAO.getSession(sessionId);
-            List<Request> allEmployeeRequests = requestSAO.getAllRequests(currentSession.getEmployeeId());
+            List<Request> allEmployeeRequests = requestSAO.getAllRequestsCheck(currentSession.getEmployeeId());
             for (Request request : allEmployeeRequests) {
                 if (request.getCategoryId() == categoryId) {
                     throw new GeneralError("This category is being used in a request elsewhere and cannot be " +

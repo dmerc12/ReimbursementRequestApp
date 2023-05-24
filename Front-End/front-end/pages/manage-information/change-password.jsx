@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import ChangePasswordForm from "@/components/ui/employee/ChangePasswordForm";
+import Cookies from "js-cookie";
 
 export const metadata = {
     title: "Changing Password",
-    description: "Changing my password"
+    description: "Changing password"
 };
 
 export default function ChangePassword() {
@@ -14,14 +15,14 @@ export default function ChangePassword() {
     const router = useRouter();
 
     useEffect(() => {
-        const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId')).split('=')[1];
-        if (!sessionId) {
+        const sessionIdCookie = Cookies.get('sessionId');
+        if (!sessionIdCookie) {
             router.push('/login');
             toast.info("Please login or register to gain access!", {
-                toastId: "customId"
+                toastId: 'customId'
             })
         }
-        setSessionId(sessionId)
+        setSessionId(sessionIdCookie)
     }, [router]);
 
     return (

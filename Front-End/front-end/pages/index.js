@@ -1,20 +1,30 @@
 import Link from 'next/link'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
+
+export const metadata = {
+  title: "Home",
+  description: "Home"
+};
 
 export default function Home() {
+  const [sessionId, setSessionId] = useState(null);
+  
   const router = useRouter();
 
   useEffect(() => {
-    const sessionId = document.cookie.split(';').find(cookie => cookie.trim().startsWith('sessionId='));
-    if (!sessionId) {
-      router.push('/login');
-      toast.info("Please login or register to gain access!", {
-        toastId: "customId"
-      })
+    const sessionIdCookie = Cookies.get('sessionId');
+    if (!sessionIdCookie) {
+        router.push('/login');
+        toast.info("Please login or register to gain access!", {
+            toastId: 'customId'
+        })
     }
-  }, [router]);
+    setSessionId(sessionIdCookie)
+}, [router]);
+
 
   return (
     <>

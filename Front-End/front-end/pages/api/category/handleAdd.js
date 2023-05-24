@@ -3,9 +3,7 @@ const handler = async (req, res) => {
 
     const requestBody = JSON.stringify({
         'sessionId': req.body.sessionId,
-        'categoryId': req.body.categoryId,
-        'comment': req.body.comment,
-        'amount': req.body.amount
+        'categoryName': req.body.categoryName
     })
 
     const requestOptions = {
