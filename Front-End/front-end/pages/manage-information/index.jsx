@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import UpdateEmployeeForm from '@/components/ui/employee/UpdateForm';
 import ChangePasswordForm from '@/components/ui/employee/ChangePasswordForm';
+import DeleteForm from '@/components/ui/employee/DeleteForm';
 
 export const metadata = {
   title: "Managing Information",
@@ -69,6 +70,7 @@ export default function UpdateCurrentEmployeeInformation() {
         <h1>Update Your Current Information Below</h1>
         {employee && <UpdateEmployeeForm employee={employee} sessionId={sessionId}/>}
         <ChangePasswordForm sessionId={sessionId}/>
+        <DeleteForm sessionId={sessionId}/>
       </>
     )
 }
