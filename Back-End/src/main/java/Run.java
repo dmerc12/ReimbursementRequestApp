@@ -2,6 +2,7 @@ import Controllers.Category.*;
 import Controllers.Employee.*;
 import Controllers.Request.AddRequestController;
 import Controllers.Request.GetAllRequestsController;
+import Controllers.Request.UpdateRequestController;
 import io.javalin.Javalin;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,9 +42,11 @@ public class Run {
         // Request Controllers and routes:
         AddRequestController addRequestController = new AddRequestController();
         GetAllRequestsController getAllRequestsController = new GetAllRequestsController();
+        UpdateRequestController updateRequestController = new UpdateRequestController();
 
         app.post("/create/request/now", addRequestController.addRequest);
         app.get("/get/all/requests/:sessionId", getAllRequestsController.getAllRequests);
+        app.put("/update/request/now", updateRequestController.updateRequest);
 
         logger.info("Application running...");
         app.start(8080);
