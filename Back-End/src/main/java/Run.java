@@ -1,6 +1,7 @@
 import Controllers.Category.*;
 import Controllers.Employee.*;
 import Controllers.Request.AddRequestController;
+import Controllers.Request.DeleteRequestController;
 import Controllers.Request.GetAllRequestsController;
 import Controllers.Request.UpdateRequestController;
 import io.javalin.Javalin;
@@ -43,10 +44,12 @@ public class Run {
         AddRequestController addRequestController = new AddRequestController();
         GetAllRequestsController getAllRequestsController = new GetAllRequestsController();
         UpdateRequestController updateRequestController = new UpdateRequestController();
+        DeleteRequestController deleteRequestController = new DeleteRequestController();
 
         app.post("/create/request/now", addRequestController.addRequest);
         app.get("/get/all/requests/:sessionId", getAllRequestsController.getAllRequests);
         app.put("/update/request/now", updateRequestController.updateRequest);
+        app.delete("/delete/request/:requestId/:sessionId", deleteRequestController.deleteRequest);
 
         logger.info("Application running...");
         app.start(8080);
