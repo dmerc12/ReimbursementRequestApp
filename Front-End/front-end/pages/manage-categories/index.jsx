@@ -44,7 +44,7 @@ export default function ManageInformation() {
           toast.warn(error.message, {
               toastId: 'customId'
           });
-      } else {
+        } else {
           toast.error(error.message, {
             toastId: "customId"
           });

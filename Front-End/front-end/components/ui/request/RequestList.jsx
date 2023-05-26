@@ -5,12 +5,12 @@ export default function RequestList({ sessionId, requests }) {
             const request = requests.success[i];
             requestRows.unshift(
                 <tr key={request.requestId}>
-                    <td className='request-table-data w-full'>{request.requestId}</td>
-                    <td className='request-table-data w-full'>{request.categoryId}</td>
-                    <td className='request-table-data w-full'>{request.comment}</td>
-                    <td className='request-table-data w-full'>{request.amount}</td>
+                    <td className='request-table-data'>{request.requestId}</td>
+                    <td className='request-table-data'>{request.categoryId}</td>
+                    <td className='request-table-data'>{request.comment}</td>
+                    <td className='request-table-data'>{request.amount}</td>
                     <td className='request-table-data flex gap-5'>
-                        
+
                     </td>
                 </tr>
             )
