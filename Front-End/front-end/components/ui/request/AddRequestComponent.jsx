@@ -58,7 +58,37 @@ export default function AddRequestComponent() {
     const onSubmit = async (event) => {
         event.preventDefault(); 
         try {
+            const sessionId = Cookies.get('sessionId');
+            const response = await fetch('/api/request/handleAdd', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'sessionId': sessionId,
+                    'categoryId': category.categoryId,
+                    'comment': comment,
+                    'amount': amount
+                })
+            })
 
+            const data = await response.json();
+
+            if (data.success) {
+                router.push('/manage-requests');
+                setVisible(false);
+                setComment('');
+                setAmount(0);
+                setCategories([]);
+                setCategory('');
+                toast.success('Request Successfully Added!', {
+                    toastId: 'customId'
+                });
+            } else if (data.error.message) {
+                throw new Error(`${data.error.message}`);
+            } else if (data.error) {
+                throw new Error(`${data.error}`);
+            } else {
+                throw new Error("Something went extremely wrong, please try again!");
+            }
         } catch (error) {
             if (error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
@@ -69,7 +99,7 @@ export default function AddRequestComponent() {
             } else {
                 toast.error(error.message, {
                     toastId: 'customId'
-                })
+                });
             }
         }
     }
