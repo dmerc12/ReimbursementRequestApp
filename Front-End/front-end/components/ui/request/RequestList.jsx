@@ -1,4 +1,4 @@
-export default function RequestList({ sessionId, requests }) {
+export default function RequestList({ requests }) {
     let requestRows = [];
     if (requests.success) {
         for (let i=0; i<requests.success.length; i++) {

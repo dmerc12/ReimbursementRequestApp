@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import RequestList from '@/components/ui/request/RequestList';
+import AddRequestComponent from '@/components/ui/request/AddRequestComponent';
 
 export const metadata = {
   title: "Managing Requests",
@@ -64,7 +65,8 @@ export default function ManageRequest() {
     return (
         <>
             <h1>Manage Request Information Page</h1>
-            <RequestList sessionId={sessionId} requests={requests}/>
+            <AddRequestComponent/>
+            <RequestList requests={requests}/>
         </>
     )
 }
