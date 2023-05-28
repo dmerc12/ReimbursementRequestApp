@@ -9,10 +9,10 @@ import { useRouter } from 'next/router';
 
 export default function AddRequestComponent() {
     const [visible, setVisible] = useState(false);
+    const [categoryId, setCategoryId] = useState(0);
     const [comment, setComment] = useState('');
     const [amount, setAmount] = useState(0);
     const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState('');
 
     const router = useRouter();
 
@@ -64,7 +64,7 @@ export default function AddRequestComponent() {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     'sessionId': sessionId,
-                    'categoryId': category.categoryId,
+                    'categoryId': categoryId,
                     'comment': comment,
                     'amount': amount
                 })
@@ -78,7 +78,6 @@ export default function AddRequestComponent() {
                 setComment('');
                 setAmount(0);
                 setCategories([]);
-                setCategory('');
                 toast.success('Request Successfully Added!', {
                     toastId: 'customId'
                 });
@@ -114,9 +113,9 @@ export default function AddRequestComponent() {
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
                         <label className='form-label' htmlFor='categoryDropDown'>Category: </label>
-                        <select className='form-input' id='categoryDropDown' name='category' value={category} onChange={event => setCategory(event.target.value)}>
+                        <select className='form-input' id='categoryDropDown' name='category' value={categoryId} onChange={event => setCategoryId(event.target.key)}>
                             {categories.map(category => (
-                                <option key={category.categoryId}>{category.categoryName}</option>))}
+                                <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>))}
                         </select>
                     </div>
 
