@@ -114,8 +114,16 @@ export default function AddRequestComponent() {
                     <div className='form-field'>
                         <label className='form-label' htmlFor='categoryDropDown'>Category: </label>
                         <select className='form-input' id='addCategoryDropDown' name='categoryDropDown' value={categoryId} onChange={event => setCategoryId(event.target.value)}>
-                            {categories.map(category => (
-                                <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>))}
+                            {categories && categories.length > 0 && (
+                                (() => {
+                                    const options = [];
+                                    for (let i=0; i < categories.length; i++) {
+                                        const category = categories[i];
+                                        options.push(<option key={category.categoryIc} value={category.categoryId}>{category.categoryName}</option>);
+                                    }
+                                    return options;
+                                })()
+                            )}
                         </select>
                     </div>
 
