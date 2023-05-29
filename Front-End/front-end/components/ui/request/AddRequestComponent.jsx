@@ -113,7 +113,7 @@ export default function AddRequestComponent() {
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
                         <label className='form-label' htmlFor='categoryDropDown'>Category: </label>
-                        <select className='form-input' id='categoryDropDown' name='category' value={categoryId} onChange={event => setCategoryId(event.target.key)}>
+                        <select className='form-input' id='categoryDropDown' name='category' value={categoryId} onChange={event => setCategoryId(event.target.value)}>
                             {categories.map(category => (
                                 <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>))}
                         </select>
