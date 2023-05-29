@@ -113,7 +113,7 @@ export default function AddRequestComponent() {
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
                         <label className='form-label' htmlFor='categoryDropDown'>Category: </label>
-                        <select className='form-input' id='categoryDropDown' name='category' value={categoryId} onChange={event => setCategoryId(event.target.value)}>
+                        <select className='form-input' id='addCategoryDropDown' name='categoryDropDown' value={categoryId} onChange={event => setCategoryId(event.target.value)}>
                             {categories.map(category => (
                                 <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>))}
                         </select>
@@ -121,12 +121,12 @@ export default function AddRequestComponent() {
 
                     <div className='form-field'>
                         <label className='form-label' htmlFor='comment'>Comment: </label>
-                        <input className='form-input' type='text' id='commentInput' name='comment' value={comment} onChange={event => setComment(event.target.value)}></input>
+                        <input className='form-input' type='text' id='createCommentInput' name='comment' value={comment} onChange={event => setComment(event.target.value)}></input>
                     </div>
 
                     <div className='form-field'>
                         <label className='form-label' htmlFor='amount'>Amount: </label>
-                        <input className='form-input' type='number' id='amountInput' name='amount' value={amount} onChange={event => setAmount(event.target.value)}></input>
+                        <input className='form-input' type='number' id='createAmountInput' name='amount' value={amount} onChange={event => setAmount(event.target.value)}></input>
                     </div>
 
                     <button className='form-btn-2' type='submit' id='addNewRequestButton'>Add Request</button>
