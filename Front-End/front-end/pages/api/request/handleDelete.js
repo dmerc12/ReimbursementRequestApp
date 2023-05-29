@@ -1,15 +1,18 @@
+import { RouteKind } from "next/dist/server/future/route-kind";
+
 const handler = async (req, res) => {
     const sessionId = req.body.sessionId;
-    
-    const method = 'GET';
-    
+    const requestId = req.body.requestId;
+
+    const method = 'DELETE';
+
     const requestOptions = {
         method: method,
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json'}
     };
-    
-    const URL = `http://localhost:8080/get/all/categories/${sessionId}`;
-    
+
+    const URL = `http://localhost:8080/delete/request/${requestId}/${sessionId}`;
+
     try {
         const response = await fetch(URL, requestOptions);
         const data = await response.json();
@@ -19,10 +22,10 @@ const handler = async (req, res) => {
             return res.end(JSON.stringify({'error': data}));
         } else {
             return res.end(JSON.stringify({'error': "Cannot connect to the back end, please try again!"}));
-         }
+        }
     } catch (error) {
         return res.end(JSON.stringify({'error': error.message}));
-     }
+    }
 }
-  
+
 export default handler;

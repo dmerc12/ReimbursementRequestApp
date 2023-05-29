@@ -317,3 +317,52 @@ p {
     color: white;
 
 }
+
+.request-list {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.request-table-head {
+    text-align: left;
+    padding: 30px;
+    color: white;
+}
+
+.request-table-data {
+    padding: 30px;
+    color: white;
+}
+
+.add-request-component {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+}
+
+.add-request-btn {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    display: inline;
+    padding: 10px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    width: 15em;
+    height: 4em;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 575;
+}
+
+.add-request-btn:hover {
+    box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}

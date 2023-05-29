@@ -39,7 +39,7 @@ export default function AddCategoryComponent({ sessionId }) {
             } else if (data.error) {
                 throw new Error(`${data.error}`);
             } else {
-                throw new Error("Something went extremely wrong, please try again!")
+                throw new Error("Something went extremely wrong, please try again!");
             }
         } catch (error) {
             if (error.message === "Session has expired, please log in!") {

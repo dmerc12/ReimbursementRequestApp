@@ -179,7 +179,7 @@ public class RequestSALTests {
             requestSAO.updateRequest(testRequest);
             Assert.fail();
         } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "The amount field cannot be $0.01, please try again!");
+            Assert.assertEquals(error.getMessage(), "The amount field cannot be below $0.01, please try again!");
         }
     }
 
@@ -187,6 +187,18 @@ public class RequestSALTests {
     public void de_updateRequestCategoryNotFound() {
         try {
             Request testRequest = new Request(currentRequestId, -1, -500000000, "test", 25.00);
+            requestSAO.updateRequest(testRequest);
+            Assert.fail();
+        } catch (GeneralError error) {
+            Assert.assertEquals(error.getMessage(), "Category not found, please try again!");
+        }
+    }
+
+    @Test
+    public void df_updateRequestNothingChanged() {
+        try {
+            Request testRequest = new Request(currentRequestId, successRequest.getEmployeeId(),
+                    successRequest.getCategoryId(), successRequest.getComment(), successRequest.getAmount());
             requestSAO.updateRequest(testRequest);
             Assert.fail();
         } catch (GeneralError error) {

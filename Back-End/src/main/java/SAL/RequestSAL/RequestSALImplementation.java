@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RequestSALImplementation implements RequestSALInterface{
     private final RequestDALImplementation requestDAO;
@@ -89,7 +90,7 @@ public class RequestSALImplementation implements RequestSALInterface{
         logger.info("Beginning SAL method update request with request ID: " + request.getRequestId()
                 + ", category ID: " + request.getCategoryId() + ", employee ID: " + request.getEmployeeId() +
                 ", comment: " + request.getComment() + ", amount: " + request.getAmount());
-        getRequest(request.getRequestId());
+        Request currentRequest = getRequest(request.getRequestId());
         categorySAO.getCategory(request.getCategoryId());
         if (request.getComment().equals("")) {
             logger.warn("SAL method update request, comment left empty");
@@ -99,7 +100,12 @@ public class RequestSALImplementation implements RequestSALInterface{
             throw new GeneralError("The comment field cannot exceed 150 characters, please try again!");
         } else if (request.getAmount() < 0.01) {
             logger.warn("SAL method update request, amount negative or $0.00");
-            throw new GeneralError("The amount field cannot be $0.01, please try again!");
+            throw new GeneralError("The amount field cannot be below $0.01, please try again!");
+        } else if (Objects.equals(currentRequest.getComment(), request.getComment()) &&
+                currentRequest.getCategoryId() == request.getCategoryId() &&
+                currentRequest.getAmount() == request.getAmount()) {
+            logger.warn("SAL method update request, nothing changed");
+            throw new GeneralError("Nothing changed, please try again!");
         } else {
             Request updatedRequest = requestDAO.updateRequest(request);
             logger.info("Finishing SAL method update request with request ID: " + updatedRequest.getRequestId()
