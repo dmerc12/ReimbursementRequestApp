@@ -1,8 +1,8 @@
 export default function RequestList({ requests }) {
     let requestRows = [];
-    if (requests.success) {
-        for (let i=0; i<requests.success.length; i++) {
-            const request = requests.success[i];
+    if (requests) {
+        for (let i=0; i<requests.length; i++) {
+            const request = requests[i];
             requestRows.unshift(
                 <tr key={request.requestId}>
                     <td className='request-table-data'>{request.requestId}</td>

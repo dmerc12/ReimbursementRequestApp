@@ -73,11 +73,11 @@ export default function AddRequestComponent() {
             const data = await response.json();
 
             if (data.success) {
-                router.push('/manage-requests');
                 setVisible(false);
                 setComment('');
                 setAmount(0);
                 setCategories([]);
+                router.push('/manage-requests');
                 toast.success('Request Successfully Added!', {
                     toastId: 'customId'
                 });
