@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import UpdateRequestComponent from './UpdateRequestComponent';
+import DeleteRequestComponent from './DeleteRequestComponent';
 
 export default function RequestList({ requests }) {
     const [categories, setCategories] = useState([]);
@@ -65,6 +66,7 @@ export default function RequestList({ requests }) {
                     <td className='request-table-data'>{request.amount}</td>
                     <td className='request-table-data flex gap-5'>
                         <UpdateRequestComponent request={request} />
+                        <DeleteRequestComponent request={request} />
                     </td>
                 </tr>
             )

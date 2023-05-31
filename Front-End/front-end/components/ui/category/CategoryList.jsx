@@ -1,7 +1,7 @@
 import UpdateCategoryComponent from './UpdateCategoryComponent';
 import DeleteCategoryComponent from './DeleteCategoryComponent';
 
-export default function CategoryList({ sessionId, categories }) {
+export default function CategoryList({ categories }) {
     let categoryRows = [];
     if (categories.success) {
         for (let i=0; i<categories.success.length; i++) {
@@ -11,7 +11,7 @@ export default function CategoryList({ sessionId, categories }) {
                     <td className="category-table-data w-full">{category.categoryName}</td>
                     <td className="category-table-data flex gap-5">
                         <UpdateCategoryComponent category={category}/>
-                        <DeleteCategoryComponent sessionId={sessionId} category={category}/>
+                        <DeleteCategoryComponent category={category}/>
                     </td>
                 </tr>
             )
