@@ -52,7 +52,7 @@ public class RequestSALImplementation implements RequestSALInterface{
         logger.info("Beginning SAL method get all requests with employee ID: " + employeeId);
         employeeSAO.getEmployeeById(employeeId);
         List<Request> requestList = requestDAO.getAllRequests(employeeId);
-        if (requestList.size() <= 1) {
+        if (requestList.size() <= 0) {
             logger.warn("SAL method get all requests, request list empty");
             throw new GeneralError("No requests found, please try again!");
         } else {

@@ -73,11 +73,11 @@ export default function AddRequestComponent() {
             const data = await response.json();
 
             if (data.success) {
-                router.push('/manage-requests');
                 setVisible(false);
                 setComment('');
                 setAmount(0);
                 setCategories([]);
+                router.push('/manage-requests');
                 toast.success('Request Successfully Added!', {
                     toastId: 'customId'
                 });
@@ -113,20 +113,28 @@ export default function AddRequestComponent() {
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
                         <label className='form-label' htmlFor='categoryDropDown'>Category: </label>
-                        <select className='form-input' id='categoryDropDown' name='category' value={categoryId} onChange={event => setCategoryId(event.target.value)}>
-                            {categories.map(category => (
-                                <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>))}
+                        <select className='form-input' id='addCategoryDropDown' name='categoryDropDown' value={categoryId} onChange={event => setCategoryId(event.target.value)}>
+                            {categories && categories.length > 0 && (
+                                (() => {
+                                    const options = [];
+                                    for (let i=0; i < categories.length; i++) {
+                                        const category = categories[i];
+                                        options.push(<option key={category.categoryIc} value={category.categoryId}>{category.categoryName}</option>);
+                                    }
+                                    return options;
+                                })()
+                            )}
                         </select>
                     </div>
 
                     <div className='form-field'>
                         <label className='form-label' htmlFor='comment'>Comment: </label>
-                        <input className='form-input' type='text' id='commentInput' name='comment' value={comment} onChange={event => setComment(event.target.value)}></input>
+                        <input className='form-input' type='text' id='createCommentInput' name='comment' value={comment} onChange={event => setComment(event.target.value)}></input>
                     </div>
 
                     <div className='form-field'>
                         <label className='form-label' htmlFor='amount'>Amount: </label>
-                        <input className='form-input' type='number' id='amountInput' name='amount' value={amount} onChange={event => setAmount(event.target.value)}></input>
+                        <input className='form-input' type='number' id='createAmountInput' name='amount' value={amount} onChange={event => setAmount(event.target.value)}></input>
                     </div>
 
                     <button className='form-btn-2' type='submit' id='addNewRequestButton'>Add Request</button>

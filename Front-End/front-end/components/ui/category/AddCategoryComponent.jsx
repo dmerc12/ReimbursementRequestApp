@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from 'next/router';
 
-export default function AddCategoryComponent({ sessionId }) {
+export default function AddCategoryComponent() {
     const [visible, setVisible] = useState(false);
     const [categoryName, setCategoryName] = useState('');
 
@@ -16,6 +16,7 @@ export default function AddCategoryComponent({ sessionId }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
+            const sessionId = Cookies.get('sessionId');
             const response = await fetch('/api/category/handleAdd', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},

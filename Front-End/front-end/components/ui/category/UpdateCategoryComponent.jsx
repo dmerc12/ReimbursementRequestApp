@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
-export default function UpdateCategoryComponent({ sessionId, category }) {
+export default function UpdateCategoryComponent({ category }) {
     const [visible, setVisible] = useState(false);
     const [categoryName, setCategoryName] = useState('');
 
@@ -20,6 +20,7 @@ export default function UpdateCategoryComponent({ sessionId, category }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
+            const sessionId = Cookies.get('sessionId');
             const response = await fetch('/api/category/handleUpdate', 
                 {
                 method: 'PUT',

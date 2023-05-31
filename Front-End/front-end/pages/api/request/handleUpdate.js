@@ -1,13 +1,7 @@
 const handler = async (req, res) => {
     const method = 'PUT';
 
-    const requestBody = JSON.stringify({
-        'sessionId': req.body.sessionId,
-        'requestId': req.body.requestId,
-        'categoryId': req.body.categoryId,
-        'comment': req.body.comment,
-        'amount': req.body.amount
-    });
+    const requestBody = req.body;
 
     const requestOptions = {
         method: method,
@@ -22,7 +16,7 @@ const handler = async (req, res) => {
         const data = await response.json();
         if (response.status === 200) {
             return res.end(JSON.stringify({'success': data}));
-        } else if (response === 400) {
+        } else if (response.status === 400) {
             return res.end(JSON.stringify({'error': data}));
         } else {
             return res.end(JSON.stringify({'error': 'Cannot connect to the back end, please try again!'}));

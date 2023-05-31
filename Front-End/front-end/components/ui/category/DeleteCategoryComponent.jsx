@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 
-export default function DeleteCategoryComponent({ sessionId, category }) {
+export default function DeleteCategoryComponent({ category }) {
     const [visible, setVisible] = useState(false);
 
     const router = useRouter();
@@ -13,6 +13,7 @@ export default function DeleteCategoryComponent({ sessionId, category }) {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
+            const sessionId = Cookies.get('sessionId');
             const response = await fetch('/api/category/handleDelete', {
                 method: "PATCH",
                 headers: {'Content-Type': 'application/json'},
