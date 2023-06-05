@@ -3,8 +3,11 @@ package SAL.EmployeeSAL;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
+import Entities.Requests.Employee.NewEmployeeRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Objects;
 
 public class EmployeeSALImplementation implements EmployeeSALInterface{
     private final EmployeeDALImplementation employeeDAO;
@@ -13,11 +16,11 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
         this.employeeDAO = employeeDAO;
     }
     @Override
-    public Employee addEmployee(Employee employee) {
-        logger.info("Beginning SAL method add employee with employeeId: " + employee.getEmployeeId() +
-                ", firstName; " + employee.getFirstName() + ", lastName: " + employee.getLastName() +
-                ", email: " + employee.getEmail() + ", password: " + employee.getPassword(),", phoneNumber: " +
-                employee.getPhoneNumber() + ", address: " + employee.getAddress());
+    public Employee addEmployee(NewEmployeeRequest employee) {
+        logger.info("Beginning SAL method add employee with firstName; " + employee.getFirstName() +
+                ", lastName: " + employee.getLastName() + ", email: " + employee.getEmail() + ", password: " +
+                employee.getPassword(), ", phoneNumber: " + employee.getPhoneNumber() + ", address: " +
+                employee.getAddress() + ", confirmationPassword: " + employee.getConfirmationPassword());
         if (employee.getFirstName().equals("")) {
             logger.warn("SAL method add employee, first name left empty");
             throw new GeneralError("The first name field cannot be left empty, please try again!");
@@ -58,13 +61,25 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
         } else if (employee.getAddress().length() > 60) {
             logger.warn("SAL method add employee, address too long");
             throw new GeneralError("The address field cannot exceed 60 characters, please try again!");
+        } else if (employee.getConfirmationPassword().equals("")) {
+            logger.warn("SAL method add employee, confirmation password left empty");
+            throw new GeneralError("The confirmation password field cannot be left empty, please try again!");
+        } else if (employee.getConfirmationPassword().length() > 60) {
+            logger.warn("SAL method add employee, confirmation password too long");
+            throw new GeneralError("The confirmation password field cannot exceed 60 characters, please try again!");
+        } else if (!(employee.getPassword().equals(employee.getConfirmationPassword()))) {
+            logger.warn("SAL method add employee, passwords don't match");
+            throw new GeneralError("The passwords do not match, please try again!");
         } else {
             Employee existingEmployee = employeeDAO.getEmployeeByEmail(employee.getEmail());
             if (existingEmployee != null) {
                 logger.warn("SAL method add employee, employee already exists");
                 throw new GeneralError("An employee with this email already exists, please try again!");
             } else {
-                Employee result = employeeDAO.addEmployee(employee);
+                Employee verifiedNewEmployee = new Employee(0, employee.getFirstName(),
+                        employee.getLastName(), employee.getEmail(), employee.getPassword(), employee.getPhoneNumber(),
+                        employee.getAddress());
+                Employee result = employeeDAO.addEmployee(verifiedNewEmployee);
                 String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
                                 "password: %s, phoneNumber: %s, address: %s", result.getEmployeeId(),
                         result.getFirstName(), result.getLastName(), result.getEmail(), result.getPassword(),
