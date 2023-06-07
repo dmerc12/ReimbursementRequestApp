@@ -5,19 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/back-end/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/org/example/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/test/java/org/example/AppTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utilities/CustomHashMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utilities/CustomHashMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/org/example/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/test/java/org/example/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/Database/DatabaseSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/Database/DatabaseSetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/Database/ResetDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/Database/ResetDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SAL/EmployeeSAL/EmployeeSALImplementation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +46,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2NvzCx9kvVf8DlsH3JwJXpYo5wh" />
   <component name="ProjectLevelVcsManager">
@@ -70,20 +70,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CustomHashMethods">
-    <configuration name="CustomHashMethods" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Utilities.CustomHashMethods" />
-      <module name="Reimbursement-Reqest-App" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Utilities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.ResetDatabase">
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
@@ -124,7 +111,7 @@
         <env name="Password" value="Mercer1282!" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="DAL.Database.ResetDatabase" />
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.Database.*" />
@@ -141,7 +128,7 @@
         <env name="Password" value="Mercer1282!" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="Run" />
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -311,7 +298,6 @@
       <item itemvalue="Application.DatabaseSetup" />
       <item itemvalue="Application.ResetDatabase" />
       <item itemvalue="Application.Run" />
-      <item itemvalue="Application.CustomHashMethods" />
       <item itemvalue="JUnit.EmployeeDALTests" />
       <item itemvalue="JUnit.EmployeeSALTests" />
       <item itemvalue="JUnit.SessionDALTests" />
@@ -321,11 +307,6 @@
       <item itemvalue="JUnit.RequestSALTests" />
       <item itemvalue="JUnit.CategorySALTests" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.CustomHashMethods" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

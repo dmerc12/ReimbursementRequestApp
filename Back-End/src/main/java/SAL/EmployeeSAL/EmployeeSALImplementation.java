@@ -4,6 +4,7 @@ import DAL.EmployeeDAL.EmployeeDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
 import Entities.Requests.Employee.NewEmployeeRequest;
+import Utilities.CustomHashMethods;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -76,8 +77,9 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
                 logger.warn("SAL method add employee, employee already exists");
                 throw new GeneralError("An employee with this email already exists, please try again!");
             } else {
+                String hashedPassword = CustomHashMethods.hash(employee.getPassword());
                 Employee verifiedNewEmployee = new Employee(0, employee.getFirstName(),
-                        employee.getLastName(), employee.getEmail(), employee.getPassword(), employee.getPhoneNumber(),
+                        employee.getLastName(), employee.getEmail(), hashedPassword, employee.getPhoneNumber(),
                         employee.getAddress());
                 Employee result = employeeDAO.addEmployee(verifiedNewEmployee);
                 String employeeString = String.format("employeeId: %s, firstName: %s, lastName: %s, email: %s, " +
