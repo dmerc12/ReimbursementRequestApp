@@ -4,11 +4,9 @@ import DAL.EmployeeDAL.EmployeeDALImplementation;
 import Entities.CustomExceptions.GeneralError;
 import Entities.Data.Employee;
 import Entities.Requests.Employee.NewEmployeeRequest;
-import Utilities.CustomHashMethods;
+import Utilities.CustomHashing;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Objects;
 
 public class EmployeeSALImplementation implements EmployeeSALInterface{
     private final EmployeeDALImplementation employeeDAO;
@@ -77,7 +75,7 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
                 logger.warn("SAL method add employee, employee already exists");
                 throw new GeneralError("An employee with this email already exists, please try again!");
             } else {
-                String hashedPassword = CustomHashMethods.hash(employee.getPassword());
+                String hashedPassword = CustomHashing.hash(employee.getPassword());
                 Employee verifiedNewEmployee = new Employee(0, employee.getFirstName(),
                         employee.getLastName(), employee.getEmail(), hashedPassword, employee.getPhoneNumber(),
                         employee.getAddress());
@@ -213,6 +211,7 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
                 logger.warn("SAL method change password, nothing changed");
                 throw new GeneralError("Nothing has changed, please try again!");
             } else {
+                employee.setPassword(CustomHashing.hash(employee.getPassword()));
                 Employee changedEmployee = employeeDAO.changePassword(employee);
                 logger.info("Finishing SAL method change password");
                 return changedEmployee;

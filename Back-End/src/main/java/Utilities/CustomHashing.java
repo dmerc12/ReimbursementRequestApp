@@ -3,9 +3,8 @@ package Utilities;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Objects;
 
-public class CustomHashMethods {
+public class CustomHashing {
 
     public static String hash (String input) {
         try {
@@ -18,8 +17,4 @@ public class CustomHashMethods {
             return null;
         }
     }
-
-     public static boolean checkPassword(String input, String hashedValue) {
-         return Objects.equals(hash(input), hashedValue);
-     }
 }
