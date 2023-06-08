@@ -34,7 +34,8 @@ public class ChangePasswordController {
                     currentEmployee.getFirstName(), currentEmployee.getLastName(), currentEmployee.getEmail(),
                     passwordChangeRequest.getPassword(), currentEmployee.getPhoneNumber(),
                     currentEmployee.getAddress());
-            Employee updatedEmployee = employeeSAO.changePassword(updatedEmployeeInformationWithNewPassword);
+            Employee updatedEmployee = employeeSAO.changePassword(updatedEmployeeInformationWithNewPassword,
+                    passwordChangeRequest.getConfirmationPassword());
             Session updatedSessionInfo = new Session(currentSession.getSessionId(), currentSession.getEmployeeId(),
                     LocalDateTime.now().plusMinutes(15));
             sessionSAO.updateSession(updatedSessionInfo);

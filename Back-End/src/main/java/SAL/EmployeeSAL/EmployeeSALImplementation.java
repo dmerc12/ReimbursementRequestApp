@@ -8,6 +8,8 @@ import Utilities.CustomHashing;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 public class EmployeeSALImplementation implements EmployeeSALInterface{
     private final EmployeeDALImplementation employeeDAO;
     public static Logger logger = LogManager.getLogger(EmployeeSALImplementation.class);
@@ -117,7 +119,7 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
             logger.warn("SAL method login, password left empty");
             throw new GeneralError("The password field cannot be left empty, please try again!");
         } else {
-            Employee employee = employeeDAO.login(email, password);
+            Employee employee = employeeDAO.login(email, CustomHashing.hash(password));
             if (employee == null) {
                 logger.warn("SAL method login, not existing credentials");
                 throw new GeneralError("Either the email or the password is incorrect, please try again!");
@@ -196,7 +198,7 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
     }
 
     @Override
-    public Employee changePassword(Employee employee) {
+    public Employee changePassword(Employee employee, String confirmationPassword) {
         logger.info("Beginning SAL method change password with employee ID: " + employee.getEmployeeId() +
                 ", password: " + employee.getPassword());
         if (employee.getPassword().equals("")) {
@@ -205,6 +207,15 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
         } else if (employee.getPassword().length() > 60) {
             logger.warn("SAL method change password, password too long");
             throw new GeneralError("The password field cannot exceed 60 characters, please try again!");
+        } else if (confirmationPassword.equals("")) {
+            logger.warn("SAL method change password, confirmation password left empty");
+            throw new GeneralError("The confirmation password field cannot be left empty, please try again!");
+        } else if (confirmationPassword.length() > 60) {
+            logger.warn("SAL method change password, confirmation password too long");
+            throw new GeneralError("The confirmation password field cannot exceed 60 characters, please try again!");
+        } else if (!Objects.equals(employee.getPassword(), confirmationPassword)) {
+            logger.warn("SAL method change password, passwords don't match");
+            throw new GeneralError("The confirmation password field must match the password field, please try again!");
         } else {
             String currentEmployeePassword = getEmployeeById(employee.getEmployeeId()).getPassword();
             if (currentEmployeePassword.equals(employee.getPassword())) {
@@ -218,6 +229,7 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
             }
         }
     }
+
 
     @Override
     public int deleteEmployee(int employeeId) {
