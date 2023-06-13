@@ -218,7 +218,7 @@ public class EmployeeSALImplementation implements EmployeeSALInterface{
             throw new GeneralError("The confirmation password field must match the password field, please try again!");
         } else {
             String currentEmployeePassword = getEmployeeById(employee.getEmployeeId()).getPassword();
-            if (currentEmployeePassword.equals(employee.getPassword())) {
+            if (Objects.equals(CustomHashing.hash(employee.getPassword()), currentEmployeePassword)) {
                 logger.warn("SAL method change password, nothing changed");
                 throw new GeneralError("Nothing has changed, please try again!");
             } else {
