@@ -4,6 +4,7 @@ import DAL.CategoryDAL.CategoryDALImplementation;
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import DAL.RequestDAL.RequestDALImplementation;
 import DAL.SessionDAL.SessionDALImplementation;
+import Utilities.CustomHashing;
 import Utilities.DatabaseConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,11 +37,11 @@ public class ResetDatabase {
             // creating employee table and inserting test data
             String employeeTable = "create table reimbursement_request_app.employees(employee_id int auto_increment " +
                     "primary key, first_name varchar(36), last_name varchar(36), email varchar(60), " +
-                    "passwrd varchar(60), phone_number varchar(13), address varchar(60));";
-            String testEmployee1 = "insert into reimbursement_request_app.employees values(-1, 'test', " +
-                    "'test', 'test@email.com', 'test', '111-222-3333', 'test');";
-            String testEmployee2 = "insert into reimbursement_request_app.employees values(-2, 'no requests', 'or categories', " +
-                    "'no@requestsorcategories.test', 'test', '222-333-4444', 'test');";
+                    "passwrd varchar(120), phone_number varchar(13), address varchar(60));";
+            String testEmployee1 = String.format("insert into reimbursement_request_app.employees values(-1, 'test', " +
+                    "'test', 'test@email.com', '%s', '111-222-3333', 'test');", CustomHashing.hash("test"));
+            String testEmployee2 = String.format("insert into reimbursement_request_app.employees values(-2, 'no requests', 'or categories', " +
+                    "'no@requestsorcategories.test', '%s', '222-333-4444', 'test');", CustomHashing.hash("test"));
             employeeDAO.accessEmployeeTable(employeeTable);
             employeeDAO.accessEmployeeTable(testEmployee1);
             employeeDAO.accessEmployeeTable(testEmployee2);
