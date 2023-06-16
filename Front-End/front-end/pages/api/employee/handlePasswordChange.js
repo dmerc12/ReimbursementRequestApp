@@ -3,7 +3,8 @@ const handler = async (req, res) => {
 
     const requestBody = JSON.stringify({
         'sessionId': req.body.sessionId,
-        'password': req.body.password
+        'password': req.body.password,
+        'confirmationPassword': req.body.confirmationPassword
     })
 
     const requestOptions = {
