@@ -9,6 +9,7 @@ import Modal from '@/components/Model';
 export default function ChangePasswordForm () {
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
+    const [confirmationPassword, setConfirmationPassword] = useState('');
 
     const router = useRouter();
 
@@ -21,7 +22,8 @@ export default function ChangePasswordForm () {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     'sessionId': sessionIdCookie,
-                    'password':  password
+                    'password':  password,
+                    'confirmationPassword': confirmationPassword
                 })
             })
 
@@ -67,6 +69,11 @@ export default function ChangePasswordForm () {
                     <div className='form-field'>
                         <label className='form-label' htmlFor="password">New Password: </label>
                         <input className='form-input' type="password" id='updatePassword' name='password' value={password} onChange={event => setPassword(event.target.value)}/>
+                    </div>
+
+                    <div className='form-field'>
+                        <label className='form-label' hemlFor='confirmPassword'>Confirm Password: </label>
+                        <input className='form-input' type="password" id='updateConfirmPassword' name='confirmPassword' value={confirmationPassword} onChange={event => setConfirmationPassword(event.target.value)} />
                     </div>
 
                     <button className='form-btn-2' type='submit' id='changePasswordButton'>Change Password</button>

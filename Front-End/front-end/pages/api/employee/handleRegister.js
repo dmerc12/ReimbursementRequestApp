@@ -6,6 +6,7 @@ const handler = async (req, res) => {
         'lastName': req.body.lastName, 
         'email': req.body.email, 
         'password': req.body.password, 
+        'confirmationPassword': req.body.confirmationPassword,
         'phoneNumber': req.body.phoneNumber, 
         'address': req.body.address
     })

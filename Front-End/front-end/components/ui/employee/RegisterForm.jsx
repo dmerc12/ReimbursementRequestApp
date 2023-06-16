@@ -9,6 +9,7 @@ export default function RegistserForm () {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmationPassword, setConfirmationPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
 
@@ -26,6 +27,7 @@ export default function RegistserForm () {
                         'lastName': lastName, 
                         'email': email, 
                         'password': password, 
+                        'confirmationPassword': confirmationPassword,
                         'phoneNumber': phoneNumber, 
                         'address': address
                     })
@@ -57,37 +59,42 @@ export default function RegistserForm () {
         <>
             <form className='form' onSubmit={onSubmit}>
                 <div className='form-field'>
-                    <label className='form-label' htmlFor="firstName">First Name</label>
+                    <label className='form-label' htmlFor="firstName">First Name: </label>
                     <input className='form-input' type="text" id='registerFirstName' name='firstName' value={firstName} onChange={(event) => setFirstName(event.target.value)}/>
                     <br/>
                 </div>
 
                 <div className='form-field'>
-                    <label className='form-label' htmlFor="lastName">Last Name</label>
+                    <label className='form-label' htmlFor="lastName">Last Name: </label>
                     <input className='form-input' type="text" id='registerLastName' name='lastName' value={lastName} onChange={(event) => setLastName(event.target.value)}/>
                     <br/>
                 </div>
                 
                 <div className='form-field'>
-                    <label className='form-label' htmlFor="email">Email</label>
+                    <label className='form-label' htmlFor="email">Email: </label>
                     <input className='form-input' type="email" id='registerEmail' name='email' value={email} onChange={(event) => setEmail(event.target.value)}/>
                     <br/>
                 </div>
                 
                 <div className='form-field'>
-                    <label className='form-label' htmlFor="password">Password</label>
+                    <label className='form-label' htmlFor="password">Password: </label>
                     <input className='form-input' type="password" id='registerPassword' name='password' value={password} onChange={(event) => setPassword(event.target.value)}/>
                     <br/>
                 </div>
+
+                <div className='form-field'>
+                    <label className='form-label' htmlFor='confirmPassword'>Confirm Password: </label>
+                    <input className='form-input' type='password' id='registerConfirmPassword' name='confirmPassword' value={confirmationPassword} onChange={(event) => setConfirmationPassword(event.target.value)}/>
+                </div>
                 
                 <div className='form-field'>
-                    <label className='form-label' htmlFor="phoneNumber">Phone Number</label>
+                    <label className='form-label' htmlFor="phoneNumber">Phone Number: </label>
                     <input className='form-input' type="text" id='registerPhoneNumber' name='phoneNumber' value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)}/>
                     <br/>
                 </div>
                 
                 <div className='form-field'>
-                    <label className='form-label' htmlFor="address">Address</label>
+                    <label className='form-label' htmlFor="address">Address: </label>
                     <input className='form-input' type="text" id='registerAddress' name='address' value={address} onChange={(event) => setAddress(event.target.value)}/>
                     <br/>
                 </div>
