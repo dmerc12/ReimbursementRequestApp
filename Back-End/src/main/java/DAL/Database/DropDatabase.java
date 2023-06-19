@@ -37,6 +37,10 @@ public class DropDatabase {
             String dropEmployeeTable = "drop table reimbursement_request_app.employees;";
             employeeDAO.accessEmployeeTable(dropEmployeeTable);
 
+            // dropping schema
+            String dropSchema = "drop schema reimbursement_request_app";
+            employeeDAO.accessEmployeeTable(dropSchema);
+
             logger.info("Finishing Drop Database Script");
         } catch (SQLException error) {
             error.printStackTrace();

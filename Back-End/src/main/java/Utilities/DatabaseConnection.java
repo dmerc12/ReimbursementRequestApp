@@ -12,7 +12,7 @@ public class DatabaseConnection {
     public static Connection createConnection() {
         try {
             return DriverManager.getConnection(String.format(
-                            "jdbc:mysql://localhost:3306/reimbursement_request_app?user=%s&password=%s",
+                            "jdbc:mysql://localhost:3306/?user=%s&password=%s",
                             System.getenv("Username"),
                             System.getenv("Password")
                     )
