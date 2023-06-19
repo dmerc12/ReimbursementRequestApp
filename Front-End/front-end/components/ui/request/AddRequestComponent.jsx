@@ -122,7 +122,7 @@ export default function AddRequestComponent() {
                                         options.push(<option key={category.categoryIc} value={category.categoryId}>{category.categoryName}</option>);
                                     }
                                     return options;
-                                })()
+                                })
                             )}
                         </select>
                     </div>

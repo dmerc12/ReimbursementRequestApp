@@ -42,7 +42,7 @@ export default function RegistserForm () {
 
     const handleStateChange = (event) => {
         setState(event.target.value);
-        fetchZipCodes(event.target.value);
+        //fetchZipCodes(event.target.value);
     };
 
     const handleZipCodeChange = (event) => {
@@ -154,9 +154,33 @@ export default function RegistserForm () {
                 <div className='form-field'>
                     <label className='form-label' htmlFor="streetAddress">Street Address: </label>
                     <input className='form-input' type="text" id='registerStreetAddress' name='streetAddress' value={streetAddress} onChange={(event) => setStreetAddress(event.target.value)}/>
-                    
+                </div>
+
+                <div className='form-field'>
                     <label className='form-label' htmlFor='city'>City: </label>
                     <input className='form-input' type="text" id='registerCity' name='city' value={city} onChange={(event) => setCity(event.target.value)}/>
+                </div>
+
+                <div className='form-field'>
+                    <label className='form-label' htmlFor='state'>State: </label>
+                    <select className='form-input' id='registerState' name='state' value={state} onChange={handleStateChange}>
+                        {states.length > 0 && (
+                        (() => {
+                            const options = [];
+                            for (let i = 0; i < states.length; i++) {
+                            const state = states[i];
+                            options.push(<option key={state.code} value={state.code}>{state.name}</option>);
+                            }
+                            return options;
+                        })()
+                        )}
+                    </select>
+</div>
+
+
+                <div className='form-field'>
+                    <label className='form-label' htmlFor='zipCode'>Zip Code: </label>
+                    <select className='form-input' id='registerZipCode' name='zipCode' value={zipCode} onChange={handleZipCodeChange} />
                 </div>
                 
                 <button className='form-btn-1' type="submit">Register</button>
