@@ -111,7 +111,7 @@ export default function UpdateEmployeeForm({ employee }) {
 
                     <div className='form-field'>
                         <label className='form-label' htmlFor="phoneNumber">Phone Number: </label>
-                        <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={event => setPhoneNumber(event.target.value)}/>
+                        <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={handlePhoneNumberChange}/>
                     </div>
 
                     <div className='form-field'>
