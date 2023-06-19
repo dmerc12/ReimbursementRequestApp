@@ -46,7 +46,8 @@ export default function RegistserForm () {
     };
 
     const handleZipCodeChange = (event) => {
-        setZipCode(event.target.value)
+        setZipCode(event.target.value);
+        setZipCode(event.target.value);
     };
 
     const handlePhoneNumberChange = (event) => {
