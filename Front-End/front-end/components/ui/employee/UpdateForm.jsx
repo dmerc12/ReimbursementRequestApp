@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 import Modal from '@/components/Model';
@@ -15,6 +15,27 @@ export default function UpdateEmployeeForm({ employee }) {
     const [visible, setVisible] = useState(false);
 
     const router = useRouter();
+
+    const handlePhoneNumberChange = (event) => {
+        const phoneNumberValue = event.target.value;
+        const formattedPhoneNumber = formatPhoneNumber(phoneNumberValue);
+        setPhoneNumber(formattedPhoneNumber);
+    };
+    
+    const formatPhoneNumber = (value) => {
+        const phoneNumberDigits = value.replace(/\D/g, '');
+        const parts = phoneNumberDigits.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
+        if (parts) {
+          const formattedPhoneNumber = `${parts[1]}${parts[2] ? '-' + parts[2] : ''}${parts[3] ? '-' + parts[3] : ''}`;
+          return formattedPhoneNumber;
+        }
+        return value;
+    };
+
+    useEffect(() => {
+        const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+        setPhoneNumber(formattedPhoneNumber);
+    }, [phoneNumber]);
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -90,7 +111,7 @@ export default function UpdateEmployeeForm({ employee }) {
 
                     <div className='form-field'>
                         <label className='form-label' htmlFor="phoneNumber">Phone Number: </label>
-                        <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={event => setPhoneNumber(event.target.value)}/>
+                        <input className='form-input' type="text" id='updatePhoneNumber' name='phoneNumber' value={phoneNumber} onChange={handlePhoneNumberChange}/>
                     </div>
 
                     <div className='form-field'>

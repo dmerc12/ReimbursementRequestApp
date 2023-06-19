@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify';
 
@@ -11,13 +11,71 @@ export default function RegistserForm () {
     const [password, setPassword] = useState('');
     const [confirmationPassword, setConfirmationPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [address, setAddress] = useState('');
+    const [streetAddress, setStreetAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [states, setStates] = useState([]);
+    const [zipCodes, setZipCodes] = useState([]);
 
     const router = useRouter();
+
+    const fetchStates = async () => {
+        try {
+            const response = await fetch('/api/states');
+            const data = await response.json();
+            setStates(data.states);
+        } catch (error) {
+            throw new Error(`${error.message}`)
+        }
+    };
+
+    const fetchZipCodes = async (state) => {
+        try {
+            const response = await fetch(`/api/zipcodes?state=${state}`);
+            const data = await response.json();
+            setZipCodes(data.zipCodes);
+        } catch (error) {
+            throw new Error(`${error.message}`)
+        }
+    };
+
+    const handleStateChange = (event) => {
+        setState(event.target.value);
+        fetchZipCodes(event.target.value);
+    };
+
+    const handleZipCodeChange = (event) => {
+        setZipCode(event.target.value)
+    };
+
+    const handlePhoneNumberChange = (event) => {
+        const phoneNumberValue = event.target.value;
+        const formattedPhoneNumber = formatPhoneNumber(phoneNumberValue);
+        setPhoneNumber(formattedPhoneNumber);
+    };
+    
+    const formatPhoneNumber = (value) => {
+        const phoneNumberDigits = value.replace(/\D/g, '');
+        const parts = phoneNumberDigits.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
+        if (parts) {
+          const formattedPhoneNumber = `${parts[1]}${parts[2] ? '-' + parts[2] : ''}${parts[3] ? '-' + parts[3] : ''}`;
+          return formattedPhoneNumber;
+        }
+        return value;
+    };
+
+    useEffect(() => {
+        const formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+        setPhoneNumber(formattedPhoneNumber);
+        fetchStates();
+    }, [phoneNumber]);
 
     const onSubmit = async (event) => {
         event.preventDefault();
         try{
+            const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`
+
             const response = await fetch('/api/employee/handleRegister',
                 {
                     method: "POST",
@@ -29,7 +87,7 @@ export default function RegistserForm () {
                         'password': password, 
                         'confirmationPassword': confirmationPassword,
                         'phoneNumber': phoneNumber, 
-                        'address': address
+                        'address': fullAddress
                     })
                 }
             )
@@ -89,14 +147,16 @@ export default function RegistserForm () {
                 
                 <div className='form-field'>
                     <label className='form-label' htmlFor="phoneNumber">Phone Number: </label>
-                    <input className='form-input' type="text" id='registerPhoneNumber' name='phoneNumber' value={phoneNumber} onChange={(event) => setPhoneNumber(event.target.value)}/>
+                    <input className='form-input' type="text" id='registerPhoneNumber' name='phoneNumber' value={phoneNumber} onChange={handlePhoneNumberChange}/>
                     <br/>
                 </div>
                 
                 <div className='form-field'>
-                    <label className='form-label' htmlFor="address">Address: </label>
-                    <input className='form-input' type="text" id='registerAddress' name='address' value={address} onChange={(event) => setAddress(event.target.value)}/>
-                    <br/>
+                    <label className='form-label' htmlFor="streetAddress">Street Address: </label>
+                    <input className='form-input' type="text" id='registerStreetAddress' name='streetAddress' value={streetAddress} onChange={(event) => setStreetAddress(event.target.value)}/>
+                    
+                    <label className='form-label' htmlFor='city'>City: </label>
+                    <input className='form-input' type="text" id='registerCity' name='city' value={city} onChange={(event) => setCity(event.target.value)}/>
                 </div>
                 
                 <button className='form-btn-1' type="submit">Register</button>
