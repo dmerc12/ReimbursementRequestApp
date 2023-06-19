@@ -42,7 +42,7 @@ export default function RegistserForm () {
 
     const handleStateChange = (event) => {
         setState(event.target.value);
-        //fetchZipCodes(event.target.value);
+        fetchZipCodes(event.target.value);
     };
 
     const handleZipCodeChange = (event) => {
@@ -168,20 +168,32 @@ export default function RegistserForm () {
                         (() => {
                             const options = [];
                             for (let i = 0; i < states.length; i++) {
-                            const state = states[i];
-                            options.push(<option key={state.code} value={state.code}>{state.name}</option>);
+                                const state = states[i];
+                                options.push(<option key={state.code} value={state.code}>{state.name}</option>);
                             }
                             return options;
                         })()
                         )}
                     </select>
-</div>
+                </div>
 
 
                 <div className='form-field'>
                     <label className='form-label' htmlFor='zipCode'>Zip Code: </label>
-                    <select className='form-input' id='registerZipCode' name='zipCode' value={zipCode} onChange={handleZipCodeChange} />
+                    <select className='form-input' id='registerZipCode' name='zipCode' value={zipCode} onChange={handleZipCodeChange}>
+                        {zipCodes.length > 0 &&
+                        (() => {
+                            const options = [];
+                            for (let i = 0; i < zipCodes.length; i++) {
+                            const zipCode = zipCodes[i];
+                            options.push(<option key={i} value={zipCode}>{zipCode}</option>);
+                            }
+                            return options;
+                        })()
+                        }
+                    </select>
                 </div>
+
                 
                 <button className='form-btn-1' type="submit">Register</button>
             </form>
