@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/Database/DatabaseSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/Database/DatabaseSetup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAL/Database/DropDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAL/Database/DropDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utilities/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utilities/DatabaseConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,14 +59,14 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ResetDatabase">
+  <component name="RunManager" selected="JUnit.EmployeeSALTests">
     <configuration name="DatabaseConnection" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
         <env name="Password" value="Mercer1282!" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="Utilities.DatabaseConnection" />
-      <module name="Reimbursement-Reqest-App" />
+      <module name="Back-End" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Utilities.*" />
@@ -85,7 +83,7 @@
         <env name="Password" value="Mercer1282!" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="DAL.Database.DatabaseSetup" />
-      <module name="Reimbursement-Reqest-App" />
+      <module name="Back-End" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.Database.*" />
@@ -102,7 +100,7 @@
         <env name="Password" value="Mercer1282!" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="DAL.Database.DropDatabase" />
-      <module name="Reimbursement-Reqest-App" />
+      <module name="Back-End" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.Database.*" />
@@ -119,7 +117,7 @@
         <env name="Password" value="Mercer1282!" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="DAL.Database.ResetDatabase" />
-      <module name="Reimbursement-Reqest-App" />
+      <module name="Back-End" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.Database.*" />
@@ -136,7 +134,7 @@
         <env name="Password" value="Mercer1282!" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="Run" />
-      <module name="Reimbursement-Reqest-App" />
+      <module name="Back-End" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -202,7 +200,7 @@
       </method>
     </configuration>
     <configuration name="EmployeeSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Reimbursement-Reqest-App" />
+      <module name="Back-End" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="SAL.*" />
