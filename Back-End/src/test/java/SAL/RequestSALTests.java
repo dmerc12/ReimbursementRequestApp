@@ -202,7 +202,7 @@ public class RequestSALTests {
             requestSAO.updateRequest(testRequest);
             Assert.fail();
         } catch (GeneralError error) {
-            Assert.assertEquals(error.getMessage(), "Category not found, please try again!");
+            Assert.assertEquals(error.getMessage(), "Nothing changed, please try again!");
         }
     }
 

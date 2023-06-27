@@ -3,6 +3,7 @@ package DAL;
 
 import DAL.EmployeeDAL.EmployeeDALImplementation;
 import Entities.Data.Employee;
+import Utilities.CustomHashing;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class EmployeeDALTests {
 
     @Test
     public void d_loginSuccess() {
-        Employee result = employeeDAO.login("test@email.com", "test");
+        Employee result = employeeDAO.login("test@email.com", CustomHashing.hash("test"));
         Assert.assertNotNull(result);
     }
 

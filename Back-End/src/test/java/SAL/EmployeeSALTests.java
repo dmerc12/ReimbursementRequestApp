@@ -574,7 +574,7 @@ public class EmployeeSALTests {
         try {
             Employee testEmployee = new Employee(-50000000, "first", "last",
                     "e@mail.com", "password", "111-222-3333", "123 Test");
-            employeeSAO.changePassword(testEmployee, "test");
+            employeeSAO.changePassword(testEmployee, "password");
             Assert.fail();
         } catch (GeneralError error) {
             Assert.assertEquals(error.getMessage(), "No employee found, please try again!");
