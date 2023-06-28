@@ -1,5 +1,5 @@
 const states = [
-    {code: '--', name: 'choose below'},
+    {code: '--', name: '--'},
     {code: 'AL', name: 'Alabama'},
     {code: 'AK', name: 'Alaska'},
     {code: 'AZ', name: 'Arizona'},

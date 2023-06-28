@@ -1,4 +1,4 @@
-with open('unformatted.txt', 'r') as file:
+with open('file.txt', 'r') as file:
     original_data = file.readlines()
 
 def extract_zip_codes():
@@ -15,5 +15,5 @@ def extract_zip_codes():
 
 extracted_zip_codes = extract_zip_codes()
 
-with open('formatted.txt', 'w') as file:
+with open('file.txt', 'w') as file:
     file.write("'" + extracted_zip_codes + "'")
