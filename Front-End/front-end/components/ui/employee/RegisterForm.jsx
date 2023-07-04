@@ -26,7 +26,7 @@ export default function RegistserForm () {
             const data = await response.json();
             setStates(data.states);
         } catch (error) {
-            throw new Error(`${error.message}`)
+            throw new Error(`${error.message}`);
         }
     };
 
@@ -36,7 +36,7 @@ export default function RegistserForm () {
             const data = await response.json();
             setZipCodes(data.zipCodes);
         } catch (error) {
-            throw new Error(`${error.message}`)
+            throw new Error(`${error.message}`);
         }
     };
 
@@ -46,7 +46,6 @@ export default function RegistserForm () {
     };
 
     const handleZipCodeChange = (event) => {
-        setZipCode(event.target.value);
         setZipCode(event.target.value);
     };
 
@@ -75,7 +74,7 @@ export default function RegistserForm () {
     const onSubmit = async (event) => {
         event.preventDefault();
         try{
-            const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`
+            const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
 
             const response = await fetch('/api/employee/handleRegister',
                 {
@@ -91,7 +90,7 @@ export default function RegistserForm () {
                         'address': fullAddress
                     })
                 }
-            )
+            );
             const data = await response.json();
             
             if (data.success) {
@@ -104,7 +103,7 @@ export default function RegistserForm () {
             } else if (data.error) {
                 throw new Error(`${data.error}`);
             } else {
-                throw new Error("Something went extremely wrong, please try again later!")
+                throw new Error("Something went extremely wrong, please try again later!");
             }
         } catch (error) {
             toast.warn(error.message, {
@@ -173,7 +172,7 @@ export default function RegistserForm () {
                                 options.push(<option key={state.code} value={state.code}>{state.name}</option>);
                             }
                             return options;
-                        })()
+                        })
                         )}
                     </select>
                 </div>
@@ -186,11 +185,11 @@ export default function RegistserForm () {
                         (() => {
                             const options = [];
                             for (let i = 0; i < zipCodes.length; i++) {
-                            const zipCode = zipCodes[i];
-                            options.push(<option key={i} value={zipCode}>{zipCode}</option>);
+                                const zipCode = zipCodes[i];
+                                options.push(<option key={i} value={zipCode}>{zipCode}</option>);
                             }
                             return options;
-                        })()
+                        })
                         }
                     </select>
                 </div>

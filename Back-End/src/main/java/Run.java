@@ -36,9 +36,9 @@ public class Run {
         DeleteCategoryController deleteCategoryController = new DeleteCategoryController();
 
         app.post("/create/category/now", addCategoryController.addCategory);
-        app.get("/get/all/categories/:sessionId", getAllCategoriesController.getAllCategories);
+        app.get("/get/all/categories/{sessionId}", getAllCategoriesController.getAllCategories);
         app.put("/update/category/now", updateCategoryController.updateCategory);
-        app.delete("/delete/category/:categoryId/:sessionId", deleteCategoryController.deleteCategory);
+        app.delete("/delete/category/{categoryId}/{sessionId}", deleteCategoryController.deleteCategory);
 
         // Request Controllers and routes:
         AddRequestController addRequestController = new AddRequestController();
@@ -47,9 +47,9 @@ public class Run {
         DeleteRequestController deleteRequestController = new DeleteRequestController();
 
         app.post("/create/request/now", addRequestController.addRequest);
-        app.get("/get/all/requests/:sessionId", getAllRequestsController.getAllRequests);
+        app.get("/get/all/requests/{sessionId}", getAllRequestsController.getAllRequests);
         app.put("/update/request/now", updateRequestController.updateRequest);
-        app.delete("/delete/request/:requestId/:sessionId", deleteRequestController.deleteRequest);
+        app.delete("/delete/request/{requestId}/{sessionId}", deleteRequestController.deleteRequest);
 
         logger.info("Application running...");
         app.start(8080);
