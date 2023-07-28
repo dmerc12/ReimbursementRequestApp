@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Run.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Run.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,19 +299,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.DropDatabase" />
+      <item itemvalue="Application.DatabaseConnection" />
       <item itemvalue="Application.DatabaseSetup" />
+      <item itemvalue="Application.DropDatabase" />
       <item itemvalue="Application.ResetDatabase" />
       <item itemvalue="Application.Run" />
-      <item itemvalue="Application.DatabaseConnection" />
+      <item itemvalue="JUnit.CategoryDALTests" />
+      <item itemvalue="JUnit.CategorySALTests" />
       <item itemvalue="JUnit.EmployeeDALTests" />
       <item itemvalue="JUnit.EmployeeSALTests" />
-      <item itemvalue="JUnit.SessionDALTests" />
-      <item itemvalue="JUnit.CategoryDALTests" />
       <item itemvalue="JUnit.RequestDALTests" />
-      <item itemvalue="JUnit.SessionSALTests" />
       <item itemvalue="JUnit.RequestSALTests" />
-      <item itemvalue="JUnit.CategorySALTests" />
+      <item itemvalue="JUnit.SessionDALTests" />
+      <item itemvalue="JUnit.SessionSALTests" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
