@@ -35,17 +35,17 @@ export const LoginForm = () => {
     return (
         <>
             <form className='form' onSubmit={onSubmit}>
-                <div>
-                    <label htmlFor="loginEmail">Email: </label>
-                    <input type="email" id='loginEmail' name='loginEmail' value={email} onChange={(event) => setEmail(event.target.value)} />
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="loginEmail">Email: </label>
+                    <input className='form-input' type="email" id='loginEmail' name='loginEmail' value={email} onChange={(event) => setEmail(event.target.value)} />
                 </div>
 
-                <div>
-                    <label htmlFor="loginPassword">Password: </label>
-                    <input type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
+                <div className='form-field'>
+                    <label className='form-label' htmlFor="loginPassword">Password: </label>
+                    <input className='form-input' type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
                 </div>
 
-                <button type='submit'>Login</button>
+                <button className='form-btn-1' type='submit'>Login</button>
             </form>
         </>
     );
