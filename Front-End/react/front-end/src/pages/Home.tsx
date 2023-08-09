@@ -1,9 +1,20 @@
-import React from 'react';
+import { Modal } from '../components/Modal';
+import { useState } from 'react'
 
 export const Home = () => {
+    const [visible, setVisible] = useState(false);
+
     return (
         <>
             <h1>home</h1>
+
+            <div className='home-component'>
+                <button onClick={() => setVisible(true)}>Open me for a modal</button>
+            </div>
+
+            <Modal visible={visible} onClose={() => setVisible(false)}>
+                <h1>Welcome to my modal</h1>
+            </Modal>
         </>
     );
 }
