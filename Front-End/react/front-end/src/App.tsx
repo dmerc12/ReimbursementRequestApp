@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
@@ -11,9 +11,9 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
-
       <BrowserRouter>
+        <Navbar />
+
         <Routes>
           <Route index path='/' element={<Login/>}/>
           <Route path='/login' element={<Login/>}/>
@@ -22,7 +22,7 @@ export default function App() {
         </Routes>
       </BrowserRouter>
 
-      <ToastContainer position='top-center' newestOnTop autoClose={3000} hideProgressBar theme='light' limit={1}/>
+      <ToastContainer position='top-center' newestOnTop autoClose={3000} hideProgressBar theme='dark' limit={1}/>
     </>
   )
 }
