@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -8,6 +10,8 @@ export default function App() {
 
   return (
     <>
+      <Navbar />
+
       <BrowserRouter>
         <Routes>
           <Route index path='/' element={<Login/>}/>
@@ -16,6 +20,8 @@ export default function App() {
           <Route path='/home' element={<Home/>}/>
         </Routes>
       </BrowserRouter>
+
+      <ToastContainer position='top-center' newestOnTop autoClose={3000} hideProgressBar theme='light' limit={1}/>
     </>
   )
 }
