@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -22,6 +25,8 @@ export const LoginForm = () => {
 
             if (response.status === 200) {
                 Cookies.set('sessionId', data.sessionId);
+                navigate('/home');
+                toast.success("Welcome!");
             } else if (response.status === 400) {
                 throw new Error(`${data.message}`);
             } else {

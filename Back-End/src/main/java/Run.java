@@ -5,6 +5,7 @@ import Controllers.Request.DeleteRequestController;
 import Controllers.Request.GetAllRequestsController;
 import Controllers.Request.UpdateRequestController;
 import io.javalin.Javalin;
+import io.javalin.plugin.bundled.CorsPluginConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +13,12 @@ public class Run {
     public static Logger logger = LogManager.getLogger(Run.class);
     public static void main(String[] args) {
         logger.info("Application starting up...");
-        Javalin app = Javalin.create();
+        Javalin app = Javalin.create(config -> {
+            config.plugins.enableDevLogging();
+            config.plugins.enableCors(cors -> {
+                cors.add(CorsPluginConfig::anyHost);
+            });
+        });
 
         // Employee controllers and routes:
         LoginController loginController = new LoginController();
