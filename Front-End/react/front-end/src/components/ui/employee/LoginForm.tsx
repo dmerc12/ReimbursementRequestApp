@@ -29,14 +29,18 @@ export const LoginForm = () => {
                 Cookies.set('sessionId', data.sessionId);
                 navigate('/home');
                 setIsLoading(false);
-                toast.success("Welcome!");
+                toast.success("Welcome!", {
+                    toastId: 'customId'
+                });
             } else if (response.status === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
             }
         } catch (error: any) {
-            toast.error(error.message);
+            toast.error(error.message, {
+                toastId: 'customId'
+            });
         }
     }
 
