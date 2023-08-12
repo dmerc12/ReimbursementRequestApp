@@ -83,9 +83,11 @@ export const RegisterForm = () => {
             }
         } catch (error: any) {
             setIsLoading(false);
-            toast.error(error.message);
+            toast.error(error.message, {
+                toastId: 'customId'
+            });
         }
-    }
+    };
 
     return (
         <>

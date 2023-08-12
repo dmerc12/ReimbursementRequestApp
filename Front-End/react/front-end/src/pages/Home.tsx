@@ -15,11 +15,11 @@ export const Home = () => {
             navigate('/login')
             toast.info("Please login or register to gain access!", {
                 toastId: 'customId'
-            })
+            });
         } else {
             setSessionId(sessionIdCookie);
         }
-    }, [])
+    }, []);
 
     return (
         <>
