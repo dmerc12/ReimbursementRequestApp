@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { states } from '../../../lib/States';
+import { zipCodeData } from '../../../lib/ZipCodes';
 
 export const RegisterForm = () => {
     const [firstName, setFirstName] = useState('');
@@ -13,11 +15,21 @@ export const RegisterForm = () => {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
-    const [states, setStates] = useState([]);
-    const [zipCodes, setZipCodes] = useState([]);
-    const [isLoading, setIsLoading] = useState(false)
+    const [zipCodes, setZipCodes] = useState([] as string[]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const selectedStateCode = event.target.value;
+        const selectedZipCodes = zipCodeData[selectedStateCode] || [];
+        setState(selectedStateCode);
+        setZipCodes(selectedZipCodes);
+    }
+
+    const handleZipCodeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setZipCode(event.target.value);
+    }
 
     const handlePhoneNumberChange = (event: any) => {
         const phoneNumberValue = event.target.value;
@@ -60,6 +72,7 @@ export const RegisterForm = () => {
 
             if (response.status === 201) {
                 navigate('/login');
+                setIsLoading(false);
                 toast.success("Employee successfully created, please log in!", {
                     toastId: 'customId'
                 });
@@ -69,13 +82,16 @@ export const RegisterForm = () => {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
             }
         } catch (error: any) {
+            setIsLoading(false);
             toast.error(error.message);
         }
     }
 
     return (
         <>
-            <h1>requests here</h1>
+            <form className="form" onSubmit={onSubmit}>
+                
+            </form>
         </>
     );
 }
