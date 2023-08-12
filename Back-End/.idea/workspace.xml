@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="" />
+    <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/Home.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +58,7 @@
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ResetDatabase">
+  <component name="RunManager" selected="Application.Run">
     <configuration name="DatabaseConnection" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
