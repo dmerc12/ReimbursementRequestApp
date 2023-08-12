@@ -1,9 +1,10 @@
 import React from 'react';
+import { RegisterForm } from '../components/ui/employee/RegisterForm';
 
 export const Register = () => {
     return (
         <>
-            <h1>register</h1>
+            <RegisterForm />
         </>
     );
 }
