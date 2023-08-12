@@ -1,4 +1,9 @@
-const states = [
+interface State {
+    code: string;
+    name: string;
+}
+
+export const states: State[] = [
     {code: '--', name: '--'},
     {code: 'AL', name: 'Alabama'},
     {code: 'AK', name: 'Alaska'},
