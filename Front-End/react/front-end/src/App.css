@@ -108,9 +108,16 @@
   transform: scale(1.05);
 }
 
-body {
+html, body {
   background-color: black;
-  height: 125vh;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -132,6 +139,8 @@ p {
   flex-direction: column;
   justify-self: center;
   align-items: center;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .form-field {
