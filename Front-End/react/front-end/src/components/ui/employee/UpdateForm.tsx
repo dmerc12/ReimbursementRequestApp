@@ -20,7 +20,6 @@ export const UpdateForm = (props: { employee: Employee }) => {
     const initialCity = addressComponents[1];
     const initialState = addressComponents[2].split(' ')[0];
     const initialZipCode = addressComponents[2].split(' ')[1];
-    console.log(initialZipCode)
 
     const [isLoading, setIsLoading] = useState(false);
     const [visible, setVisible] = useState(false);
