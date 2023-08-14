@@ -14,7 +14,7 @@ public class Run {
     public static void main(String[] args) {
         logger.info("Application starting up...");
         Javalin app = Javalin.create(config -> {
-            config.plugins.enableDevLogging();
+            //config.plugins.enableDevLogging();
             config.plugins.enableCors(cors -> {
                 cors.add(CorsPluginConfig::anyHost);
             });

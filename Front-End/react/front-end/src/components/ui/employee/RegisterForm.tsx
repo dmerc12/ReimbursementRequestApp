@@ -48,7 +48,7 @@ export const RegisterForm = () => {
     };
 
     const onSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault;
+        event.preventDefault();
         setIsLoading(true);
         try {
             const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
@@ -83,9 +83,11 @@ export const RegisterForm = () => {
             }
         } catch (error: any) {
             setIsLoading(false);
-            toast.error(error.message);
+            toast.error(error.message, {
+                toastId: 'customId'
+            });
         }
-    }
+    };
 
     return (
         <>
@@ -104,19 +106,19 @@ export const RegisterForm = () => {
 
                 <div className="form-field">
                     <label className="form-label" htmlFor="registerEmail">Email: </label>
-                    <input className="form-input" type="text"  id="registerEmail" name="registerEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
+                    <input className="form-input" type="email"  id="registerEmail" name="registerEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
                     <br />
                 </div>
 
                 <div className="form-field">
                     <label className="form-label" htmlFor="registerPassword">Password: </label>
-                    <input className="form-input" type="text"  id="registerPassword" name="registerPassword" value={password} onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}/>
+                    <input className="form-input" type="password"  id="registerPassword" name="registerPassword" value={password} onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}/>
                     <br />
                 </div>
 
                 <div className="form-field">
                     <label className="form-label" htmlFor="registerConfirmationPassword">Confirm Password: </label>
-                    <input className="form-input" type="text"  id="registerConfirmationPassword" name="registerConfirmationPassword" value={confirmationPassword} onChange={(event: ChangeEvent<HTMLInputElement>) => setConfirmationPassword(event.target.value)}/>
+                    <input className="form-input" type="password"  id="registerConfirmationPassword" name="registerConfirmationPassword" value={confirmationPassword} onChange={(event: ChangeEvent<HTMLInputElement>) => setConfirmationPassword(event.target.value)}/>
                     <br />
                 </div>
 
@@ -152,9 +154,15 @@ export const RegisterForm = () => {
                 <div className="form-field">
                     <label className="form-label" htmlFor="registerZipCode">Zip Code: </label>
                     <select className="form-input" name="registerZipCode" id="registerZipCode" value={zipCode} onChange={handleZipCodeChange}>
-                        
+                        {zipCodes.length > 0 && (
+                            zipCodes.map((zipCode, index) => (
+                                <option key={index} value={zipCode}>{zipCode}</option>
+                            ))
+                        )}
                     </select>
                 </div>
+
+                <button id="registerButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Loading..." : "Register"}</button>
             </form>
         </>
     );
