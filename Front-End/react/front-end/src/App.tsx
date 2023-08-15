@@ -28,7 +28,7 @@ export default function App() {
         </Routes>
       </BrowserRouter>
 
-      <ToastContainer position='top-center' newestOnTop autoClose={3000} hideProgressBar theme='dark' limit={1}/>
+      <ToastContainer position='top-center' newestOnTop autoClose={3000} hideProgressBar theme='colored' limit={1} closeOnClick />
     </>
   )
 }
