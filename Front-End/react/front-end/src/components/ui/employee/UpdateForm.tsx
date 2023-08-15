@@ -14,23 +14,18 @@ interface Employee {
     address: string
 }
 
-export const UpdateForm = (props: { employee: Employee }) => {
-    const addressComponents = props.employee.address.split(', ');
-    const initialStreetAddress = addressComponents[0];
-    const initialCity = addressComponents[1];
-    const initialState = addressComponents[2].split(' ')[0];
-    const initialZipCode = addressComponents[2].split(' ')[1];
-
+export const UpdateForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [visible, setVisible] = useState(false);
-    const [firstName, setFirstName] = useState(props.employee.firstName);
-    const [lastName, setLastName] = useState(props.employee.lastName);
-    const [email, setEmail] = useState(props.employee.email);
-    const [phoneNumber, setPhoneNumber] = useState(props.employee.phoneNumber);
-    const [streetAddress, setStreetAddress] = useState(initialStreetAddress);
-    const [city, setCity] = useState(initialCity);
-    const [state, setState] = useState(initialState);
-    const [zipCode, setZipCode] = useState(initialZipCode);
+    
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [streetAddress, setStreetAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipCode, setZipCode] = useState('');
     const [zipCodes, setZipCodes] = useState([] as string[])
 
     const navigate = useNavigate();
@@ -123,6 +118,52 @@ export const UpdateForm = (props: { employee: Employee }) => {
             const initialZipCodes = zipCodeData[state] || [];
             setZipCodes(initialZipCodes)
         }
+
+        const fetchEmployee = async() => {
+            try {
+                const sessionId = Cookies.get('sessionId');
+
+                const response = await fetch('http://localhost:8080/get/employee', {
+                    method: 'PATCH',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({'sessionId': sessionId})
+                });
+                const data = await response.json();
+                if (response.status === 200) {
+                    const employee: Employee = data
+                    setFirstName(employee.firstName);
+                    setLastName(employee.lastName);
+                    setEmail(employee.email);
+                    setPhoneNumber(employee.phoneNumber);
+                    const addressComponents = employee.address.split(', ');
+                    setStreetAddress(addressComponents[0]);
+                    setCity(addressComponents[1]);
+                    const initialState = addressComponents[2].split(' ')[0];
+                    setState(initialState);
+                    const initialZipCodes = zipCodeData[initialState];
+                    setZipCodes(initialZipCodes);
+                    const initialZipCode = addressComponents[2].split(' ')[1];
+                    setZipCode(initialZipCode);
+                } else if (response.status === 400) {
+                    throw new Error(`${data.message}`);
+                } else {
+                    throw new Error("Cannot connect to the back end of the application, please try again!");
+                }
+            } catch (error: any) {
+                if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                    Cookies.remove('sessionId');
+                    navigate('/login');
+                    toast.warn(error.message, {
+                        toastId: "customId"
+                    });
+                } else {
+                    toast.warn(error.message, {
+                        toastId: "customId"
+                    });
+                }
+            }
+        }
+        fetchEmployee();
     }, []);
 
     return (
