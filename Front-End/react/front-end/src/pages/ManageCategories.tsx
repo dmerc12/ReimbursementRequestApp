@@ -8,13 +8,6 @@ export const ManageCategories = () => {
         <>
             <h1>categories here</h1>
 
-            <div className='home-component'>
-                <button onClick={() => setVisible(true)}>Open me for a modal</button>
-            </div>
-
-            <Modal visible={visible} onClose={() => setVisible(false)}>
-                <h1>Welcome to my modal</h1>
-            </Modal>
         </>
     );
 }
