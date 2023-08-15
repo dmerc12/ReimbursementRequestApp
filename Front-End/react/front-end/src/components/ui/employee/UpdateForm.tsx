@@ -67,13 +67,13 @@ export const UpdateForm = (props: { employee: Employee }) => {
         setIsLoading(true);
         try {
             const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
-            const sessionIdCookie = Cookies.get('sessionId');
+            const sessionId = Cookies.get('sessionId');
 
             const response = await fetch('http://localhost:8080/update/employee/now', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    'sessionId': sessionIdCookie,
+                    'sessionId': sessionId,
                     'firstName': firstName,
                     'lastName': lastName,
                     'email': email,
@@ -95,10 +95,20 @@ export const UpdateForm = (props: { employee: Employee }) => {
                 throw new Error("Cannot connect to the back end, please try again!");
             }
         } catch (error: any) {
-            setIsLoading(false);
-            toast.error(error.message, {
-                toastId: 'customId'
-            });
+            if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                Cookies.remove('sessionId');
+                navigate('/login');
+                setVisible(false);
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            } else {
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            }
         }
     };
 

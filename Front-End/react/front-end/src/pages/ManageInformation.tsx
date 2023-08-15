@@ -12,8 +12,8 @@ export const ManageInformation = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const sessionIdCookie = Cookies.get('sessionId');
-        if (!sessionIdCookie) {
+        const sessionId = Cookies.get('sessionId');
+        if (!sessionId) {
             navigate('/login');
             toast.info("Please login or register to gain access!", {
                 toastId: 'customId'
@@ -25,7 +25,7 @@ export const ManageInformation = () => {
                 const response = await fetch('http://localhost:8080/get/employee', {
                     method: 'PATCH',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({'sessionId': sessionIdCookie})
+                    body: JSON.stringify({'sessionId': sessionId})
                 });
                 const data = await response.json();
                 if (response.status === 200) {
@@ -36,15 +36,15 @@ export const ManageInformation = () => {
                     throw new Error("Cannot connect to the back end of the application, please try again!");
                 }
             } catch (error: any) {
-                if (error.message === "Session has expired, please login" || error.message === "No session found, please try again!") {
+                if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                     Cookies.remove('sessionId');
-                    navigate('/loigin');
+                    navigate('/login');
                     toast.warn(error.message, {
-                        toastId: 'customId'
+                        toastId: "customId"
                     });
                 } else {
-                    toast.error(error.message, {
-                        toastId: 'customId'
+                    toast.warn(error.message, {
+                        toastId: "customId"
                     });
                 }
             }

@@ -13,8 +13,8 @@ export const ChangePasswordForm = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const sessionIdCookie = Cookies.get('sessionId');
-        if (!sessionIdCookie) {
+        const sessionId = Cookies.get('sessionId');
+        if (!sessionId) {
             navigate('/login')
             toast.info("Please login or register to gain access!", {
                 toastId: 'customId'
@@ -23,7 +23,50 @@ export const ChangePasswordForm = () => {
     }, []);
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setIsLoading(true);
+        try {
+            const sessionId = Cookies.get('sessionId');
+            const response = await fetch('http://localhost:8080/change/password/now', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'sessionId': sessionId,
+                    'password': password,
+                    'confirmationPassword': confirmationPassword
+                })
+            });
 
+            const data = await response.json();
+
+            if (response.status === 200) {
+                navigate('/manage-information');
+                setVisible(false);
+                setIsLoading(false);
+                toast.success("Password successfully changed!", {
+                    toastId: 'customId'
+                });
+            } else if (response.status === 400) {
+                throw new Error(`${data.messsage}`);
+            } else {
+                throw new Error("Cannot connect to the back end, please try again!");
+            }
+        } catch (error: any) {
+            if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                Cookies.remove('sessionId');
+                navigate('/login');
+                setVisible(false);
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            } else {
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            }
+        }
     };
 
     return (
