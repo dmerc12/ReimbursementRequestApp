@@ -127,7 +127,7 @@ export const UpdateForm = (props: { employee: Employee }) => {
 
     return (
         <>
-            <div className="update-employee-component">
+            <div className="component">
                 <button onClick={() => setVisible(true)} className="action-btn" id="nav-btn">Update Information</button>
             </div>
 

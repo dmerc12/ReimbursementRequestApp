@@ -21,6 +21,8 @@
   border-radius: 0.5rem;
   transition-property: all;
   transition-duration: 0.3s;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modal {
@@ -139,7 +141,7 @@ p {
   flex-direction: column;
   justify-self: center;
   align-items: center;
-  max-height: 100vh;
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
 
@@ -244,18 +246,43 @@ p {
   margin: 20px;
 }
 
-.update-employee-component {
-  margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    align-items: center;
-}
-
-.change-password-component {
+.component {
   margin-top: 18px;
   display: flex;
   flex-direction: column;
   justify-self: center;
   align-items: center;
+}
+
+.plus-icon {
+  vertical-align: middle;
+  display: inline-flex;
+}
+
+.add-category-component {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+}
+
+.list {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  width: 25em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-head {
+  text-align: left;
+  padding: 30px;
+  color: white;
+}
+
+.table-data {
+  padding: 30px;
+  color: white;
 }
