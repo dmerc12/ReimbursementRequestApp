@@ -23,7 +23,6 @@ export const UpdateForm = (props: { employee: Employee }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [visible, setVisible] = useState(false);
-    const [sessionId, setSessionId] = useState('');
     const [firstName, setFirstName] = useState(props.employee.firstName);
     const [lastName, setLastName] = useState(props.employee.lastName);
     const [email, setEmail] = useState(props.employee.email);
@@ -68,9 +67,33 @@ export const UpdateForm = (props: { employee: Employee }) => {
         setIsLoading(true);
         try {
             const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
+            const sessionIdCookie = Cookies.get('sessionId');
 
+            const response = await fetch('http://localhost:8080/update/employee/now', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'sessionId': sessionIdCookie,
+                    'firstName': firstName,
+                    'lastName': lastName,
+                    'email': email,
+                    'phoneNumber': phoneNumber,
+                    'address': fullAddress
+                })
+            });
+            const data = await response.json();
 
-
+            if (response.status === 200) {
+                navigate('/manage-information');
+                setVisible(false);
+                toast.success("Information successfully updated!", {
+                    toastId: 'customId'
+                });
+            } else if (response.status === 400) {
+                throw new Error(`${data.message}`);
+            } else {
+                throw new Error("Cannot connect to the back end, please try again!");
+            }
         } catch (error: any) {
             setIsLoading(false);
             toast.error(error.message, {
@@ -87,7 +110,6 @@ export const UpdateForm = (props: { employee: Employee }) => {
                 toastId: 'customId'
             });
         } else {
-            setSessionId(sessionIdCookie);
             const initialZipCodes = zipCodeData[state] || [];
             setZipCodes(initialZipCodes)
         }

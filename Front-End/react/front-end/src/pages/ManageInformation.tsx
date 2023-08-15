@@ -1,12 +1,13 @@
 import { UpdateForm } from "../components/ui/employee/UpdateForm";
+import { ChangePasswordForm } from "../components/ui/employee/ChangePasswordForm";
+import { DeleteForm } from "../components/ui/employee/DeleteForm";
 import { useEffect, useState } from "react";
-import { parsePath, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { toast } from 'react-toastify';
 
 export const ManageInformation = () => {
     const [employee, setEmployee] = useState(null);
-    const [sessionId, setSessionId] = useState('');
 
     const navigate = useNavigate();
 
@@ -17,8 +18,6 @@ export const ManageInformation = () => {
             toast.info("Please login or register to gain access!", {
                 toastId: 'customId'
             });
-        } else {
-            setSessionId(sessionIdCookie);
         }
 
         const fetchEmployee = async() => {
@@ -57,6 +56,8 @@ export const ManageInformation = () => {
         <>
             <h1>Manage Your Information Below!</h1>
             {employee && <UpdateForm  employee={employee}/>}
+            <ChangePasswordForm />
+            <DeleteForm />
         </>
     );
 }
