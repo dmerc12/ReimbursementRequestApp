@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 
 export const ManageInformation = () => {
     const [employee, setEmployee] = useState(null);
-    const [sessionId, setSessionId] = useState('');
 
     const navigate = useNavigate();
 
@@ -17,8 +16,6 @@ export const ManageInformation = () => {
             toast.info("Please login or register to gain access!", {
                 toastId: 'customId'
             });
-        } else {
-            setSessionId(sessionIdCookie);
         }
 
         const fetchEmployee = async() => {
