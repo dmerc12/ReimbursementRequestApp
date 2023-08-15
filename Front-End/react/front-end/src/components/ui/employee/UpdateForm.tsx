@@ -128,7 +128,7 @@ export const UpdateForm = (props: { employee: Employee }) => {
     return (
         <>
             <div className="component">
-                <button onClick={() => setVisible(true)} className="action-btn" id="nav-btn">Update Information</button>
+                <button onClick={() => setVisible(true)} className="action-btn" id="updateInformationModal">Update Information</button>
             </div>
 
             <Modal visible={visible} onClose={() => setVisible(false)}>
@@ -191,7 +191,7 @@ export const UpdateForm = (props: { employee: Employee }) => {
                         </select>
                     </div>
 
-                    <button id="updateInformationButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Updating Information..." : "Update Information"}</button>
+                    <button id="updateInformationButton" disabled={isLoading} className="form-btn-1" type="submit">{isLoading ? "Updating Information..." : "Update Information"}</button>
                 </form>
             </Modal>
         </>
