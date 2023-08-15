@@ -23,10 +23,11 @@ export const Home = () => {
 
     return (
         <>
-            <div className="nav-btn-container">
-                <Link className="nav-btn" to='/manage-requests'>Manage Request Information</Link>
-                <Link className="nav-btn" to='/manage-categories'>Manage Categories</Link>
-                <Link className="nav-btn" to='/manage-information'>Manage Information</Link>
+            <h1>Welcome Home!</h1>
+            <div className="action-btn-container">
+                <Link className="action-btn" to='/manage-requests'>Manage Request Information</Link>
+                <Link className="action-btn" to='/manage-categories'>Manage Categories</Link>
+                <Link className="action-btn" to='/manage-information'>Manage Information</Link>
             </div>
         </>
     );

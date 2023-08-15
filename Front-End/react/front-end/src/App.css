@@ -211,56 +211,45 @@ p {
   transform: scale(1.05);
 }
 
+.action-btn {
+  display: inline-flex;
+  justify-items: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: all 0.2s ease-in-out;
+  color: white;
+  width: 15em;
+  height: 4em;
+  font-size: 15px;
+  font-weight: 575;
+  justify-content: space-between;
+  border: none;
+  background-color: black;
+}
+
+.action-btn:hover {
+  background-color: black;
+  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.25);
+  font-size: 18px;
+  transform: scale(1.05);
+}
+
+.action-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
 .update-employee-component {
   margin-top: 18px;
     display: flex;
     flex-direction: column;
     justify-self: center;
     align-items: center;
-}
-
-.update-employee-btn {
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  display: inline;
-  padding: 10px;
-  border: none;
-  background-color: black;
-  color: white;
-  border-radius: 5px;
-  width: 15em;
-  height: 4em;
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: 575;
-}
-
-.update-employee-btn:hover {
-  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
-}
-
-.change-password-btn {
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  display: inline;
-  padding: 10px;
-  border: none;
-  background-color: black;
-  color: white;
-  border-radius: 5px;
-  width: 15em;
-  height: 4em;
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: 575;
-} 
-
-.change-password-btn:hover {
-  box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
 }
 
 .change-password-component {

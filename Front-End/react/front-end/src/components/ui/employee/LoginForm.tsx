@@ -38,6 +38,7 @@ export const LoginForm = () => {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
             }
         } catch (error: any) {
+            setIsLoading(false);
             toast.error(error.message, {
                 toastId: 'customId'
             });

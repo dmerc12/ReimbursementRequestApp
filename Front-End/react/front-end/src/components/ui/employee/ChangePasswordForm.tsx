@@ -72,7 +72,7 @@ export const ChangePasswordForm = () => {
     return (
         <>
             <div className="change-password-component">
-                <button onClick={() => setVisible(true)} className="change-password-btn" id="changePasswordModal">Change Password</button>
+                <button onClick={() => setVisible(true)} className="action-btn" id="changePasswordModal">Change Password</button>
             </div>
 
             <Modal visible={visible} onClose={() => setVisible(false)}>

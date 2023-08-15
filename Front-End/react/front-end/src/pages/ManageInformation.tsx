@@ -55,9 +55,11 @@ export const ManageInformation = () => {
     return (
         <>
             <h1>Manage Your Information Below!</h1>
-            {employee && <UpdateForm  employee={employee}/>}
-            <ChangePasswordForm />
-            <DeleteForm />
+            <div className="action-btn-container">
+                {employee && <UpdateForm  employee={employee}/>}
+                <ChangePasswordForm />
+                <DeleteForm />
+            </div>
         </>
     );
 }

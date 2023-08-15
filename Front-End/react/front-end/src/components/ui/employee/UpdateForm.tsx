@@ -128,7 +128,7 @@ export const UpdateForm = (props: { employee: Employee }) => {
     return (
         <>
             <div className="update-employee-component">
-                <button onClick={() => setVisible(true)} className="update-employee-btn" id="updateInformationModal">Update Information</button>
+                <button onClick={() => setVisible(true)} className="action-btn" id="nav-btn">Update Information</button>
             </div>
 
             <Modal visible={visible} onClose={() => setVisible(false)}>
