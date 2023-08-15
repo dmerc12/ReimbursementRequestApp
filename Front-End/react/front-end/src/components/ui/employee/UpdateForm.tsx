@@ -123,65 +123,65 @@ export const UpdateForm = (props: { employee: Employee }) => {
 
             <Modal visible={visible} onClose={() => setVisible(false)}>
                 <form className="form" onSubmit={onSubmit}>
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateFirstName">First Name: </label>
-                    <input className="form-input" type="text"  id="updateFirstName" name="updateFirstName" value={firstName} onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}/>
-                    <br />
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateFirstName">First Name: </label>
+                        <input className="form-input" type="text"  id="updateFirstName" name="updateFirstName" value={firstName} onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}/>
+                        <br />
+                    </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateLasttName">Last Name: </label>
-                    <input className="form-input" type="text"  id="updateLasttName" name="updateLasttName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
-                    <br />
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateLasttName">Last Name: </label>
+                        <input className="form-input" type="text"  id="updateLasttName" name="updateLasttName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
+                        <br />
+                    </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateEmail">Email: </label>
-                    <input className="form-input" type="email"  id="updateEmail" name="updateEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
-                    <br />
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateEmail">Email: </label>
+                        <input className="form-input" type="email"  id="updateEmail" name="updateEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
+                        <br />
+                    </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updatePhoneNumber">Phone Number: </label>
-                    <input className="form-input" type="text"  id="updatePhoneNumber" name="updatePhoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange}/>
-                    <br />
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updatePhoneNumber">Phone Number: </label>
+                        <input className="form-input" type="text"  id="updatePhoneNumber" name="updatePhoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange}/>
+                        <br />
+                    </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateStreetAddress">Street Address: </label>
-                    <input className="form-input" type="text"  id="updateStreetAddress" name="updateStreetAddress" value={streetAddress} onChange={(event: ChangeEvent<HTMLInputElement>) => setStreetAddress(event.target.value)}/>
-                    <br />
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateStreetAddress">Street Address: </label>
+                        <input className="form-input" type="text"  id="updateStreetAddress" name="updateStreetAddress" value={streetAddress} onChange={(event: ChangeEvent<HTMLInputElement>) => setStreetAddress(event.target.value)}/>
+                        <br />
+                    </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateCity">City: </label>
-                    <input className="form-input" type="text"  id="updateCity" name="updateCity" value={city} onChange={(event: ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}/>
-                    <br />
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateCity">City: </label>
+                        <input className="form-input" type="text"  id="updateCity" name="updateCity" value={city} onChange={(event: ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}/>
+                        <br />
+                    </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateState">State: </label>
-                    <select className="form-input" name="updateState" id="updateState" value={state} onChange={handleStateChange}>
-                        {states.length > 0 && (
-                            states.map(state => (
-                                <option key={state.code} value={state.code}>{state.name}</option>
-                            ))
-                        )}
-                    </select>
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateState">State: </label>
+                        <select className="form-input" name="updateState" id="updateState" value={state} onChange={handleStateChange}>
+                            {states.length > 0 && (
+                                states.map(state => (
+                                    <option key={state.code} value={state.code}>{state.name}</option>
+                                ))
+                            )}
+                        </select>
+                    </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateZipCode">Zip Code: </label>
-                    <select className="form-input" name="updateZipCode" id="updateZipCode" value={zipCode} onChange={handleZipCodeChange}>
-                        {zipCodes.length > 0 && (
-                            zipCodes.map((zipCode, index) => (
-                                <option key={index} value={zipCode}>{zipCode}</option>
-                            ))
-                        )}
-                    </select>
-                </div>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateZipCode">Zip Code: </label>
+                        <select className="form-input" name="updateZipCode" id="updateZipCode" value={zipCode} onChange={handleZipCodeChange}>
+                            {zipCodes.length > 0 && (
+                                zipCodes.map((zipCode, index) => (
+                                    <option key={index} value={zipCode}>{zipCode}</option>
+                                ))
+                            )}
+                        </select>
+                    </div>
 
-                <button id="updateInformationButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Loading..." : "Update Information"}</button>
+                    <button id="updateInformationButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Updating Information..." : "Update Information"}</button>
                 </form>
             </Modal>
         </>

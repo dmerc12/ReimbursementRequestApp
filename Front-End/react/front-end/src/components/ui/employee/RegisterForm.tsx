@@ -162,7 +162,7 @@ export const RegisterForm = () => {
                     </select>
                 </div>
 
-                <button id="registerButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Loading..." : "Register"}</button>
+                <button id="registerButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Registering..." : "Register"}</button>
             </form>
         </>
     );
