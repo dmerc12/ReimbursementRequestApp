@@ -298,10 +298,15 @@ p {
   gap: 1.25rem;
 }
 
+.edit-icon {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
 .loading-indicator {
 
 }
 
 .failed-to-fetch {
-  
+
 }

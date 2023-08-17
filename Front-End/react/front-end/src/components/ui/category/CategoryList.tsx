@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 
 export interface Category {
     categoryId: number,
-    categoryName: String
+    categoryName: string
 }
 
 export const CategoryList = () => {
