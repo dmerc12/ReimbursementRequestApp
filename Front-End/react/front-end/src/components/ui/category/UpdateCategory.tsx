@@ -1,4 +1,6 @@
-export const UpdateCategory = () => {
+import { Category } from "./CategoryList"
+
+export const UpdateCategory = (props: { category: Category}) => {
     return (
         <>
         

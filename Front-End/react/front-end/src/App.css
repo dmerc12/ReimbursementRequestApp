@@ -276,6 +276,11 @@ p {
   margin-right: auto;
 }
 
+.table {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .table-head {
   text-align: left;
   padding: 30px;
@@ -285,4 +290,10 @@ p {
 .table-data {
   padding: 30px;
   color: white;
+  width: 100%;
+}
+
+.crud-icons {
+  display: flex;
+  gap: 1.25rem;
 }
