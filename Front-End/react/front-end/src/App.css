@@ -21,6 +21,8 @@
   border-radius: 0.5rem;
   transition-property: all;
   transition-duration: 0.3s;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modal {
@@ -139,7 +141,7 @@ p {
   flex-direction: column;
   justify-self: center;
   align-items: center;
-  max-height: 100vh;
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
 
@@ -211,32 +213,100 @@ p {
   transform: scale(1.05);
 }
 
-.update-employee-component {
-  margin-top: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    align-items: center;
-}
-
-.update-employee-btn {
-  justify-content: space-between;
+.action-btn {
+  display: inline-flex;
+  justify-items: center;
   align-items: center;
-  display: flex;
-  display: inline;
+  margin: 10px;
   padding: 10px;
-  border: none;
-  background-color: black;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: all 0.2s ease-in-out;
   color: white;
-  border-radius: 5px;
   width: 15em;
   height: 4em;
-  margin-top: 10px;
   font-size: 15px;
   font-weight: 575;
+  justify-content: space-between;
+  border: none;
+  background-color: black;
 }
 
-.update-employee-btn:hover {
+.action-btn:hover {
+  background-color: black;
   box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.25);
+  font-size: 18px;
   transform: scale(1.05);
+}
+
+.action-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.component {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+}
+
+.plus-icon {
+  vertical-align: middle;
+  display: inline-flex;
+}
+
+.add-category-component {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+}
+
+.list {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  width: 25em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-head {
+  text-align: left;
+  padding: 30px;
+  color: white;
+}
+
+.table-data {
+  padding: 30px;
+  color: white;
+  width: 100%;
+}
+
+.crud-icons {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.edit-icon {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.loading-indicator {
+
+}
+
+.failed-to-fetch {
+
 }

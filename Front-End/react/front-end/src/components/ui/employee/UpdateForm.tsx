@@ -14,23 +14,20 @@ interface Employee {
     address: string
 }
 
-export const UpdateForm = (props: { employee: Employee }) => {
-    const addressComponents = props.employee.address.split(', ');
-    const initialStreetAddress = addressComponents[0];
-    const initialCity = addressComponents[1];
-    const initialState = addressComponents[2].split(' ')[0];
-    const initialZipCode = addressComponents[2].split(' ')[1];
-
+export const UpdateForm = () => {
     const [isLoading, setIsLoading] = useState(false);
+    const [dataIsLoading, setDataIsLoading] = useState(false);
+    const [failedToFetch, setFailedToFetch] = useState(false);
     const [visible, setVisible] = useState(false);
-    const [firstName, setFirstName] = useState(props.employee.firstName);
-    const [lastName, setLastName] = useState(props.employee.lastName);
-    const [email, setEmail] = useState(props.employee.email);
-    const [phoneNumber, setPhoneNumber] = useState(props.employee.phoneNumber);
-    const [streetAddress, setStreetAddress] = useState(initialStreetAddress);
-    const [city, setCity] = useState(initialCity);
-    const [state, setState] = useState(initialState);
-    const [zipCode, setZipCode] = useState(initialZipCode);
+    
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [streetAddress, setStreetAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipCode, setZipCode] = useState('');
     const [zipCodes, setZipCodes] = useState([] as string[])
 
     const navigate = useNavigate();
@@ -67,13 +64,13 @@ export const UpdateForm = (props: { employee: Employee }) => {
         setIsLoading(true);
         try {
             const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
-            const sessionIdCookie = Cookies.get('sessionId');
+            const sessionId = Cookies.get('sessionId');
 
             const response = await fetch('http://localhost:8080/update/employee/now', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    'sessionId': sessionIdCookie,
+                    'sessionId': sessionId,
                     'firstName': firstName,
                     'lastName': lastName,
                     'email': email,
@@ -86,6 +83,7 @@ export const UpdateForm = (props: { employee: Employee }) => {
             if (response.status === 200) {
                 navigate('/manage-information');
                 setVisible(false);
+                setIsLoading(false);
                 toast.success("Information successfully updated!", {
                     toastId: 'customId'
                 });
@@ -95,94 +93,154 @@ export const UpdateForm = (props: { employee: Employee }) => {
                 throw new Error("Cannot connect to the back end, please try again!");
             }
         } catch (error: any) {
-            setIsLoading(false);
-            toast.error(error.message, {
-                toastId: 'customId'
-            });
+            if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                Cookies.remove('sessionId');
+                navigate('/login');
+                setVisible(false);
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            } else {
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            }
         }
     };
 
     useEffect(() => {
-        const sessionIdCookie = Cookies.get('sessionId');
-        if (!sessionIdCookie) {
-            navigate('/login')
-            toast.info("Please login or register to gain access!", {
-                toastId: 'customId'
-            });
-        } else {
-            const initialZipCodes = zipCodeData[state] || [];
-            setZipCodes(initialZipCodes)
+        const fetchEmployee = async() => {
+            try {
+                setDataIsLoading(true);
+                setFailedToFetch(false);
+
+                const sessionId = Cookies.get('sessionId');
+
+                const response = await fetch('http://localhost:8080/get/employee', {
+                    method: 'PATCH',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({'sessionId': sessionId})
+                });
+                const data = await response.json();
+                if (response.status === 200) {
+                    const employee: Employee = data
+                    setFirstName(employee.firstName);
+                    setLastName(employee.lastName);
+                    setEmail(employee.email);
+                    setPhoneNumber(employee.phoneNumber);
+                    const addressComponents = employee.address.split(', ');
+                    setStreetAddress(addressComponents[0]);
+                    setCity(addressComponents[1]);
+                    const initialState = addressComponents[2].split(' ')[0];
+                    setState(initialState);
+                    const initialZipCodes = zipCodeData[initialState];
+                    setZipCodes(initialZipCodes);
+                    const initialZipCode = addressComponents[2].split(' ')[1];
+                    setZipCode(initialZipCode);
+                    setDataIsLoading(false);
+                } else if (response.status === 400) {
+                    throw new Error(`${data.message}`);
+                } else {
+                    throw new Error("Cannot connect to the back end of the application, please try again!");
+                }
+            } catch (error: any) {
+                if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                    Cookies.remove('sessionId');
+                    navigate('/login');
+                    setDataIsLoading(false);
+                    toast.warn(error.message, {
+                        toastId: "customId"
+                    });
+                } else if (error.message === "Failed to fetch") {
+                    setFailedToFetch(true);
+                    setDataIsLoading(false);
+                } else {
+                    setDataIsLoading(false);
+                    toast.warn(error.message, {
+                        toastId: "customId"
+                    });
+                }
+            }
         }
+        fetchEmployee();
     }, []);
 
     return (
         <>
-            <div className="update-employee-component">
-                <button onClick={() => setVisible(true)} className="update-employee-btn" id="updateInformationModal">Update Information</button>
+            <div className="component">
+                <button onClick={() => setVisible(true)} className="action-btn" id="updateInformationModal">Update Information</button>
             </div>
 
             <Modal visible={visible} onClose={() => setVisible(false)}>
-                <form className="form" onSubmit={onSubmit}>
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateFirstName">First Name: </label>
-                    <input className="form-input" type="text"  id="updateFirstName" name="updateFirstName" value={firstName} onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}/>
-                    <br />
-                </div>
+                {dataIsLoading ? ( 
+                    <div className="loading-indicator">Loading...</div>
+                ) : failedToFetch ? (
+                    <div className="failed-to-fetch">Unable to connect to the back end server, please try again!</div>
+                ) : (
+                    <form className="form" onSubmit={onSubmit}>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateFirstName">First Name: </label>
+                            <input className="form-input" type="text"  id="updateFirstName" name="updateFirstName" value={firstName} onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}/>
+                            <br />
+                        </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateLasttName">Last Name: </label>
-                    <input className="form-input" type="text"  id="updateLasttName" name="updateLasttName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
-                    <br />
-                </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateLasttName">Last Name: </label>
+                            <input className="form-input" type="text"  id="updateLasttName" name="updateLasttName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
+                            <br />
+                        </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateEmail">Email: </label>
-                    <input className="form-input" type="email"  id="updateEmail" name="updateEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
-                    <br />
-                </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateEmail">Email: </label>
+                            <input className="form-input" type="email"  id="updateEmail" name="updateEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
+                            <br />
+                        </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updatePhoneNumber">Phone Number: </label>
-                    <input className="form-input" type="text"  id="updatePhoneNumber" name="updatePhoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange}/>
-                    <br />
-                </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updatePhoneNumber">Phone Number: </label>
+                            <input className="form-input" type="text"  id="updatePhoneNumber" name="updatePhoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange}/>
+                            <br />
+                        </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateStreetAddress">Street Address: </label>
-                    <input className="form-input" type="text"  id="updateStreetAddress" name="updateStreetAddress" value={streetAddress} onChange={(event: ChangeEvent<HTMLInputElement>) => setStreetAddress(event.target.value)}/>
-                    <br />
-                </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateStreetAddress">Street Address: </label>
+                            <input className="form-input" type="text"  id="updateStreetAddress" name="updateStreetAddress" value={streetAddress} onChange={(event: ChangeEvent<HTMLInputElement>) => setStreetAddress(event.target.value)}/>
+                            <br />
+                        </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateCity">City: </label>
-                    <input className="form-input" type="text"  id="updateCity" name="updateCity" value={city} onChange={(event: ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}/>
-                    <br />
-                </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateCity">City: </label>
+                            <input className="form-input" type="text"  id="updateCity" name="updateCity" value={city} onChange={(event: ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}/>
+                            <br />
+                        </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateState">State: </label>
-                    <select className="form-input" name="updateState" id="updateState" value={state} onChange={handleStateChange}>
-                        {states.length > 0 && (
-                            states.map(state => (
-                                <option key={state.code} value={state.code}>{state.name}</option>
-                            ))
-                        )}
-                    </select>
-                </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateState">State: </label>
+                            <select className="form-input" name="updateState" id="updateState" value={state} onChange={handleStateChange}>
+                                {states.length > 0 && (
+                                    states.map(state => (
+                                        <option key={state.code} value={state.code}>{state.name}</option>
+                                    ))
+                                )}
+                            </select>
+                        </div>
 
-                <div className="form-field">
-                    <label className="form-label" htmlFor="updateZipCode">Zip Code: </label>
-                    <select className="form-input" name="updateZipCode" id="updateZipCode" value={zipCode} onChange={handleZipCodeChange}>
-                        {zipCodes.length > 0 && (
-                            zipCodes.map((zipCode, index) => (
-                                <option key={index} value={zipCode}>{zipCode}</option>
-                            ))
-                        )}
-                    </select>
-                </div>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateZipCode">Zip Code: </label>
+                            <select className="form-input" name="updateZipCode" id="updateZipCode" value={zipCode} onChange={handleZipCodeChange}>
+                                {zipCodes.length > 0 && (
+                                    zipCodes.map((zipCode, index) => (
+                                        <option key={index} value={zipCode}>{zipCode}</option>
+                                    ))
+                                )}
+                            </select>
+                        </div>
 
-                <button id="updateInformationButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Loading..." : "Update Information"}</button>
-                </form>
+                        <button id="updateInformationButton" disabled={isLoading} className="form-btn-1" type="submit">{isLoading ? "Updating Information..." : "Update Information"}</button>
+                    </form>
+                )}    
             </Modal>
         </>
     )

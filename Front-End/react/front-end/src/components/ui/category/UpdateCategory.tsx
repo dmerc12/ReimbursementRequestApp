@@ -1,36 +1,42 @@
+import { Category } from "./CategoryList";
+import { useState } from 'react';
+import { FiEdit } from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { Modal } from "../../Modal";
-import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { Modal } from "../../Modal";
 
-export const DeleteForm = () => {
+export const UpdateCategory = (props: { category: Category, onUpdate: () => void}) => {
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [categoryName, setCategoryName] = useState(props.category.categoryName);
 
     const navigate = useNavigate();
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setIsLoading(true);
         try {
             const sessionId = Cookies.get('sessionId');
-
-            const response = await fetch('http://localhost:8080/delete/employee/now', {
-                method: 'DELETE',
+            
+            const response = await fetch('http://localhost:8080/update/category/now', {
+                method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    'sessionId': sessionId
+                    'sessionId': sessionId,
+                    'categoryId': props.category.categoryId,
+                    'categoryName': categoryName
                 })
-            })
+            });
 
             const data = await response.json();
 
             if (response.status === 200) {
-                Cookies.remove('sessionId');
-                navigate('/login');
-                setIsLoading(false);
+                navigate('/manage-categories');
+                props.onUpdate();
                 setVisible(false);
-                toast.success("Profile successfully deleted, goodbye!", {
+                setIsLoading(false);
+                toast.success("Category Successfully Updated!", {
                     toastId: 'customId'
                 });
             } else if (response.status === 400) {
@@ -54,20 +60,19 @@ export const DeleteForm = () => {
                 });
             }
         }
-    };
+    }
 
     return (
         <>
-            <div className="component">
-                <button onClick={() => setVisible(true)} className="action-btn" id="deleteInformationModal">Delete Profile</button>
-            </div>
-
+            <FiEdit onClick={() => setVisible(true)} cursor='pointer' size={15}/>
             <Modal visible={visible} onClose={() => setVisible(false)}>
                 <form className="form" onSubmit={onSubmit}>
-                    <h1>Confirm Deletion Below</h1>
-                    <p>Any requests or subsequent categories you are associated with will also be deleted. Are you sure you?</p>
+                    <div className="form-field">
+                        <label className="form-label" htmlFor="updateCategoryName">Category Name: </label>
+                        <input className="form-input" type="text" id="updateCategoryName" name="updateCategoryName" value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
+                    </div>
 
-                    <button id="deleteInformationButton" className="form-btn-1" disabled={isLoading} type="submit">{isLoading ? "Deleting Profile..." : "Delete Profile"}</button>
+                    <button disabled={isLoading} className="form-btn-1" type="submit">{isLoading ? "Updating Category..." : "Update Category"}</button>
                 </form>
             </Modal>
         </>

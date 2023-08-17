@@ -38,6 +38,7 @@ export const LoginForm = () => {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
             }
         } catch (error: any) {
+            setIsLoading(false);
             toast.error(error.message, {
                 toastId: 'customId'
             });
@@ -57,7 +58,7 @@ export const LoginForm = () => {
                     <input className='form-input' type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
                 </div>
 
-                <button disabled={isloading} className='form-btn-1' type='submit'>{isloading ? "Loading.." : "Login"}</button>
+                <button disabled={isloading} className='form-btn-1' type='submit'>{isloading ? "Logging in.." : "Login"}</button>
             </form>
         </>
     );
