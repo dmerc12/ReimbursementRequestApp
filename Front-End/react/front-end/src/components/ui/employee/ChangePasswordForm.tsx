@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Cookies from "js-cookie";
@@ -11,16 +11,6 @@ export const ChangePasswordForm = () => {
     const [confirmationPassword, setConfirmationPassword] = useState('');
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const sessionId = Cookies.get('sessionId');
-        if (!sessionId) {
-            navigate('/login')
-            toast.info("Please login or register to gain access!", {
-                toastId: 'customId'
-            });
-        }
-    }, []);
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
