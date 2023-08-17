@@ -297,3 +297,11 @@ p {
   display: flex;
   gap: 1.25rem;
 }
+
+.loading-indicator {
+
+}
+
+.failed-to-fetch {
+  
+}
