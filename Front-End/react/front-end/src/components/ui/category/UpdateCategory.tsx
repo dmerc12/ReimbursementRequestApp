@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { Modal } from "../../Modal";
 
-export const UpdateCategory = (props: { category: Category}) => {
+export const UpdateCategory = (props: { category: Category, onUpdate: () => void}) => {
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [categoryName, setCategoryName] = useState(props.category.categoryName);
@@ -33,6 +33,7 @@ export const UpdateCategory = (props: { category: Category}) => {
 
             if (response.status === 200) {
                 navigate('/manage-categories');
+                props.onUpdate();
                 setVisible(false);
                 setIsLoading(false);
                 toast.success("Category Successfully Updated!", {
