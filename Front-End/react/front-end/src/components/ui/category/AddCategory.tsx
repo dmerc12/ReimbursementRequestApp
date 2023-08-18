@@ -1,4 +1,5 @@
 import { AiOutlinePlus } from 'react-icons/ai';
+import { FaSpinner } from 'react-icons/fa'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -32,7 +33,7 @@ export const AddCategory = () => {
             const data = await response.json();
 
             if (response.status === 201) {
-                navigate('/manage-categories');
+                window.location.reload();
                 setVisible(false);
                 setIsLoading(false);
                 setCategoryName('');
@@ -71,7 +72,11 @@ export const AddCategory = () => {
             </div>
 
             <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
-                {failedToFetch ? (
+                {isLoading ? (
+                    <div className='loading-indicator'>
+                        <FaSpinner className='spinner' />
+                    </div>
+                ) : failedToFetch ? (
                     <div className='failed-to-fetch'>Cannot connect to the back end server, please try again!</div>
                 ) : (
                     <form className='form' onSubmit={onSubmit}>
