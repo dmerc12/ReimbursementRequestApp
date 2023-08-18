@@ -298,6 +298,11 @@ p {
   gap: 1.25rem;
 }
 
+.plus-icon {
+  vertical-align: middle;
+  display: inline-flex;
+}
+
 .edit-icon {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));

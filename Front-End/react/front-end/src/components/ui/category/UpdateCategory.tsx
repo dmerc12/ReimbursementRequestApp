@@ -72,7 +72,7 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
                         <input className="form-input" type="text" id="updateCategoryName" name="updateCategoryName" value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
                     </div>
 
-                    <button disabled={isLoading} className="form-btn-1" type="submit">{isLoading ? "Updating Category..." : "Update Category"}</button>
+                    <button disabled={isLoading} className="form-btn-1" type="submit" id="updateCategoryButton">{isLoading ? "Updating Category..." : "Update Category"}</button>
                 </form>
             </Modal>
         </>
