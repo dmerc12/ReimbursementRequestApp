@@ -298,13 +298,31 @@ p {
   gap: 1.25rem;
 }
 
+.plus-icon {
+  vertical-align: middle;
+  display: inline-flex;
+}
+
 .edit-icon {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
 
+.spinner {
+  animation: spin 1s linear infinite;
+  font-size: 2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .failed-to-fetch {
