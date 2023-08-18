@@ -64,14 +64,6 @@ export const AddCategory = () => {
         }
     }
 
-    if (failedToFetch) {
-        return <div className='failed-to-fetch'>Cannot connect to the back end server, please try again!</div>
-    }
-
-    if (isLoading) {
-        return <div className='loading-indicator'>Loading...</div>
-    }
-
     return (
         <>
             <div className='component'>
@@ -79,14 +71,18 @@ export const AddCategory = () => {
             </div>
 
             <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
-                <form className='form' onSubmit={onSubmit}>
-                    <div className='form-field'>
-                        <label className='form-label' htmlFor="newCategoryName">New Category Name: </label>
-                        <input className='form-input' type="text" id='newCategoryName' name='newCategoryName' value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
+                {failedToFetch ? (
+                    <div className='failed-to-fetch'>Cannot connect to the back end server, please try again!</div>
+                ) : (
+                    <form className='form' onSubmit={onSubmit}>
+                        <div className='form-field'>
+                            <label className='form-label' htmlFor="newCategoryName">New Category Name: </label>
+                            <input className='form-input' type="text" id='newCategoryName' name='newCategoryName' value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
+                        </div>
 
                         <button disabled={isLoading} className='form-btn-1' type='submit' id='addCategoryButton'>{isLoading ? "Adding Category..." : "Add Category"}</button>
-                    </div>
-                </form>
+                    </form> 
+                )}
             </Modal>
         </>
     )
