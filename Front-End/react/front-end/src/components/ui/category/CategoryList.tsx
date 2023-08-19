@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { FaSpinner } from 'react-icons/fa';
 
 export interface Category {
     categoryId: number,
@@ -80,31 +81,29 @@ export const CategoryList = () => {
         }
     }
 
-    if (failedToFetch) {
-        return <div className="failed-to-fetch">Cannot connect to the back end server, please try again!</div>
-    }
-
-    if (isLoading) {
-        return <div className="loading-indicator">Loading...</div>
-    }
-
-    if (categories.length === 0) {
-        return <div>No categories found.</div>
-    }
-
     return (
         <>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th className="table-head">Category Name</th>
-                        <th className="table-head">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {categoryRows}
-                </tbody>
-            </table>
+            {isLoading ? (
+                <div className='loading-indicator'>
+                    <FaSpinner className='spinner' />
+                </div>
+            ) : failedToFetch ? (
+                <div className="failed-to-fetch">Cannot connect to the back end server, please try again!</div>
+            ) : categories.length === 0 ? (
+                <div>No categories found</div>
+            ) : (
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th className="table-head">Category Name</th>
+                            <th className="table-head">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {categoryRows}
+                    </tbody>
+                </table>
+            )}
         </>
     )
 }

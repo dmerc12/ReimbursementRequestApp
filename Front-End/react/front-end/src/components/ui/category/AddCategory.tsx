@@ -1,5 +1,5 @@
 import { AiOutlinePlus } from 'react-icons/ai';
-import { FaSpinner } from 'react-icons/fa'
+import { FaSpinner } from 'react-icons/fa';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';

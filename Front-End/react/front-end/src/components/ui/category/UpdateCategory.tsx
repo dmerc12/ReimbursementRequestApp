@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { Modal } from "../../Modal";
+import { FaSpinner } from 'react-icons/fa';
 
 export const UpdateCategory = (props: { category: Category, onUpdate: () => void}) => {
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [failedToFetch, setFailedToFetch] = useState(false);
     const [categoryName, setCategoryName] = useState(props.category.categoryName);
 
     const navigate = useNavigate();
@@ -48,11 +50,13 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setVisible(false);
                 setIsLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "Failed to fetch") {
+                setFailedToFetch(true);
+                setIsLoading(false);
             } else {
                 setIsLoading(false);
                 toast.warn(error.message, {
@@ -64,16 +68,24 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
 
     return (
         <>
-            <FiEdit onClick={() => setVisible(true)} cursor='pointer' size={15}/>
-            <Modal visible={visible} onClose={() => setVisible(false)}>
-                <form className="form" onSubmit={onSubmit}>
-                    <div className="form-field">
-                        <label className="form-label" htmlFor="updateCategoryName">Category Name: </label>
-                        <input className="form-input" type="text" id="updateCategoryName" name="updateCategoryName" value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
-                    </div>
+            <FiEdit onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15}/>
+            <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
+                {isLoading ? (
+                    <div className='loading-indicator'>
+                        <FaSpinner className='spinner' />
+                    </div> 
+                ) : failedToFetch ? (
+                    <div className='failed-to-fetch'>Cannot connect to the back end server, please try again!</div>
+                ) : (
+                    <form className="form" onSubmit={onSubmit}>
+                        <div className="form-field">
+                            <label className="form-label" htmlFor="updateCategoryName">Category Name: </label>
+                            <input className="form-input" type="text" id="updateCategoryName" name="updateCategoryName" value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
+                        </div>
 
-                    <button disabled={isLoading} className="form-btn-1" type="submit" id="updateCategoryButton">{isLoading ? "Updating Category..." : "Update Category"}</button>
-                </form>
+                        <button disabled={isLoading} className="form-btn-1" type="submit" id="updateCategoryButton">{isLoading ? "Updating Category..." : "Update Category"}</button>
+                    </form>
+                )}
             </Modal>
         </>
     )

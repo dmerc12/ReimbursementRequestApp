@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { states } from "../../../lib/States";
 import { zipCodeData } from "../../../lib/ZipCodes";
+import { FaSpinner } from 'react-icons/fa';
 
 interface Employee {
     firstName: string,
@@ -170,12 +171,14 @@ export const UpdateForm = () => {
     return (
         <>
             <div className="component">
-                <button onClick={() => setVisible(true)} className="action-btn" id="updateInformationModal">Update Information</button>
+                <button onClick={() => {setVisible(true); setFailedToFetch(false)}} className="action-btn" id="updateInformationModal">Update Information</button>
             </div>
 
-            <Modal visible={visible} onClose={() => setVisible(false)}>
+            <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
                 {dataIsLoading ? ( 
-                    <div className="loading-indicator">Loading...</div>
+                    <div className='loading-indicator'>
+                        <FaSpinner className='spinner' />
+                    </div>
                 ) : failedToFetch ? (
                     <div className="failed-to-fetch">Unable to connect to the back end server, please try again!</div>
                 ) : (
