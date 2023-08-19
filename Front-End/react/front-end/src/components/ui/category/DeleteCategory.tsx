@@ -11,9 +11,51 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
+
+    const navigate = useNavigate();
     
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        
+        event.preventDefault();
+        try {
+            const sessionId = Cookies.get('sessionId');
+
+            const response = await fetch(`http://localhost:8080/delete/category/${props.category.categoryId}/${sessionId}`, {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'}
+            });
+
+            const data = await response.json();
+
+            if (response.status === 200) {
+                props.onUpdate();
+                setVisible(false);
+                setIsLoading(false);
+                toast.success("Category Successfully Deleted!", {
+                    toastId: "customId"
+                });
+            } else if (response.status === 400) {
+                throw new Error(`${data.message}`);
+            } else {
+                throw new Error('Cannot connect to the back end server, please try again!');
+            }
+        } catch (error: any) {
+            if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                Cookies.remove('sessionId');
+                navigate('/login');
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            } else if (error.message === "Failed to fetch") {
+                setFailedToFetch(true);
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            }
+        }
     }
 
     return (
