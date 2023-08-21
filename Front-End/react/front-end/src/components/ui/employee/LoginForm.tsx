@@ -2,16 +2,20 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { FaSpinner, FaSync } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isloading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [failedToFetch, setFailedToFetch] = useState(false);
 
     const navigate = useNavigate();
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: any) => {
         event.preventDefault();
+        setFailedToFetch(false);
         setIsLoading(true);
         try {
             const response = await fetch('http://localhost:8080/login/now', 
@@ -38,28 +42,53 @@ export const LoginForm = () => {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
             }
         } catch (error: any) {
-            setIsLoading(false);
-            toast.error(error.message, {
-                toastId: 'customId'
-            });
+            if (error.message === "Failed to fetch") {
+                setFailedToFetch(true);
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            }
         }
+    }
+
+    const goBack = () => {
+        setFailedToFetch(false);
     }
 
     return (
         <>
-            <form className='form' onSubmit={onSubmit}>
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="loginEmail">Email: </label>
-                    <input className='form-input' type="email" id='loginEmail' name='loginEmail' value={email} onChange={(event) => setEmail(event.target.value)} />
+            {isLoading ? (
+                <div className='loading-indictor'>
+                    <FaSpinner className='spinner' />
                 </div>
-
-                <div className='form-field'>
-                    <label className='form-label' htmlFor="loginPassword">Password: </label>
-                    <input className='form-input' type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
+            ) : failedToFetch ? (
+                <div className='failed-to-fetch'>
+                    <AiOutlineExclamationCircle className='warning-icon'/>
+                    <p>Cannot connect to the back end server.</p>
+                    <p>Please check your internet connection and try again.</p>
+                    <button className='retry-button' onClick={onSubmit}>
+                        <FaSync className='retry-icon'/> Retry
+                    </button>
+                    <button className='back-button' onClick={goBack}>Go Back</button>
                 </div>
+            ) : (
+                <form className='form' onSubmit={onSubmit}>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="loginEmail">Email: </label>
+                        <input className='form-input' type="email" id='loginEmail' name='loginEmail' value={email} onChange={(event) => setEmail(event.target.value)} />
+                    </div>
 
-                <button disabled={isloading} className='form-btn-1' type='submit'>{isloading ? "Logging in.." : "Login"}</button>
-            </form>
+                    <div className='form-field'>
+                        <label className='form-label' htmlFor="loginPassword">Password: </label>
+                        <input className='form-input' type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
+                    </div>
+
+                    <button disabled={isLoading} className='form-btn-1' type='submit'>{isLoading ? "Logging in.." : "Login"}</button>
+                </form>
+            )}
         </>
     );
 }
