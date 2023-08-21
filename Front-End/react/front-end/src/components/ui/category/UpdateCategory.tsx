@@ -34,7 +34,6 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
             const data = await response.json();
 
             if (response.status === 200) {
-                navigate('/manage-categories');
                 props.onUpdate();
                 setVisible(false);
                 setIsLoading(false);
