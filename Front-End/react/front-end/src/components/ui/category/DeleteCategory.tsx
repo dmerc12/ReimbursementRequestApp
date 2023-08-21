@@ -61,6 +61,7 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
 
     const goBack = () => {
         setFailedToFetch(false);
+        setVisible(false);
     }
 
     return (

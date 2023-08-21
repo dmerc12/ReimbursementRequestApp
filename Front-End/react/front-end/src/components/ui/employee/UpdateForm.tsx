@@ -5,7 +5,8 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { states } from "../../../lib/States";
 import { zipCodeData } from "../../../lib/ZipCodes";
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner, FaSync } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 interface Employee {
     firstName: string,
@@ -60,7 +61,7 @@ export const UpdateForm = () => {
         setPhoneNumber(formattedPhoneNumber);
     };
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: any) => {
         event.preventDefault();
         setIsLoading(true);
         try {
@@ -97,11 +98,13 @@ export const UpdateForm = () => {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setVisible(false);
                 setIsLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "Failed to fetch") {
+                setFailedToFetch(true);
+                setIsLoading(false);
             } else {
                 setIsLoading(false);
                 toast.warn(error.message, {
@@ -111,60 +114,65 @@ export const UpdateForm = () => {
         }
     };
 
-    useEffect(() => {
-        const fetchEmployee = async() => {
-            try {
-                setDataIsLoading(true);
-                setFailedToFetch(false);
+    const goBack = () => {
+        setFailedToFetch(false);
+    }
 
-                const sessionId = Cookies.get('sessionId');
+    const fetchEmployee = async() => {
+        try {
+            setDataIsLoading(true);
+            setFailedToFetch(false);
 
-                const response = await fetch('http://localhost:8080/get/employee', {
-                    method: 'PATCH',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({'sessionId': sessionId})
+            const sessionId = Cookies.get('sessionId');
+
+            const response = await fetch('http://localhost:8080/get/employee', {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({'sessionId': sessionId})
+            });
+            const data = await response.json();
+            if (response.status === 200) {
+                const employee: Employee = data
+                setFirstName(employee.firstName);
+                setLastName(employee.lastName);
+                setEmail(employee.email);
+                setPhoneNumber(employee.phoneNumber);
+                const addressComponents = employee.address.split(', ');
+                setStreetAddress(addressComponents[0]);
+                setCity(addressComponents[1]);
+                const initialState = addressComponents[2].split(' ')[0];
+                setState(initialState);
+                const initialZipCodes = zipCodeData[initialState];
+                setZipCodes(initialZipCodes);
+                const initialZipCode = addressComponents[2].split(' ')[1];
+                setZipCode(initialZipCode);
+                setDataIsLoading(false);
+            } else if (response.status === 400) {
+                throw new Error(`${data.message}`);
+            } else {
+                throw new Error("Cannot connect to the back end of the application, please try again!");
+            }
+        } catch (error: any) {
+            if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                Cookies.remove('sessionId');
+                navigate('/login');
+                setDataIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
                 });
-                const data = await response.json();
-                if (response.status === 200) {
-                    const employee: Employee = data
-                    setFirstName(employee.firstName);
-                    setLastName(employee.lastName);
-                    setEmail(employee.email);
-                    setPhoneNumber(employee.phoneNumber);
-                    const addressComponents = employee.address.split(', ');
-                    setStreetAddress(addressComponents[0]);
-                    setCity(addressComponents[1]);
-                    const initialState = addressComponents[2].split(' ')[0];
-                    setState(initialState);
-                    const initialZipCodes = zipCodeData[initialState];
-                    setZipCodes(initialZipCodes);
-                    const initialZipCode = addressComponents[2].split(' ')[1];
-                    setZipCode(initialZipCode);
-                    setDataIsLoading(false);
-                } else if (response.status === 400) {
-                    throw new Error(`${data.message}`);
-                } else {
-                    throw new Error("Cannot connect to the back end of the application, please try again!");
-                }
-            } catch (error: any) {
-                if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
-                    Cookies.remove('sessionId');
-                    navigate('/login');
-                    setDataIsLoading(false);
-                    toast.warn(error.message, {
-                        toastId: "customId"
-                    });
-                } else if (error.message === "Failed to fetch") {
-                    setFailedToFetch(true);
-                    setDataIsLoading(false);
-                } else {
-                    setDataIsLoading(false);
-                    toast.warn(error.message, {
-                        toastId: "customId"
-                    });
-                }
+            } else if (error.message === "Failed to fetch") {
+                setFailedToFetch(true);
+                setDataIsLoading(false);
+            } else {
+                setDataIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
             }
         }
+    }
+
+    useEffect(() => {
         fetchEmployee();
     }, []);
 
@@ -179,8 +187,20 @@ export const UpdateForm = () => {
                     <div className='loading-indicator'>
                         <FaSpinner className='spinner' />
                     </div>
+                ) : isLoading ? (
+                    <div className='loading-indicator'>
+                        <FaSpinner className='spinner' />
+                    </div>
                 ) : failedToFetch ? (
-                    <div className="failed-to-fetch">Unable to connect to the back end server, please try again!</div>
+                    <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={fetchEmployee}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">

@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import { FaSpinner} from 'react-icons/fa';
+import { FaSpinner, FaSync } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export const DeleteForm = () => {
     const [visible, setVisible] = useState(false);
@@ -12,8 +13,9 @@ export const DeleteForm = () => {
 
     const navigate = useNavigate();
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: any) => {
         event.preventDefault();
+        setIsLoading(true);
         try {
             const sessionId = Cookies.get('sessionId');
 
@@ -60,6 +62,10 @@ export const DeleteForm = () => {
         }
     };
 
+    const goBack = () => {
+        setFailedToFetch(false);
+    }
+
     return (
         <>
             <div className="component">
@@ -72,7 +78,15 @@ export const DeleteForm = () => {
                         <FaSpinner className='spinner' />
                     </div>
                 ) : failedToFetch ? (
-                    <div className="failed-to-fetch">Cannot connect to the back end server, please try again!</div>
+                    <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={onSubmit}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <h1>Confirm Deletion Below</h1>
