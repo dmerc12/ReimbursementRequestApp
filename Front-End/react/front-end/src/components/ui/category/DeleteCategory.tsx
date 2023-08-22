@@ -1,7 +1,8 @@
 import { Category } from "./CategoryList";
 import { useState } from 'react';
 import { FiTrash2 } from  'react-icons/fi';
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner, FaSync } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { Modal } from "../../Modal";
@@ -14,7 +15,8 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
 
     const navigate = useNavigate();
     
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: any) => {
+        setIsLoading(true);
         event.preventDefault();
         try {
             const sessionId = Cookies.get('sessionId');
@@ -58,6 +60,11 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
         }
     }
 
+    const goBack = () => {
+        setFailedToFetch(false);
+        setVisible(false);
+    }
+
     return (
         <>
             <FiTrash2 onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15} />
@@ -67,7 +74,15 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
                         <FaSpinner className='spinner' />
                     </div>
                 ) : failedToFetch ? (
-                    <div className="failed-to-fetch">Cannot connect to the back end server, please try again!</div>
+                    <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={onSubmit}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">

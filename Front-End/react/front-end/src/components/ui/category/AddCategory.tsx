@@ -1,5 +1,5 @@
-import { AiOutlinePlus } from 'react-icons/ai';
-import { FaSpinner } from 'react-icons/fa';
+import { AiOutlinePlus, AiOutlineExclamationCircle } from 'react-icons/ai';
+import { FaSpinner, FaSync } from 'react-icons/fa';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -14,7 +14,7 @@ export const AddCategory = () => {
 
     const navigate = useNavigate();
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: any) => {
         event.preventDefault();
         try {
             setIsLoading(true);
@@ -65,6 +65,10 @@ export const AddCategory = () => {
         }
     }
 
+    const goBack = () => {
+        setFailedToFetch(false);
+    }
+
     return (
         <>
             <div className='component'>
@@ -77,7 +81,15 @@ export const AddCategory = () => {
                         <FaSpinner className='spinner' />
                     </div>
                 ) : failedToFetch ? (
-                    <div className='failed-to-fetch'>Cannot connect to the back end server, please try again!</div>
+                    <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={onSubmit}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
                 ) : (
                     <form className='form' onSubmit={onSubmit}>
                         <div className='form-field'>

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { Modal } from "../../Modal";
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner, FaSync } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export const UpdateCategory = (props: { category: Category, onUpdate: () => void}) => {
     const [visible, setVisible] = useState(false);
@@ -15,7 +16,7 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
 
     const navigate = useNavigate();
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: any) => {
         event.preventDefault();
         setIsLoading(true);
         try {
@@ -65,6 +66,10 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
         }
     }
 
+    const goBack = () => {
+        setFailedToFetch(false);
+    }
+
     return (
         <>
             <FiEdit onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15}/>
@@ -74,7 +79,15 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
                         <FaSpinner className='spinner' />
                     </div> 
                 ) : failedToFetch ? (
-                    <div className='failed-to-fetch'>Cannot connect to the back end server, please try again!</div>
+                    <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={onSubmit}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
