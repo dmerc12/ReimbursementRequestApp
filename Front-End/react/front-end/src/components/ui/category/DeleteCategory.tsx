@@ -16,6 +16,7 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
     const navigate = useNavigate();
     
     const onSubmit = async (event: any) => {
+        setIsLoading(true);
         event.preventDefault();
         try {
             const sessionId = Cookies.get('sessionId');

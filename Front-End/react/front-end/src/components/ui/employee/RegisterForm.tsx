@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { states } from '../../../lib/States';
 import { zipCodeData } from '../../../lib/ZipCodes';
+import { FaSpinner, FaSync } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export const RegisterForm = () => {
     const [firstName, setFirstName] = useState('');
@@ -17,6 +19,7 @@ export const RegisterForm = () => {
     const [zipCode, setZipCode] = useState('');
     const [zipCodes, setZipCodes] = useState([] as string[]);
     const [isLoading, setIsLoading] = useState(false);
+    const [failedToFetch, setFailedToFetch] = useState(false);
 
     const navigate = useNavigate();
 
@@ -47,7 +50,7 @@ export const RegisterForm = () => {
         return value;
     };
 
-    const onSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async(event: any) => {
         event.preventDefault();
         setIsLoading(true);
         try {
@@ -82,16 +85,40 @@ export const RegisterForm = () => {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
             }
         } catch (error: any) {
-            setIsLoading(false);
-            toast.error(error.message, {
-                toastId: 'customId'
-            });
+            if (error.message === "Failed to fetch") {
+                setFailedToFetch(true);
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            }
         }
     };
 
+    const goBack = () => {
+        setFailedToFetch(false);
+    }
+
     return (
         <>
-            <form className="form" onSubmit={onSubmit}>
+            {isLoading ? (
+                <div className="loading-indicator">
+                    <FaSpinner className="spinner" />
+                </div>
+            ) : failedToFetch ? (
+                <div className='failed-to-fetch'>
+                    <AiOutlineExclamationCircle className='warning-icon'/>
+                    <p>Cannot connect to the back end server.</p>
+                    <p>Please check your internet connection and try again.</p>
+                    <button className='retry-button' onClick={onSubmit}>
+                        <FaSync className='retry-icon'/> Retry
+                    </button>
+                    <button className='back-button' onClick={goBack}>Go Back</button>
+                </div>
+            ) : (
+                <form className="form" onSubmit={onSubmit}>
                 <div className="form-field">
                     <label className="form-label" htmlFor="registerFirstName">First Name: </label>
                     <input className="form-input" type="text"  id="registerFirstName" name="registerFirstName" value={firstName} onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}/>
@@ -164,6 +191,7 @@ export const RegisterForm = () => {
 
                 <button id="registerButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Registering..." : "Register"}</button>
             </form>
+            )}
         </>
     );
 }

@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner, FaSync } from 'react-icons/fa';
+import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export interface Category {
     categoryId: number,
@@ -62,6 +63,10 @@ export const CategoryList = () => {
         }
     }
 
+    const goBack = () => {
+        navigate('/home');
+    }
+
     useEffect(() => {
         fetchCategories();
     }, [])
@@ -88,7 +93,15 @@ export const CategoryList = () => {
                     <FaSpinner className='spinner' />
                 </div>
             ) : failedToFetch ? (
-                <div className="failed-to-fetch">Cannot connect to the back end server, please try again!</div>
+                <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={fetchCategories}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
             ) : categories.length === 0 ? (
                 <div>No categories found</div>
             ) : (

@@ -21,7 +21,7 @@ export const UpdateForm = () => {
     const [dataIsLoading, setDataIsLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
     const [visible, setVisible] = useState(false);
-    
+    const [employee, setEmployee] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -115,7 +115,12 @@ export const UpdateForm = () => {
     };
 
     const goBack = () => {
-        setFailedToFetch(false);
+        if (employee) {
+            setFailedToFetch(false);
+        } else {
+            setFailedToFetch(false);
+            setVisible(false);
+        }
     }
 
     const fetchEmployee = async() => {
@@ -146,6 +151,7 @@ export const UpdateForm = () => {
                 setZipCodes(initialZipCodes);
                 const initialZipCode = addressComponents[2].split(' ')[1];
                 setZipCode(initialZipCode);
+                setEmployee(true);
                 setDataIsLoading(false);
             } else if (response.status === 400) {
                 throw new Error(`${data.message}`);
@@ -201,7 +207,7 @@ export const UpdateForm = () => {
                         </button>
                         <button className='back-button' onClick={goBack}>Go Back</button>
                     </div>
-                ) : (
+                ) : employee ? (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateFirstName">First Name: </label>
@@ -263,6 +269,16 @@ export const UpdateForm = () => {
 
                         <button id="updateInformationButton" disabled={isLoading} className="form-btn-1" type="submit">{isLoading ? "Updating Information..." : "Update Information"}</button>
                     </form>
+                ) : (
+                    <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={fetchEmployee}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
                 )}    
             </Modal>
         </>
