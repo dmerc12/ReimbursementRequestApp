@@ -21,7 +21,7 @@ export const ManageInformation = () => {
     
     return (
         <>
-            <h1>Manage Your Information Below!</h1>
+            <h1>Manage Information Below!</h1>
             <div className="action-btn-container">
                 <UpdateForm />
                 <ChangePasswordForm />
