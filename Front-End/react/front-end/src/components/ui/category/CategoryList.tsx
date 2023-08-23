@@ -65,6 +65,7 @@ export const CategoryList = () => {
 
     const goBack = () => {
         navigate('/home');
+        setFailedToFetch(false);
     }
 
     useEffect(() => {

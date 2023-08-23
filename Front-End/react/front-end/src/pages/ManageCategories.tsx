@@ -20,7 +20,7 @@ export const ManageCategories = () => {
 
     return (
         <>
-            <h1>Manage Category Information</h1>
+            <h1>Manage Categories</h1>
             <AddCategory />
             <CategoryList />
         </>
