@@ -119,9 +119,13 @@ export const RequestList = () => {
         return foundCategory ? foundCategory.categoryName : ''
     }
 
-    useEffect(() => {
+    const fetchData = () => {
         fetchCategories();
         fetchRequests();
+    }
+
+    useEffect(() => {
+        fetchData();
     }, [])
 
     if (requests) {
@@ -145,22 +149,40 @@ export const RequestList = () => {
 
     return (
         <>
-            <div className="list">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th className="table-head">Request ID</th>
-                            <th className="table-head">Category</th>
-                            <th className="table-head">Comment</th>
-                            <th className="table-head">Amount</th>
-                            <th className="table-head">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {requestRows}
-                    </tbody>
-                </table>
-            </div>
+            {isLoading ? (
+                <div className="loading-indicator">
+                    <FaSpinner className="spinner" />
+                </div>
+            ) : failedToFetch ? (
+                <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={fetchData}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
+            ) : requests.length === 0 ? (
+                <div>No requests yet</div>
+            ) : (
+                <div className="list">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th className="table-head">Request ID</th>
+                                <th className="table-head">Category</th>
+                                <th className="table-head">Comment</th>
+                                <th className="table-head">Amount</th>
+                                <th className="table-head">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {requestRows}
+                        </tbody>
+                    </table>
+                </div>
+            )}
         </>
     )
 }

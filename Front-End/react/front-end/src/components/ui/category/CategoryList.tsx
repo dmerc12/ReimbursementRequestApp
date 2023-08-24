@@ -104,7 +104,7 @@ export const CategoryList = () => {
                         <button className='back-button' onClick={goBack}>Go Back</button>
                     </div>
             ) : categories.length === 0 ? (
-                <div>No categories found</div>
+                <div>No categories yet</div>
             ) : (
                 <table className="table">
                     <thead>
