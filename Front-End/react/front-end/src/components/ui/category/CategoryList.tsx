@@ -106,17 +106,19 @@ export const CategoryList = () => {
             ) : categories.length === 0 ? (
                 <div>No categories yet</div>
             ) : (
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th className="table-head">Category Name</th>
-                            <th className="table-head">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {categoryRows}
-                    </tbody>
-                </table>
+                <div className="list">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th className="table-head">Category Name</th>
+                                <th className="table-head">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {categoryRows}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </>
     )
