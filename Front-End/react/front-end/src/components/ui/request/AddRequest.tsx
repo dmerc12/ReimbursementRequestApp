@@ -14,7 +14,7 @@ export const AddRequest = () => {
     const [categoryId, setCategoryId] = useState(0);
     const [comment, setComment] = useState('');
     const [amount, setAmount] = useState(0.00);
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState<Category[]>([])
 
     const fetchCategories = async () => {
 
@@ -53,13 +53,11 @@ export const AddRequest = () => {
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
                             <label className="form-label" htmlFor="addRequestCategoryDropdown">Category: </label>
-                            <select className="form-input" id="addRequestCategoryDropdown" name="addRequestCategoryDropdown" value={categoryId} onChange={event => setCategoryId(event.target.value)}>
+                            <select className="form-input" id="addRequestCategoryDropdown" name="addRequestCategoryDropdown" value={categoryId} onChange={event => setCategoryId(parseInt(event.target.value, 10))}>
                                 {categories && categories.length > 0 && (
-                                    const options = [];
-                                    for (let i=0; i < categories.length; i++) {
-                                        const category: Category = categories[i];
-                                        options.push(<option key={categoryId.categoryId}>{categoryId.categoryName}</option>)
-                                    }
+                                    categories.map(category => (
+                                        <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
+                                    ))
                                 )}
                             </select>
                         </div>
@@ -71,7 +69,7 @@ export const AddRequest = () => {
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="addRequestAmount">Amount: </label>
-                            <input className="form-input" type="number" name="addRequestAmount" id="addRequestAmount" value={amount} onChange={event => setAmount(event.target.value)}/>
+                            <input className="form-input" type="number" name="addRequestAmount" id="addRequestAmount" value={amount} onChange={event => setAmount(parseFloat(event.target.value))}/>
                         </div>
 
                         <button className="form-btn-1" type="submit" id="addRequestButton">Add Request</button>
