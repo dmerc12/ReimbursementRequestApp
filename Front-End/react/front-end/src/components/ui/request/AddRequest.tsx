@@ -23,6 +23,7 @@ export const AddRequest = () => {
         try {
             setLoading(true);
             setFailedToFetchCategories(false);
+            setFailedToFetchSubmission(false);
 
             const sessionId = Cookies.get('sessionId');
                 
@@ -62,7 +63,59 @@ export const AddRequest = () => {
     }
 
     const onSubmit = async (event: any) => {
-        
+        try {
+            setLoading(true);
+            setFailedToFetchCategories(false);
+            setFailedToFetchSubmission(false);
+
+            const sessionId = Cookies.get('sessionId');
+
+            const response = await fetch('http://localhost:8080/create/request/now', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'sessionId': sessionId,
+                    'categoryId': categoryId,
+                    'comment': comment,
+                    'amount': amount
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.status === 201) {
+                setLoading(false);
+                setVisible(false);
+                setComment('');
+                setAmount(0.00);
+                setCategories([]);
+                window.location.reload();
+                toast.success("Request Successfully Added!", {
+                    toastId: 'customId'
+                });
+            } else if (response.status === 400) {
+                throw new Error(`${data.message}`);
+            } else {
+                throw new Error("Cannot connect to the back end, please try again!");
+            }
+        } catch (error: any) {
+            if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
+                Cookies.remove('sessionId');
+                navigate('/login');
+                setLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            } else if (error.message === "Failed to fetch") {
+                setFailedToFetchSubmission(true);
+                setLoading(false);
+            } else {
+                setLoading(false);
+                toast.warn(error.message, {
+                    toastId: "customId"
+                });
+            }
+        }
     }
 
     const goBack = () => {
