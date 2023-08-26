@@ -25,9 +25,9 @@ export const Home = () => {
         <>
             <h1>Welcome Home!</h1>
             <div className="action-btn-container">
-                <Link className="action-btn" to='/manage-requests'>Manage Request Information</Link>
-                <Link className="action-btn" to='/manage-categories'>Manage Categories</Link>
-                <Link className="action-btn" to='/manage-information'>Manage Information</Link>
+                <Link className="home-nav" to='/manage-requests'>Manage Request Information</Link>
+                <Link className="home-nav" to='/manage-categories'>Manage Categories</Link>
+                <Link className="home-nav" to='/manage-information'>Manage Information</Link>
             </div>
         </>
     );
