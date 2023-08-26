@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
 
-export const DeleteRequest = (props: { request: Request, onUpdate: () => void}) => {
+export const DeleteRequest = (props: { request: Request}) => {
     return (
         <>
         
