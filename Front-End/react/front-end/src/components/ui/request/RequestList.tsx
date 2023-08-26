@@ -139,8 +139,8 @@ export const RequestList = () => {
                     <td className="table-data">{request.comment}</td>
                     <td className="table-data">{request.amount}</td>
                     <td className="table-data">
-                        <UpdateRequest />
-                        <DeleteRequest />
+                        <UpdateRequest request={request} onUpdate={fetchRequests}/>
+                        <DeleteRequest request={request} onUpdate={fetchRequests}/>
                     </td>
                 </tr>
             )
