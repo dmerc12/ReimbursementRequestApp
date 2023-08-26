@@ -18,7 +18,7 @@ export const Modal = ({ visible, onClose, children }: ModalProps) => {
         <>
             <div className='modal-exterior-wrapper' id='wrapper' onClick={handleClose}>
                 <div className='modal-interior-wrapper'>
-                    <button className='modal' onClick={() => onClose()}>x</button>
+                    <button className='modal' onClick={() => onClose()}>Close</button>
                     <div className='modal-interior'>
                         {children}
                     </div>
