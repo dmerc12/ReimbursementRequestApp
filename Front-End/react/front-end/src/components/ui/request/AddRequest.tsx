@@ -86,6 +86,7 @@ export const AddRequest = () => {
             if (response.status === 201) {
                 setLoading(false);
                 setVisible(false);
+                setCategoryId(0);
                 setComment('');
                 setAmount(0.00);
                 setCategories([]);
