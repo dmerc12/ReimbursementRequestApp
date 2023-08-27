@@ -33,7 +33,7 @@ export const DeleteRequest = (props: { request: Request, onUpdate: ()=> void}) =
                 setLoading(false);
                 setVisible(false);
                 setRequestId(0);
-                props.onUpdate();
+                window.location.reload();
                 toast.success("Request Successfully Deleted!", {
                     toastId: 'customId'
                 });
