@@ -72,36 +72,36 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
         try {
             const sessionId = Cookies.get('sessionId');
 
-        const response = await fetch('http://localhost:8080/update/request/now', {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                'sessionId': sessionId,
-                'requestId': requestId,
-                'categoryId': categoryId,
-                'comment': comment,
-                'amount': amount
-            })
-        });
-
-        const data = await response.json();
-
-        if (response.status === 200) {
-            setLoading(false);
-            setVisible(false);
-            setRequestId(0);
-            setCategoryId(0);
-            setComment('');
-            setAmount(0.00);
-            props.onUpdate();
-            toast.success("Request Successfully Updated!", {
-                toastId: 'customId'
+            const response = await fetch('http://localhost:8080/update/request/now', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    'sessionId': sessionId,
+                    'requestId': requestId,
+                    'categoryId': categoryId,
+                    'comment': comment,
+                    'amount': amount
+                })
             });
-        } else if (response.status === 400) {
-            throw new Error(`${data.message}`);
-        } else {
-            throw new Error("Cannot connect to the back end, please try again!");
-        }
+
+            const data = await response.json();
+
+            if (response.status === 200) {
+                setLoading(false);
+                setVisible(false);
+                setRequestId(0);
+                setCategoryId(0);
+                setComment('');
+                setAmount(0.00);
+                props.onUpdate();
+                toast.success("Request Successfully Updated!", {
+                    toastId: 'customId'
+                });
+            } else if (response.status === 400) {
+                throw new Error(`${data.message}`);
+            } else {
+                throw new Error("Cannot connect to the back end, please try again!");
+            }
         } catch (error: any) {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');

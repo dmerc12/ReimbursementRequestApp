@@ -140,7 +140,7 @@ export const RequestList = () => {
                     <td className="table-data">{request.amount}</td>
                     <td className="table-data">
                         <UpdateRequest request={request} onUpdate={fetchRequests}/>
-                        <DeleteRequest request={request}/>
+                        <DeleteRequest request={request} onUpdate={fetchRequests}/>
                     </td>
                 </tr>
             )
