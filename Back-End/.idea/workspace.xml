@@ -5,42 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/public/vite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/Modal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/Navbar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/category/AddCategory.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/category/CategoryList.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/category/DeleteCategory.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/category/UpdateCategory.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/employee/ChangePasswordForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/employee/DeleteForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/employee/LoginForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/employee/RegisterForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/employee/UpdateForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/request/AddRequest.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/request/DeleteRequest.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/request/RequestList.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/request/UpdateRequest.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/lib/States.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/lib/ZipCodes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/main.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/Home.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/Login.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/ManageCategories.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/ManageInformation.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/ManageRequests.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/pages/Register.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/vite-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/tsconfig.node.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/vite.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/src/components/ui/request/AddRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/src/components/ui/request/AddRequest.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

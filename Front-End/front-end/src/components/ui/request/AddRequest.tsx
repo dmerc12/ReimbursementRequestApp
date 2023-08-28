@@ -126,7 +126,11 @@ export const AddRequest = () => {
 
     useEffect(() => {
         fetchCategories();
+        if (categories.length > 0) {
+            setCategoryId(categories[0].categoryId);
+        }
     }, [])
+
 
     return ( 
         <>
