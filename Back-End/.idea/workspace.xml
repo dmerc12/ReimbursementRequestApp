@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/request/DeleteRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/react/front-end/src/components/ui/request/DeleteRequest.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/POMs/CategoryPOMs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/POMs/EmployeePOMs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/POMs/RequestPOMs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/Runner/Runner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Features/Register.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/chromedriver.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/msedgedriver.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,10 +63,12 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\test\resources" />
+      <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\test\java" />
       <recent name="C:\Users\Dylan\OneDrive\Desktop\personal projects\ReimbursementRequestApp\Back-End\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="JUnit.Runner">
     <configuration name="DatabaseConnection" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
@@ -258,6 +268,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Runner" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Back-End" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Runner.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Runner" />
+      <option name="MAIN_CLASS_NAME" value="Runner.Runner" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SessionDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Back-End" />
       <extension name="coverage">
@@ -312,7 +337,13 @@
       <item itemvalue="JUnit.RequestSALTests" />
       <item itemvalue="JUnit.SessionDALTests" />
       <item itemvalue="JUnit.SessionSALTests" />
+      <item itemvalue="JUnit.Runner" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Runner" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
