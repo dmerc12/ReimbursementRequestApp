@@ -36,6 +36,7 @@ export const AddRequest = () => {
 
             if (response.status === 200) {
                 setCategories(data);
+                setCategoryId(data[0].categoryId);
                 setLoading(false);
             } else if (response.status === 400) {
                 throw new Error(`${data.message}`);
@@ -86,7 +87,7 @@ export const AddRequest = () => {
             if (response.status === 201) {
                 setLoading(false);
                 setVisible(false);
-                setCategoryId(0);
+                setCategoryId(categories[0].categoryId);
                 setComment('');
                 setAmount(0.00);
                 setCategories([]);
@@ -126,9 +127,6 @@ export const AddRequest = () => {
 
     useEffect(() => {
         fetchCategories();
-        if (categories.length > 0) {
-            setCategoryId(categories[0].categoryId);
-        }
     }, [])
 
 
