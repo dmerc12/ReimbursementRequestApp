@@ -18,8 +18,10 @@ export const RegisterForm = () => {
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
     const [zipCodes, setZipCodes] = useState([] as string[]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
+
+    const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
 
     const navigate = useNavigate();
 
@@ -52,10 +54,8 @@ export const RegisterForm = () => {
 
     const onSubmit = async(event: any) => {
         event.preventDefault();
-        setIsLoading(true);
+        setLoading(true);
         try {
-            const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
-
             const response = await fetch ('http://localhost:8080/register/now', 
                 {
                     method: 'POST',
@@ -71,11 +71,12 @@ export const RegisterForm = () => {
                     })
                 }
             );
+
             const data = await response.json();
 
             if (response.status === 201) {
                 navigate('/login');
-                setIsLoading(false);
+                setLoading(false);
                 toast.success("Employee successfully created, please log in!", {
                     toastId: 'customId'
                 });
@@ -87,9 +88,9 @@ export const RegisterForm = () => {
         } catch (error: any) {
             if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
-                setIsLoading(false);
+                setLoading(false);
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -103,7 +104,7 @@ export const RegisterForm = () => {
 
     return (
         <>
-            {isLoading ? (
+            {loading ? (
                 <div className="loading-indicator">
                     <FaSpinner className="spinner" />
                 </div>
@@ -126,8 +127,8 @@ export const RegisterForm = () => {
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerLasttName">Last Name: </label>
-                    <input className="form-input" type="text"  id="registerLasttName" name="registerLasttName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
+                    <label className="form-label" htmlFor="registerLastName">Last Name: </label>
+                    <input className="form-input" type="text"  id="registerLastName" name="registerLastName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
                     <br />
                 </div>
 
@@ -189,7 +190,7 @@ export const RegisterForm = () => {
                     </select>
                 </div>
 
-                <button id="registerButton" disabled={isLoading}className="form-btn-1" type="submit">{isLoading ? "Registering..." : "Register"}</button>
+                <button className="form-btn-1" type="submit" id="registerButton">"Register"</button>
             </form>
             )}
         </>
