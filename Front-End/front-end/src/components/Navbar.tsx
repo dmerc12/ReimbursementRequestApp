@@ -19,9 +19,9 @@ export const Navbar = () => {
             <nav className="nav-bar">
                 <div className="nav-left">
                     <Link className="nav-item" to='/home'>Home</Link>
-                    <Link className="nav-item" to='/manage-requests'>Manage Requests</Link>
-                    <Link className="nav-item" to='/manage-categories'>Manage Categories</Link>
-                    <Link className="nav-item" to='/manage-information'>Manage Information</Link>
+                    <Link className="nav-item" to='/manage-requests' id="manageRequestsTab">Manage Requests</Link>
+                    <Link className="nav-item" to='/manage-categories' id="manageCategoriesTab">Manage Categories</Link>
+                    <Link className="nav-item" to='/manage-information' id="manageInformationTab">Manage Information</Link>
                 </div>
                 <div className="nav-right">
                     {isLoggedIn ? (
@@ -30,8 +30,8 @@ export const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            <Link className="nav-item" to='/login'>Login</Link>
-                            <Link className="nav-item" to='/register'>Register</Link>
+                            <Link className="nav-item" to='/login' id="loginTab">Login</Link>
+                            <Link className="nav-item" to='/register' id="registerTab">Register</Link>
                         </>
                     )}
                 </div>

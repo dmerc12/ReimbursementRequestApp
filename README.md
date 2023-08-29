@@ -15,11 +15,10 @@
 - Gson
 - j-unit
 - Java
-- Next.JS
+- React JS
 - CSS
-- react-toastify
 - js-cookie
-- Tailwind CSS
-- Post CSS
+- react-toastify
 - react-icons
+- react-router-dom
 

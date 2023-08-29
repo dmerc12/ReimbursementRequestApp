@@ -55,6 +55,12 @@ export const RequestList = () => {
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "No categories found, please try again!") {
+                setIsLoading(false);
+                navigate('/home');
+                toast.info("Oops! It looks like you haven't created any categories yet. Categories are used to organize your requests. Please create a category first before adding a new request. You can do this by clicking on 'Manage Categories' in the navigation menu", {
+                    toastId: 'customId'
+                });
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
                 setIsLoading(false);
@@ -97,6 +103,8 @@ export const RequestList = () => {
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "No requests found, please try again!") {
+                setIsLoading(false);
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
                 setIsLoading(false);

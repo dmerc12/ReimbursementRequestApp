@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
 
-export const DeleteCategory = (props: { category: Category, onUpdate: () => void}) => {
+export const DeleteCategory = (props: { category: Category}) => {
     const [visible, setVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
@@ -29,7 +29,7 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
             const data = await response.json();
 
             if (response.status === 200) {
-                props.onUpdate();
+                window.location.reload();
                 setVisible(false);
                 setIsLoading(false);
                 toast.success("Category Successfully Deleted!", {

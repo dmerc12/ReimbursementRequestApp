@@ -8,7 +8,7 @@ import { AiOutlineExclamationCircle } from 'react-icons/ai';
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
     const navigate = useNavigate();
@@ -16,10 +16,9 @@ export const LoginForm = () => {
     const onSubmit = async (event: any) => {
         event.preventDefault();
         setFailedToFetch(false);
-        setIsLoading(true);
+        setLoading(true);
         try {
-            const response = await fetch('http://localhost:8080/login/now', 
-            {
+            const response = await fetch('http://localhost:8080/login/now', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -27,12 +26,13 @@ export const LoginForm = () => {
                     'password': password
                 })
             });
+            
             const data = await response.json();
 
             if (response.status === 200) {
                 Cookies.set('sessionId', data.sessionId);
                 navigate('/home');
-                setIsLoading(false);
+                setLoading(false);
                 toast.success("Welcome!", {
                     toastId: 'customId'
                 });
@@ -44,9 +44,9 @@ export const LoginForm = () => {
         } catch (error: any) {
             if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
-                setIsLoading(false);
+                setLoading(false);
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -60,7 +60,7 @@ export const LoginForm = () => {
 
     return (
         <>
-            {isLoading ? (
+            {loading ? (
                 <div className='loading-indictor'>
                     <FaSpinner className='spinner' />
                 </div>
@@ -86,7 +86,7 @@ export const LoginForm = () => {
                         <input className='form-input' type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
                     </div>
 
-                    <button disabled={isLoading} className='form-btn-1' type='submit'>{isLoading ? "Logging in.." : "Login"}</button>
+                    <button className='form-btn-1' type='submit' id='loginButton'>"Login"</button>
                 </form>
             )}
         </>
