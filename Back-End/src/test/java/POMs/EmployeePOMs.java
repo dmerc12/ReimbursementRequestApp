@@ -60,4 +60,48 @@ public class EmployeePOMs {
     public void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
+
+    public void setRegisterFirstName(String firstName) {
+        driver.findElement(registerFirstName).sendKeys(firstName);
+    }
+
+    public void setRegisterLastName(String lastName) {
+        driver.findElement(registerLastName).sendKeys(lastName);
+    }
+
+    public void setRegisterEmail(String email) {
+        driver.findElement(registerEmail).sendKeys(email);
+    }
+
+    public void setRegisterPassword(String password) {
+        driver.findElement(registerPassword).sendKeys(password);
+    }
+
+    public void setRegisterConfirmationPassword(String confirmationPassword) {
+        driver.findElement(registerConfirmationPassword).sendKeys(confirmationPassword);
+    }
+
+    public void setRegisterPhoneNumber(String phoneNumber) {
+        driver.findElement(registerPhoneNumber).sendKeys(phoneNumber);
+    }
+
+    public void setRegisterStreetAddress(String streetAddress) {
+        driver.findElement(registerStreetAddress).sendKeys(streetAddress);
+    }
+
+    public void setRegisterCity(String city) {
+        driver.findElement(registerCity).sendKeys(city);
+    }
+
+    public void setRegisterState(String state) {
+        driver.findElement(registerState).sendKeys(state);
+    }
+
+    public void setRegisterZipCode(String zipCode) {
+        driver.findElement(registerZipCode).sendKeys(zipCode);
+    }
+
+    public void clickRegisterButton() {
+        driver.findElement(registerButton).click();
+    }
 }
