@@ -51,6 +51,8 @@ export const CategoryList = () => {
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "No categories found, please try again!") {
+                setIsLoading(false);
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
                 setIsLoading(false);
@@ -80,7 +82,7 @@ export const CategoryList = () => {
                     <td className="table-data">{category.categoryName}</td>
                     <td className="table-data crud-icons">
                         <UpdateCategory category={category} onUpdate={fetchCategories}/>
-                        <DeleteCategory category={category} onUpdate={fetchCategories}/>
+                        <DeleteCategory category={category}/>
                     </td>
                 </tr>
             )

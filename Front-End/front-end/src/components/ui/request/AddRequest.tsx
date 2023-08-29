@@ -51,6 +51,8 @@ export const AddRequest = () => {
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "No categories found, please try again!") {
+                setLoading(false);
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetchCategories(true);
                 setLoading(false);

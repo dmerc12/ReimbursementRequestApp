@@ -55,6 +55,8 @@ export const RequestList = () => {
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "No categories found, please try again!") {
+                setIsLoading(false);
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
                 setIsLoading(false);
@@ -97,6 +99,8 @@ export const RequestList = () => {
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
+            } else if (error.message === "No requests found, please try again!") {
+                setIsLoading(false);
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
                 setIsLoading(false);
