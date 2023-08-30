@@ -5,13 +5,20 @@ import org.openqa.selenium.WebDriver;
 
 public class CategoryPOMs {
     private WebDriver driver;
-    private By addCategoryNameInput = By.id("element-id(not currently the real id)");
+    private By manageCategoriesTab = By.id("manageCategoriesTab");
+    private By manageCategoriesButton = By.id("manageCategoriesButton");
 
     public CategoryPOMs(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void addCategoryNameInput(String comment) {
-        driver.findElement(addCategoryNameInput).sendKeys(comment);
+
+    public void clickManageCategoriesTab() {
+        driver.findElement(manageCategoriesTab).click();
     }
+
+    public void clickManageCategoriesButton() {
+        driver.findElement(manageCategoriesButton).click();
+    }
+
 }
