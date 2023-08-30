@@ -5,13 +5,19 @@ import org.openqa.selenium.WebDriver;
 
 public class RequestPOMs {
     private WebDriver driver;
-    private By addRequestCommentInput = By.id("element-id(not currently the real id)");
+    private By manageRequestsTab = By.id("manageRequestsTab");
+
+    private By manageRequestsButton = By.id("manageRequestsButton");
 
     public RequestPOMs(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void addRequestCommentInput(String comment) {
-        driver.findElement(addRequestCommentInput).sendKeys(comment);
+    public void clickManageRequestsTab() {
+        driver.findElement(manageRequestsTab).click();
+    }
+
+    public void clickManageRequestsButton() {
+        driver.findElement(manageRequestsButton).click();
     }
 }

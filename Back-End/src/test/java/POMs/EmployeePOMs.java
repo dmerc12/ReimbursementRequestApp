@@ -7,9 +7,8 @@ public class EmployeePOMs {
     private WebDriver driver;
     private By registerTab = By.id("registerTab");
     private By loginTab = By.id("loginTab");
-    private By manageRequestsTab = By.id("manageRequestsTab");
-    private By manageCategoriesTab = By.id("manageCategoriesTab");
     private By manageInformationTab = By.id("manageInformationTab");
+    private By manageInformationButton = By.id("manageInformationButton");
     private By loginEmailInput = By.id("loginEmail");
     private By loginPasswordInput = By.id("loginPassword");
     private By loginButton = By.id("loginButton");
@@ -37,16 +36,12 @@ public class EmployeePOMs {
         driver.findElement(loginTab).click();
     }
 
-    public void clickManageRequestsTab() {
-        driver.findElement(manageRequestsTab).click();
-    }
-
-    public void clickManageCategoriesTab() {
-        driver.findElement(manageCategoriesTab).click();
-    }
-
     public void clickManageInformationTab() {
         driver.findElement(manageInformationTab).click();
+    }
+
+    public void clickManageInformationButton() {
+        driver.findElement(manageInformationButton).click();
     }
 
     public void setLoginEmailInput(String email) {
