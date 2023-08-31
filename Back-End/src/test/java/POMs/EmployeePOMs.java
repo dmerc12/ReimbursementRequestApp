@@ -23,6 +23,16 @@ public class EmployeePOMs {
     private By registerState = By.id("registerState");
     private By registerZipCode = By.id("registerZipCode");
     private By registerButton = By.id("registerButton");
+    private By updateInformationModal = By.id("updateInformationModal");
+    private By updateFirstName = By.id("updateFirstName");
+    private By updateLastName = By.id("updateLastName");
+    private By updateEmail = By.id("updateEmail");
+    private By updatePhoneNumber = By.id("updatePhoneNumber");
+    private By updateStreetAddress = By.id("updateStreetAddress");
+    private By updateCity = By.id("updateCity");
+    private By updateState = By.id("updateState");
+    private By updateZipCode = By.id("updateZipCode");
+    private By updateInformationButton = By.id("updateInformationButton");
 
     public EmployeePOMs(WebDriver driver) {
         this.driver = driver;
@@ -98,5 +108,45 @@ public class EmployeePOMs {
 
     public void clickRegisterButton() {
         driver.findElement(registerButton).click();
+    }
+
+    public void clickUpdateInformationModal() {
+        driver.findElement(updateInformationModal).click();
+    }
+
+    public void setUpdateFirstName(String firstName) {
+        driver.findElement(updateFirstName).sendKeys(firstName);
+    }
+
+    public void setUpdateLastName(String lastName) {
+        driver.findElement(updateLastName).sendKeys(lastName);
+    }
+
+    public void setUpdateEmail(String email) {
+        driver.findElement(updateEmail).sendKeys(email);
+    }
+
+    public void setUpdatePhoneNumber(String phoneNumber) {
+        driver.findElement(updatePhoneNumber).sendKeys(phoneNumber);
+    }
+
+    public void setUpdateStreetAddress(String streetAddress) {
+        driver.findElement(updateStreetAddress).sendKeys(streetAddress);
+    }
+
+    public void setUpdateCity(String city) {
+        driver.findElement(updateCity).sendKeys(city);
+    }
+
+    public void setUpdateState(String state) {
+        driver.findElement(updateState).sendKeys(state);
+    }
+
+    public void setUpdateZipCode(String zipCode) {
+        driver.findElement(updateZipCode).sendKeys(zipCode);
+    }
+
+    public void clickUpdateInformationButton() {
+        driver.findElement(updateInformationButton).click();
     }
 }

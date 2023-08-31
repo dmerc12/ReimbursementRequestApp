@@ -5,11 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 public class EmployeeSteps {
     @Given("I am on the login page")
@@ -74,5 +71,4 @@ public class EmployeeSteps {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/login"));
         Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/login");
     }
-
 }

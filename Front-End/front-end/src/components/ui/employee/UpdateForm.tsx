@@ -17,9 +17,10 @@ interface Employee {
 }
 
 export const UpdateForm = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [dataIsLoading, setDataIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [dataLoading, setDataLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
+    const [failedToFetchData, setFailedToFetchData] = useState(false);
     const [visible, setVisible] = useState(false);
     const [employee, setEmployee] = useState(false);
     const [firstName, setFirstName] = useState('');
@@ -63,7 +64,7 @@ export const UpdateForm = () => {
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
-        setIsLoading(true);
+        setLoading(true);
         try {
             const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
             const sessionId = Cookies.get('sessionId');
@@ -85,7 +86,7 @@ export const UpdateForm = () => {
             if (response.status === 200) {
                 navigate('/manage-information');
                 setVisible(false);
-                setIsLoading(false);
+                setLoading(false);
                 toast.success("Information successfully updated!", {
                     toastId: 'customId'
                 });
@@ -98,15 +99,15 @@ export const UpdateForm = () => {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
-                setIsLoading(false);
+                setLoading(false);
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -125,8 +126,8 @@ export const UpdateForm = () => {
 
     const fetchEmployee = async() => {
         try {
-            setDataIsLoading(true);
-            setFailedToFetch(false);
+            setDataLoading(true);
+            setFailedToFetchData(false);
 
             const sessionId = Cookies.get('sessionId');
 
@@ -152,7 +153,7 @@ export const UpdateForm = () => {
                 const initialZipCode = addressComponents[2].split(' ')[1];
                 setZipCode(initialZipCode);
                 setEmployee(true);
-                setDataIsLoading(false);
+                setDataLoading(false);
             } else if (response.status === 400) {
                 throw new Error(`${data.message}`);
             } else {
@@ -162,15 +163,15 @@ export const UpdateForm = () => {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setDataIsLoading(false);
+                setDataLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
             } else if (error.message === "Failed to fetch") {
-                setFailedToFetch(true);
-                setDataIsLoading(false);
+                setFailedToFetchData(true);
+                setDataLoading(false);
             } else {
-                setDataIsLoading(false);
+                setDataLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -185,19 +186,29 @@ export const UpdateForm = () => {
     return (
         <>
             <div className="component">
-                <button onClick={() => {setVisible(true); setFailedToFetch(false)}} className="action-btn" id="updateInformationModal">Update Information</button>
+                <button onClick={() => {setVisible(true); setFailedToFetch(false); setFailedToFetchData(false)}} className="action-btn" id="updateInformationModal">Update Information</button>
             </div>
 
-            <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
-                {dataIsLoading ? ( 
+            <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false); setFailedToFetchData(false)}}>
+                {dataLoading ? ( 
                     <div className='loading-indicator'>
                         <FaSpinner className='spinner' />
                     </div>
-                ) : isLoading ? (
+                ) : loading ? (
                     <div className='loading-indicator'>
                         <FaSpinner className='spinner' />
                     </div>
                 ) : failedToFetch ? (
+                    <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={onSubmit}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
+                ) : failedToFetchData ? (
                     <div className='failed-to-fetch'>
                         <AiOutlineExclamationCircle className='warning-icon'/>
                         <p>Cannot connect to the back end server.</p>
@@ -216,8 +227,8 @@ export const UpdateForm = () => {
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateLasttName">Last Name: </label>
-                            <input className="form-input" type="text"  id="updateLasttName" name="updateLasttName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
+                            <label className="form-label" htmlFor="updateLastName">Last Name: </label>
+                            <input className="form-input" type="text"  id="updateLasttName" name="updateLastName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
                             <br />
                         </div>
 
@@ -267,7 +278,7 @@ export const UpdateForm = () => {
                             </select>
                         </div>
 
-                        <button id="updateInformationButton" disabled={isLoading} className="form-btn-1" type="submit">{isLoading ? "Updating Information..." : "Update Information"}</button>
+                        <button id="updateInformationButton" className="form-btn-1" type="submit">Update Information</button>
                     </form>
                 ) : (
                     <div className='failed-to-fetch'>
