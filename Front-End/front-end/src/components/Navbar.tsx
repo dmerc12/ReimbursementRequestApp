@@ -26,7 +26,7 @@ export const Navbar = () => {
                 <div className="nav-right">
                     {isLoggedIn ? (
                         <>
-                            <button className="nav-item" onClick={handleLogout}>Logout</button>
+                            <button id="logoutButton" className="nav-item" onClick={handleLogout}>Logout</button>
                         </>
                     ) : (
                         <>

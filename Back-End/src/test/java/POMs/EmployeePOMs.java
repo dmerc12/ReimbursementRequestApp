@@ -8,6 +8,7 @@ public class EmployeePOMs {
     private By registerTab = By.id("registerTab");
     private By loginTab = By.id("loginTab");
     private By manageInformationTab = By.id("manageInformationTab");
+    private By logoutButton = By.id("logoutButton");
     private By manageInformationButton = By.id("manageInformationButton");
     private By loginEmailInput = By.id("loginEmail");
     private By loginPasswordInput = By.id("loginPassword");
@@ -54,6 +55,9 @@ public class EmployeePOMs {
 
     public void clickManageInformationTab() {
         driver.findElement(manageInformationTab).click();
+    }
+    public void clickLogoutButton() {
+        driver.findElement(logoutButton).click();
     }
 
     public void clickManageInformationButton() {
