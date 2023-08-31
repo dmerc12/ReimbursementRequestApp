@@ -10,6 +10,9 @@ public class CategoryPOMs {
     private By addCategoryModal = By.id("addCategoryModal");
     private By newCategoryName = By.id("newCategoryName");
     private By addCategoryButton = By.id("addCategoryButton");
+    private By updateCategoryModal = By.id("updateCategoryModal");
+    private By updateCategoryName = By.id("updateCategoryName");
+    private By updateCategoryButton = By.id("updateCategoryButton");
 
     public CategoryPOMs(WebDriver driver) {
         this.driver = driver;
@@ -33,6 +36,17 @@ public class CategoryPOMs {
 
     public void clickAddCategoryButton() {
         driver.findElement(addCategoryButton).click();
+    }
+    public void clickUpdateCategoryModal() {
+        driver.findElement(updateCategoryModal).click();
+    }
+
+    public void setUpdateCategoryName(String categoryName) {
+        driver.findElement(updateCategoryName).sendKeys(categoryName);
+    }
+
+    public void clickUpdateCategoryButton() {
+        driver.findElement(updateCategoryButton).click();
     }
 
 }
