@@ -33,6 +33,10 @@ public class EmployeePOMs {
     private By updateState = By.id("updateState");
     private By updateZipCode = By.id("updateZipCode");
     private By updateInformationButton = By.id("updateInformationButton");
+    private By changePasswordModal = By.id("changePasswordModal");
+    private By newPassword = By.id("newPassword");
+    private By newConfirmationPassword = By.id("newConfirmationPassword");
+    private By changePasswordButton = By.id("changePasswordButton");
 
     public EmployeePOMs(WebDriver driver) {
         this.driver = driver;
@@ -148,5 +152,20 @@ public class EmployeePOMs {
 
     public void clickUpdateInformationButton() {
         driver.findElement(updateInformationButton).click();
+    }
+    public void clickChangePasswordModal() {
+        driver.findElement(changePasswordModal).click();
+    }
+
+    public void setNewPassword(String password) {
+        driver.findElement(newPassword).sendKeys(password);
+    }
+
+    public void setNewConfirmationPassword(String confirmationPassword) {
+        driver.findElement(newConfirmationPassword).sendKeys(confirmationPassword);
+    }
+
+    public void clickChangePasswordButton() {
+        driver.findElement(changePasswordButton).click();
     }
 }
