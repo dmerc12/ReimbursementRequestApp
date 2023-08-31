@@ -190,7 +190,7 @@ export const RegisterForm = () => {
                     </select>
                 </div>
 
-                <button className="form-btn-1" type="submit" id="registerButton">"Register"</button>
+                <button className="form-btn-1" type="submit" id="registerButton">Register</button>
             </form>
             )}
         </>

@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/POMs/CategoryPOMs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/POMs/CategoryPOMs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/POMs/EmployeePOMs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/POMs/EmployeePOMs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/POMs/RequestPOMs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/POMs/RequestPOMs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/src/pages/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/src/pages/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Steps/EmployeeSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Steps/EmployeeSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Features/Register.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Features/Register.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/src/components/ui/employee/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/src/components/ui/employee/RegisterForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="JUnit.Runner">
     <configuration name="DatabaseConnection" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="Username" value="root" />
