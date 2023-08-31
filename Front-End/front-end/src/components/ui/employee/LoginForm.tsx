@@ -86,7 +86,7 @@ export const LoginForm = () => {
                         <input className='form-input' type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
                     </div>
 
-                    <button className='form-btn-1' type='submit' id='loginButton'>"Login"</button>
+                    <button className='form-btn-1' type='submit' id='loginButton'>Login</button>
                 </form>
             )}
         </>

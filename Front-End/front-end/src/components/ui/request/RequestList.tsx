@@ -172,7 +172,7 @@ export const RequestList = () => {
                         <button className='back-button' onClick={goBack}>Go Back</button>
                     </div>
             ) : requests.length === 0 ? (
-                <div>No requests yet</div>
+                <div className="empty-list">No requests have been created yet. Click the Add Request button to create a new reimbursement request.</div>
             ) : (
                 <div className="list">
                     <table className="table">

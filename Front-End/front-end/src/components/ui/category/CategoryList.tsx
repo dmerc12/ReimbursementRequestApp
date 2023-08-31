@@ -106,7 +106,7 @@ export const CategoryList = () => {
                         <button className='back-button' onClick={goBack}>Go Back</button>
                     </div>
             ) : categories.length === 0 ? (
-                <div>No categories yet</div>
+                <div className="empty-list">No categories have been created yet. Click the Add Category button to create a new category.</div>
             ) : (
                 <div className="list">
                     <table className="table">
