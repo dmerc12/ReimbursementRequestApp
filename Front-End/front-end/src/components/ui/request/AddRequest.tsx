@@ -178,7 +178,7 @@ export const AddRequest = () => {
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="addRequestComment">Comment: </label>
-                            <input className="form-input" type="text"  id="addRequestComment" name="addReuestComment" value={comment} onChange={event => setComment(event.target.value)}/>
+                            <input className="form-input" type="text"  id="addRequestComment" name="addRequestComment" value={comment} onChange={event => setComment(event.target.value)}/>
                         </div>
 
                         <div className="form-field">

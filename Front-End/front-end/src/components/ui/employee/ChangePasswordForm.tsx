@@ -8,7 +8,7 @@ import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export const ChangePasswordForm = () => {
     const [visible, setVisible] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
     const [password, setPassword] = useState('');
     const [confirmationPassword, setConfirmationPassword] = useState('');
@@ -17,7 +17,7 @@ export const ChangePasswordForm = () => {
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
-        setIsLoading(true);
+        setLoading(true);
         try {
             const sessionId = Cookies.get('sessionId');
             const response = await fetch('http://localhost:8080/change/password/now', {
@@ -35,7 +35,7 @@ export const ChangePasswordForm = () => {
             if (response.status === 200) {
                 navigate('/manage-information');
                 setVisible(false);
-                setIsLoading(false);
+                setLoading(false);
                 toast.success("Password successfully changed!", {
                     toastId: 'customId'
                 });
@@ -48,15 +48,15 @@ export const ChangePasswordForm = () => {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
-                setIsLoading(false);
+                setLoading(false);
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -75,7 +75,7 @@ export const ChangePasswordForm = () => {
             </div>
 
             <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
-                {isLoading ? (
+                {loading ? (
                     <div className='loading-indicator'>
                         <FaSpinner className='spinner' />
                     </div>
@@ -101,7 +101,7 @@ export const ChangePasswordForm = () => {
                             <input className="form-input" type="password" id="newConfirmationPassword" name="newConfirmationPassword" value={confirmationPassword} onChange={event => setConfirmationPassword(event.target.value)}/>
                         </div>
 
-                        <button disabled={isLoading} className="form-btn-1" type="submit">{isLoading ? "Changing Password..." : "Change Password"}</button>
+                        <button id="changePasswordButton" className="form-btn-1" type="submit">Change Password</button>
                     </form>
                 )}
             </Modal>

@@ -8,7 +8,7 @@ import { Modal } from '../../Modal';
 
 export const AddCategory = () => {
     const [visible, setVisible] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
     const [categoryName, setCategoryName] = useState('');
 
@@ -17,7 +17,7 @@ export const AddCategory = () => {
     const onSubmit = async (event: any) => {
         event.preventDefault();
         try {
-            setIsLoading(true);
+            setLoading(true);
 
             const sessionId = Cookies.get('sessionId');
 
@@ -35,7 +35,7 @@ export const AddCategory = () => {
             if (response.status === 201) {
                 window.location.reload();
                 setVisible(false);
-                setIsLoading(false);
+                setLoading(false);
                 setCategoryName('');
                 toast.success("Category Successfully Added!", {
                     toastId: 'customId'
@@ -49,15 +49,15 @@ export const AddCategory = () => {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
-                setIsLoading(false);
+                setLoading(false);
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -76,7 +76,7 @@ export const AddCategory = () => {
             </div>
 
             <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
-                {isLoading ? (
+                {loading ? (
                     <div className='loading-indicator'>
                         <FaSpinner className='spinner' />
                     </div>
@@ -97,7 +97,7 @@ export const AddCategory = () => {
                             <input className='form-input' type="text" id='newCategoryName' name='newCategoryName' value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
                         </div>
 
-                        <button disabled={isLoading} className='form-btn-1' type='submit' id='addCategoryButton'>{isLoading ? "Adding Category..." : "Add Category"}</button>
+                        <button className='form-btn-1' type='submit' id='addCategoryButton'>Add Category</button>
                     </form> 
                 )}
             </Modal>

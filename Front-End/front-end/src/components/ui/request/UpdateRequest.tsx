@@ -171,8 +171,8 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateCategoryDropDown">Category: </label>
-                            <select className="form-input" name="updateCategoryDropDown" id="updateCategoryDropDown" value={categoryId} onChange={event => setCategoryId(parseInt(event.target.value, 10))}>
+                            <label className="form-label" htmlFor="updateRequestCategoryDropDown">Category: </label>
+                            <select className="form-input" name="updateRequestCategoryDropDown" id="updateRequestCategoryDropDown" value={categoryId} onChange={event => setCategoryId(parseInt(event.target.value, 10))}>
                                 {categories && categories.length > 0 && (
                                     categories.map(category => (
                                         <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
@@ -183,7 +183,7 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateRequestComment">Comment: </label>
-                            <input className="form-input" type="text"  id="updateRequestComment" name="updateReuestComment" value={comment} onChange={event => setComment(event.target.value)}/>
+                            <input className="form-input" type="text"  id="updateRequestComment" name="updateRequestComment" value={comment} onChange={event => setComment(event.target.value)}/>
                         </div>
 
                         <div className="form-field">

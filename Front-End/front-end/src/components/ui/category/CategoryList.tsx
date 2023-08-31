@@ -14,7 +14,7 @@ export interface Category {
 
 export const CategoryList = () => {
     const [categories, setCategories] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const CategoryList = () => {
 
     const fetchCategories = async () => {
         try {
-            setIsLoading(true);
+            setLoading(true);
             setFailedToFetch(false);
 
             const sessionId = Cookies.get('sessionId');
@@ -37,7 +37,7 @@ export const CategoryList = () => {
 
             if (response.status === 200) {
                 setCategories(data);
-                setIsLoading(false);
+                setLoading(false);
             } else if (response.status === 400) {
                 throw new Error(`${data.message}`);
             } else {
@@ -47,17 +47,17 @@ export const CategoryList = () => {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
             } else if (error.message === "No categories found, please try again!") {
-                setIsLoading(false);
+                setLoading(false);
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
-                setIsLoading(false);
+                setLoading(false);
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -91,7 +91,7 @@ export const CategoryList = () => {
 
     return (
         <>
-            {isLoading ? (
+            {loading ? (
                 <div className='loading-indicator'>
                     <FaSpinner className='spinner' />
                 </div>
@@ -106,7 +106,7 @@ export const CategoryList = () => {
                         <button className='back-button' onClick={goBack}>Go Back</button>
                     </div>
             ) : categories.length === 0 ? (
-                <div>No categories yet</div>
+                <div className="empty-list">No categories have been created yet. Click the Add Category button to create a new category.</div>
             ) : (
                 <div className="list">
                     <table className="table">

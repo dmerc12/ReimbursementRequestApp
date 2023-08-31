@@ -8,6 +8,7 @@ public class EmployeePOMs {
     private By registerTab = By.id("registerTab");
     private By loginTab = By.id("loginTab");
     private By manageInformationTab = By.id("manageInformationTab");
+    private By logoutButton = By.id("logoutButton");
     private By manageInformationButton = By.id("manageInformationButton");
     private By loginEmailInput = By.id("loginEmail");
     private By loginPasswordInput = By.id("loginPassword");
@@ -33,6 +34,12 @@ public class EmployeePOMs {
     private By updateState = By.id("updateState");
     private By updateZipCode = By.id("updateZipCode");
     private By updateInformationButton = By.id("updateInformationButton");
+    private By changePasswordModal = By.id("changePasswordModal");
+    private By newPassword = By.id("newPassword");
+    private By newConfirmationPassword = By.id("newConfirmationPassword");
+    private By changePasswordButton = By.id("changePasswordButton");
+    private By deleteInformationModal = By.id("deleteInformationModal");
+    private By deleteInformationButton = By.id("deleteInformationButton");
 
     public EmployeePOMs(WebDriver driver) {
         this.driver = driver;
@@ -48,6 +55,9 @@ public class EmployeePOMs {
 
     public void clickManageInformationTab() {
         driver.findElement(manageInformationTab).click();
+    }
+    public void clickLogoutButton() {
+        driver.findElement(logoutButton).click();
     }
 
     public void clickManageInformationButton() {
@@ -148,5 +158,28 @@ public class EmployeePOMs {
 
     public void clickUpdateInformationButton() {
         driver.findElement(updateInformationButton).click();
+    }
+    public void clickChangePasswordModal() {
+        driver.findElement(changePasswordModal).click();
+    }
+
+    public void setNewPassword(String password) {
+        driver.findElement(newPassword).sendKeys(password);
+    }
+
+    public void setNewConfirmationPassword(String confirmationPassword) {
+        driver.findElement(newConfirmationPassword).sendKeys(confirmationPassword);
+    }
+
+    public void clickChangePasswordButton() {
+        driver.findElement(changePasswordButton).click();
+    }
+
+    public void clickDeleteInformationModal() {
+        driver.findElement(deleteInformationModal).click();
+    }
+
+    public void clickDeleteInformationButton() {
+        driver.findElement(deleteInformationButton).click();
     }
 }
