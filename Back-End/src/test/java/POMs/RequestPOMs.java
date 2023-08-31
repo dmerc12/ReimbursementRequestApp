@@ -13,6 +13,11 @@ public class RequestPOMs {
     private By addRequestComment = By.id("addRequestComment");
     private By addRequestAmount = By.id("addRequestAmount");
     private By addRequestButton = By.id("addRequestButton");
+    private By updateRequestModal = By.id("updateRequestModal");
+    private By updateRequestCategoryDropDown = By.id("updateRequestCategoryDropDown");
+    private By updateRequestComment = By.id("updateRequestComment");
+    private By updateRequestAmount = By.id("updateRequestAmount");
+    private By updateRequestButton = By.id("updateRequestButton");
 
     public RequestPOMs(WebDriver driver) {
         this.driver = driver;
@@ -43,5 +48,25 @@ public class RequestPOMs {
 
     public void clickAddRequestButton() {
         driver.findElement(addRequestButton).click();
+    }
+
+    public void clickUpdateRequestModal() {
+        driver.findElement(updateRequestModal).click();
+    }
+
+    public void setUpdateRequestCategoryDropDown(String category) {
+        driver.findElement(updateRequestCategoryDropDown).sendKeys(category);
+    }
+
+    public void setUpdateRequestComment(String comment) {
+        driver.findElement(updateRequestComment).sendKeys(comment);
+    }
+
+    public void setUpdateRequestAmount(double amount) {
+        driver.findElement(updateRequestAmount).sendKeys(String.valueOf(amount));
+    }
+
+    public void clickUpdateRequestButton() {
+        driver.findElement(updateRequestButton).click();
     }
 }
