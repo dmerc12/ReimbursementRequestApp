@@ -18,23 +18,23 @@ Feature: A new employee needs to register with the reimbursement request system 
 
     Examples:
       |firstName|lastName|email| password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|
-      |thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|last|first@email.com|first|first|1112224444|123 First St|New|OK|73071|
-      |first|thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|first@email.com|first|first|1112224444|123 First St |New|OK|73071|
-      |first|last|thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|first|first|1112224444|123 First St|New|OK|73071 |
-      |first|last|first@email.com|thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|first|1112224444|123 First St|New|OK|73071|
-      |first|last|first@email.com|first|thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|1112224444|123 First St|New|OK|73071|
-      |first|last|first@email.com|first|first|thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|123 First St|New|OK|73071|
-      |first|last|first@email.com|first|first|1112224444|thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|New|OK|73071|
-      |first|last|first@email.com|first|first|1112224444|123 First St|thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass|OK|73071|
-      ||last|first@email.com|first|first|1112224444|123 First St|New|OK|73071|
-      |first||first@email.com|first|first|1112224444|123 First St|New|OK|73071|
-      |first|last||first|first|1112224444|123 First St|New|OK|73071|
-      |first|last|first@email.com||first|1112224444|123 First St|New|OK|73071|
-      |first|last|first@email.com|first||1112224444|123 First St|New|OK|73071|
-      |first|last|first@email.com|first|first||123 First St|New|OK|73071|
-      |first|last|test@email.com|first|first|1112224444|123 First St|New|OK|73071|
-      |first|last|first@email.com|first|first|1112224444|||||
-      |first|last|first@email.com|first|wrong|55|123 First St|New|OK|73071|
+      |"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"first"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"OK"|"73071"|
+      |""|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|""|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|""|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|""|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"first"|""|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|""|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"test@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|""|""|""|""|
+      |"first"|"last"|"first@email.com"|"first"|"wrong"|"55"|"123 First St"|"New"|"OK"|"73071"|
 
 
   Scenario Outline: As a new employee, I successfully input the information needed to register.
@@ -54,5 +54,5 @@ Feature: A new employee needs to register with the reimbursement request system 
     Then  I am back on the login page
 
     Examples:
-    |firstName|lastName|email          | password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|
-    |first    |last    |first@email.com|first    |first               |1112224444 |123 First St |New |OK   |73071  |
+    |firstName|lastName|email| password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|
+    |"first"|"last"|"first-time@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|

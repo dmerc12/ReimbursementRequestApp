@@ -1,3 +1,5 @@
+package Runner;
+
 import POMs.*;
 import org.junit.BeforeClass;
 import org.junit.AfterClass;
@@ -33,8 +35,8 @@ public class Runner {
         categoryPOM = new CategoryPOMs(edgeDriver);
         employeePOM = new EmployeePOMs(edgeDriver);
 
-        edgeDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-        wait = new WebDriverWait(edgeDriver, Duration.ofSeconds(2));
+        edgeDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        wait = new WebDriverWait(edgeDriver, Duration.ofSeconds(5));
     }
 
     @AfterClass

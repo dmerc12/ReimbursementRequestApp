@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class EmployeePOMs {
-    private WebDriver driver;
+    public WebDriver driver;
     private By registerTab = By.id("registerTab");
     private By loginTab = By.id("loginTab");
     private By manageInformationTab = By.id("manageInformationTab");
