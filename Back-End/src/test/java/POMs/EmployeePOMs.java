@@ -37,6 +37,8 @@ public class EmployeePOMs {
     private By newPassword = By.id("newPassword");
     private By newConfirmationPassword = By.id("newConfirmationPassword");
     private By changePasswordButton = By.id("changePasswordButton");
+    private By deleteInformationModal = By.id("deleteInformationModal");
+    private By deleteInformationButton = By.id("deleteInformationButton");
 
     public EmployeePOMs(WebDriver driver) {
         this.driver = driver;
@@ -167,5 +169,13 @@ public class EmployeePOMs {
 
     public void clickChangePasswordButton() {
         driver.findElement(changePasswordButton).click();
+    }
+
+    public void clickDeleteInformationModal() {
+        driver.findElement(deleteInformationModal).click();
+    }
+
+    public void clickDeleteInformationButton() {
+        driver.findElement(deleteInformationButton).click();
     }
 }
