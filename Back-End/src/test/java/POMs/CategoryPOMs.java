@@ -13,6 +13,8 @@ public class CategoryPOMs {
     private By updateCategoryModal = By.id("updateCategoryModal");
     private By updateCategoryName = By.id("updateCategoryName");
     private By updateCategoryButton = By.id("updateCategoryButton");
+    private By deleteCategoryModal = By.id("deleteCategoryModal");
+    private By deleteCategoryButton = By.id("deleteCategoryButton");
 
     public CategoryPOMs(WebDriver driver) {
         this.driver = driver;
@@ -47,6 +49,14 @@ public class CategoryPOMs {
 
     public void clickUpdateCategoryButton() {
         driver.findElement(updateCategoryButton).click();
+    }
+
+    public void clickDeleteCategoryModal() {
+        driver.findElement(deleteCategoryModal).click();
+    }
+
+    public void clickDeleteCategoryButton() {
+        driver.findElement(deleteCategoryButton).click();
     }
 
 }

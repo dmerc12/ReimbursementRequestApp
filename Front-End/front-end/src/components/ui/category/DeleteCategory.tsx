@@ -10,13 +10,13 @@ import Cookies from "js-cookie";
 
 export const DeleteCategory = (props: { category: Category}) => {
     const [visible, setVisible] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
     const navigate = useNavigate();
     
     const onSubmit = async (event: any) => {
-        setIsLoading(true);
+        setLoading(true);
         event.preventDefault();
         try {
             const sessionId = Cookies.get('sessionId');
@@ -31,7 +31,7 @@ export const DeleteCategory = (props: { category: Category}) => {
             if (response.status === 200) {
                 window.location.reload();
                 setVisible(false);
-                setIsLoading(false);
+                setLoading(false);
                 toast.success("Category Successfully Deleted!", {
                     toastId: "customId"
                 });
@@ -44,15 +44,15 @@ export const DeleteCategory = (props: { category: Category}) => {
             if (error.message === "No session found, please try again!" || error.message === "Session has expired, please log in!") {
                 Cookies.remove('sessionId');
                 navigate('/login');
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
             } else if (error.message === "Failed to fetch") {
                 setFailedToFetch(true);
-                setIsLoading(false);
+                setLoading(false);
             } else {
-                setIsLoading(false);
+                setLoading(false);
                 toast.warn(error.message, {
                     toastId: "customId"
                 });
@@ -67,9 +67,9 @@ export const DeleteCategory = (props: { category: Category}) => {
 
     return (
         <>
-            <FiTrash2 onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15} />
+            <FiTrash2 onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15} id="deleteCategoryModal"/>
             <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
-                {isLoading ? (
+                {loading ? (
                     <div className='loading-indicator'>
                         <FaSpinner className='spinner' />
                     </div>
@@ -89,7 +89,7 @@ export const DeleteCategory = (props: { category: Category}) => {
                             <label className="form-label">Are you sure?</label>
                         </div>
 
-                        <button disabled={isLoading} className="form-btn-1" type="submit" id="deleteCategoryButton">{isLoading ? "Deleting Category..." : "Delete Category"}</button>
+                        <button className="form-btn-1" type="submit" id="deleteCategoryButton">Delete Category</button>
                     </form>
                 )}
             </Modal>
