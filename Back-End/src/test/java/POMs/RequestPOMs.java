@@ -18,6 +18,8 @@ public class RequestPOMs {
     private By updateRequestComment = By.id("updateRequestComment");
     private By updateRequestAmount = By.id("updateRequestAmount");
     private By updateRequestButton = By.id("updateRequestButton");
+    private By deleteRequestModal = By.id("deleteRequestModal");
+    private By deleteRequestButton = By.id("deleteRequestButton");
 
     public RequestPOMs(WebDriver driver) {
         this.driver = driver;
@@ -68,5 +70,12 @@ public class RequestPOMs {
 
     public void clickUpdateRequestButton() {
         driver.findElement(updateRequestButton).click();
+    }
+    public void clickDeleteRequestModal() {
+        driver.findElement(deleteRequestModal).click();
+    }
+
+    public void clickDeleteRequestButton() {
+        driver.findElement(deleteRequestButton).click();
     }
 }
