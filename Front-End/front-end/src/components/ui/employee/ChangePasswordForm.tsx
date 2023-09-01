@@ -13,13 +13,15 @@ export const ChangePasswordForm = () => {
     const [password, setPassword] = useState('');
     const [confirmationPassword, setConfirmationPassword] = useState('');
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
         setLoading(true);
+        setFailedToFetch(false);
         try {
-            const sessionId = Cookies.get('sessionId');
             const response = await fetch('http://localhost:8080/change/password/now', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
@@ -40,7 +42,7 @@ export const ChangePasswordForm = () => {
                     toastId: 'customId'
                 });
             } else if (response.status === 400) {
-                throw new Error(`${data.messsage}`);
+                throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");
             }

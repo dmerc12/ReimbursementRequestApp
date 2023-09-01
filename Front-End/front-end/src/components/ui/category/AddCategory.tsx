@@ -12,15 +12,15 @@ export const AddCategory = () => {
     const [failedToFetch, setFailedToFetch] = useState(false);
     const [categoryName, setCategoryName] = useState('');
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
+        setLoading(true);
+        setFailedToFetch(false);
         try {
-            setLoading(true);
-
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch('http://localhost:8080/create/category/now', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},

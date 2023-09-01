@@ -33,6 +33,10 @@ export const UpdateForm = () => {
     const [zipCode, setZipCode] = useState('');
     const [zipCodes, setZipCodes] = useState([] as string[])
 
+    const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
+
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -65,10 +69,8 @@ export const UpdateForm = () => {
     const onSubmit = async (event: any) => {
         event.preventDefault();
         setLoading(true);
+        setFailedToFetch(false);
         try {
-            const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch('http://localhost:8080/update/employee/now', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
@@ -81,6 +83,7 @@ export const UpdateForm = () => {
                     'address': fullAddress
                 })
             });
+
             const data = await response.json();
 
             if (response.status === 200) {
@@ -125,18 +128,17 @@ export const UpdateForm = () => {
     }
 
     const fetchEmployee = async() => {
+        setDataLoading(true);
+        setFailedToFetchData(false);
         try {
-            setDataLoading(true);
-            setFailedToFetchData(false);
-
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch('http://localhost:8080/get/employee', {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({'sessionId': sessionId})
             });
+
             const data = await response.json();
+            
             if (response.status === 200) {
                 const employee: Employee = data
                 setFirstName(employee.firstName);
@@ -278,7 +280,7 @@ export const UpdateForm = () => {
                             </select>
                         </div>
 
-                        <button id="updateInformationButton" className="form-btn-1" type="submit">Update Information</button>
+                        <button id="updateInformationButton" className="form-btn-3" type="submit">Update Information</button>
                     </form>
                 ) : (
                     <div className='failed-to-fetch'>

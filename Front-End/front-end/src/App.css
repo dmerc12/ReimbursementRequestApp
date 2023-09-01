@@ -230,6 +230,20 @@ p {
   cursor: pointer;
 }
 
+.form-btn-3 {
+  padding: 3px;
+  border: none;
+  background-color: grey;
+  color: white;
+  border-radius: 5px;
+  width: 6.5rem;
+  height: 3em;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 575;
+  cursor: pointer;
+}
+
 .form-btn-1:hover {
   transform: scale(0.95);
 }

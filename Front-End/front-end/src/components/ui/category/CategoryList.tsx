@@ -17,17 +17,16 @@ export const CategoryList = () => {
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     let categoryRows = []
 
     const fetchCategories = async () => {
-        try {
-            setLoading(true);
-            setFailedToFetch(false);
-
-            const sessionId = Cookies.get('sessionId');
-                
+        setLoading(true);
+        setFailedToFetch(false);
+        try {                
             const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}

@@ -19,6 +19,7 @@ export const DeleteRequest = (props: { request: Request, onUpdate: ()=> void}) =
     const navigate = useNavigate();
 
     const onSubmit = async (event: any) => {
+        event.preventDefault();
         setLoading(true);
         setFailedToFetchSubmission(false);
         try {

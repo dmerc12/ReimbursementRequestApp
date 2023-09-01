@@ -55,6 +55,7 @@ export const RegisterForm = () => {
     const onSubmit = async(event: any) => {
         event.preventDefault();
         setLoading(true);
+        setFailedToFetch(false);
         try {
             const response = await fetch ('http://localhost:8080/register/now', 
                 {
