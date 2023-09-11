@@ -5,51 +5,90 @@ import { states } from '../../../lib/States';
 import { zipCodeData } from '../../../lib/ZipCodes';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import { useFetch } from "../../../hooks/useFetch";
 
 export const RegisterForm = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmationPassword, setConfirmationPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [streetAddress, setStreetAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [registerForm, setRegisterForm] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmationPassword: '',
+        phoneNumber: '',
+        address: ''
+    });
+    const [address, setAddress] = useState({
+        streetAddress: '',
+        city: '',
+        state: '',
+        zipCode: ''
+    });
     const [zipCodes, setZipCodes] = useState([] as string[]);
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
-    const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
-    const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selectedStateCode = event.target.value;
-        const selectedZipCodes = zipCodeData[selectedStateCode] || [];
-        setState(selectedStateCode);
-        setZipCodes(selectedZipCodes);
-    }
-
-    const handleZipCodeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setZipCode(event.target.value);
-    }
-
-    const handlePhoneNumberChange = (event: any) => {
-        const phoneNumberValue = event.target.value;
-        const formattedPhoneNumber = formatPhoneNumber(phoneNumberValue);
-        setPhoneNumber(formattedPhoneNumber);
-    };
-
-    const formatPhoneNumber = (value: any) => {
-        const phoneNumberDigits = value.replace(/\D/g, '');
-        const parts = phoneNumberDigits.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
-        if (parts) {
-          const formattedPhoneNumber = `${parts[1]}${parts[2] ? '-' + parts[2] : ''}${parts[3] ? '-' + parts[3] : ''}`;
-          return formattedPhoneNumber;
+    const onChange = (event: any) => {
+        const { name, value } = event.target;
+        
+        if (name === 'phoneNumber') {
+            const phoneNumberDigits = value.replace(/\D/g, '');
+            const parts = phoneNumberDigits.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
+            if (parts) {
+                const formattedPhoneNumber = `${parts[1]}${parts[2] ? '-' + parts[2] : ''}${parts[3] ? '-' + parts[3] : ''}`;
+                setRegisterForm((prevRegisterForm) => ({
+                    ...prevRegisterForm,
+                    phoneNumber: formattedPhoneNumber
+                }));
+            } else {
+                setRegisterForm((prevRegisterForm) => ({
+                    ...prevRegisterForm,
+                    phoneNumber: value
+                }));
+            }
+        } else if (name === 'state') {
+            const selectedStateCode = value;
+            const selectedZipCodes = zipCodeData[selectedStateCode] || [];
+            setAddress((prevAddress) => ({
+                ...prevAddress,
+                state: selectedStateCode,
+                zipCode: ''
+            }));
+            const fullAddress = `${address.streetAddress}, ${address.city}, ${selectedStateCode} ${address.zipCode}`;
+            setRegisterForm((prevRegisterForm) => ({
+                ...prevRegisterForm,
+                address: fullAddress
+            }));
+            setZipCodes(selectedZipCodes);
+        } else if (name === 'zipCode') {
+            setAddress((prevAddress) => ({
+                ...prevAddress,
+                zipCode: value
+            }));
+            const fullAddress = `${address.streetAddress}, ${address.city}, ${address.state} ${value}`;
+            setRegisterForm((prevRegisterForm) => ({
+                ...prevRegisterForm,
+                address: fullAddress
+            }));
+        } else if (name === 'streetAddress' || name === 'city') {
+            setAddress((prevAddress) => ({
+                ...prevAddress,
+                [name]: value
+            }));
+            const fullAddress = `${address.streetAddress}, ${address.city}, ${address.state} ${address.zipCode}`;
+            setRegisterForm((prevRegisterForm) => ({
+                ...prevRegisterForm,
+                address: fullAddress
+            }));
+        } else {
+            setRegisterForm((prevRegisterForm) => ({
+                ...prevRegisterForm,
+                [name]: value
+            }));
         }
-        return value;
     };
 
     const onSubmit = async(event: any) => {
@@ -57,31 +96,15 @@ export const RegisterForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const response = await fetch ('http://localhost:8080/register/now', 
-                {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        'firstName': firstName,
-                        'lastName': lastName,
-                        'email': email,
-                        'password': password,
-                        'confirmationPassword': confirmationPassword,
-                        'phoneNumber': phoneNumber,
-                        'address': fullAddress
-                    })
-                }
-            );
+            const { responseStatus, data } = await fetchData('/register/now', 'POST', registerForm)
 
-            const data = await response.json();
-
-            if (response.status === 201) {
+            if (responseStatus === 201) {
                 navigate('/login');
                 setLoading(false);
                 toast.success("Employee successfully created, please log in!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
@@ -122,56 +145,56 @@ export const RegisterForm = () => {
             ) : (
                 <form className="form" onSubmit={onSubmit}>
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerFirstName">First Name: </label>
-                    <input className="form-input" type="text"  id="registerFirstName" name="registerFirstName" value={firstName} onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}/>
+                    <label className="form-label" htmlFor="firstName">First Name: </label>
+                    <input className="form-input" type="text"  id="registerFirstName" name="firstName" value={registerForm.firstName} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerLastName">Last Name: </label>
-                    <input className="form-input" type="text"  id="registerLastName" name="registerLastName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
+                    <label className="form-label" htmlFor="lastName">Last Name: </label>
+                    <input className="form-input" type="text"  id="registerLastName" name="lastName" value={registerForm.lastName} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerEmail">Email: </label>
-                    <input className="form-input" type="email"  id="registerEmail" name="registerEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
+                    <label className="form-label" htmlFor="email">Email: </label>
+                    <input className="form-input" type="email"  id="registerEmail" name="email" value={registerForm.email} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerPassword">Password: </label>
-                    <input className="form-input" type="password"  id="registerPassword" name="registerPassword" value={password} onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}/>
+                    <label className="form-label" htmlFor="password">Password: </label>
+                    <input className="form-input" type="password"  id="registerPassword" name="password" value={registerForm.password} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerConfirmationPassword">Confirm Password: </label>
-                    <input className="form-input" type="password"  id="registerConfirmationPassword" name="registerConfirmationPassword" value={confirmationPassword} onChange={(event: ChangeEvent<HTMLInputElement>) => setConfirmationPassword(event.target.value)}/>
+                    <label className="form-label" htmlFor="confirmationPassword">Confirm Password: </label>
+                    <input className="form-input" type="password"  id="registerConfirmationPassword" name="confirmationPassword" value={registerForm.confirmationPassword} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerPhoneNumber">Phone Number: </label>
-                    <input className="form-input" type="text"  id="registerPhoneNumber" name="registerPhoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange}/>
+                    <label className="form-label" htmlFor="phoneNumber">Phone Number: </label>
+                    <input className="form-input" type="text"  id="registerPhoneNumber" name="phoneNumber" value={registerForm.phoneNumber} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerStreetAddress">Street Address: </label>
-                    <input className="form-input" type="text"  id="registerStreetAddress" name="registerStreetAddress" value={streetAddress} onChange={(event: ChangeEvent<HTMLInputElement>) => setStreetAddress(event.target.value)}/>
+                    <label className="form-label" htmlFor="streetAddress">Street Address: </label>
+                    <input className="form-input" type="text"  id="registerStreetAddress" name="streetAddress" value={address.streetAddress} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerCity">City: </label>
-                    <input className="form-input" type="text"  id="registerCity" name="registerCity" value={city} onChange={(event: ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}/>
+                    <label className="form-label" htmlFor="city">City: </label>
+                    <input className="form-input" type="text"  id="registerCity" name="city" value={address.city} onChange={onChange}/>
                     <br />
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerState">State: </label>
-                    <select className="form-input" name="registerState" id="registerState" value={state} onChange={handleStateChange}>
+                    <label className="form-label" htmlFor="state">State: </label>
+                    <select className="form-input" name="state" id="registerState" value={address.state} onChange={onChange}>
                         {states.length > 0 && (
                             states.map(state => (
                                 <option key={state.code} value={state.code}>{state.name}</option>
@@ -181,8 +204,8 @@ export const RegisterForm = () => {
                 </div>
 
                 <div className="form-field">
-                    <label className="form-label" htmlFor="registerZipCode">Zip Code: </label>
-                    <select className="form-input" name="registerZipCode" id="registerZipCode" value={zipCode} onChange={handleZipCodeChange}>
+                    <label className="form-label" htmlFor="zipCode">Zip Code: </label>
+                    <select className="form-input" name="zipCode" id="registerZipCode" value={address.zipCode} onChange={onChange}>
                         {zipCodes.length > 0 && (
                             zipCodes.map((zipCode, index) => (
                                 <option key={index} value={zipCode}>{zipCode}</option>
