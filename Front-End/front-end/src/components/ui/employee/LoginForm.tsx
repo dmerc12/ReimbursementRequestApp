@@ -4,12 +4,17 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
+import { useFetch } from '../../../hooks/useFetch';
 
 export const LoginForm = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [loginForm, setLoginForm] = useState({
+        email: '',
+        password: ''
+    });
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
+
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
@@ -18,25 +23,16 @@ export const LoginForm = () => {
         setFailedToFetch(false);
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:8080/login/now', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'email': email,
-                    'password': password
-                })
-            });
-            
-            const data = await response.json();
+            const { responseStatus, data } = await fetchData('/login/now', 'POST', loginForm)
 
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 Cookies.set('sessionId', data.sessionId);
                 navigate('/home');
                 setLoading(false);
                 toast.success("Welcome!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
@@ -53,6 +49,14 @@ export const LoginForm = () => {
             }
         }
     }
+
+    const onChange = (event: any) => {
+        const { name, value } = event.target;
+        setLoginForm((prevLoginForm) => ({
+            ...prevLoginForm,
+            [name]: value
+        }));
+    };
 
     const goBack = () => {
         setFailedToFetch(false);
@@ -77,13 +81,13 @@ export const LoginForm = () => {
             ) : (
                 <form className='form' onSubmit={onSubmit}>
                     <div className='form-field'>
-                        <label className='form-label' htmlFor="loginEmail">Email: </label>
-                        <input className='form-input' type="email" id='loginEmail' name='loginEmail' value={email} onChange={(event) => setEmail(event.target.value)} />
+                        <label className='form-label' htmlFor="email">Email: </label>
+                        <input className='form-input' type="email" id='loginEmail' name='email' value={loginForm.email} onChange={onChange} />
                     </div>
 
                     <div className='form-field'>
-                        <label className='form-label' htmlFor="loginPassword">Password: </label>
-                        <input className='form-input' type="password" id='loginPassword' name='loginPassword' value={password} onChange={(event) => setPassword(event.target.value)} />
+                        <label className='form-label' htmlFor="password">Password: </label>
+                        <input className='form-input' type="password" id='loginPassword' name='password' value={loginForm.password} onChange={onChange} />
                     </div>
 
                     <button className='form-btn-1' type='submit' id='loginButton'>Login</button>

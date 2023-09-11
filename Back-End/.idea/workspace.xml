@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/documentation/Selenium-Tests-Report.html" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/Selenium-Tests-Report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Steps/EmployeeSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Steps/EmployeeSteps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/Features/LoginLogout.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Features/LoginLogout.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/Features/Register.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Features/Register.feature" afterDir="false" />
-    </list>
+    <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
