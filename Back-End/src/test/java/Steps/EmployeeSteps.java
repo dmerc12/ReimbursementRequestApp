@@ -13,6 +13,12 @@ public class EmployeeSteps {
     public void i_am_on_the_login_page() {
         Runner.edgeDriver.get("http://localhost:5173/");
     }
+
+    @Given("I am on the home landing page")
+    public void i_am_on_the_home_landing_page() {
+        Runner.edgeDriver.get("http://localhost:5173/home");
+    }
+
     @When("I click the register tab in the nav bar")
     public void i_click_the_register_tab_in_the_nav_bar() {
         Runner.employeePOM.clickRegisterTab();
@@ -61,6 +67,25 @@ public class EmployeeSteps {
     public void i_click_the_register_button() {
         Runner.employeePOM.clickRegisterButton();
     }
+
+    @When("I input {string} in the login email input")
+    public void i_input_in_the_login_email_input(String email) {
+        Runner.employeePOM.setLoginEmailInput(email);
+    }
+    @When("I input {string} in the login password input")
+    public void i_input_in_the_login_password_input(String password) {
+        Runner.employeePOM.setLoginPasswordInput(password);
+    }
+    @When("I click the login button")
+    public void i_click_the_login_button() {
+        Runner.employeePOM.clickLoginButton();
+    }
+
+    @When("I click the logout button")
+    public void i_click_the_logout_button() {
+        Runner.employeePOM.clickLogoutButton();
+    }
+
     @Then("I am on the register page")
     public void the_employee_is_on_the_register_page() {
         Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/register");
@@ -68,6 +93,18 @@ public class EmployeeSteps {
 
     @Then("I am back on the login page")
     public void the_employee_is_on_the_login_page() {
+        Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/"));
+        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/");
+    }
+
+    @Then("I am on the home page")
+    public void i_am_on_the_home_page() {
+        Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/home"));
+        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/home");
+    }
+
+    @Then("I am sent to the login page")
+    public void i_am_sent_to_the_login_page() {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/login"));
         Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/login");
     }
