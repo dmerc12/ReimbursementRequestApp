@@ -20,16 +20,15 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
     const [comment, setComment] = useState('');
     const [amount, setAmount] = useState(0.00);
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     const fetchCategories = async () => {
+        setLoading(true);
+        setFailedToFetchCategories(false);
+        setFailedToFetchSubmission(false);
         try {
-            setLoading(true);
-            setFailedToFetchCategories(false);
-            setFailedToFetchSubmission(false);
-
-            const sessionId = Cookies.get('sessionId');
-                
             const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
@@ -66,12 +65,11 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
     }
 
     const onSubmit = async (event: any) => {
+        event.preventDefault();
         setLoading(true);
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false);
         try {
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch('http://localhost:8080/update/request/now', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},

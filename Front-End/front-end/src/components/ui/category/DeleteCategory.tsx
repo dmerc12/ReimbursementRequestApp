@@ -13,14 +13,15 @@ export const DeleteCategory = (props: { category: Category}) => {
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
     
     const onSubmit = async (event: any) => {
-        setLoading(true);
         event.preventDefault();
+        setLoading(true);
+        setFailedToFetch(false);
         try {
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch(`http://localhost:8080/delete/category/${props.category.categoryId}/${sessionId}`, {
                 method: 'DELETE',
                 headers: {'Content-Type': 'application/json'}

@@ -14,14 +14,15 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
     const [failedToFetch, setFailedToFetch] = useState(false);
     const [categoryName, setCategoryName] = useState(props.category.categoryName);
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
         setLoading(true);
+        setFailedToFetch(false);
         try {
-            const sessionId = Cookies.get('sessionId');
-            
             const response = await fetch('http://localhost:8080/update/category/now', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},

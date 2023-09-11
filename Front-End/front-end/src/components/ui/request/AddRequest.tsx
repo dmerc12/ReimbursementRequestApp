@@ -17,16 +17,15 @@ export const AddRequest = () => {
     const [amount, setAmount] = useState(0.00);
     const [categories, setCategories] = useState<Category[]>([])
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     const fetchCategories = async () => {
-        try {
-            setLoading(true);
-            setFailedToFetchCategories(false);
-            setFailedToFetchSubmission(false);
-
-            const sessionId = Cookies.get('sessionId');
-                
+        setLoading(true);
+        setFailedToFetchCategories(false);
+        setFailedToFetchSubmission(false); 
+        try {               
             const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
@@ -66,13 +65,11 @@ export const AddRequest = () => {
     }
 
     const onSubmit = async (event: any) => {
+        event.preventDefault();
+        setLoading(true);
+        setFailedToFetchCategories(false);
+        setFailedToFetchSubmission(false);
         try {
-            setLoading(true);
-            setFailedToFetchCategories(false);
-            setFailedToFetchSubmission(false);
-
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch('http://localhost:8080/create/request/now', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},

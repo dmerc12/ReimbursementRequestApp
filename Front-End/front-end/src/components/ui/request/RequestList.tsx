@@ -19,19 +19,20 @@ export const RequestList = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [requests, setRequests] = useState<Request[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [failedToFetch, setFailedToFetch] = useState(false);
+    const [failedToFetchCategories, setFailedToFetchCategories] = useState(false);
+    const [failedToFetchRequests, setFailedToFetchRequests] = useState(false);
+
+
+    const sessionId = Cookies.get('sessionId');
 
     const navigate = useNavigate();
 
     let requestRows = [];
 
     const fetchCategories = async () => {
-        try {
-            setIsLoading(true);
-            setFailedToFetch(false);
-
-            const sessionId = Cookies.get('sessionId');
-                
+        setIsLoading(true);
+        setFailedToFetchCategories(false);
+        try {   
             const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
@@ -62,7 +63,7 @@ export const RequestList = () => {
                     toastId: 'customId'
                 });
             } else if (error.message === "Failed to fetch") {
-                setFailedToFetch(true);
+                setFailedToFetchCategories(true);
                 setIsLoading(false);
             } else {
                 setIsLoading(false);
@@ -74,12 +75,9 @@ export const RequestList = () => {
     }
 
     const fetchRequests = async () => {
+        setFailedToFetchRequests(false);
+        setIsLoading(true);
         try {
-            setFailedToFetch(false);
-            setIsLoading(true);
-
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch(`http://localhost:8080/get/all/requests/${sessionId}`, {
                 method: "GET",
                 headers: {'Content-Type': 'application/json'}
@@ -106,7 +104,7 @@ export const RequestList = () => {
             } else if (error.message === "No requests found, please try again!") {
                 setIsLoading(false);
             } else if (error.message === "Failed to fetch") {
-                setFailedToFetch(true);
+                setFailedToFetchRequests(true);
                 setIsLoading(false);
             } else {
                 setIsLoading(false);
@@ -119,7 +117,8 @@ export const RequestList = () => {
 
     const goBack = () => {
         navigate('/home');
-        setFailedToFetch(false);
+        setFailedToFetchCategories(false);
+        setFailedToFetchRequests(false);
     }
 
     const getCategoryName = (categoryId: number) => {
@@ -161,7 +160,17 @@ export const RequestList = () => {
                 <div className="loading-indicator">
                     <FaSpinner className="spinner" />
                 </div>
-            ) : failedToFetch ? (
+            ) : failedToFetchCategories ? (
+                <div className='failed-to-fetch'>
+                        <AiOutlineExclamationCircle className='warning-icon'/>
+                        <p>Cannot connect to the back end server.</p>
+                        <p>Please check your internet connection and try again.</p>
+                        <button className='retry-button' onClick={fetchData}>
+                            <FaSync className='retry-icon'/> Retry
+                        </button>
+                        <button className='back-button' onClick={goBack}>Go Back</button>
+                    </div>
+            ) : failedToFetchRequests ? (
                 <div className='failed-to-fetch'>
                         <AiOutlineExclamationCircle className='warning-icon'/>
                         <p>Cannot connect to the back end server.</p>

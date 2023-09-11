@@ -11,14 +11,15 @@ export const DeleteForm = () => {
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
+    const sessionId = Cookies.get('sessionId');
+
     const navigate = useNavigate();
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
         setLoading(true);
+        setFailedToFetch(false);
         try {
-            const sessionId = Cookies.get('sessionId');
-
             const response = await fetch('http://localhost:8080/delete/employee/now', {
                 method: 'DELETE',
                 headers: {'Content-Type': 'application/json'},
