@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Front-End/front-end/src/components/ui/employee/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-End/front-end/src/components/ui/employee/RegisterForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utilities/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utilities/DatabaseConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,14 +64,14 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Runner">
+  <component name="RunManager" selected="Application.Run">
     <configuration name="DatabaseConnection" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="Utilities.DatabaseConnection" />
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Utilities.*" />
@@ -84,11 +84,11 @@
     </configuration>
     <configuration name="DatabaseSetup" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="DAL.Database.DatabaseSetup" />
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.Database.*" />
@@ -101,11 +101,11 @@
     </configuration>
     <configuration name="DropDatabase" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="DAL.Database.DropDatabase" />
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.Database.*" />
@@ -118,11 +118,11 @@
     </configuration>
     <configuration name="ResetDatabase" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="DAL.Database.ResetDatabase" />
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.Database.*" />
@@ -135,17 +135,17 @@
     </configuration>
     <configuration name="Run" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="Run" />
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="CategoryDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.*" />
@@ -157,15 +157,15 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="CategorySALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="SAL.*" />
@@ -177,15 +177,15 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="EmployeeDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.*" />
@@ -197,15 +197,15 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="EmployeeSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="SAL.*" />
@@ -217,15 +217,15 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="RequestDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.*" />
@@ -237,15 +237,15 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="RequestSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="SAL.*" />
@@ -257,30 +257,15 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Runner" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value=".*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Runner" />
-      <option name="MAIN_CLASS_NAME" value="Runner.Runner" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SessionDALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="DAL.*" />
@@ -292,15 +277,15 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="SessionSALTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <module name="Back-End" />
+      <module name="Reimbursement-Reqest-App" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="SAL.*" />
@@ -312,8 +297,8 @@
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="Username" value="root" />
-        <env name="Password" value="Mercer1282!" />
+        <env name="USERNAME" value="root" />
+        <env name="PASSWORD" value="Mercer1282" />
       </envs>
       <method v="2">
         <option name="Make" enabled="true" />
@@ -326,14 +311,13 @@
       <item itemvalue="Application.ResetDatabase" />
       <item itemvalue="Application.Run" />
       <item itemvalue="JUnit.CategoryDALTests" />
-      <item itemvalue="JUnit.CategorySALTests" />
       <item itemvalue="JUnit.EmployeeDALTests" />
-      <item itemvalue="JUnit.EmployeeSALTests" />
       <item itemvalue="JUnit.RequestDALTests" />
-      <item itemvalue="JUnit.RequestSALTests" />
       <item itemvalue="JUnit.SessionDALTests" />
+      <item itemvalue="JUnit.CategorySALTests" />
+      <item itemvalue="JUnit.EmployeeSALTests" />
+      <item itemvalue="JUnit.RequestSALTests" />
       <item itemvalue="JUnit.SessionSALTests" />
-      <item itemvalue="JUnit.Runner" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
