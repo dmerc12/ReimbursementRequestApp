@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
@@ -161,9 +163,12 @@ public class EmployeeSteps {
         Runner.employeePOM.clickChangePasswordButton();
     }
 
-    @Then("I remain on the update information page")
-    public void i_remain_on_the_update_information_page() {
-        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/update-information");
+    @Then("I should see a toast notification saying {string}")
+    public void i_should_see_the_toast_notification_saying(String expectedToastText) {
+        By toastLocator = By.cssSelector(".toast-message");
+        WebElement toastElement = Runner.wait.until(ExpectedConditions.visibilityOfElementLocated(toastLocator));
+        String actualToastText = toastElement.getText();
+        Assert.assertEquals(expectedToastText, actualToastText);
     }
 
     @Then("I am on the register page")
