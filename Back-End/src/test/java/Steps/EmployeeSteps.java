@@ -141,6 +141,26 @@ public class EmployeeSteps {
         Runner.employeePOM.clickUpdateInformationButton();
     }
 
+    @When("I click the change password modal")
+    public void i_click_the_change_password_modal() {
+        Runner.employeePOM.clickChangePasswordModal();
+    }
+
+    @When("I input {string} in the change password input")
+    public void i_input_in_the_change_password_input(String password) {
+        Runner.employeePOM.setNewPassword(password);
+    }
+
+    @When("I input {string} in the change password confirmation input")
+    public void i_input_in_the_change_password_confirmation_input(String confirmationPassword) {
+        Runner.employeePOM.setNewConfirmationPassword(confirmationPassword);
+    }
+
+    @When("I click the change password button")
+    public void i_click_the_change_password_button() {
+        Runner.employeePOM.clickChangePasswordButton();
+    }
+
     @Then("I remain on the update information page")
     public void i_remain_on_the_update_information_page() {
         Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/update-information");
