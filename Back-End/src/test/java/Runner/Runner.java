@@ -5,6 +5,7 @@ import org.junit.BeforeClass;
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.edge.EdgeDriver;
 import java.time.Duration;
@@ -20,7 +21,7 @@ import io.cucumber.junit.CucumberOptions;
 )
 
 public class Runner {
-    public static WebDriver edgeDriver;
+    public static WebDriver driver;
     public static WebDriverWait wait;
     public static RequestPOMs requestPOM;
     public static CategoryPOMs categoryPOM;
@@ -28,20 +29,28 @@ public class Runner {
 
     @BeforeClass
     public static void setup() {
-        System.setProperty("webdriver.edge.driver", "src/test/resources/msedgedriver.exe");
-        edgeDriver = new EdgeDriver();
+        String osName = System.getProperty("os.name").toLowerCase();
 
-        requestPOM = new RequestPOMs(edgeDriver);
-        categoryPOM = new CategoryPOMs(edgeDriver);
-        employeePOM = new EmployeePOMs(edgeDriver);
+        if (osName.contains("win")) {
+            System.setProperty("webdriver.edge.driver", "src/test/resources/msedgedriver.exe");
+            driver = new EdgeDriver();
+        } else if (osName.contains("mac")) {
+            driver = new SafariDriver();
+        } else {
+            throw new UnsupportedOperationException("Unsupported OS for these tests!");
+        }
 
-        edgeDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(edgeDriver, Duration.ofSeconds(5));
+        requestPOM = new RequestPOMs(driver);
+        categoryPOM = new CategoryPOMs(driver);
+        employeePOM = new EmployeePOMs(driver);
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     @AfterClass
     public static void teardown() {
-        edgeDriver.quit();
+        driver.quit();
     }
 
 }

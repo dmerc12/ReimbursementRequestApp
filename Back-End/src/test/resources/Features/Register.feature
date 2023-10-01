@@ -51,7 +51,7 @@ Feature: A new employee needs to register with the reimbursement request system 
     When  I input <state> in the register state input
     When  I input <zipCode> in the register zip code input
     When  I click the register button
-    Then  I am sent to the login page
+    Then  I am routed to the login page
 
     Examples:
     |firstName|lastName|email| password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|

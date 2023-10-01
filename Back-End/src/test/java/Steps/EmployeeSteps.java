@@ -11,12 +11,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class EmployeeSteps {
     @Given("I am on the login page")
     public void i_am_on_the_login_page() {
-        Runner.edgeDriver.get("http://localhost:5173/");
+        Runner.driver.get("http://localhost:5173/");
     }
 
     @Given("I am on the home landing page")
     public void i_am_on_the_home_landing_page() {
-        Runner.edgeDriver.get("http://localhost:5173/home");
+        Runner.driver.get("http://localhost:5173/home");
     }
 
     @When("I click the register tab in the nav bar")
@@ -143,29 +143,29 @@ public class EmployeeSteps {
 
     @Then("I remain on the update information page")
     public void i_remain_on_the_update_information_page() {
-        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/update-information");
+        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/update-information");
     }
 
     @Then("I am on the register page")
     public void the_employee_is_on_the_register_page() {
-        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/register");
+        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/register");
     }
 
     @Then("I remain on the login page")
     public void i_remain_on_the_login_page() {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/"));
-        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/");
+        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/");
     }
 
     @Then("I am routed to the home page")
     public void i_am_routed_to_the_home_page() {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/home"));
-        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/home");
+        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/home");
     }
 
     @Then("I am routed to the login page")
     public void i_am_routed_to_the_login_page() {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/login"));
-        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/login");
+        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/login");
     }
 }
