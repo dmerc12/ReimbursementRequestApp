@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="26062e6a-2b58-4b27-a705-3be5b54df193" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utilities/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utilities/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Steps/EmployeeSteps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Steps/EmployeeSteps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Features/LoginLogout.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Features/LoginLogout.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Features/UpdateProfile.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Features/UpdateProfile.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run">
+  <component name="RunManager" selected="Cucumber Java.Feature: UpdateProfile">
     <configuration name="DatabaseConnection" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="USERNAME" value="root" />
@@ -140,6 +142,25 @@
       </envs>
       <option name="MAIN_CLASS_NAME" value="Run" />
       <module name="Reimbursement-Reqest-App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Feature: UpdateProfile" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/Features/UpdateProfile.feature" />
+      <option name="GLUE" value="Steps" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="Reimbursement-Reqest-App" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+      <option name="SUGGESTED_NAME" value="Feature: UpdateProfile" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -310,6 +331,7 @@
       <item itemvalue="Application.DropDatabase" />
       <item itemvalue="Application.ResetDatabase" />
       <item itemvalue="Application.Run" />
+      <item itemvalue="Cucumber Java.Feature: UpdateProfile" />
       <item itemvalue="JUnit.CategoryDALTests" />
       <item itemvalue="JUnit.EmployeeDALTests" />
       <item itemvalue="JUnit.RequestDALTests" />
@@ -319,6 +341,11 @@
       <item itemvalue="JUnit.RequestSALTests" />
       <item itemvalue="JUnit.SessionSALTests" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cucumber Java.Feature: UpdateProfile" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

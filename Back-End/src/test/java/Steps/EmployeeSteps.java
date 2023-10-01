@@ -86,25 +86,85 @@ public class EmployeeSteps {
         Runner.employeePOM.clickLogoutButton();
     }
 
+    @When("I click the manage information button")
+    public void i_click_the_manage_information_button() {
+        Runner.employeePOM.clickManageInformationButton();
+    }
+
+    @When("I click the update information modal")
+    public void i_click_the_update_information_modal() {
+        Runner.employeePOM.clickUpdateInformationModal();
+    }
+
+    @When("I input {string} in the update first name input")
+    public void i_input_in_the_update_first_name_input(String firstName) {
+        Runner.employeePOM.setUpdateFirstName(firstName);
+    }
+
+    @When("I input {string} in the update last name input")
+    public void i_input_in_the_update_last_name_input(String lastName) {
+        Runner.employeePOM.setUpdateLastName(lastName);
+    }
+
+    @When("I input {string} in the update email input")
+    public void i_input_in_the_update_email_input(String email) {
+        Runner.employeePOM.setUpdateEmail(email);
+    }
+
+    @When("I input {string} in the update phone number input")
+    public void i_input_in_the_update_phone_number_input(String phoneNumber) {
+        Runner.employeePOM.setUpdatePhoneNumber(phoneNumber);
+    }
+
+    @When("I input {string} in the update street address input")
+    public void i_input_in_the_update_street_address_input(String streetAddress) {
+        Runner.employeePOM.setUpdateStreetAddress(streetAddress);
+    }
+
+    @When("I input {string} in the update city input")
+    public void i_input_in_the_update_city_input(String city) {
+        Runner.employeePOM.setUpdateCity(city);
+    }
+
+    @When("I input {string} in the update state input")
+    public void i_input_in_the_update_state_input(String state) {
+        Runner.employeePOM.setUpdateState(state);
+    }
+
+    @When("I input {string} in the update zip code input")
+    public void i_input_in_the_update_zip_code_input(String zipCode) {
+        Runner.employeePOM.setUpdateZipCode(zipCode);
+    }
+
+    @When("I click the update information button")
+    public void i_click_the_update_information_button() {
+        Runner.employeePOM.clickUpdateInformationButton();
+    }
+
+    @Then("I remain on the update information page")
+    public void i_remain_on_the_update_information_page() {
+        Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/update-information");
+    }
+
     @Then("I am on the register page")
     public void the_employee_is_on_the_register_page() {
         Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/register");
     }
 
-    @Then("I am back on the login page")
-    public void the_employee_is_on_the_login_page() {
+    @Then("I remain on the login page")
+    public void i_remain_on_the_login_page() {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/"));
         Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/");
     }
 
-    @Then("I am on the home page")
-    public void i_am_on_the_home_page() {
+    @Then("I am routed to the home page")
+    public void i_am_routed_to_the_home_page() {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/home"));
         Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/home");
     }
 
-    @Then("I am sent to the login page")
-    public void i_am_sent_to_the_login_page() {
+    @Then("I am routed to the login page")
+    public void i_am_routed_to_the_login_page() {
         Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/login"));
         Assert.assertEquals(Runner.edgeDriver.getCurrentUrl(), "http://localhost:5173/login");
     }
