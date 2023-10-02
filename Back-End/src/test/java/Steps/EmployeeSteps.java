@@ -170,27 +170,4 @@ public class EmployeeSteps {
         String actualToastText = toastElement.getText();
         Assert.assertEquals(expectedToastText, actualToastText);
     }
-
-    @Then("I am on the register page")
-    public void the_employee_is_on_the_register_page() {
-        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/register");
-    }
-
-    @Then("I remain on the login page")
-    public void i_remain_on_the_login_page() {
-        Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/"));
-        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/");
-    }
-
-    @Then("I am routed to the home page")
-    public void i_am_routed_to_the_home_page() {
-        Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/home"));
-        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/home");
-    }
-
-    @Then("I am routed to the login page")
-    public void i_am_routed_to_the_login_page() {
-        Runner.wait.until(ExpectedConditions.urlToBe("http://localhost:5173/login"));
-        Assert.assertEquals(Runner.driver.getCurrentUrl(), "http://localhost:5173/login");
-    }
 }
