@@ -1,8 +1,9 @@
 import { Modal } from "../../Modal";
 import { toast } from 'react-toastify';
-import { useState, useEffect, ChangeEvent } from "react";
-import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../../hooks/useFetch";
+import Cookies from "js-cookie";
 import { states } from "../../../lib/States";
 import { zipCodeData } from "../../../lib/ZipCodes";
 import { FaSpinner, FaSync } from 'react-icons/fa';
@@ -17,53 +18,92 @@ interface Employee {
 }
 
 export const UpdateForm = () => {
+    const sessionId = Cookies.get('sessionId');
+
+    const [updateForm, setUpdateForm] = useState({
+        sessionId: Number(sessionId),
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        address: ''
+    });
+    const [address, setAddress] = useState({
+        streetAddress: '',
+        city: '',
+        state: '',
+        zipCode: ''
+    });
     const [loading, setLoading] = useState(false);
     const [dataLoading, setDataLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
     const [failedToFetchData, setFailedToFetchData] = useState(false);
     const [visible, setVisible] = useState(false);
     const [employee, setEmployee] = useState(false);
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [streetAddress, setStreetAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [zipCode, setZipCode] = useState('');
     const [zipCodes, setZipCodes] = useState([] as string[])
 
-    const fullAddress = `${streetAddress}, ${city}, ${state} ${zipCode}`;
-
-    const sessionId = Cookies.get('sessionId');
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
-    const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const selectedStateCode = event.target.value;
-        const selectedZipCodes = zipCodeData[selectedStateCode] || [];
-        setState(selectedStateCode);
-        setZipCodes(selectedZipCodes);
-    };
-
-    const handleZipCodeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setZipCode(event.target.value);
-    };
-
-    const formatPhoneNumber = (value: any) => {
-        const phoneNumberDigits = value.replace(/\D/g, '');
-        const parts = phoneNumberDigits.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
-        if (parts) {
-          const formattedPhoneNumber = `${parts[1]}${parts[2] ? '-' + parts[2] : ''}${parts[3] ? '-' + parts[3] : ''}`;
-          return formattedPhoneNumber;
+    const onChange = (event: any) => {
+        const { name, value } = event.target;
+        
+        if (name === 'phoneNumber') {
+            const phoneNumberDigits = value.replace(/\D/g, '');
+            const parts = phoneNumberDigits.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
+            if (parts) {
+                const formattedPhoneNumber = `${parts[1]}${parts[2] ? '-' + parts[2] : ''}${parts[3] ? '-' + parts[3] : ''}`;
+                setUpdateForm((prevForm) => ({
+                    ...prevForm,
+                    phoneNumber: formattedPhoneNumber
+                }));
+            } else {
+                setUpdateForm((prevForm) => ({
+                    ...prevForm,
+                    phoneNumber: value
+                }));
+            }
+        } else if (name === 'state') {
+            const selectedStateCode = value;
+            const selectedZipCodes = zipCodeData[selectedStateCode] || [];
+            setAddress((prevAddress) => ({
+                ...prevAddress,
+                state: selectedStateCode,
+                zipCode: ''
+            }));
+            const fullAddress = `${address.streetAddress}, ${address.city}, ${selectedStateCode} ${address.zipCode}`;
+            setUpdateForm((prevForm) => ({
+                ...prevForm,
+                address: fullAddress
+            }));
+            setZipCodes(selectedZipCodes);
+        } else if (name === 'zipCode') {
+            setAddress((prevAddress) => ({
+                ...prevAddress,
+                zipCode: value
+            }));
+            const fullAddress = `${address.streetAddress}, ${address.city}, ${address.state} ${value}`;
+            setUpdateForm((prevForm) => ({
+                ...prevForm,
+                address: fullAddress
+            }));
+        } else if (name === 'streetAddress' || name === 'city') {
+            setAddress((prevAddress) => ({
+                ...prevAddress,
+                [name]: value
+            }));
+            const fullAddress = `${address.streetAddress}, ${address.city}, ${address.state} ${address.zipCode}`;
+            setUpdateForm((prevForm) => ({
+                ...prevForm,
+                address: fullAddress
+            }));
+        } else {
+            setUpdateForm((prevForm) => ({
+                ...prevForm,
+                [name]: value
+            }));
         }
-        return value;
-    };
-
-    const handlePhoneNumberChange = (event: any) => {
-        const phoneNumberValue = event.target.value;
-        const formattedPhoneNumber = formatPhoneNumber(phoneNumberValue);
-        setPhoneNumber(formattedPhoneNumber);
     };
 
     const onSubmit = async (event: any) => {
@@ -71,29 +111,16 @@ export const UpdateForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const response = await fetch('http://localhost:8080/update/employee/now', {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'sessionId': sessionId,
-                    'firstName': firstName,
-                    'lastName': lastName,
-                    'email': email,
-                    'phoneNumber': phoneNumber,
-                    'address': fullAddress
-                })
-            });
+            const { responseStatus, data } = await fetchData('/update/employee/now', 'PUT', updateForm)
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 navigate('/manage-information');
                 setVisible(false);
                 setLoading(false);
                 toast.success("Information successfully updated!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");
@@ -131,32 +158,32 @@ export const UpdateForm = () => {
         setDataLoading(true);
         setFailedToFetchData(false);
         try {
-            const response = await fetch('http://localhost:8080/get/employee', {
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({'sessionId': sessionId})
-            });
-
-            const data = await response.json();
+            const { responseStatus, data } = await fetchData("get/employee", "PATCH", {sessionId: Number(sessionId)});
             
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 const employee: Employee = data
-                setFirstName(employee.firstName);
-                setLastName(employee.lastName);
-                setEmail(employee.email);
-                setPhoneNumber(employee.phoneNumber);
                 const addressComponents = employee.address.split(', ');
-                setStreetAddress(addressComponents[0]);
-                setCity(addressComponents[1]);
                 const initialState = addressComponents[2].split(' ')[0];
-                setState(initialState);
                 const initialZipCodes = zipCodeData[initialState];
-                setZipCodes(initialZipCodes);
                 const initialZipCode = addressComponents[2].split(' ')[1];
-                setZipCode(initialZipCode);
+                setUpdateForm({
+                    sessionId: Number(sessionId),
+                    firstName: employee.firstName,
+                    lastName: employee.lastName,
+                    email: employee.email,
+                    phoneNumber: employee.phoneNumber,
+                    address: employee.address
+                });
+                setAddress({
+                    streetAddress: addressComponents[0],
+                    city: addressComponents[1],
+                    state: initialState,
+                    zipCode: initialZipCode
+                });
+                setZipCodes(initialZipCodes);
                 setEmployee(true);
                 setDataLoading(false);
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end of the application, please try again!");
@@ -220,47 +247,47 @@ export const UpdateForm = () => {
                         </button>
                         <button className='back-button' onClick={goBack}>Go Back</button>
                     </div>
-                ) : employee ? (
+                ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateFirstName">First Name: </label>
-                            <input className="form-input" type="text"  id="updateFirstName" name="updateFirstName" value={firstName} onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}/>
+                            <input className="form-input" type="text"  id="updateFirstName" name="updateFirstName" value={updateForm.firstName} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateLastName">Last Name: </label>
-                            <input className="form-input" type="text"  id="updateLasttName" name="updateLastName" value={lastName} onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}/>
+                            <input className="form-input" type="text"  id="updateLasttName" name="updateLastName" value={updateForm.lastName} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateEmail">Email: </label>
-                            <input className="form-input" type="email"  id="updateEmail" name="updateEmail" value={email} onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}/>
+                            <input className="form-input" type="email"  id="updateEmail" name="updateEmail" value={updateForm.email} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updatePhoneNumber">Phone Number: </label>
-                            <input className="form-input" type="text"  id="updatePhoneNumber" name="updatePhoneNumber" value={phoneNumber} onChange={handlePhoneNumberChange}/>
+                            <input className="form-input" type="text"  id="updatePhoneNumber" name="updatePhoneNumber" value={updateForm.phoneNumber} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateStreetAddress">Street Address: </label>
-                            <input className="form-input" type="text"  id="updateStreetAddress" name="updateStreetAddress" value={streetAddress} onChange={(event: ChangeEvent<HTMLInputElement>) => setStreetAddress(event.target.value)}/>
+                            <input className="form-input" type="text"  id="updateStreetAddress" name="updateStreetAddress" value={address.streetAddress} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateCity">City: </label>
-                            <input className="form-input" type="text"  id="updateCity" name="updateCity" value={city} onChange={(event: ChangeEvent<HTMLInputElement>) => setCity(event.target.value)}/>
+                            <input className="form-input" type="text"  id="updateCity" name="updateCity" value={address.city} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateState">State: </label>
-                            <select className="form-input" name="updateState" id="updateState" value={state} onChange={handleStateChange}>
+                            <select className="form-input" name="updateState" id="updateState" value={address.state} onChange={onChange}>
                                 {states.length > 0 && (
                                     states.map(state => (
                                         <option key={state.code} value={state.code}>{state.name}</option>
@@ -271,7 +298,7 @@ export const UpdateForm = () => {
 
                         <div className="form-field">
                             <label className="form-label" htmlFor="updateZipCode">Zip Code: </label>
-                            <select className="form-input" name="updateZipCode" id="updateZipCode" value={zipCode} onChange={handleZipCodeChange}>
+                            <select className="form-input" name="updateZipCode" id="updateZipCode" value={address.zipCode} onChange={onChange}>
                                 {zipCodes.length > 0 && (
                                     zipCodes.map((zipCode, index) => (
                                         <option key={index} value={zipCode}>{zipCode}</option>
@@ -282,16 +309,6 @@ export const UpdateForm = () => {
 
                         <button id="updateInformationButton" className="form-btn-3" type="submit">Update Information</button>
                     </form>
-                ) : (
-                    <div className='failed-to-fetch'>
-                        <AiOutlineExclamationCircle className='warning-icon'/>
-                        <p>Cannot connect to the back end server.</p>
-                        <p>Please check your internet connection and try again.</p>
-                        <button className='retry-button' onClick={fetchEmployee}>
-                            <FaSync className='retry-icon'/> Retry
-                        </button>
-                        <button className='back-button' onClick={goBack}>Go Back</button>
-                    </div>
                 )}    
             </Modal>
         </>
