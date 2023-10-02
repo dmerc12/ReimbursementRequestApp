@@ -1,6 +1,6 @@
 Feature: An employee needs to be able to update their current information.
 
-  Scenario Outline: As an employee, I incorrectly update my current information.
+  Scenario Outline: As an employee, I incorrectly attempt to update my current information.
     Given I am on the login page
     When  I input <email> in the login email input
     When  I input <password> in the login password input
