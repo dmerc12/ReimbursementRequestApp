@@ -39,13 +39,13 @@ export const RegisterForm = () => {
             const parts = phoneNumberDigits.match(/^(\d{3})(\d{0,3})(\d{0,4})$/);
             if (parts) {
                 const formattedPhoneNumber = `${parts[1]}${parts[2] ? '-' + parts[2] : ''}${parts[3] ? '-' + parts[3] : ''}`;
-                setRegisterForm((prevRegisterForm) => ({
-                    ...prevRegisterForm,
+                setRegisterForm((prevForm) => ({
+                    ...prevForm,
                     phoneNumber: formattedPhoneNumber
                 }));
             } else {
-                setRegisterForm((prevRegisterForm) => ({
-                    ...prevRegisterForm,
+                setRegisterForm((prevForm) => ({
+                    ...prevForm,
                     phoneNumber: value
                 }));
             }
@@ -58,8 +58,8 @@ export const RegisterForm = () => {
                 zipCode: ''
             }));
             const fullAddress = `${address.streetAddress}, ${address.city}, ${selectedStateCode} ${address.zipCode}`;
-            setRegisterForm((prevRegisterForm) => ({
-                ...prevRegisterForm,
+            setRegisterForm((prevForm) => ({
+                ...prevForm,
                 address: fullAddress
             }));
             setZipCodes(selectedZipCodes);
@@ -69,8 +69,8 @@ export const RegisterForm = () => {
                 zipCode: value
             }));
             const fullAddress = `${address.streetAddress}, ${address.city}, ${address.state} ${value}`;
-            setRegisterForm((prevRegisterForm) => ({
-                ...prevRegisterForm,
+            setRegisterForm((prevForm) => ({
+                ...prevForm,
                 address: fullAddress
             }));
         } else if (name === 'streetAddress' || name === 'city') {
@@ -79,13 +79,13 @@ export const RegisterForm = () => {
                 [name]: value
             }));
             const fullAddress = `${address.streetAddress}, ${address.city}, ${address.state} ${address.zipCode}`;
-            setRegisterForm((prevRegisterForm) => ({
-                ...prevRegisterForm,
+            setRegisterForm((prevForm) => ({
+                ...prevForm,
                 address: fullAddress
             }));
         } else {
-            setRegisterForm((prevRegisterForm) => ({
-                ...prevRegisterForm,
+            setRegisterForm((prevForm) => ({
+                ...prevForm,
                 [name]: value
             }));
         }
