@@ -31,19 +31,16 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
         setLoading(true);
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false); 
-        try {               
-            const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'}
-            });
+        try {
+            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET');
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 setCategories(data);
-                setCategoryId(data[0].categoryId);
+                setAddRequestForm((prevForm) => ({
+                    ...prevForm,
+                    categoryId: data[0].categoryId}));
                 setLoading(false);
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error('Cannot connect to the back end, please try again!');
@@ -68,7 +65,7 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
                 });
             }
         }
-    }
+    };
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
@@ -76,31 +73,23 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false);
         try {
-            const response = await fetch('http://localhost:8080/create/request/now', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'sessionId': sessionId,
-                    'categoryId': categoryId,
-                    'comment': comment,
-                    'amount': amount
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.status === 201) {
+            const { responseStatus, data } = await fetchData('/create/request/now', 'POST', addRequestForm)
+ 
+            if (responseStatus === 201) {
                 setLoading(false);
                 setVisible(false);
-                setCategoryId(categories[0].categoryId);
-                setComment('');
-                setAmount(0.00);
+                setAddRequestForm({
+                    sessionId: Number(sessionId),
+                    categoryId: categories[0].categoryId,
+                    comment: '',
+                    amount: 0.00
+                });
                 setCategories([]);
                 props.onUpdate();
                 toast.success("Request Successfully Added!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");
@@ -123,12 +112,20 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
                 });
             }
         }
-    }
+    };
+
+    const onChange = (event: any) => {
+        const { name, value }  = event.target;
+        setAddRequestForm((prevForm) => ({
+            ...prevForm,
+            [name]: value
+        }));
+    };
 
     const goBack = () => {
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false);
-    }
+    };
 
     useEffect(() => {
         fetchCategories();
@@ -169,8 +166,8 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
-                            <label className="form-label" htmlFor="addRequestCategoryDropdown">Category: </label>
-                            <select className="form-input" id="addRequestCategoryDropdown" name="addRequestCategoryDropdown" value={categoryId} onChange={event => setCategoryId(parseInt(event.target.value, 10))}>
+                            <label className="form-label" htmlFor="categoryId">Category: </label>
+                            <select className="form-input" id="addRequestCategoryDropdown" name="categoryId" value={addRequestForm.categoryId} onChange={onChange}>
                                 {categories && categories.length > 0 && (
                                     categories.map(category => (
                                         <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
@@ -180,13 +177,13 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="addRequestComment">Comment: </label>
-                            <input className="form-input" type="text"  id="addRequestComment" name="addRequestComment" value={comment} onChange={event => setComment(event.target.value)}/>
+                            <label className="form-label" htmlFor="comment">Comment: </label>
+                            <input className="form-input" type="text"  id="addRequestComment" name="comment" value={addRequestForm.comment} onChange={onChange}/>
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="addRequestAmount">Amount: </label>
-                            <input className="form-input" type="number" name="addRequestAmount" id="addRequestAmount" value={amount} onChange={event => setAmount(parseFloat(event.target.value))}/>
+                            <label className="form-label" htmlFor="amount">Amount: </label>
+                            <input className="form-input" type="number" id="addRequestAmount" name="amount" value={addRequestForm.amount} onChange={onChange} />
                         </div>
 
                         <button className="form-btn-1" type="submit" id="addRequestButton">Add Request</button>
