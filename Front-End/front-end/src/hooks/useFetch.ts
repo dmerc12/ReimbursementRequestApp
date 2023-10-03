@@ -1,6 +1,6 @@
 export const useFetch = () => {
 
-    const fetchData = async (url:string, requestMethod:string, requestBody: object) => {
+    const fetchData = async (url:string, requestMethod:string, requestBody?: object) => {
         try {
             const response = await fetch(`http://localhost:8080${url}`, {
                 method: requestMethod,

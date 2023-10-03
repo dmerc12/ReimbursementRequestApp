@@ -1,3 +1,4 @@
+import { AddCategory } from "./AddCategory";
 import { UpdateCategory } from "./UpdateCategory";
 import { DeleteCategory } from "./DeleteCategory";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +31,7 @@ export const CategoryList = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET', {})
+            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET')
 
             if (responseStatus === 200) {
                 setCategories(data);
@@ -79,7 +80,7 @@ export const CategoryList = () => {
                     <td className="table-data">{category.categoryName}</td>
                     <td className="table-data crud-icons">
                         <UpdateCategory category={category} onUpdate={fetchCategories}/>
-                        <DeleteCategory category={category}/>
+                        <DeleteCategory category={category} onUpdate={fetchCategories}/>
                     </td>
                 </tr>
             )
@@ -88,6 +89,7 @@ export const CategoryList = () => {
 
     return (
         <>
+            <AddCategory onUpdate={fetchCategories}/>
             {loading ? (
                 <div className='loading-indicator'>
                     <FaSpinner className='spinner' />

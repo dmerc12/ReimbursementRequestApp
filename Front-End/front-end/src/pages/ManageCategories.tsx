@@ -1,4 +1,3 @@
-import { AddCategory } from "../components/ui/category/AddCategory";
 import { CategoryList } from "../components/ui/category/CategoryList";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +20,6 @@ export const ManageCategories = () => {
     return (
         <>
             <h1>Manage Categories</h1>
-            <AddCategory />
             <CategoryList />
         </>
     );

@@ -1,20 +1,27 @@
 import { Category } from "./CategoryList";
-import { useState } from 'react';
-import { FiEdit } from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useFetch } from "../../../hooks/useFetch";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { Modal } from "../../Modal";
+import { FiEdit } from 'react-icons/fi';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export const UpdateCategory = (props: { category: Category, onUpdate: () => void}) => {
+    const sessionId = Cookies.get('sessionId');
+
+    const [updateCategoryForm, setUpdateCategoryForm] = useState({
+        sessionId: Number(sessionId),
+        categoryId: Number(props.category.categoryId),
+        categoryName: props.category.categoryName
+    });
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
-    const [categoryName, setCategoryName] = useState(props.category.categoryName);
 
-    const sessionId = Cookies.get('sessionId');
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
@@ -23,26 +30,16 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const response = await fetch('http://localhost:8080/update/category/now', {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'sessionId': sessionId,
-                    'categoryId': props.category.categoryId,
-                    'categoryName': categoryName
-                })
-            });
+            const { responseStatus, data } = await fetchData('/update/category/now', 'PUT', updateCategoryForm);
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 props.onUpdate();
                 setVisible(false);
                 setLoading(false);
                 toast.success("Category Successfully Updated!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");
@@ -65,15 +62,23 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
                 });
             }
         }
-    }
+    };
 
     const goBack = () => {
         setFailedToFetch(false);
-    }
+    };
+
+    const onChange = (event: any) => {
+        const { name, value } = event.target;
+        setUpdateCategoryForm((prevForm) => ({
+            ...prevForm,
+            [name]: value
+        }));
+    };
 
     return (
         <>
-            <FiEdit onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15} id="updateCategoryModal"/>
+            <FiEdit onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15} id={`updateCategoryModal${props.category.categoryId}`}/>
             <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
                 {loading ? (
                     <div className='loading-indicator'>
@@ -92,8 +97,8 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateCategoryName">Category Name: </label>
-                            <input className="form-input" type="text" id="updateCategoryName" name="updateCategoryName" value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
+                            <label className="form-label" htmlFor="categoryName">Category Name: </label>
+                            <input className="form-input" type="text" id="updateCategoryName" name="categoryName" value={updateCategoryForm.categoryName} onChange={onChange}/>
                         </div>
 
                         <button className="form-btn-1" type="submit" id="updateCategoryButton">Update Category</button>

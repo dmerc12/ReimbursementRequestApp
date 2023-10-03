@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { Modal } from '../../Modal';
 
-export const AddCategory = () => {
+export const AddCategory = (props: { onUpdate: () => void }) => {
     const sessionId = Cookies.get('sessionId');
 
     const [addCategoryForm, setAddCategoryForm] = useState({
@@ -30,7 +30,7 @@ export const AddCategory = () => {
             const { responseStatus, data } = await fetchData('/create/category/now', 'POST', addCategoryForm)
 
             if (responseStatus === 201) {
-                window.location.reload();
+                props.onUpdate();
                 setVisible(false);
                 setLoading(false);
                 setAddCategoryForm({
