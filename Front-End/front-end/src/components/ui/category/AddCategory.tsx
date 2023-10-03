@@ -2,17 +2,23 @@ import { AiOutlinePlus, AiOutlineExclamationCircle } from 'react-icons/ai';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFetch } from '../../../hooks/useFetch';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { Modal } from '../../Modal';
 
-export const AddCategory = () => {
+export const AddCategory = (props: { onUpdate: () => void }) => {
+    const sessionId = Cookies.get('sessionId');
+
+    const [addCategoryForm, setAddCategoryForm] = useState({
+        sessionId: Number(sessionId),
+        categoryName: ''
+    });
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
-    const [categoryName, setCategoryName] = useState('');
 
-    const sessionId = Cookies.get('sessionId');
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
@@ -21,26 +27,20 @@ export const AddCategory = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const response = await fetch('http://localhost:8080/create/category/now', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'sessionId': sessionId,
-                    'categoryName': categoryName
-                })
-            });
+            const { responseStatus, data } = await fetchData('/create/category/now', 'POST', addCategoryForm)
 
-            const data = await response.json();
-
-            if (response.status === 201) {
-                window.location.reload();
+            if (responseStatus === 201) {
+                props.onUpdate();
                 setVisible(false);
                 setLoading(false);
-                setCategoryName('');
+                setAddCategoryForm({
+                    sessionId: Number(sessionId),
+                    categoryName: ''
+                });
                 toast.success("Category Successfully Added!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");
@@ -63,11 +63,19 @@ export const AddCategory = () => {
                 });
             }
         }
-    }
+    };
+
+    const onChange = (event: any) => {
+        const { name, value } = event.target;
+        setAddCategoryForm((prevForm) => ({
+            ...prevForm,
+            [name]: value
+        }))
+    };
 
     const goBack = () => {
         setFailedToFetch(false);
-    }
+    };
 
     return (
         <>
@@ -93,8 +101,8 @@ export const AddCategory = () => {
                 ) : (
                     <form className='form' onSubmit={onSubmit}>
                         <div className='form-field'>
-                            <label className='form-label' htmlFor="newCategoryName">New Category Name: </label>
-                            <input className='form-input' type="text" id='newCategoryName' name='newCategoryName' value={categoryName} onChange={event => setCategoryName(event.target.value)}/>
+                            <label className='form-label' htmlFor="categoryName">New Category Name: </label>
+                            <input className='form-input' type="text" id='newCategoryName' name='categoryName' value={addCategoryForm.categoryName} onChange={onChange}/>
                         </div>
 
                         <button className='form-btn-1' type='submit' id='addCategoryButton'>Add Category</button>

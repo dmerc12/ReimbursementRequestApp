@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { useFetch } from '../../../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
-import { useFetch } from '../../../hooks/useFetch';
 
 export const LoginForm = () => {
     const [loginForm, setLoginForm] = useState({
@@ -52,8 +52,8 @@ export const LoginForm = () => {
 
     const onChange = (event: any) => {
         const { name, value } = event.target;
-        setLoginForm((prevLoginForm) => ({
-            ...prevLoginForm,
+        setLoginForm((prevForm) => ({
+            ...prevForm,
             [name]: value
         }));
     };

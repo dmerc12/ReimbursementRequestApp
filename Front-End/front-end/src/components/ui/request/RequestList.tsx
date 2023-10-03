@@ -1,7 +1,9 @@
+import { AddRequest } from "./AddRequest";
 import { UpdateRequest } from "./UpdateRequest";
 import { DeleteRequest } from "./DeleteRequest";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useFetch } from "../../../hooks/useFetch";
 import { toast } from 'react-toastify';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
@@ -22,6 +24,7 @@ export const RequestList = () => {
     const [failedToFetchCategories, setFailedToFetchCategories] = useState(false);
     const [failedToFetchRequests, setFailedToFetchRequests] = useState(false);
 
+    const { fetchData } = useFetch();
 
     const sessionId = Cookies.get('sessionId');
 
@@ -32,18 +35,13 @@ export const RequestList = () => {
     const fetchCategories = async () => {
         setIsLoading(true);
         setFailedToFetchCategories(false);
-        try {   
-            const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'}
-            });
+        try {
+            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET');
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 setCategories(data);
                 setIsLoading(false);
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error('Cannot connect to the back end, please try again!');
@@ -113,26 +111,26 @@ export const RequestList = () => {
                 });
             }
         }
-    }
+    };
 
     const goBack = () => {
         navigate('/home');
         setFailedToFetchCategories(false);
         setFailedToFetchRequests(false);
-    }
+    };
 
     const getCategoryName = (categoryId: number) => {
         const foundCategory = categories.find(category => category.categoryId === categoryId);
         return foundCategory ? foundCategory.categoryName : ''
-    }
+    };
 
-    const fetchData = () => {
+    const fetchCurrent = () => {
         fetchCategories();
         fetchRequests();
     }
 
     useEffect(() => {
-        fetchData();
+        fetchCurrent();
     }, [])
 
     if (requests) {
@@ -156,6 +154,7 @@ export const RequestList = () => {
 
     return (
         <>
+            <AddRequest onUpdate={fetchRequests}/>
             {isLoading ? (
                 <div className="loading-indicator">
                     <FaSpinner className="spinner" />
@@ -165,7 +164,7 @@ export const RequestList = () => {
                         <AiOutlineExclamationCircle className='warning-icon'/>
                         <p>Cannot connect to the back end server.</p>
                         <p>Please check your internet connection and try again.</p>
-                        <button className='retry-button' onClick={fetchData}>
+                        <button className='retry-button' onClick={fetchCurrent}>
                             <FaSync className='retry-icon'/> Retry
                         </button>
                         <button className='back-button' onClick={goBack}>Go Back</button>
@@ -175,7 +174,7 @@ export const RequestList = () => {
                         <AiOutlineExclamationCircle className='warning-icon'/>
                         <p>Cannot connect to the back end server.</p>
                         <p>Please check your internet connection and try again.</p>
-                        <button className='retry-button' onClick={fetchData}>
+                        <button className='retry-button' onClick={fetchCurrent}>
                             <FaSync className='retry-icon'/> Retry
                         </button>
                         <button className='back-button' onClick={goBack}>Go Back</button>

@@ -1,17 +1,20 @@
 import { Category } from "./CategoryList";
-import { useState } from 'react';
 import { FiTrash2 } from  'react-icons/fi';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useFetch } from "../../../hooks/useFetch";
 import { toast } from 'react-toastify';
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
 
-export const DeleteCategory = (props: { category: Category}) => {
+export const DeleteCategory = (props: { category: Category, onUpdate: () => void}) => {
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
+
+    const { fetchData } = useFetch();
 
     const sessionId = Cookies.get('sessionId');
 
@@ -22,21 +25,16 @@ export const DeleteCategory = (props: { category: Category}) => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const response = await fetch(`http://localhost:8080/delete/category/${props.category.categoryId}/${sessionId}`, {
-                method: 'DELETE',
-                headers: {'Content-Type': 'application/json'}
-            });
+            const { responseStatus, data } = await fetchData(`/delete/category/${props.category.categoryId}/${sessionId}`, 'DELETE', {});
 
-            const data = await response.json();
-
-            if (response.status === 200) {
-                window.location.reload();
+            if (responseStatus === 200) {
+                props.onUpdate();
                 setVisible(false);
                 setLoading(false);
                 toast.success("Category Successfully Deleted!", {
                     toastId: "customId"
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error('Cannot connect to the back end server, please try again!');
@@ -68,7 +66,7 @@ export const DeleteCategory = (props: { category: Category}) => {
 
     return (
         <>
-            <FiTrash2 onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15} id="deleteCategoryModal"/>
+            <FiTrash2 onClick={() => {setVisible(true); setFailedToFetch(false)}} cursor='pointer' size={15} id={`deleteCategoryModal${props.category.categoryId}`}/>
             <Modal visible={visible} onClose={() => {setVisible(false); setFailedToFetch(false)}}>
                 {loading ? (
                     <div className='loading-indicator'>

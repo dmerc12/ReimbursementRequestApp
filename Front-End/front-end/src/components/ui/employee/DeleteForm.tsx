@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useFetch } from "../../../hooks/useFetch";
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
@@ -11,6 +12,8 @@ export const DeleteForm = () => {
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
+    const { fetchData } = useFetch();
+
     const sessionId = Cookies.get('sessionId');
 
     const navigate = useNavigate();
@@ -20,17 +23,9 @@ export const DeleteForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const response = await fetch('http://localhost:8080/delete/employee/now', {
-                method: 'DELETE',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'sessionId': sessionId
-                })
-            })
+            const { responseStatus, data } = await fetchData('/delete/employee/now', 'DELETE', {sessionId: Number(sessionId)});
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 Cookies.remove('sessionId');
                 navigate('/login');
                 setLoading(false);
@@ -38,7 +33,7 @@ export const DeleteForm = () => {
                 toast.success("Profile successfully deleted, goodbye!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");

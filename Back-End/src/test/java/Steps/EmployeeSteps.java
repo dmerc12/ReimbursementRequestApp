@@ -163,6 +163,16 @@ public class EmployeeSteps {
         Runner.employeePOM.clickChangePasswordButton();
     }
 
+    @When("I click the delete profile modal")
+    public void i_click_the_delete_profile_modal() {
+        Runner.employeePOM.clickDeleteInformationModal();
+    }
+
+    @When("I click the delete profile button")
+    public void i_click_the_delete_profile_button() {
+        Runner.employeePOM.clickDeleteInformationButton();
+    }
+
     @Then("I should see a toast notification saying {string}")
     public void i_should_see_the_toast_notification_saying(String expectedToastText) {
         By toastLocator = By.cssSelector(".toast-message");

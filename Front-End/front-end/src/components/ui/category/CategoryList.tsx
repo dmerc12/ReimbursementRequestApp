@@ -1,7 +1,9 @@
+import { AddCategory } from "./AddCategory";
 import { UpdateCategory } from "./UpdateCategory";
 import { DeleteCategory } from "./DeleteCategory";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import { useFetch } from "../../../hooks/useFetch";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { FaSpinner, FaSync } from 'react-icons/fa';
@@ -17,6 +19,8 @@ export const CategoryList = () => {
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
 
+    const { fetchData } = useFetch();
+
     const sessionId = Cookies.get('sessionId');
 
     const navigate = useNavigate();
@@ -26,18 +30,13 @@ export const CategoryList = () => {
     const fetchCategories = async () => {
         setLoading(true);
         setFailedToFetch(false);
-        try {                
-            const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'}
-            });
+        try {
+            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET')
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 setCategories(data);
                 setLoading(false);
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error('Cannot connect to the back end, please try again!');
@@ -81,7 +80,7 @@ export const CategoryList = () => {
                     <td className="table-data">{category.categoryName}</td>
                     <td className="table-data crud-icons">
                         <UpdateCategory category={category} onUpdate={fetchCategories}/>
-                        <DeleteCategory category={category}/>
+                        <DeleteCategory category={category} onUpdate={fetchCategories}/>
                     </td>
                 </tr>
             )
@@ -90,6 +89,7 @@ export const CategoryList = () => {
 
     return (
         <>
+            <AddCategory onUpdate={fetchCategories}/>
             {loading ? (
                 <div className='loading-indicator'>
                     <FaSpinner className='spinner' />

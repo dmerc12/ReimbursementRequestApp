@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../../hooks/useFetch";
 import { toast } from 'react-toastify';
 import Cookies from "js-cookie";
 import { Modal } from "../../Modal";
@@ -7,13 +8,18 @@ import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 
 export const ChangePasswordForm = () => {
+    const sessionId = Cookies.get('sessionId');
+
+    const [changePasswordForm, setChangePasswordForm] = useState({
+        sessionId: Number(sessionId),
+        password: '',
+        confirmationPassword: ''
+    })
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
-    const [password, setPassword] = useState('');
-    const [confirmationPassword, setConfirmationPassword] = useState('');
 
-    const sessionId = Cookies.get('sessionId');
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
@@ -22,26 +28,16 @@ export const ChangePasswordForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const response = await fetch('http://localhost:8080/change/password/now', {
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'sessionId': sessionId,
-                    'password': password,
-                    'confirmationPassword': confirmationPassword
-                })
-            });
+            const { responseStatus, data } = await fetchData('/change/password/now', 'PATCH', changePasswordForm)
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 navigate('/manage-information');
                 setVisible(false);
                 setLoading(false);
                 toast.success("Password successfully changed!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");
@@ -66,9 +62,17 @@ export const ChangePasswordForm = () => {
         }
     };
 
+    const onChange = (event: any) => {
+        const { name, value } = event.target;
+        setChangePasswordForm((prevForm) => ({
+            ...prevForm,
+            [name]: value
+        }));
+    };
+
     const goBack = () => {
         setFailedToFetch(false);
-    }
+    };
 
     return (
         <>
@@ -94,13 +98,13 @@ export const ChangePasswordForm = () => {
                 ): (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
-                            <label className="form-label" htmlFor="newPassword">New Password: </label>
-                            <input className="form-input" type="password" id="newPassword" name="newPassword" value={password} onChange={event => setPassword(event.target.value)}/>
+                            <label className="form-label" htmlFor="password">New Password: </label>
+                            <input className="form-input" type="password" id="newPassword" name="password" value={changePasswordForm.password} onChange={onChange}/>
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="newConfirmationPassword">Confirm Password: </label>
-                            <input className="form-input" type="password" id="newConfirmationPassword" name="newConfirmationPassword" value={confirmationPassword} onChange={event => setConfirmationPassword(event.target.value)}/>
+                            <label className="form-label" htmlFor="confirmationPassword">Confirm Password: </label>
+                            <input className="form-input" type="password" id="newConfirmationPassword" name="confirmationPassword" value={changePasswordForm.confirmationPassword} onChange={onChange}/>
                         </div>
 
                         <button id="changePasswordButton" className="form-btn-1" type="submit">Change Password</button>

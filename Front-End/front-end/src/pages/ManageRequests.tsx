@@ -1,4 +1,3 @@
-import { AddRequest } from "../components/ui/request/AddRequest";
 import { RequestList } from "../components/ui/request/RequestList";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -21,7 +20,6 @@ export const ManageRequests = () => {
     return (
         <>
             <h1>Manage Requests Below!</h1>
-            <AddRequest />
             <RequestList />
         </>
     );
