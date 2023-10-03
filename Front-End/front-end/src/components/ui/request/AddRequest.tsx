@@ -2,22 +2,28 @@ import { AiOutlinePlus, AiOutlineExclamationCircle } from "react-icons/ai";
 import { FaSpinner, FaSync } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../../hooks/useFetch";
 import { toast } from "react-toastify";
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
 import { Category } from "../category/CategoryList";
 
-export const AddRequest = () => {
+export const AddRequest = (props: { onUpdate: () => void}) => {
+    const sessionId = Cookies.get('sessionId');
+
+    const [addRequestForm, setAddRequestForm] = useState({
+        sessionId: Number(sessionId),
+        categoryId: 0,
+        comment: '',
+        amount: 0.00
+    });
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [failedToFetchCategories, setFailedToFetchCategories] = useState(false);
-    const [failedToFetchSubmission, setFailedToFetchSubmission] = useState(false)
-    const [categoryId, setCategoryId] = useState(0);
-    const [comment, setComment] = useState('');
-    const [amount, setAmount] = useState(0.00);
+    const [failedToFetchSubmission, setFailedToFetchSubmission] = useState(false);
     const [categories, setCategories] = useState<Category[]>([])
 
-    const sessionId = Cookies.get('sessionId');
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
@@ -90,7 +96,7 @@ export const AddRequest = () => {
                 setComment('');
                 setAmount(0.00);
                 setCategories([]);
-                window.location.reload();
+                props.onUpdate();
                 toast.success("Request Successfully Added!", {
                     toastId: 'customId'
                 });
