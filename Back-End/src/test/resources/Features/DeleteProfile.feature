@@ -13,4 +13,3 @@ Feature: An employee needs to be able to delete their profile with the reimburse
     Examples:
     |email|password|expectedToastText|
     |"test@email.com"|"test"|"Profile successfully deleted, goodbye!"|
-    

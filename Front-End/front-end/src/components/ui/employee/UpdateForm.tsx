@@ -158,7 +158,7 @@ export const UpdateForm = () => {
         setDataLoading(true);
         setFailedToFetchData(false);
         try {
-            const { responseStatus, data } = await fetchData("get/employee", "PATCH", {sessionId: Number(sessionId)});
+            const { responseStatus, data } = await fetchData("/get/employee", "PATCH", {sessionId: Number(sessionId)});
             
             if (responseStatus === 200) {
                 const employee: Employee = data
@@ -250,44 +250,44 @@ export const UpdateForm = () => {
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateFirstName">First Name: </label>
-                            <input className="form-input" type="text"  id="updateFirstName" name="updateFirstName" value={updateForm.firstName} onChange={onChange}/>
+                            <label className="form-label" htmlFor="firstName">First Name: </label>
+                            <input className="form-input" type="text"  id="updateFirstName" name="firstName" value={updateForm.firstName} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateLastName">Last Name: </label>
-                            <input className="form-input" type="text"  id="updateLasttName" name="updateLastName" value={updateForm.lastName} onChange={onChange}/>
+                            <label className="form-label" htmlFor="lastName">Last Name: </label>
+                            <input className="form-input" type="text"  id="updateLasttName" name="lastName" value={updateForm.lastName} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateEmail">Email: </label>
-                            <input className="form-input" type="email"  id="updateEmail" name="updateEmail" value={updateForm.email} onChange={onChange}/>
+                            <label className="form-label" htmlFor="email">Email: </label>
+                            <input className="form-input" type="email"  id="updateEmail" name="email" value={updateForm.email} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updatePhoneNumber">Phone Number: </label>
-                            <input className="form-input" type="text"  id="updatePhoneNumber" name="updatePhoneNumber" value={updateForm.phoneNumber} onChange={onChange}/>
+                            <label className="form-label" htmlFor="phoneNumber">Phone Number: </label>
+                            <input className="form-input" type="text"  id="updatePhoneNumber" name="phoneNumber" value={updateForm.phoneNumber} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateStreetAddress">Street Address: </label>
-                            <input className="form-input" type="text"  id="updateStreetAddress" name="updateStreetAddress" value={address.streetAddress} onChange={onChange}/>
+                            <label className="form-label" htmlFor="streetAddress">Street Address: </label>
+                            <input className="form-input" type="text"  id="updateStreetAddress" name="streetAddress" value={address.streetAddress} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateCity">City: </label>
-                            <input className="form-input" type="text"  id="updateCity" name="updateCity" value={address.city} onChange={onChange}/>
+                            <label className="form-label" htmlFor="city">City: </label>
+                            <input className="form-input" type="text"  id="updateCity" name="city" value={address.city} onChange={onChange}/>
                             <br />
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateState">State: </label>
-                            <select className="form-input" name="updateState" id="updateState" value={address.state} onChange={onChange}>
+                            <label className="form-label" htmlFor="state">State: </label>
+                            <select className="form-input" name="updateState" id="state" value={address.state} onChange={onChange}>
                                 {states.length > 0 && (
                                     states.map(state => (
                                         <option key={state.code} value={state.code}>{state.name}</option>
@@ -297,8 +297,8 @@ export const UpdateForm = () => {
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateZipCode">Zip Code: </label>
-                            <select className="form-input" name="updateZipCode" id="updateZipCode" value={address.zipCode} onChange={onChange}>
+                            <label className="form-label" htmlFor="zipCode">Zip Code: </label>
+                            <select className="form-input" name="updateZipCode" id="zipCode" value={address.zipCode} onChange={onChange}>
                                 {zipCodes.length > 0 && (
                                     zipCodes.map((zipCode, index) => (
                                         <option key={index} value={zipCode}>{zipCode}</option>

@@ -98,13 +98,13 @@ export const ChangePasswordForm = () => {
                 ): (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
-                            <label className="form-label" htmlFor="newPassword">New Password: </label>
-                            <input className="form-input" type="password" id="newPassword" name="newPassword" value={changePasswordForm.password} onChange={onChange}/>
+                            <label className="form-label" htmlFor="password">New Password: </label>
+                            <input className="form-input" type="password" id="newPassword" name="password" value={changePasswordForm.password} onChange={onChange}/>
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="newConfirmationPassword">Confirm Password: </label>
-                            <input className="form-input" type="password" id="newConfirmationPassword" name="newConfirmationPassword" value={changePasswordForm.confirmationPassword} onChange={onChange}/>
+                            <label className="form-label" htmlFor="confirmationPassword">Confirm Password: </label>
+                            <input className="form-input" type="password" id="newConfirmationPassword" name="confirmationPassword" value={changePasswordForm.confirmationPassword} onChange={onChange}/>
                         </div>
 
                         <button id="changePasswordButton" className="form-btn-1" type="submit">Change Password</button>
