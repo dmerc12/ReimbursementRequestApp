@@ -12,7 +12,6 @@ public class CategoryPOMs {
     private By addCategoryButton = By.id("addCategoryButton");
     private By updateCategoryName = By.id("updateCategoryName");
     private By updateCategoryButton = By.id("updateCategoryButton");
-    private By deleteCategoryModal = By.id("deleteCategoryModal");
     private By deleteCategoryButton = By.id("deleteCategoryButton");
 
     public CategoryPOMs(WebDriver driver) {
@@ -52,8 +51,10 @@ public class CategoryPOMs {
         driver.findElement(updateCategoryButton).click();
     }
 
-    public void clickDeleteCategoryModal() {
-        driver.findElement(deleteCategoryModal).click();
+    public void clickDeleteCategoryModal(String categoryId) {
+        String dynamicId = "deleteCategoryModal" + categoryId;
+        By dynamicLocator = By.id(dynamicId);
+        driver.findElement(dynamicLocator).click();
     }
 
     public void clickDeleteCategoryButton() {

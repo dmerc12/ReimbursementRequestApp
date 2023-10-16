@@ -26,4 +26,10 @@ public class CategorySteps {
 
     @When("I click the update category button")
     public void i_click_the_update_category_button(){Runner.categoryPOM.clickUpdateCategoryButton();}
+
+    @When("I click the delete category modal for category {string}")
+    public void i_click_the_delete_category_modal_for_category(String categoryId) {Runner.categoryPOM.clickDeleteCategoryModal(categoryId);}
+
+    @When("I click the delete category button")
+    public void i_click_the_delete_category_button(){Runner.categoryPOM.clickDeleteCategoryButton();}
 }
