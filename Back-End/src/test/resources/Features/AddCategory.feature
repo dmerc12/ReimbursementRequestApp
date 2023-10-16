@@ -1,6 +1,6 @@
-Feature An employee needs to be able to create a category.
+Feature: An employee needs to be able to create a new category.
 
-  Scenario Outline: As an employee, I incorrectly attempt to create a category.
+  Scenario Outline: As an employee, I incorrectly attempt to create a new category.
     Given I am on the login page
     When  I input <email> in the login email input
     When  I input <password> in the login password input

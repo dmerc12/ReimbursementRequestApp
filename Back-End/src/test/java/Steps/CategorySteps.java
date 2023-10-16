@@ -18,5 +18,12 @@ public class CategorySteps {
     @When("I click the create category button")
     public void i_click_the_create_category_button(){Runner.categoryPOM.clickAddCategoryButton();}
 
+    @When("I click the update category modal for category {string}")
+    public void i_click_the_update_category_modal_for_category(String categoryId) {Runner.categoryPOM.clickUpdateCategoryModal(categoryId);}
 
+    @When("I input {string} in the update category name input")
+    public void i_input_category_name_in_the_update_category_name_input(String categoryName) {Runner.categoryPOM.setUpdateCategoryName(categoryName);}
+
+    @When("I click the update category button")
+    public void i_click_the_update_category_button(){Runner.categoryPOM.clickUpdateCategoryButton();}
 }
