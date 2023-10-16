@@ -14,27 +14,26 @@ Feature: A new employee needs to register with the reimbursement request system 
     When  I input <state> in the register state input
     When  I input <zipCode> in the register zip code input
     When  I click the register button
-    Then  I am on the register page
+    Then  I should see a toast notification saying <expectedToastText>
 
     Examples:
-      |firstName|lastName|email| password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|
-      |"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"first"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"first"|"first"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"thisistoolongandsoitshouldraisethedesirederrormessageandsothiserrorwillultimatelybethrownbutthetestwillpass"|"OK"|"73071"|
-      |""|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|""|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|""|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|""|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"first"|""|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"first"|"first"|""|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"test@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
-      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|""|""|""|""|
-      |"first"|"last"|"first@email.com"|"first"|"wrong"|"55"|"123 First St"|"New"|"OK"|"73071"|
+      |firstName|lastName|email| password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|expectedToastText|
+      |"this is too long and so it should raise the desired error message"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The first name field cannot exceed 36 characters, please try again!"|
+      |"first"|"this is too long and so it should raise the desired error message"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The last name field cannot exceed 36 characters, please try again!"|
+      |"first"|"last"|"this is too long and so it should raise the desired error message"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The email field cannot exceed 60 characters, please try again!"|
+      |"first"|"last"|"first@email.com"|"this is too long and so it should raise the desired error message"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The password field cannot exceed 60 characters, please try again!"|
+      |"first"|"last"|"first@email.com"|"first"|"this is too long and so it should raise the desired error message"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The confirmation password field cannot exceed 60 characters, please try again!"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|"this is too long and so it should raise the desired error message"|"123 First St"|"New"|"OK"|"73071"|"The phone number field cannot exceed 13 characters, please try again!"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|"this is too long and so it should raise the desired error message"|"New"|"OK"|"73071"|"The address field cannot exceed 60 characters, please try again!"|
+      |""|"last"|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The first name field cannot be left empty, please try again!"|
+      |"first"|""|"first@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The last name field cannot be left empty, please try again!"|
+      |"first"|"last"|""|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The email field cannot be left empty, please try again!"|
+      |"first"|"last"|"first@email.com"|""|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The password field cannot be left empty, please try again!"|
+      |"first"|"last"|"first@email.com"|"first"|""|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"The confirmation password field cannot be left empty, please try again!"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|""|"123 First St"|"New"|"OK"|"73071"|"The phone number field cannot be left empty, please try again!"|
+      |"first"|"last"|"test@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"An employee with this email already exists, please try again!"|
+      |"first"|"last"|"first@email.com"|"first"|"first"|"1112224444"|""|""|""|""|"The address field cannot be left empty, please try again!"|
+      |"first"|"last"|"first@email.com"|"first"|"wrong"|"55"|"123 First St"|"New"|"OK"|"73071"|"The passwords do not match, please try again!"|
 
 
   Scenario Outline: As a new employee, I successfully input the information needed to register.
@@ -51,8 +50,8 @@ Feature: A new employee needs to register with the reimbursement request system 
     When  I input <state> in the register state input
     When  I input <zipCode> in the register zip code input
     When  I click the register button
-    Then  I am routed to the login page
+    Then  I should see a toast notification saying <expectedToastText>
 
     Examples:
-    |firstName|lastName|email| password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|
-    |"first"|"last"|"first-time@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|
+    |firstName|lastName|email| password|confirmationPassword|phoneNumber|streetAddress|city|state|zipCode|expectedToastText|
+    |"first"|"last"|"first-time@email.com"|"first"|"first"|"1112224444"|"123 First St"|"New"|"OK"|"73071"|"Employee successfully created"|
