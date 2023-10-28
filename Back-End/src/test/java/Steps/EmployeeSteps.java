@@ -1,30 +1,25 @@
 package Steps;
 
 import Runner.Runner;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class EmployeeSteps {
-    @Given("I am on the login page")
-    public void i_am_on_the_login_page() {
-        Runner.driver.get("http://localhost:5173/");
-    }
-
-    @Given("I am on the home landing page")
-    public void i_am_on_the_home_landing_page() {
-        Runner.driver.get("http://localhost:5173/home");
-    }
-
     @When("I click the register tab in the nav bar")
     public void i_click_the_register_tab_in_the_nav_bar() {
         Runner.employeePOM.clickRegisterTab();
     }
+
+    @When("I click the login tab in the nav bar")
+    public void i_click_the_login_tab_in_the_nav_bar() {
+        Runner.employeePOM.clickLoginTab();
+    }
+
+    @When("I click the manage information tab in the nav bar")
+    public void i_click_the_manage_information_tab_in_the_nav_bar() {
+        Runner.employeePOM.clickManageInformationTab();
+    }
+
     @When("I input {string} in the register first name input")
     public void i_input_first_name_in_the_register_first_name_input(String firstName) {
         Runner.employeePOM.setRegisterFirstName(firstName);
@@ -171,13 +166,5 @@ public class EmployeeSteps {
     @When("I click the delete profile button")
     public void i_click_the_delete_profile_button() {
         Runner.employeePOM.clickDeleteInformationButton();
-    }
-
-    @Then("I should see a toast notification saying {string}")
-    public void i_should_see_the_toast_notification_saying(String expectedToastText) {
-        By toastLocator = By.cssSelector(".toast-message");
-        WebElement toastElement = Runner.wait.until(ExpectedConditions.visibilityOfElementLocated(toastLocator));
-        String actualToastText = toastElement.getText();
-        Assert.assertEquals(expectedToastText, actualToastText);
     }
 }
