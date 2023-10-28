@@ -4,46 +4,49 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class EmployeePOMs {
-    public WebDriver driver;
-    private By registerTab = By.id("registerTab");
-    private By loginTab = By.id("loginTab");
-    private By manageInformationTab = By.id("manageInformationTab");
-    private By logoutButton = By.id("logoutButton");
-    private By manageInformationButton = By.id("manageInformationButton");
-    private By loginEmailInput = By.id("loginEmail");
-    private By loginPasswordInput = By.id("loginPassword");
-    private By loginButton = By.id("loginButton");
-    private By registerFirstName = By.id("registerFirstName");
-    private By registerLastName = By.id("registerLastName");
-    private By registerEmail = By.id("registerEmail");
-    private By registerPassword = By.id("registerPassword");
-    private By registerConfirmationPassword = By.id("registerConfirmationPassword");
-    private By registerPhoneNumber = By.id("registerPhoneNumber");
-    private By registerStreetAddress = By.id("registerStreetAddress");
-    private By registerCity = By.id("registerCity");
-    private By registerState = By.id("registerState");
-    private By registerZipCode = By.id("registerZipCode");
-    private By registerButton = By.id("registerButton");
-    private By updateInformationModal = By.id("updateInformationModal");
-    private By updateFirstName = By.id("updateFirstName");
-    private By updateLastName = By.id("updateLastName");
-    private By updateEmail = By.id("updateEmail");
-    private By updatePhoneNumber = By.id("updatePhoneNumber");
-    private By updateStreetAddress = By.id("updateStreetAddress");
-    private By updateCity = By.id("updateCity");
-    private By updateState = By.id("updateState");
-    private By updateZipCode = By.id("updateZipCode");
-    private By updateInformationButton = By.id("updateInformationButton");
-    private By changePasswordModal = By.id("changePasswordModal");
-    private By newPassword = By.id("newPassword");
-    private By newConfirmationPassword = By.id("newConfirmationPassword");
-    private By changePasswordButton = By.id("changePasswordButton");
-    private By deleteInformationModal = By.id("deleteInformationModal");
-    private By deleteInformationButton = By.id("deleteInformationButton");
+    public  WebDriver driver;
+    private final By homeTab = By.id("homeTab");
+    private final By registerTab = By.id("registerTab");
+    private final By loginTab = By.id("loginTab");
+    private final By manageInformationTab = By.id("manageInformationTab");
+    private final By logoutButton = By.id("logoutButton");
+    private final By manageInformationButton = By.id("manageInformationButton");
+    private final By loginEmailInput = By.id("loginEmail");
+    private final By loginPasswordInput = By.id("loginPassword");
+    private final By loginButton = By.id("loginButton");
+    private final By registerFirstName = By.id("registerFirstName");
+    private final By registerLastName = By.id("registerLastName");
+    private final By registerEmail = By.id("registerEmail");
+    private final By registerPassword = By.id("registerPassword");
+    private final By registerConfirmationPassword = By.id("registerConfirmationPassword");
+    private final By registerPhoneNumber = By.id("registerPhoneNumber");
+    private final By registerStreetAddress = By.id("registerStreetAddress");
+    private final By registerCity = By.id("registerCity");
+    private final By registerState = By.id("registerState");
+    private final By registerZipCode = By.id("registerZipCode");
+    private final By registerButton = By.id("registerButton");
+    private final By updateInformationModal = By.id("updateInformationModal");
+    private final By updateFirstName = By.id("updateFirstName");
+    private final By updateLastName = By.id("updateLastName");
+    private final By updateEmail = By.id("updateEmail");
+    private final By updatePhoneNumber = By.id("updatePhoneNumber");
+    private final By updateStreetAddress = By.id("updateStreetAddress");
+    private final By updateCity = By.id("updateCity");
+    private final By updateState = By.id("updateState");
+    private final By updateZipCode = By.id("updateZipCode");
+    private final By updateInformationButton = By.id("updateInformationButton");
+    private final By changePasswordModal = By.id("changePasswordModal");
+    private final By newPassword = By.id("newPassword");
+    private final By newConfirmationPassword = By.id("newConfirmationPassword");
+    private final By changePasswordButton = By.id("changePasswordButton");
+    private final By deleteInformationModal = By.id("deleteInformationModal");
+    private final By deleteInformationButton = By.id("deleteInformationButton");
 
     public EmployeePOMs(WebDriver driver) {
         this.driver = driver;
     }
+
+    public void clickHomeTab(){driver.findElement(homeTab).click();}
 
     public void clickRegisterTab() {
         driver.findElement(registerTab).click();
