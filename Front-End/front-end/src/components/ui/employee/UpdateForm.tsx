@@ -111,7 +111,7 @@ export const UpdateForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData('/update/employee/now', 'PUT', updateForm)
+            const { responseStatus, data } = await fetchData('/api/update/employee', 'PUT', updateForm)
 
             if (responseStatus === 200) {
                 navigate('/manage-information');
@@ -158,7 +158,7 @@ export const UpdateForm = () => {
         setDataLoading(true);
         setFailedToFetchData(false);
         try {
-            const { responseStatus, data } = await fetchData("/get/employee", "PATCH", {sessionId: Number(sessionId)});
+            const { responseStatus, data } = await fetchData("/api/get/employee", "PATCH", {sessionId: Number(sessionId)});
             
             if (responseStatus === 200) {
                 const employee: Employee = data

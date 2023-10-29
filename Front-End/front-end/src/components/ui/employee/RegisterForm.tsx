@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { states } from '../../../lib/States';
@@ -96,7 +96,7 @@ export const RegisterForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData('/register/now', 'POST', registerForm)
+            const { responseStatus, data } = await fetchData('/api/register', 'POST', registerForm)
 
             if (responseStatus === 201) {
                 navigate('/login');

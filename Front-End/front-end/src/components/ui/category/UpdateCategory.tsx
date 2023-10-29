@@ -30,7 +30,7 @@ export const UpdateCategory = (props: { category: Category, onUpdate: () => void
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData('/update/category/now', 'PUT', updateCategoryForm);
+            const { responseStatus, data } = await fetchData('/api/update/category', 'PUT', updateCategoryForm);
 
             if (responseStatus === 200) {
                 props.onUpdate();
