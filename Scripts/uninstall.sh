@@ -15,18 +15,26 @@ run_command() {
 }
 
 # Stop front-end (if running)
-pm2 stop front-End
+echo "Stopping front-end (if running)..."
+run_command pm2 stop front-End
 
 # Stop the back-end(if running)
+echo "Stopping back-end (if running)..."
+run_command pkill -f "java -cp target/classes Run"
 
 # Stop and remove Docker database container
-docker stop mysql
-docker rm mysql
+echo "Stopping and removing MySQL database container"
+run_command docker stop mysql
+run_command docker rm mysql
 
 # Remove installed software and dependencies
+echo "Removing Docker..."
 run_command sudo apt remove -y docker.io docker-compose
 
 # Clean up any additional files or configurations
+echo "Removing generated files..."
+run_command git checkout main
+run_command git pull
 
 # Check the number of failures and prompt the user
 if [ $failures -gt 0 ]; then
