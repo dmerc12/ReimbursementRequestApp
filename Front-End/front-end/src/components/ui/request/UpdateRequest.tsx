@@ -3,6 +3,7 @@ import { Category } from "../category/CategoryList";
 import { useState, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../../hooks/useFetch";
 import { Modal } from "../../Modal";
 import { FaSpinner, FaSync } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
@@ -10,17 +11,22 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 
 export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) => {
+    const sessionId = Cookies.get('sessionId');
+
+    const [updateRequestForm, setUpdateRequestForm] = useState({
+        sessionId: sessionId,
+        requestId: props.request.requestId,
+        categoryId: props.request.categoryId,
+        comment: props.request.comment,
+        amount: props.request.amount
+    });
     const [visible, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [failedToFetchCategories, setFailedToFetchCategories] = useState(false);
     const [failedToFetchSubmission, setFailedToFetchSubmission] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
-    const [requestId, setRequestId] = useState(0);
-    const [categoryId, setCategoryId] = useState(0);
-    const [comment, setComment] = useState('');
-    const [amount, setAmount] = useState(0.00);
 
-    const sessionId = Cookies.get('sessionId');
+    const { fetchData } = useFetch();
 
     const navigate = useNavigate();
 
@@ -29,17 +35,12 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false);
         try {
-            const response = await fetch(`http://localhost:8080/get/all/categories/${sessionId}`, {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'}
-            });
+            const { responseStatus, data } = await fetchData(`/api/get/all/categories/${sessionId}`, 'GET');
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 setCategories(data);
                 setLoading(false);
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error('Cannot connect to the back end, please try again!');
@@ -62,7 +63,7 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
                 });
             }
         }
-    }
+    };
 
     const onSubmit = async (event: any) => {
         event.preventDefault();
@@ -70,32 +71,16 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false);
         try {
-            const response = await fetch('http://localhost:8080/update/request/now', {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    'sessionId': sessionId,
-                    'requestId': requestId,
-                    'categoryId': categoryId,
-                    'comment': comment,
-                    'amount': amount
-                })
-            });
+            const { responseStatus, data } = await fetchData('/api/update/request', 'PUT', updateRequestForm)
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 setLoading(false);
                 setVisible(false);
-                setRequestId(0);
-                setCategoryId(0);
-                setComment('');
-                setAmount(0.00);
                 props.onUpdate();
                 toast.success("Request Successfully Updated!", {
                     toastId: 'customId'
                 });
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");
@@ -118,19 +103,23 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
                 });
             }
         } 
-    }
+    };
 
     const goBack = () => {
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false);
-    }
+    };
+
+    const onChange = (event: any) => {
+        const { name, value } = event.target;
+        setUpdateRequestForm((prevForm) => ({
+            ...prevForm,
+            [name]: value
+        }))
+    };
 
     useEffect(() => {
         fetchCategories();
-        setRequestId(props.request.requestId);
-        setCategoryId(props.request.categoryId);
-        setComment(props.request.comment);
-        setAmount(props.request.amount);
     }, []);
 
     return (
@@ -164,13 +153,13 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
                 ) : (
                     <form className="form" onSubmit={onSubmit}>
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateRequestId">Request ID: </label>
-                            <input className="form-input" disabled type="text" id="updateRequestId" name="updateRequestId" value={requestId}/>
+                            <label className="form-label" htmlFor="requestId">Request ID: </label>
+                            <input className="form-input" disabled type="text" id="requestId" name="updateRequestId" value={updateRequestForm.requestId}/>
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateRequestCategoryDropDown">Category: </label>
-                            <select className="form-input" name="updateRequestCategoryDropDown" id="updateRequestCategoryDropDown" value={categoryId} onChange={event => setCategoryId(parseInt(event.target.value, 10))}>
+                            <label className="form-label" htmlFor="categoryId">Category: </label>
+                            <select className="form-input" name="categoryId" id="updateRequestCategoryDropDown" value={updateRequestForm.categoryId} onChange={onChange}>
                                 {categories && categories.length > 0 && (
                                     categories.map(category => (
                                         <option key={category.categoryId} value={category.categoryId}>{category.categoryName}</option>
@@ -180,13 +169,13 @@ export const UpdateRequest = (props: { request: Request, onUpdate: () => void}) 
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateRequestComment">Comment: </label>
-                            <input className="form-input" type="text"  id="updateRequestComment" name="updateRequestComment" value={comment} onChange={event => setComment(event.target.value)}/>
+                            <label className="form-label" htmlFor="comment">Comment: </label>
+                            <input className="form-input" type="text"  id="comment" name="updateRequestComment" value={updateRequestForm.comment} onChange={onChange}/>
                         </div>
 
                         <div className="form-field">
-                            <label className="form-label" htmlFor="updateRequestAmount">Amount: </label>
-                            <input className="form-input" type="number" name="updateRequestAmount" id="updateRequestAmount" value={amount} onChange={event => setAmount(parseFloat(event.target.value))}/>
+                            <label className="form-label" htmlFor="amount">Amount: </label>
+                            <input className="form-input" type="number" name="amount" id="updateRequestAmount" value={updateRequestForm.amount} onChange={onChange}/>
                         </div>
 
                         <button className="form-btn-1" type="submit" id="updateRequestButton">Update Request</button>

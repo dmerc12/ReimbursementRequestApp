@@ -27,7 +27,7 @@ export const AddCategory = (props: { onUpdate: () => void }) => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData('/create/category/now', 'POST', addCategoryForm)
+            const { responseStatus, data } = await fetchData('/api/create/category', 'POST', addCategoryForm)
 
             if (responseStatus === 201) {
                 props.onUpdate();

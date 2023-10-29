@@ -31,7 +31,7 @@ export const CategoryList = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET')
+            const { responseStatus, data } = await fetchData(`/api/get/all/categories/${sessionId}`, 'GET')
 
             if (responseStatus === 200) {
                 setCategories(data);

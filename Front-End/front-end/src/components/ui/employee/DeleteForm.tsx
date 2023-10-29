@@ -23,7 +23,7 @@ export const DeleteForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData('/delete/employee/now', 'DELETE', {sessionId: Number(sessionId)});
+            const { responseStatus, data } = await fetchData('/api/delete/employee', 'DELETE', {sessionId: Number(sessionId)});
 
             if (responseStatus === 200) {
                 Cookies.remove('sessionId');

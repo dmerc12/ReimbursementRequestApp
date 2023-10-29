@@ -3,7 +3,12 @@ package Steps;
 import Runner.Runner;
 import io.cucumber.java.en.When;
 
+
 public class CategorySteps {
+    @When("I click the manage categories tab in the nav bar")
+    public void i_click_the_manage_categories_tab_in_the_nav_bar () {
+        Runner.categoryPOM.clickManageCategoriesTab();
+    }
 
     @When("I click the manage categories button")
     public void i_click_the_manage_categories_button(){Runner.categoryPOM.clickManageCategoriesButton();}

@@ -4,22 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class RequestPOMs {
-    private WebDriver driver;
-    private By manageRequestsTab = By.id("manageRequestsTab");
+    public WebDriver driver;
+    private final By manageRequestsTab = By.id("manageRequestsTab");
 
-    private By manageRequestsButton = By.id("manageRequestsButton");
-    private By addRequestModal = By.id("addRequestModal");
-    private By addRequestCategoryDropdown = By.id("addRequestCategoryDropdown");
-    private By addRequestComment = By.id("addRequestComment");
-    private By addRequestAmount = By.id("addRequestAmount");
-    private By addRequestButton = By.id("addRequestButton");
-    private By updateRequestModal = By.id("updateRequestModal");
-    private By updateRequestCategoryDropDown = By.id("updateRequestCategoryDropDown");
-    private By updateRequestComment = By.id("updateRequestComment");
-    private By updateRequestAmount = By.id("updateRequestAmount");
-    private By updateRequestButton = By.id("updateRequestButton");
-    private By deleteRequestModal = By.id("deleteRequestModal");
-    private By deleteRequestButton = By.id("deleteRequestButton");
+    private final By manageRequestsButton = By.id("manageRequestsButton");
+    private final By addRequestModal = By.id("addRequestModal");
+    private final By addRequestCategoryDropdown = By.id("addRequestCategoryDropdown");
+    private final By addRequestComment = By.id("addRequestComment");
+    private final By addRequestAmount = By.id("addRequestAmount");
+    private final By addRequestButton = By.id("addRequestButton");
+    private final By updateRequestCategoryDropDown = By.id("updateRequestCategoryDropDown");
+    private final By updateRequestComment = By.id("updateRequestComment");
+    private final By updateRequestAmount = By.id("updateRequestAmount");
+    private final By updateRequestButton = By.id("updateRequestButton");
+    private final By deleteRequestButton = By.id("deleteRequestButton");
 
     public RequestPOMs(WebDriver driver) {
         this.driver = driver;
@@ -52,8 +50,8 @@ public class RequestPOMs {
         driver.findElement(addRequestButton).click();
     }
 
-    public void clickUpdateRequestModal() {
-        driver.findElement(updateRequestModal).click();
+    public void clickUpdateRequestModal(String requestId) {
+        driver.findElement(By.id("updateRequestModal" + requestId)).click();
     }
 
     public void setUpdateRequestCategoryDropDown(String category) {
@@ -71,8 +69,8 @@ public class RequestPOMs {
     public void clickUpdateRequestButton() {
         driver.findElement(updateRequestButton).click();
     }
-    public void clickDeleteRequestModal() {
-        driver.findElement(deleteRequestModal).click();
+    public void clickDeleteRequestModal(String requestId) {
+        driver.findElement(By.id("deleteRequestModal" + requestId)).click();
     }
 
     public void clickDeleteRequestButton() {

@@ -4,15 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CategoryPOMs {
-    private WebDriver driver;
-    private By manageCategoriesTab = By.id("manageCategoriesTab");
-    private By manageCategoriesButton = By.id("manageCategoriesButton");
-    private By addCategoryModal = By.id("addCategoryModal");
-    private By newCategoryName = By.id("newCategoryName");
-    private By addCategoryButton = By.id("addCategoryButton");
-    private By updateCategoryName = By.id("updateCategoryName");
-    private By updateCategoryButton = By.id("updateCategoryButton");
-    private By deleteCategoryButton = By.id("deleteCategoryButton");
+    public WebDriver driver;
+    private final By manageCategoriesTab = By.id("manageCategoriesTab");
+    private final By manageCategoriesButton = By.id("manageCategoriesButton");
+    private final By addCategoryModal = By.id("addCategoryModal");
+    private final By newCategoryName = By.id("newCategoryName");
+    private final By addCategoryButton = By.id("addCategoryButton");
+    private final By updateCategoryName = By.id("updateCategoryName");
+    private final By updateCategoryButton = By.id("updateCategoryButton");
+    private final By deleteCategoryButton = By.id("deleteCategoryButton");
 
     public CategoryPOMs(WebDriver driver) {
         this.driver = driver;

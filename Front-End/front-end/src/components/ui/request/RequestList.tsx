@@ -36,7 +36,7 @@ export const RequestList = () => {
         setIsLoading(true);
         setFailedToFetchCategories(false);
         try {
-            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET');
+            const { responseStatus, data } = await fetchData(`/api/get/all/categories/${sessionId}`, 'GET');
 
             if (responseStatus === 200) {
                 setCategories(data);
@@ -76,17 +76,12 @@ export const RequestList = () => {
         setFailedToFetchRequests(false);
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:8080/get/all/requests/${sessionId}`, {
-                method: "GET",
-                headers: {'Content-Type': 'application/json'}
-            });
+            const { responseStatus, data } = await fetchData(`/api/get/all/requests/${sessionId}`, 'GET');
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 setRequests(data);
                 setIsLoading(false);
-            } else if (response.status === 400) {
+            } else if (responseStatus === 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error('Cannot connect to the back end, please try again!');

@@ -4,6 +4,7 @@ import { FiTrash2 } from "react-icons/fi";
 import { FaSpinner, FaSync } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../../hooks/useFetch";
 import { toast } from "react-toastify";
 import { Modal } from "../../Modal";
 import Cookies from "js-cookie";
@@ -16,6 +17,8 @@ export const DeleteRequest = (props: { request: Request, onUpdate: ()=> void}) =
 
     const sessionId = Cookies.get('sessionId');
 
+    const { fetchData } = useFetch();
+
     const navigate = useNavigate();
 
     const onSubmit = async (event: any) => {
@@ -23,14 +26,9 @@ export const DeleteRequest = (props: { request: Request, onUpdate: ()=> void}) =
         setLoading(true);
         setFailedToFetchSubmission(false);
         try {
-            const response = await fetch(`http://localhost:8080/delete/request/${requestId}/${sessionId}`, {
-                method: 'DELETE',
-                headers: {'Content-Type': 'application/json'}
-            });
+            const { responseStatus, data } = await fetchData(`/api/delete/request/${requestId}/${sessionId}`, 'DELETE');
 
-            const data = await response.json();
-
-            if (response.status === 200) {
+            if (responseStatus === 200) {
                 setLoading(false);
                 setVisible(false);
                 setRequestId(0);
@@ -38,7 +36,7 @@ export const DeleteRequest = (props: { request: Request, onUpdate: ()=> void}) =
                 toast.success("Request Successfully Deleted!", {
                     toastId: 'customId'
                 });
-            } else if (response.status == 400) {
+            } else if (responseStatus == 400) {
                 throw new Error(`${data.message}`);
             } else {
                 throw new Error("Cannot connect to the back end, please try again!");

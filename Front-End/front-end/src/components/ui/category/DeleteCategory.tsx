@@ -25,7 +25,7 @@ export const DeleteCategory = (props: { category: Category, onUpdate: () => void
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData(`/delete/category/${props.category.categoryId}/${sessionId}`, 'DELETE', {});
+            const { responseStatus, data } = await fetchData(`/api/delete/category/${props.category.categoryId}/${sessionId}`, 'DELETE', {});
 
             if (responseStatus === 200) {
                 props.onUpdate();

@@ -28,7 +28,7 @@ export const ChangePasswordForm = () => {
         setLoading(true);
         setFailedToFetch(false);
         try {
-            const { responseStatus, data } = await fetchData('/change/password/now', 'PATCH', changePasswordForm)
+            const { responseStatus, data } = await fetchData('/api/change/password', 'PATCH', changePasswordForm)
 
             if (responseStatus === 200) {
                 navigate('/manage-information');

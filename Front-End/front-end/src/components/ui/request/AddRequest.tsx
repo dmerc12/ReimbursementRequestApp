@@ -32,7 +32,7 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false); 
         try {
-            const { responseStatus, data } = await fetchData(`/get/all/categories/${sessionId}`, 'GET');
+            const { responseStatus, data } = await fetchData(`/api/get/all/categories/${sessionId}`, 'GET');
 
             if (responseStatus === 200) {
                 setCategories(data);
@@ -73,7 +73,7 @@ export const AddRequest = (props: { onUpdate: () => void}) => {
         setFailedToFetchCategories(false);
         setFailedToFetchSubmission(false);
         try {
-            const { responseStatus, data } = await fetchData('/create/request/now', 'POST', addRequestForm)
+            const { responseStatus, data } = await fetchData('/api/create/request', 'POST', addRequestForm)
  
             if (responseStatus === 201) {
                 setLoading(false);
