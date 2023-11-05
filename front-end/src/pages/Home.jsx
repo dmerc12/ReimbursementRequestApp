@@ -8,8 +8,8 @@ export const Home = ({ toastRef }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const sessionIdCookie = Cookies.get('sessionId');
-        if (!sessionIdCookie) {
+        const sessionId = Cookies.get('sessionId');
+        if (!sessionId) {
             navigate('/login');
             toastRef.current.addToast({ mode: 'warning', message: 'Please login or register to gain access!' });
         }
@@ -18,10 +18,10 @@ export const Home = ({ toastRef }) => {
     return (
         <>
             <h1>Welcome Home!</h1>
-            <div className="action-btn-container">
-                <Link id="manageRequestsButton" className="home-nav" to='/manage-requests'>Manage Request Information</Link>
-                <Link id="manageCategoriesButton" className="home-nav" to='/manage-categories'>Manage Categories</Link>
-                <Link id="manageInformationButton" className="home-nav" to='/manage-information'>Manage Information</Link>
+            <div>
+                <Link id="manageRequestsButton" className="home-nav" to='/manage/requests'>Manage Request Information</Link>
+                <Link id="manageCategoriesButton" className="home-nav" to='/manage/categories'>Manage Categories</Link>
+                <Link id="manageInformationButton" className="home-nav" to='/manage/information'>Manage Information</Link>
             </div>
         </>
     );
