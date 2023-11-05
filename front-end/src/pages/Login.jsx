@@ -11,5 +11,5 @@ export const Login = ({ toastRef }) => {
 };
 
 Login.propTypes = {
-    toastRef: PropTypes.object
+    toastRef: PropTypes.object.isRequired
 };
