@@ -28,7 +28,7 @@ public class UniversalSteps {
 
     @Then("I should see a toast notification saying {string}")
     public void i_should_see_the_toast_notification_saying(String expectedToastText) {
-        By toastLocator = By.cssSelector(".toast-message");
+        By toastLocator = By.cssSelector("toast");
         WebElement toastElement = Runner.wait.until(ExpectedConditions.visibilityOfElementLocated(toastLocator));
         String actualToastText = toastElement.getText();
         Assert.assertEquals(expectedToastText, actualToastText);
