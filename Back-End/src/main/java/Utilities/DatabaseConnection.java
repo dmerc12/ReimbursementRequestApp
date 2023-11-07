@@ -13,8 +13,8 @@ public class DatabaseConnection {
         try {
             return DriverManager.getConnection(String.format(
                             "jdbc:mysql://localhost:3306/?user=%s&password=%s",
-                            System.getenv("Username"),
-                            System.getenv("Password")
+                            System.getenv("USERNAME"),
+                            System.getenv("PASSWORD")
                     )
             );
         } catch (SQLException exception) {

@@ -4,17 +4,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CategoryPOMs {
-    private WebDriver driver;
-    private By manageCategoriesTab = By.id("manageCategoriesTab");
-    private By manageCategoriesButton = By.id("manageCategoriesButton");
-    private By addCategoryModal = By.id("addCategoryModal");
-    private By newCategoryName = By.id("newCategoryName");
-    private By addCategoryButton = By.id("addCategoryButton");
-    private By updateCategoryModal = By.id("updateCategoryModal");
-    private By updateCategoryName = By.id("updateCategoryName");
-    private By updateCategoryButton = By.id("updateCategoryButton");
-    private By deleteCategoryModal = By.id("deleteCategoryModal");
-    private By deleteCategoryButton = By.id("deleteCategoryButton");
+    public WebDriver driver;
+    private final By manageCategoriesTab = By.id("manageCategoriesTab");
+    private final By manageCategoriesButton = By.id("manageCategoriesButton");
+    private final By addCategoryModal = By.id("addCategoryModal");
+    private final By newCategoryName = By.id("newCategoryName");
+    private final By addCategoryButton = By.id("addCategoryButton");
+    private final By updateCategoryName = By.id("updateCategoryName");
+    private final By updateCategoryButton = By.id("updateCategoryButton");
+    private final By deleteCategoryButton = By.id("deleteCategoryButton");
 
     public CategoryPOMs(WebDriver driver) {
         this.driver = driver;
@@ -39,8 +37,10 @@ public class CategoryPOMs {
     public void clickAddCategoryButton() {
         driver.findElement(addCategoryButton).click();
     }
-    public void clickUpdateCategoryModal() {
-        driver.findElement(updateCategoryModal).click();
+    public void clickUpdateCategoryModal(String categoryId) {
+        String dynamicId = "updateCategoryModal" + categoryId;
+        By dynamicLocator = By.id(dynamicId);
+        driver.findElement(dynamicLocator).click();
     }
 
     public void setUpdateCategoryName(String categoryName) {
@@ -51,8 +51,10 @@ public class CategoryPOMs {
         driver.findElement(updateCategoryButton).click();
     }
 
-    public void clickDeleteCategoryModal() {
-        driver.findElement(deleteCategoryModal).click();
+    public void clickDeleteCategoryModal(String categoryId) {
+        String dynamicId = "deleteCategoryModal" + categoryId;
+        By dynamicLocator = By.id(dynamicId);
+        driver.findElement(dynamicLocator).click();
     }
 
     public void clickDeleteCategoryButton() {

@@ -23,3 +23,5 @@
 hs_err_pid*
 
 .idea
+.DS_Store
+Back-End/target/test-classes/Features/
