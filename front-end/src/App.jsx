@@ -1,9 +1,9 @@
-import 'App.css'
+import './App.css'
 
 import { useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ToastContainer, Navbar } from 'components';
-import { Home, Login, Register, ManageInformation, ManageCategories, ManageRequests } from 'pages';
+import { ToastContainer, Navbar } from './components';
+import { Home, Login, Register, ManageInformation, ManageCategories, ManageRequests } from './pages';
 
 function App() {
   const toastRef = useRef();

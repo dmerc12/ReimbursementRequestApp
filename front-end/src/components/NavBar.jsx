@@ -42,5 +42,5 @@ export const Navbar = ({ toastRef }) => {
 };
 
 Navbar.propTypes = {
-    toastRef: PropTypes.opject.isRequired
+    toastRef: PropTypes.object.isRequired
 };

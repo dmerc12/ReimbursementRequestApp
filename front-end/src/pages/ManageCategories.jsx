@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CategoryList } from 'components';
+import { CategoryList } from '../components';
 
 export const ManageCategories = ({ toastRef }) => {
     document.title = "Manage Categories";
