@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RequestList } from 'components';
+import { RequestList } from '../components';
 
 export const ManageRequests = ({ toastRef }) => {
+    document.title = "Manage Requests";
+    
     const navigate = useNavigate();
 
     useEffect(() => {

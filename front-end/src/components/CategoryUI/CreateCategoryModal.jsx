@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 
-import { Modal } from 'components';
+import { Modal } from '../Modal';
 import { useState } from 'react';
-import { useFetch } from 'hooks';
+import { useFetch } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlinePlus, AiOutlineExclamationCircle } from 'react-icons/ai';
@@ -108,7 +108,7 @@ export const CreateCategory = ({ toastRef, onUpdate }) => {
     )
 };
 
-CreateCategoryModal.propTypes = {
+CreateCategory.propTypes = {
     toastRef: PropTypes.object.isRequired,
     onUpdate: PropTypes.func.isRequired
 };

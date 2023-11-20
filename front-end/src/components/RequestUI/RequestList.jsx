@@ -2,11 +2,11 @@ import Cookies from 'js-cookie';
 import PropTypes from 'prop-types';
 
 import { useEffect, useState } from 'react';
-import { useFetch } from 'hooks';
+import { useFetch } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaSync } from 'react-icons/fa';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
-import { AddRequest, UpdateRequest, DeleteRequest } from 'components';
+import { CreateRequest, UpdateRequest, DeleteRequest } from '../RequestUI';
 
 export const RequestList = ({ toastRef }) => {
     const [categories, setCategories] = useState([]);
@@ -130,7 +130,7 @@ export const RequestList = ({ toastRef }) => {
 
     return (
         <>
-            <AddRequest toastRef={toastRef} onUpdate={fetchRequests}/>
+            <CreateRequest toastRef={toastRef} onUpdate={fetchRequests}/>
             {isLoading ? (
                 <div className="loading-indicator">
                     <FaSpinner className="spinner" />
