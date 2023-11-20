@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { RequestList } from 'components';
 
 export const ManageRequests = ({ toastRef }) => {
+    document.title = "Manage Requests";
+    
     const navigate = useNavigate();
 
     useEffect(() => {
